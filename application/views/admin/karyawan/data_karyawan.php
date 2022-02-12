@@ -49,9 +49,9 @@
                                         <td>
                                             <?php echo $data_kr['created_at'] ?>
                                         </td>
-                                        <td class="bg-light justify-content-between">
-                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal_edit_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-pen"></i> Edit</button>
-                                            <button type="button" class="btn btn-sm btn-danger ml-5" data-toggle="modal" data-target="#modal_hapus_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-trash"></i> Hapus</button>
+                                        <td class="justify-content-around row d-flex">
+                                            <button type="button" class="btn btn-sm btn-warning col-5" data-toggle="modal" data-target="#modal_edit_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-pen"></i> Edit</button>
+                                            <button type="button" class="btn btn-sm btn-danger col-5" data-toggle="modal" data-target="#modal_hapus_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
