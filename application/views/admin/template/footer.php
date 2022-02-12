@@ -18,6 +18,9 @@
 
 <!-- Page Specific JS File -->
 <script src="<?= base_url() ?>assets/js/page/datatables.js"></script>
+  <script src="<?=base_url('assets/bundles/sweetalert/sweetalert.min.js')?>"></script>
+  <!-- Page Specific JS File -->
+  <script src="<?=base_url('assets/js/page/sweetalert.js')?>"></script>
 <!-- JS Libraies -->
 <script src="<?= base_url() ?>assets/bundles/apexcharts/apexcharts.min.js"></script>
 <!-- Page Specific JS File -->

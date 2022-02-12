@@ -7,7 +7,7 @@
                         <h4 class="mx-auto">Register</h4>
                     </div>
                     <div class="card-body">
-                        <form action="<?= base_url()?>auth/register/daftar"  method="post" enctype="multipart/form-data">
+                        <form action="<?= base_url()?>Admin/auth/register/daftar"  method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="email">Nama</label>
                                 <input id="nama" type="text" class="form-control" name="nama" tabindex="1" required autofocus>

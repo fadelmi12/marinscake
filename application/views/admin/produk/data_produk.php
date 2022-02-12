@@ -1,25 +1,25 @@
+<?php echo $this->session->flashdata('produk'); ?>
 <div class="main-content">
     <section class="section">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-
                         <h4>
                             Daftar Produk
                         </h4>
-                        <div class="btn btn-primary d-flex">
+                        <a class="btn btn-primary d-flex" href="<?php echo base_url("admin/produk/tambah_produk") ?>">
                             <div class="fas fa-plus my-auto mr-2"></div>
                             Tambah Produk
-                        </div>
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="table-1">
+                            <table class="table table-hover" id="table-1">
                                 <thead>
                                     <tr>
                                         <th class="text-center">
-                                            #
+                                            No
                                         </th>
                                         <th>Nama Produk</th>
                                         <th>Kategori</th>
@@ -31,87 +31,69 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php 
+                                    $no = 1;
+                                    foreach ($produk as $data_produk): ?>
                                     <tr>
-
                                         <td class="text-center">
-                                            1
+                                            <?php echo $no++ ?>
                                         </td>
                                         <td>
-                                            Roti Pisang
+                                            <?php echo $data_produk['namaProduk'] ?>
                                         </td>
                                         <td>
-                                            Kue
+                                            <?php echo $data_produk['namaJenis'] ?>
                                         </td>
                                         <td>
-                                            Rp 1.000
+                                            <?php echo "Rp. "; echo $data_produk['harga'] ?>
                                         </td>
                                         <td>
-                                            Ready
+                                            <?php echo $data_produk['status'] ?>
                                         </td>
                                         <td>
-                                            18
+                                            <?php echo $data_produk['stok'] ?>
                                         </td>
                                         <td class="w-25">
-                                            <div >
-                                                <img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid my-2">
+                                            <div>
+                                                <img src="<?php echo base_url().'/uploads/gambar_produk/'.$data_produk["gambar"]; ?>" alt="" style="border-radius:5px;" class="img-fluid my-2">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                <div class="btn btn-success mr-2">
+                                                <button class="btn btn-success mr-2" onclick="window.location.href='<?php echo base_url('admin/produk/edit_produk/'.$data_produk['idProduk']) ?>'">
                                                     Edit
-                                                </div>
-                                                <div class="btn btn-danger">
+                                                </button>
+                                                <button class="btn btn-danger" onclick="hapus_produk(<?php echo $data_produk['idProduk']; ?>)">
                                                     Hapus
-                                                </div>
+                                                </button>
                                             </div>
                                         </td>
 
                                     </tr>
-                                    <tr>
-
-                                        <td class="text-center">
-                                            1
-                                        </td>
-                                        <td>
-                                            Roti Pisang
-                                        </td>
-                                        <td>
-                                            Kue
-                                        </td>
-                                        <td>
-                                            Rp 1.000
-                                        </td>
-                                        <td>
-                                            Ready
-                                        </td>
-                                        <td>
-                                            18
-                                        </td>
-                                        <td class="w-25">
-                                            <div >
-                                                <img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid my-2">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <div class="btn btn-success mr-2">
-                                                    Edit
-                                                </div>
-                                                <div class="btn btn-danger">
-                                                    Hapus
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                    </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+ <script type="text/javascript">
+    function hapus_produk($idProduk){
+        swal({
+            title: "Hapus produk",
+            text: "Apakah anda yakin ingin menghapus produk ini ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                window.location="<?php echo base_url('admin/produk/hapus_produk/')?>"+$idProduk;
+            } else {
+                swal("Produk gagal dihapus");
+            }
+        });
+    }
+ </script>

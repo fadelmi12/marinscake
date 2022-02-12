@@ -7,6 +7,7 @@
                         <h4>
                             Daftar Produk
                         </h4>
+                        <button class="btn btn-danger btn-sm" type="button" onclick="window.location.href='<?php echo base_url('admin/cetak_pdf/cetak_gaji_pdf/') ?>'">Export pdf</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -16,33 +17,34 @@
                                         <th class="text-center">
                                             #
                                         </th>
-                                        <th>Nama Transaksi</th>
-                                        <th>Jumlah</th>
-                                        <th>Jenis Transaksi</th>
-                                        <th>Tipe Transaksi</th>
-
-                                        <th>Tanggal Transaksi</th>
+                                        <th>Nama Karyawan</th>
+                                        <th>Posisi</th>
+                                        <th>Bulan</th>
+                                        <th>Gaji</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php 
+                                    $no = 1;
+                                    foreach ($gaji_karyawan as $gaji): ?>
                                     <tr>
-
                                         <td class="text-center">
-                                        </td>
-                                        <td></td>
-                                        <td>
-                                            
+                                            <?= $no++ ?>
                                         </td>
                                         <td>
-                                            
+                                            <?= $gaji['nama'] ?>
                                         </td>
                                         <td>
-                                            
+                                            <?= $gaji['posisi'] ?>
                                         </td>
-                                        <td></td>
-
-
+                                        <td>
+                                            <?= $gaji['bulan'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $gaji['gaji'] ?>
+                                        </td>
                                     </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

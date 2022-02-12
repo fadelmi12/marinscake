@@ -9,7 +9,7 @@
                                 <h4 class="mx-auto">Halaman Masuk</h4>
                             </div>
                             <div class="card-body">
-                                <form action="<?php base_url() ?>login/login_user" method="post" enctype="multipart/form-data">
+                                <form action="<?php echo base_url('Admin/auth/Login/login_user/') ?>" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <?php echo $this->session->flashdata('pesan') ?>
                                         <label for="email">Email</label>
