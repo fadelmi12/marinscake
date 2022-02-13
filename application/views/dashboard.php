@@ -1,12 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Header</h1>
-</body>
-</html>
+<div class="container">
+    <div class="pb-80" id="slider">
+        <div class="ps-carousel--animate ps-carousel--1st">
+            <div class="item">
+                <div class="ps-product--banner">
+                    <span class="ps-badge ps-badge--sale"><img src="<?=base_url()?>assets/client/images/icons/badge-brown.png" alt="" /> <i>0.5</i>
+                    </span>
+                    <img src="<?=base_url()?>assets/client/images/banner/slider-5.png" alt="" />
+                    <div class="ps-product__footer">
+                        <a class="ps-btn py-3 px-5" href="order-form.html">
+                            Pesan Sekarang
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ps-product--banner">
+                    <span class="ps-badge ps-badge--sale"><img src="<?=base_url()?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?=base_url()?>assets/client/images/banner/slider-6.png" alt="" />
+                    <div class="ps-product__footer">
+                        <a class="ps-btn py-3 px-5" href="order-form.html">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- award-->
+<div class="ps-awards">
+    <div class="container">
+        <div class="ps-section__header">
+            <h3 class="ps-section__title">Tentang Kita</h3>
+            <p>SELAMAT DATANG DI MARINS CAKE</p>
+            <span><img src="<?=base_url()?>assets/client/images/icons/floral.png" alt="" /></span>
+        </div>
+        <div class="ps-section__content">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="ps-block--award">
+                        <img src="<?=base_url()?>assets/client/images/icons/award-1.png" alt="" />
+                        <h4>BAHAN PREMIUM DAN BERKUALITAS</h4>
+                        <p>
+                            Tart bear claw cake tiramisu chocolate bar gummies dragée
+                            lemon drops brownie. Jujubes chocolate cake sesame snaps
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="ps-block--award">
+                        <img src="<?=base_url()?>assets/client/images/icons/award-2.png" alt="" />
+                        <h4>ROTI FRESH TIAP HARI</h4>
+                        <p>
+                            Tart bear claw cake tiramisu chocolate bar gummies dragée
+                            lemon drops brownie. Jujubes chocolate cake sesame snaps
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="ps-block--award">
+                        <img src="<?=base_url()?>assets/client/images/icons/award-2.png" alt="" />
+                        <h4>BAKERY OF THE YEAR</h4>
+                        <p>
+                            Tart bear claw cake tiramisu chocolate bar gummies dragée
+                            lemon drops brownie. Jujubes chocolate cake sesame snaps
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Home 1 products-->
+<div class="ps-home-product bg--cover" data-background="<?=base_url()?>assets/client/images/bg/home-product.jpg">
+    <div class="container">
+        <div class="ps-section__header">
+            <h3 class="ps-section__title">Roti Hari Ini</h3>
+            <p>FRESH FROM OVEN</p>
+            <span><img src="<?=base_url()?>assets/client/images/icons/floral.png" alt="" /></span>
+        </div>
+        <div class="ps-section__content">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ps-product ps-product--horizontal d-flex align-items-center">
+                        <div class="ps-product__thumbnail">
+                            <img src="<?=base_url()?>assets/client/images/products/1.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <ul class="ps-product__actions">
+                                <li>
+                                    <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ps-product__content">
+                            <a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
+                            <p>
+                                Ready 100 Buah
+                            </p>
+                            <p class="ps-product__price">Rp 2.500</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ps-product ps-product--horizontal d-flex align-items-center">
+                        <div class="ps-product__thumbnail">
+                            <span class="ps-badge"><img src="<?=base_url()?>assets/client/images/icons/badge-red.png" alt="" /><i>New</i></span><img src="<?=base_url()?>assets/client/images/products/2.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <ul class="ps-product__actions">
+                                <li>
+                                    <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ps-product__content">
+                            <a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
+                            <p>
+                                Ready 100 Buah
+                            </p>
+                            <p class="ps-product__price">Rp 2.500</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ps-product ps-product--horizontal d-flex align-items-center">
+                        <div class="ps-product__thumbnail">
+                            <span class="ps-badge"><img src="<?=base_url()?>assets/client/images/icons/badge-red.png" alt="" /><i>New</i></span><img src="<?=base_url()?>assets/client/images/products/3.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <ul class="ps-product__actions">
+                                <li>
+                                    <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ps-product__content">
+                            <a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
+                            <p>
+                                Ready 100 Buah
+                            </p>
+                            <p class="ps-product__price">Rp 2.500</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ps-product ps-product--horizontal d-flex align-items-center">
+                        <div class="ps-product__thumbnail">
+                            <span class="ps-badge ps-badge--sale"><img src="<?=base_url()?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?=base_url()?>assets/client/images/products/4.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <ul class="ps-product__actions">
+                                <li>
+                                    <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ps-product__content">
+                            <a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
+                            <p>
+                                Ready 100 Buah
+                            </p>
+                            <p class="ps-product__price">Rp 2.500</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ps-product ps-product--horizontal d-flex align-items-center">
+                        <div class="ps-product__thumbnail">
+                            <img src="<?=base_url()?>assets/client/images/products/5.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <ul class="ps-product__actions">
+                                <li>
+                                    <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ps-product__content">
+                            <a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
+                            <p>
+                                Ready 100 Buah
+                            </p>
+                            <p class="ps-product__price">Rp 2.500</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="ps-product ps-product--horizontal d-flex align-items-center">
+                        <div class="ps-product__thumbnail">
+                            <img src="<?=base_url()?>assets/client/images/products/6.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <ul class="ps-product__actions">
+                                <li>
+                                    <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ps-product__content">
+                            <a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
+                            <p>
+                                Ready 100 Buah
+                            </p>
+                            <p class="ps-product__price">Rp 2.500</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center ps-product__footer">
+                <a class="ps-btn mb-5 py-3 px-5" href="order-form.html">Produk Lainnya</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--delivery form-->
+<div class="ps-delivery-form bg--parallax" data-background="<?=base_url()?>assets/client/images/bg/delivery-form.jpg" id="company-info">
+    <div class="ps-block--delivery">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="ps-block__content">
+                    <div class="ps-block--contact">
+                        <h4>KONTAK</h4>
+                        <h5>Whatsapp : 0812-1700-3696</h5>
+                    </div>
+                    <div class="ps-block--contact">
+                        <h4>ALAMAT TOKO</h4>
+                        <h5>
+                            Jalan Dandang Gendis No. 335B Kelurahan Doko Kecamatan Ngasem
+                            Kediri Jawa Timur 64182 Indonesia
+                        </h5>
+                    </div>
+                    <div class="ps-block--contact">
+                        <h4>JAM BUKA</h4>
+                        <h5>
+                            Senin - Jumat : 07.00 - 20.00 <br />
+                            Sabtu - Minggu : 09.00 - 20.00
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="ps-block--contact">
+                    <h4>MAP</h4>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.739596274058!2d112.03954931435698!3d-7.817364679794704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7857638a8d3c03%3A0xab61df830e15f8a!2sMaRins%20Cake!5e0!3m2!1sid!2sid!4v1644653292572!5m2!1sid!2sid" width="600" height="275" style="margin: 0px" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

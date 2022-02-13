@@ -7,20 +7,19 @@ class Cetak_pdf extends CI_Controller {
 		require_once APPPATH.'third_party/dompdf/dompdf_config.inc.php';
 	}
 
-	public function cetak_gaji_pdf()
+	public function cetak_gaji_pdf($blnTh)
     {
-         $this->load->library('dompdf_gen');
+     	$this->load->library('dompdf_gen');
 
-        $this->db->select('*');
-        $this->db->from('karyawan');
-        $this->db->join('gaji_karyawan', 'gaji_karyawan.idKaryawan = karyawan.idKaryawan');
-        $data['gaji_karyawan'] = $this->db->get()->result_array();
+     	$data['data_karyawan'] = $this->Model_karyawan->get_data_karyawan()->result_array();
+     	$data['gaji_karyawan'] = $this->Model_laporan->search_bulan($blnTh);
+     	$data['bulan_tahun']   = $blnTh;
+     	//echo "<pre>"; print_r($data); exit;
+     	$this->load->view('admin/laporan/laporan_gaji_pdf', $data);
 
-        $this->load->view('admin/laporan/laporan_gaji_pdf', $data);
-
-        $paper_size 	= 'A5';
-		$orientation 	= 'landscape';
-		$html 			= $this->output->get_output();
+     	$paper_size 	= 'A4';
+		$orientation 	= 'portrait';
+		$html 		= $this->output->get_output();
 		$this->dompdf->set_paper($paper_size, $orientation);
 
 		$this->dompdf->load_html($html);

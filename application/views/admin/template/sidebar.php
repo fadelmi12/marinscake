@@ -31,7 +31,7 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="user"></i><span>Karyawan</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/karyawan">Daftar Karyawan</a></li>
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/karyawan/gaji_karyawan">Gaji Karyawan</a></li>
+                    
                 </ul>
             </li>
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'laporan') ? 'active' : '' ?>">

@@ -28,14 +28,14 @@ class Karyawan extends CI_Controller
         $kelamin  = $this->input->post('kelamin');
         $posisi   = $this->input->post('posisi');
         $noHp     = $this->input->post('noHp');
-        $tanggal  = $this->input->post('tanggal');
+        $gaji     = $this->input->post('gaji');
 
         $data = array(
-            'nama' => $nama,
+            'nama'         => $nama,
             'jenisKelamin' => $kelamin,
-            'posisi' => $posisi,
-            'noHp' => $noHp,
-            'created_at' => $tanggal,
+            'posisi'       => $posisi,
+            'noHp'         => $noHp,
+            'gaji'         => $gaji,
         );
 
         $this->db->insert('karyawan', $data);
@@ -54,16 +54,16 @@ class Karyawan extends CI_Controller
         $kelamin  = $this->input->post('kelamin');
         $posisi   = $this->input->post('posisi');
         $noHp     = $this->input->post('noHp');
-        $tanggal  = $this->input->post('tanggal');
+        $gaji     = $this->input->post('gaji');
 
         $data = array(
-            'nama' => $nama,
-            'jenisKelamin' => $kelamin,
-            'posisi' => $posisi,
-            'noHp' => $noHp,
-            'created_at' => $tanggal,
+            'nama'          => $nama,
+            'jenisKelamin'  => $kelamin,
+            'posisi'        => $posisi,
+            'noHp'          => $noHp,
+            'gaji'          => $gaji,
         );
-        //echo "<pre>"; print_r($data); exit;
+        
         $where = array('idKaryawan' => $idKaryawan);
 
         $this->db->update('karyawan', $data, $where);
@@ -90,12 +90,4 @@ class Karyawan extends CI_Controller
                     );
         redirect('admin/karyawan/index/');
     }
-
-    public function gaji_karyawan()
-        {
-            $this->load->view('admin/template/header');
-            $this->load->view('admin/template/sidebar');
-            $this->load->view('admin/karyawan/gaji_karyawan');
-            $this->load->view('admin/template/footer');
-        }
 }

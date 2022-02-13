@@ -45,7 +45,7 @@
                                             <?php echo $data_produk['namaJenis'] ?>
                                         </td>
                                         <td>
-                                            <?php echo "Rp. "; echo $data_produk['harga'] ?>
+                                            Rp <?php echo number_format($data_produk['harga'], 0, '', '.') ?>
                                         </td>
                                         <td>
                                             <?php echo $data_produk['status'] ?>
@@ -53,9 +53,9 @@
                                         <td>
                                             <?php echo $data_produk['stok'] ?>
                                         </td>
-                                        <td class="w-25">
+                                        <td class="w-25 text-center">
                                             <div>
-                                                <img src="<?php echo base_url().'/uploads/gambar_produk/'.$data_produk["gambar"]; ?>" alt="" style="border-radius:5px;" class="img-fluid my-2">
+                                                <img src="<?php echo base_url().'/uploads/gambar_produk/'.$data_produk["gambar"]; ?>" alt="" style="border-radius:5px;max-height: 120px;" class="img-fluid my-2">
                                             </div>
                                         </td>
                                         <td>
@@ -63,9 +63,7 @@
                                                 <button class="btn btn-success mr-2" onclick="window.location.href='<?php echo base_url('admin/produk/edit_produk/'.$data_produk['idProduk']) ?>'">
                                                     Edit
                                                 </button>
-                                                <button class="btn btn-danger" onclick="hapus_produk(<?php echo $data_produk['idProduk']; ?>)">
-                                                    Hapus
-                                                </button>
+                                                <button class="btn btn-danger" onclick="hapus_produk(<?php echo $data_produk['idProduk']; ?>)">Hapus</button>
                                             </div>
                                         </td>
 
