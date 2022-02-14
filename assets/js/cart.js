@@ -142,7 +142,7 @@ $(".add-to-cart").click(function (event) {
 	event.preventDefault();
 	var name = $(this).data("name");
 	var id = $(this).data("id");
-	console.log(id);
+	// console.log(id);
 	var price = Number($(this).data("price"));
 	shoppingCart.addItemToCart(name, price, 1,id);
 	displayCart();
@@ -221,22 +221,47 @@ function lanjut_bayar() {
 	var total 	= document.getElementById('total-cart').value;
 	var kembalian = uang - total;
 	
-	if (cek == '') {
-		swal("Informasi", "Nominal uang pembayaran masih kosong.", "info");
+	if (total == '0') {
+		swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
 	}else{
-		if (uang < total) {
-			swal("Informasi", "Nominal uang pembayaran kurang", "info");
+		if (document.getElementById('uang').value == '') {
+			swal("Informasi", "Nominal uang pembayaran masih kosong", "info");
 		}else{
-			document.getElementById('total_belanja').value = total;
-			document.getElementById('kembalian').value = kembalian;
+			if (uang < total) {
+				swal("Informasi", "Nominal uang pembayaran kurang", "info");
+			}else{
+				document.getElementById('total_belanja1').value = total;
+				document.getElementById('kembalian').value = kembalian;
 
-			$('#modal_kembalian').appendTo("body").modal('show');
-
+				$('#modal_kembalian').appendTo("body").modal('show');
+			}
 		}
 	}
 }
 
 function submit_terjual(){
+	document.getElementById('formTerjual').submit();
+	sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
+}
+
+function preorder(){
+	var total 	= document.getElementById('total-cart').value;
+	if(total == '0'){
+		swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
+	}else{
+		var total 	= document.getElementById('total-cart').value;
+		document.getElementById('total_belanja2').value = total;
+
+		$('#modal_preorder').appendTo("body").modal('show');
+	}	
+}
+
+function submit_preorder(){
+	var tgl 	= document.getElementById('tanggalDikirim').value;
+	document.getElementById('tglDikirim').value = tgl;
+
+	$('#modal_preorder').appendTo("body").modal('hide');
+
 	document.getElementById('formTerjual').submit();
 	sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
 }

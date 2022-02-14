@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2022 at 07:23 PM
+-- Generation Time: Feb 14, 2022 at 10:35 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -28,11 +28,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `detail_preorder` (
+  `id_detailPreorder` int(11) NOT NULL,
   `idPreorder` int(11) NOT NULL,
+  `idProduk` int(11) NOT NULL,
   `namaProduk` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detail_preorder`
+--
+
+INSERT INTO `detail_preorder` (`id_detailPreorder`, `idPreorder`, `idProduk`, `namaProduk`, `jumlah`, `total`) VALUES
+(1, 6, 25, 'Roti Boyo', 2, 20000),
+(2, 6, 19, 'Roti Roma', 3, 30000),
+(3, 6, 20, 'Roti Malkist', 2, 12000),
+(4, 7, 23, 'Roti Donat', 2, 10000),
+(5, 7, 19, 'Roti Roma', 2, 20000);
 
 -- --------------------------------------------------------
 
@@ -56,7 +69,8 @@ CREATE TABLE `detail_transaksi` (
 INSERT INTO `detail_transaksi` (`id_detailTransaksi`, `idTransaksi`, `idProduk`, `namaProduk`, `jumlah`, `total`) VALUES
 (42, 19, 20, 'Roti Malkist', 2, 12000),
 (43, 19, 23, 'Roti Donat', 1, 5000),
-(44, 19, 25, 'Roti Boyo', 2, 20000);
+(44, 19, 25, 'Roti Boyo', 2, 20000),
+(51, 20, 24, 'Roti Hatari', 1, 5000);
 
 --
 -- Triggers `detail_transaksi`
@@ -64,7 +78,7 @@ INSERT INTO `detail_transaksi` (`id_detailTransaksi`, `idTransaksi`, `idProduk`,
 DELIMITER $$
 CREATE TRIGGER `pembelian` AFTER INSERT ON `detail_transaksi` FOR EACH ROW BEGIN
 	UPDATE produk SET stok = stok-NEW.jumlah
-    WHERE namaProduk = NEW.namaProduk;
+    WHERE idProduk = NEW.idProduk;
 END
 $$
 DELIMITER ;
@@ -160,6 +174,14 @@ CREATE TABLE `preorder` (
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `preorder`
+--
+
+INSERT INTO `preorder` (`idPreorder`, `jumlah`, `metode`, `tanggalPesan`, `tanggalDikirim`, `status`, `created_at`) VALUES
+(6, 62000, 'Offline', '2022-02-15', '2022-02-28', 'Belum Dikirim', '2022-02-15'),
+(7, 30000, 'Offline', '2022-02-15', '2022-02-19', 'Belum Dikirim', '2022-02-15');
+
 -- --------------------------------------------------------
 
 --
@@ -182,12 +204,12 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`idProduk`, `idJenis`, `namaProduk`, `harga`, `status`, `stok`, `gambar`, `created_at`) VALUES
-(19, 2, 'Roti Roma', 10000, 'Ready', 45, '1.png', '2022-02-11'),
-(20, 1, 'Roti Malkist', 6000, 'Kosong', 33, '3.png', '2022-02-11'),
-(21, 2, 'Kue Ulang Tahun', 3000, 'Preorder', 0, '6.png', '2022-02-11'),
-(23, 2, 'Roti Donat', 5000, 'Ready', 7, '4.png', '2022-02-14'),
-(24, 1, 'Roti Hatari', 5000, 'Ready', 28, '12.png', '2022-02-14'),
-(25, 1, 'Roti Boyo', 10000, 'Ready', 6, '9.png', '2022-02-14');
+(19, 2, 'Roti Roma', 10000, 'Ready', 10, '1.png', '2022-02-11'),
+(20, 1, 'Roti Malkist', 6000, 'Kosong', 10, '3.png', '2022-02-11'),
+(21, 2, 'Kue Ulang Tahun', 3000, 'Preorder', 10, '6.png', '2022-02-11'),
+(23, 2, 'Roti Donat', 5000, 'Ready', 10, '4.png', '2022-02-14'),
+(24, 1, 'Roti Hatari', 5000, 'Ready', 10, '12.png', '2022-02-14'),
+(25, 1, 'Roti Boyo', 10000, 'Ready', 10, '9.png', '2022-02-14');
 
 -- --------------------------------------------------------
 
@@ -209,7 +231,8 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`idTransaksi`, `total_belanja`, `metode`, `pembayaran`, `status`, `tanggal`) VALUES
-(19, 37000, 'Offline', 'Tunai', 'Selesi', '2022-02-14');
+(19, 37000, 'Offline', 'Tunai', 'Selesi', '2022-02-14'),
+(20, 5000, 'Offline', 'Tunai', 'Selesai', '2022-02-15');
 
 -- --------------------------------------------------------
 
@@ -240,7 +263,9 @@ INSERT INTO `user` (`idUser`, `nama`, `email`, `password`, `role`) VALUES
 -- Indexes for table `detail_preorder`
 --
 ALTER TABLE `detail_preorder`
-  ADD KEY `preorder` (`idPreorder`);
+  ADD PRIMARY KEY (`id_detailPreorder`),
+  ADD KEY `preorder` (`idPreorder`),
+  ADD KEY `idProduk` (`idProduk`);
 
 --
 -- Indexes for table `detail_transaksi`
@@ -299,10 +324,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `detail_preorder`
+--
+ALTER TABLE `detail_preorder`
+  MODIFY `id_detailPreorder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id_detailTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_detailTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `gaji_karyawan`
@@ -326,7 +357,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `preorder`
 --
 ALTER TABLE `preorder`
-  MODIFY `idPreorder` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPreorder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -338,7 +369,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -354,7 +385,8 @@ ALTER TABLE `user`
 -- Constraints for table `detail_preorder`
 --
 ALTER TABLE `detail_preorder`
-  ADD CONSTRAINT `preorder` FOREIGN KEY (`idPreorder`) REFERENCES `preorder` (`idPreorder`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `detail_preorder_ibfk_1` FOREIGN KEY (`idProduk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `preorder` FOREIGN KEY (`idPreorder`) REFERENCES `preorder` (`idPreorder`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `detail_transaksi`

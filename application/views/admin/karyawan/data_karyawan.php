@@ -49,7 +49,7 @@
                                             <td>
                                                 Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
                                             </td>
-                                            <td class="d-flex">
+                                            <td class="d-flex justify-content-around">
                                                 <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#modal_edit_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-pen mr-1"></i> Edit</button>
                                                 <button onclick="hapus_karyawan(<?php echo $data_kr['idKaryawan']; ?>)" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-trash mr-1"></i> Hapus</button>
                                             </td>
@@ -129,7 +129,7 @@
                             <input type="text" name="gaji" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-around">
                         <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">
                             <i class="fas fa-check mr-1"></i>
                             Batal
@@ -210,7 +210,7 @@
                                 <input type="text" name="gaji" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $data_kr['gaji'] ?>">
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-around">
                             <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">
                                 <i class="fas fa-check mr-1"></i>
                                 Batal
