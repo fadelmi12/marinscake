@@ -8,105 +8,33 @@
                             Daftar Produk
                         </h4>
                     </div>
-                    <div class="card-body " style="max-height: 82vh; overflow-y:scroll">
-                        <form action="" method="post">
-                            <h6 class="text-dark">Kue</h6>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="<?php echo str_replace(' ', '', 'Kue Pisang'); ?>" data-price="10000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
+                    <?php foreach($jenis_produk as $js_produk): ?>
+                        <div class="card-body " style="max-height: 82vh; overflow-y:scroll">
+                            <form action="" method="post">
+                                <h6 class="text-dark"><?= $js_produk['namaJenis'] ?></h6>
+                                <div class="row">
+                                    <!-- <div class="col-lg-3">
+                                        <div class="form-group text-center">
+                                            <a href="#" data-name="<?php echo str_replace(' ', '', 'Kue Pisang'); ?>" data-price="10000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
+                                            <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
+                                            <h6 class="text-dark font-15">Rp 2.500</h6>
+                                        </div>
+                                    </div> -->
+                                    <?php foreach($daftar_produk as $dt_produk): ?>
+                                        <?php if ($dt_produk['idJenis'] == $js_produk['idJenis']): ?>
+                                            <div class="col-lg-3">
+                                                <div class="form-group text-center">
+                                                    <a href="#" data-name="<?php echo str_replace(" ", "", $dt_produk['namaProduk']); ?>" data-price="<?= $dt_produk['harga'] ?>" class="add-to-cart"><img src="<?php echo base_url().'/uploads/gambar_produk/'.$dt_produk["gambar"]; ?>" alt="" style="border-radius:5px;" class="img-fluid"></a>
+                                                    <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark"><?= $dt_produk['namaProduk'] ?></h6>
+                                                    <h6 class="text-dark font-15">Rp. <?= number_format($dt_produk['harga'], 0, '', '.') ?></h6>
+                                                </div>
+                                            </div>
+                                        <?php endif ?>
+                                    <?php endforeach;?>
                                 </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Donat" data-price="2000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Klepom" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group text-center">
-                                        <a href="#" data-name="Orange" data-price="1000" class="add-to-cart"><img src="https://www.harapanrakyat.com/wp-content/uploads/2019/12/Suka-Donat-Topping-Meses.jpg" alt="" style="border-radius:5px;" class="img-fluid"></a>
-                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Kue Pisang</h6>
-                                        <h6 class="text-dark font-15">Rp 2.500</h6>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -136,8 +64,6 @@
                                     <div class="show-cart table">
 
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

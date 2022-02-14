@@ -166,9 +166,9 @@ function displayCart() {
 			cartArray[i].count +
 			"'><button class='plus-item bg-white text-dark p-0 m-0' style='border:none'  data-name=" +
 			cartArray[i].name +
-			">+</button></div></div><div class='col-3 my-auto'>Rp " +
+			">+</button></div></div><div class='col-4 my-auto'>Rp " +
 			cartArray[i].total +
-			"</div><div class='col-2 my-auto'><button class='delete-item bg-danger border-0 rounded px-2 text-white' data-name=" +
+			"</div><div class='col-1 my-auto'><button class='delete-item bg-danger border-0 rounded px-2 text-white' data-name=" +
 			cartArray[i].name +
 			">x</button></div></div>";
 	}
