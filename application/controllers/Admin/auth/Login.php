@@ -8,7 +8,6 @@ class Login extends CI_Controller
 		$this->load->view('admin/auth/template/header');
 		$this->load->view('admin/auth/login');
 		$this->load->view('admin/auth/template/footer');
-		
 	}
 
 	public function login_user()
@@ -24,14 +23,18 @@ class Login extends CI_Controller
 
 			if ($auth == FALSE) {
 				$this->session->set_flashdata('pesan', '<div style="justify-content:center;" class="text-center alert alert-danger alert-dismissible fade show" role="alert">Password Anda Salah!</div>');
-				
+
 				redirect('admin/auth/login');
 			} else {
 				$this->session->set_userdata('nama', $auth->nama);
 				$this->session->set_userdata('email', $auth->email);
 				$this->session->set_userdata('role', $auth->role);
 				$this->session->set_userdata('idUser', $auth->idUser);
-				redirect('admin/dashboard');
+				if ($auth->role == 77) {
+					redirect('admin/dashboard');
+				} elseif ($auth->role == 24) {
+					redirect('kasir/kasir_page');
+				}
 			}
 		}
 	}
