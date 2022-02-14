@@ -9,10 +9,11 @@ var shoppingCart = (function () {
 	cart = [];
 
 	// Constructor
-	function Item(name, price, count) {
+	function Item(name, price, count, idProduk) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
+		this.idProduk = idProduk;
 	}
 
 	// Save cart
@@ -34,7 +35,7 @@ var shoppingCart = (function () {
 	var obj = {};
 
 	// Add to cart
-	obj.addItemToCart = function (name, price, count) {
+	obj.addItemToCart = function (name, price, count,idProduk) {
 		for (var item in cart) {
 			if (cart[item].name === name) {
 				cart[item].count++;
@@ -42,7 +43,7 @@ var shoppingCart = (function () {
 				return;
 			}
 		}
-		var item = new Item(name, price, count);
+		var item = new Item(name, price, count,idProduk);
 		cart.push(item);
 		saveCart();
 	};
@@ -140,8 +141,10 @@ var shoppingCart = (function () {
 $(".add-to-cart").click(function (event) {
 	event.preventDefault();
 	var name = $(this).data("name");
+	var id = $(this).data("id");
+	console.log(id);
 	var price = Number($(this).data("price"));
-	shoppingCart.addItemToCart(name, price, 1);
+	shoppingCart.addItemToCart(name, price, 1,id);
 	displayCart();
 });
 
@@ -154,23 +157,27 @@ $(".clear-cart").click(function () {
 function displayCart() {
 	var cartArray = shoppingCart.listCart();
 	var output = "";
+	ab = 1; ac = 1; ad = 1; ag = 1;
 	for (var i in cartArray) {
-		output +=
-			"<div class='row py-2 border-bottom text-dark'><div class='col-4 my-auto'>" +
+		output +=		
+			"<input type='text' style='width:max-content;border:0;background:white' name='idProduk[" + ag++ + "]' value='" +
+			cartArray[i].idProduk +
+			"' hidden><div class='row py-2 border-bottom text-dark'><div class='col-4 my-auto'><input type='text' style='width:max-content;border:0;background:white' name='namaProduk[" + ab++ + "]' value='" +
+			cartArray[i].name.replace(/\_/g, ' ') +
+			"' readonly></div><div class='col-3 my-auto text-center'><div class='d-flex justify-content-start pl-0 ml-0'><button type='button' class='minus-item bg-white text-dark m-0 p-0' style='border:none' data-name=" +
 			cartArray[i].name +
-			"</div><div class='col-3 my-auto text-center'><div class='d-flex justify-content-start pl-0 ml-0'><button class='minus-item bg-white text-dark m-0 p-0' style='border:none' data-name=" +
-			cartArray[i].name +
-			">-</button><input type='text' class='item-count mx-2' style='width:50px;text-align: center;border:solid 1px #e4e6fc'  data-name='" +
+			">-</button><input type='text' class='item-count mx-2' name='jumlahProduk[" + ac++ + "]' style='width:50px;text-align: center;border:solid 1px #e4e6fc'  data-name='" +
 			cartArray[i].name +
 			"' value='" +
 			cartArray[i].count +
-			"'><button class='plus-item bg-white text-dark p-0 m-0' style='border:none'  data-name=" +
+			"'><button type='button' class='plus-item bg-white text-dark p-0 m-0' style='border:none'  data-name=" +
 			cartArray[i].name +
-			">+</button></div></div><div class='col-4 my-auto'>Rp " +
+			">+</button></div></div><div class='col-4 my-auto'><input type='text' name='totalProduk[" + ad++ + "]' style='width:max-content;border:0;background:white' value='Rp. " +
 			cartArray[i].total +
-			"</div><div class='col-1 my-auto'><button class='delete-item bg-danger border-0 rounded px-2 text-white' data-name=" +
+			"' readonly></div><div class='col-1 my-auto'><button type='button' class='delete-item bg-danger border-0 rounded px-2 text-white' data-name=" +
 			cartArray[i].name +
 			">x</button></div></div>";
+			
 	}
 	$(".show-cart").html(output);
 	$("#total-cart").val(shoppingCart.totalCart());
@@ -206,5 +213,32 @@ $(".show-cart").on("change", ".item-count", function (event) {
 	shoppingCart.setCountForItem(name, count);
 	displayCart();
 });
+
+function lanjut_bayar() {
+	az = 1;
+	var cek 	= document.getElementById('uang').value;
+	var uang 	= parseInt(document.getElementById('uang').value);
+	var total 	= document.getElementById('total-cart').value;
+	var kembalian = uang - total;
+	
+	if (cek == '') {
+		swal("Informasi", "Nominal uang pembayaran masih kosong.", "info");
+	}else{
+		if (uang < total) {
+			swal("Informasi", "Nominal uang pembayaran kurang", "info");
+		}else{
+			document.getElementById('total_belanja').value = total;
+			document.getElementById('kembalian').value = kembalian;
+
+			$('#modal_kembalian').appendTo("body").modal('show');
+
+		}
+	}
+}
+
+function submit_terjual(){
+	document.getElementById('formTerjual').submit();
+	sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
+}
 
 displayCart();
