@@ -9,7 +9,7 @@
 */
 /*
     TABLE OF CONTENT
-        1. RESET AND TYPHFOGRAPHY
+        1. RESET AND TYPHOGRAPHY
             1.1 Reset
             1.2 typhography
         2. ELEMENTS
@@ -490,7 +490,7 @@ body {
 }
 
 .ps-sidebar {
-  padding: 0 30px;
+  padding: 0 0px;
   max-width: 400px;
 }
 
@@ -841,7 +841,6 @@ body {
   display: inline-block;
   padding: 9px 60px 7px;
   line-height: 25px;
-  font-weight: bold;
   font-size: 14px;
   text-transform: uppercase;
   color: #cd9b33;
@@ -1126,6 +1125,7 @@ textarea.form-control {
 }
 
 .ps-select {
+  
   display: inline-block;
 }
 
@@ -3117,7 +3117,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 
 .ps-block--contact h5 {
   margin-bottom: 20px;
-  line-height: 2;
+  line-height: 1em;
   font-size: 14px;
   font-weight: 400;
   color: #c7c7c7;
@@ -5901,13 +5901,13 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 
 .ps-hero {
   position: relative;
-  min-height: 350px;
+  min-height: 300px;
   vertical-align: top;
 }
 
 .ps-hero__content {
   margin: 0 auto;
-  padding-top: 200px;
+  padding-top: 160px;
   max-width: 1170px;
   text-align: center;
   height: 100%;
@@ -8339,12 +8339,12 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 }
 
 .menu > li {
-  /* display: inline-block; */
+  display: inline-block;
   padding: 0 30px;
 }
 
 .menu > li > a {
-  /* display: inline-block; */
+  display: inline-block;
   padding: 10px 0px;
   font-family: "Lora", serif;
   font-size: 16px;
@@ -9002,7 +9002,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 
 .header--3 .ps-logo {
   display: inline-block;
-  max-width: 90px;
+  /* max-width: 1px; */
   line-height: 80px;
 }
 
@@ -9148,7 +9148,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 .ps-site-info .ps-logo {
   margin-bottom: 30px;
   display: inline-block;
-  max-width: 120px;
+  max-width: 200px;
 }
 
 .ps-site-info p {
@@ -9158,7 +9158,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 }
 
 .ps-footer .ps-footer__content {
-  padding: 60px 0;
+  padding: 80px 0;
   background-color: #22202e;
 }
 
