@@ -22,19 +22,13 @@ class Model_login extends CI_Model
 				return array();
 			}
 		} else {
-
-			$this->session->set_flashdata('pesan', '<div style="justify-content:center;" class="text-center alert alert-danger alert-dismissible fade show" role="alert">Email tidak ditemukan!</div>');
-			redirect('auth/login');
+			$this->session->set_flashdata('pesan',
+					'<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                    <script type ="text/JavaScript">  
+                    swal("Gagal Login","Email yang anda masukkan salah!","error")  
+                    </script>'
+				);
+			redirect('admin/auth/login');
 		}
-	}
-	public function daftar_user($data, $table)
-	{
-		$this->db->insert($table, $data);
-		return true;
-	}
-
-	public function link_saldo($data){
-		$this->db->insert('saldo', $data);
-		return true;
 	}
 }

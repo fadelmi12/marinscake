@@ -6,11 +6,11 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h4>
-                            Daftar Transaksi
+                            Daftar Transaksi Langsung
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo base_url('admin/transaksi/index/')?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo base_url('admin/transaksi/')?>" method="post" enctype="multipart/form-data">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="form-group d-flex align-items-center mr-3 mb-0">
                                     <h6 class="w-100 mr-3 my-0" style="color:black">Pilih Tanggal : </h6>
@@ -41,41 +41,40 @@
                                     <?php 
                                     $no = 1;
                                     foreach($riwayat_transaksi as $rw_tr): ?>
-                                    <tr>
-                                        <td class="text-center">
-                                            <?= $no++?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($rw_tr['total_belanja'], 0, '', '.') ?>
-                                        </td>
-                                        <td>
-                                            <?= $rw_tr['metode'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $rw_tr['pembayaran'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $rw_tr['tanggal'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $rw_tr['status'] ?>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-around">
-                                                <button class="btn btn-info" data-toggle="modal" data-target="#modal_detail_transaksi<?= $rw_tr['idTransaksi'] ?>">
-                                                    <i class="fas fa-search"></i> Detail</button>
-                                                <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal_edit_transaksi<?php echo $rw_tr['idTransaksi'] ?>">
-                                                    <i class="fas fa-pen"></i> Edit</button>
-                                                <button class="btn btn-danger" onclick="hapus_riwayat_transaksi(<?php echo $rw_tr['idTransaksi'];?>)" type="button">
-                                                    <i class="fas fa-trash"></i> Hapus</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <?= $no++?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($rw_tr['total_belanja'], 0, '', '.') ?>
+                                            </td>
+                                            <td>
+                                                <?= $rw_tr['metode'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $rw_tr['pembayaran'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $rw_tr['tanggal'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $rw_tr['status'] ?>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-around">
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#modal_detail_transaksi<?= $rw_tr['idTransaksi'] ?>">
+                                                        <i class="fas fa-search"></i> Detail</button>
+                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal_edit_transaksi<?php echo $rw_tr['idTransaksi'] ?>">
+                                                        <i class="fas fa-pen"></i> Edit</button>
+                                                    <button class="btn btn-danger" onclick="hapus_riwayat_transaksi(<?php echo $rw_tr['idTransaksi'];?>)" type="button">
+                                                        <i class="fas fa-trash"></i> Hapus</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -165,6 +164,7 @@
                             <label>
                                 Jumlah Transaksi
                             </label>
+                            <input type="date" class="form-control mr-3" value="<?= $tanggal; ?>" name="filter_tanggal" hidden>
                             <input type="text" name="total_belanja" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['total_belanja'] ?>">
                         </div>
                         <div class="row">
@@ -215,7 +215,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>
-                                        Tanggal
+                                        Tanggal Transaksi
                                     </label>
                                     <input type="date" name="tanggal" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['tanggal'] ?>">
                                 </div>
@@ -249,9 +249,9 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/transaksi/hapus_transaksi/') ?>" + $idTransaksi;
+                window.location = "<?php echo base_url('admin/transaksi/hapus_transaksi/') ?>" + $idTransaksi + "<?php echo '_'.$tanggal?>";
             } else {
-                swal("Data karyawan batal dihapus");
+                swal("Data transaksi batal dihapus");
             }
         });
     }

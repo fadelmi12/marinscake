@@ -22,8 +22,8 @@
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'transaksi') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="shopping-cart"></i><span>Transaksi</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi">Daftar Transaksi</a></li>
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi/preorder">Preorder</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi">Transaksi Langsung</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi/preorder">Transaksi Preorder</a></li>
                 </ul>
             </li>
             <li class="menu-header">Laporan</li>

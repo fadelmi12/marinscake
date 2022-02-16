@@ -15,10 +15,16 @@ class Model_transaksi extends CI_Model{
         return $this->db->get('');
     }
 
-    public function get_transaksi($id){
+    public function get_riwayat_preorder($tanggal)
+    {   
+        return $this->db->get_where('preorder', array('tanggalPesan' => $tanggal));
+    }
+
+    public function detail_riwayat_preorder()
+    {
         $this->db->select('*');
-        $this->db->from('transaksi');
-        $this->db->where('idUser =', $id);
-        return $this->db->get();
+        $this->db->from('detail_preorder');
+        $this->db->join('produk', 'produk.idProduk = detail_preorder.idProduk');
+        return $this->db->get('');
     }
 } 

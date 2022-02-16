@@ -4,7 +4,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Login extends CI_Controller
 {
 	public function index()
-	{
+	{	
+		$this->session->sess_destroy();
 		$this->load->view('admin/auth/template/header');
 		$this->load->view('admin/auth/login');
 		$this->load->view('admin/auth/template/footer');
@@ -22,8 +23,12 @@ class Login extends CI_Controller
 			$auth = $this->Model_login->cek_login();
 
 			if ($auth == FALSE) {
-				$this->session->set_flashdata('pesan', '<div style="justify-content:center;" class="text-center alert alert-danger alert-dismissible fade show" role="alert">Password Anda Salah!</div>');
-
+				$this->session->set_flashdata('pesan',
+					'<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                    <script type ="text/JavaScript">  
+                    swal("Gagal Login","Password yang anda masukkan salah!","error")  
+                    </script>'
+				);
 				redirect('admin/auth/login');
 			} else {
 				$this->session->set_userdata('nama', $auth->nama);
