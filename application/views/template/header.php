@@ -49,25 +49,17 @@
                     <div class="col-5 d-flex align-items-center pr-5">
                         <ul class="menu d-flex justify-content-between w-100">
                             <li class="menu-item-has-children current-menu-item">
-                                <a href="index.html">Homepage</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
-                                <ul class="sub-menu">
-                                    <li><a href="index.html">Homepage 1</a></li>
-                                    <li><a href="homepage-2.html">Homepage 2</a></li>
-                                    <li><a href="homepage-3.html">Homepage 3</a></li>
-                                </ul>
+                                <a href="index.html">Home</a>
+                                
                             </li>
                             <li><a href="#company-info">About</a></li>
                             <li>
                                 <a href="product-listing.html">Product</a>
-                                <ul class="sub-menu">
-                                    <li><a href="product-listing.html">Product Listing</a></li>
-                                    <li><a href="product-detail.html">Product Detail</a></li>
-                                </ul>
                             </li>
                         </ul>
                     </div>
                     <div class="col-2 d-flex align-items-center">
-                        <a class="ps-logo" href="index.html"><img src="<?= base_url() ?>assets/client/images/logo-light.png" alt="" /></a>
+                        <a class="ps-logo" href="index.html"><img src="<?= base_url() ?>assets/client/images/logo-light2.svg" alt="" /></a>
                     </div>
                     <div class="col-5 d-flex align-items-center justify-content-between pl-5">
                         <ul class="menu d-flex justify-content-between w-75">
@@ -121,51 +113,19 @@
         </nav>
         <nav class="navigation--mobile">
             <div class="ps-container">
-                <a class="ps-logo" href="#"><img src="<?= base_url() ?>assets/client/images/logo-light.png" alt="" /></a>
+                <a class="ps-logo" href="#"><img src="<?= base_url() ?>assets/client/images/logo-light3.svg" alt="" /></a>
                 <ul class="menu menu--mobile">
                     <li class="current-menu-item menu-item-has-children">
-                        <a href="#">Homepage</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Homepage 1</a></li>
-                            <li><a href="homepage-2.html">Homepage 2</a></li>
-                            <li><a href="homepage-3.html">Homepage 3</a></li>
-                        </ul>
+                        <a href="#">Home</a>
                     </li>
                     <li><a href="about.html">About</a></li>
-                    <li class="menu-item-has-children">
-                        <a href="product-listing.html">product</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
-                        <ul class="sub-menu">
-                            <li><a href="product-listing.html">Product List</a></li>
-                            <li><a href="product-detail.html">Product Detail</a></li>
-                            <li><a href="order-form.html">Order Form</a></li>
-                        </ul>
+                    <li>
+                        <a href="product-listing.html">produk</a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="about.html">Pages</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
-                        <ul class="sub-menu">
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a href="cart.html">Shopping Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="whishlist.html">Whishlist</a></li>
-                            <li><a href="compare.html">Compare</a></li>
-                            <li><a href="404-page.html">Page 404</a></li>
-                        </ul>
+                    <li>
+                        <a href="product-listing.html">preorder</a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="blog-grid.html">Blogs</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
-                        <ul class="sub-menu">
-                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                            <li class="menu-item-has-children">
-                                <a href="blog-list.html">Blog Listing</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
-                                <ul class="sub-menu">
-                                    <li><a href="blog-list.html">Blog List Has Sidebar</a></li>
-                                    <li><a href="blog-list.html">Blog List No Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog-detail.html">Blog Detail</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
                 </ul>
                 <div class="menu-toggle"><span></span></div>
                 <div class="header__actions">

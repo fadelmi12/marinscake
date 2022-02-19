@@ -3117,7 +3117,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 
 .ps-block--contact h5 {
   margin-bottom: 20px;
-  line-height: 1em;
+  line-height: 2;
   font-size: 14px;
   font-weight: 400;
   color: #c7c7c7;
@@ -8613,7 +8613,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 
 .header--1 .ps-logo {
   display: inline-block;
-  max-width: 150px;
+  max-width: 130px;
 }
 
 .header--1 .header__actions {
@@ -8686,7 +8686,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 }
 
 .header--1 .navigation--mobile .ps-logo {
-  max-width: 65px;
+  max-width: 120px;
   line-height: 60px;
 }
 

@@ -7,7 +7,7 @@
                     </span>
                     <img src="<?=base_url()?>assets/client/images/banner/slider-5.png" alt="" />
                     <div class="ps-product__footer">
-                        <a class="ps-btn py-3 px-5" href="order-form.html">
+                        <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="order-form.html">
                             Pesan Sekarang
                         </a>
                     </div>
@@ -17,7 +17,7 @@
                 <div class="ps-product--banner">
                     <span class="ps-badge ps-badge--sale"><img src="<?=base_url()?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?=base_url()?>assets/client/images/banner/slider-6.png" alt="" />
                     <div class="ps-product__footer">
-                        <a class="ps-btn py-3 px-5" href="order-form.html">Pesan Sekarang</a>
+                        <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="order-form.html">Pesan Sekarang</a>
                     </div>
                 </div>
             </div>

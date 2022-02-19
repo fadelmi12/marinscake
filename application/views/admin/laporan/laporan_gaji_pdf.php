@@ -23,17 +23,18 @@
         }
     </style>
 </head><body>
-    <div style="margin-left: 50px; margin-right: 50px; position: static;">
+    <div style="padding:0 50px">
         <div align="center" style="margin-left: 80px; position: static;">
-            <h2>TOKO KUE MARINS CAKE SIPLAH
-                <br>MADIUN JAWATIMUR
+            <h2>TOKO MARINS CAKE
+                <br>KEDIRI JAWATIMUR
             </h2>
-            <div style="margin-top: -15px; margin-bottom: 7px;">Jl. Tanjung Sari Ds. Nglanduk Kec. Wungu Kab. Madiun
-                <br>No. Hp/WA 083845253852 Email: marinscake@gmail.com
+            <div style="margin-top: -15px; margin-bottom: 7px;">Jalan Dandang Gendis No. 335B  
+                <br>Kelurahan Doko Kecamatan Ngasem Kediri
             </div>
         </div>
-        <hr style="border: 1.5px solid black; margin-top: -30px; position: static;">
-        <img src="assets/img/logo_kue.png" style="width: 18%; height: auto; position: absolute; margin-top: 35px; margin-left: 60px;">
+        
+        <img src="assets/client/images/logo-light.png" style="width: 16%; height: auto; position: absolute; margin-top: 35px; margin-left: 60px;">
+        <hr style="border: 1.5px solid black;margin-top:-10px;position:static">
         <div align="center">
             LAPORAN GAJI KARYAWAN
             <br>Bulan .... Tahun ....
@@ -42,7 +43,7 @@
         <div class="container-fluid" align="center" style="margin-top: 20px;">
             <table>
                 <tr>
-                    <th align="center" colspan="3" width="40">NO</th>
+                    <th align="center" colspan="3" width="40" style="padding: 7px 0;">NO</th>
                     <th align="center" colspan="5" width="200">Nama Karyawan</th>
                     <th align="center" colspan="5" width="100">Gaji</th>
                     <th align="center" colspan="5" width="100">Status</th>
@@ -52,10 +53,10 @@
                 $no = 1;
                 foreach ($data_karyawan as $data_kr): ?>
                 <tr>
-                    <td colspan="3" align="center" height="15">
+                    <td colspan="3" align="center" height="15" style="padding: 5px 0;">
                         <?= $no++ ?>
                     </td>
-                    <td colspan="5" align="left" style="margin-left: 5px;">
+                    <td colspan="5" align="left" style="margin-left: 5px; padding-left:10px">
                         <?= $data_kr['nama'] ?>
                     </td>
                     <td colspan="5" align="center">
