@@ -1,10 +1,10 @@
 <section class="section">
     <div class="container">
         <div class="row align-items-center justify-content-center" style="min-height: 100vh;">
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-5">
                 <div class="card card-info" style="overflow: hidden;">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="card-header">
                                 <h4 class="mx-auto">Halaman Masuk</h4>
                             </div>
@@ -43,27 +43,6 @@
                             </div>
                             <div class="col-6"></div>
 
-                        </div>
-                        <div class="col-6 bg-info">
-                            <div class="d-flex justify-content-center align-items-center h-100">
-                                <div class="text-center" style="color: white;">
-                                    <h4>
-                                        Hai, Kawula Muda!
-                                        <br>
-                                        Selamat Datang di MAUKOS!
-                                        <br>
-                                        Disini kamu akan mulai merencanakan keuangan kalian!
-                                    </h4>
-                                    <a href="<?php echo base_url() ?>auth/register">
-                                        <div class="btn btn-light px-3 py-2 mt-2" style="box-shadow: none;">
-                                            <h6 class="m-0">
-                                                Daftar
-                                            </h6 class="m-0">
-                                        </div>
-                                    </a>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
 

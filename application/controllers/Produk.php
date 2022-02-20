@@ -10,4 +10,11 @@ class Produk extends CI_Controller {
 		$this->load->view('daftar_produk');
 		$this->load->view('template/footer');
 	}
+
+	public function detail()
+	{
+		$this->load->view('template/header2');
+		$this->load->view('detail_produk');
+		$this->load->view('template/footer');
+	}
 }

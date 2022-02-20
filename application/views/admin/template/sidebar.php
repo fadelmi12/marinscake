@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="<?= base_url() ?>assets/img/logo.png" class="header-logo" /> <span class="logo-name">Maukos</span>
+            <a href="index.html"><span class="logo-name">Marins Cake</span>
             </a>
         </div>
         <ul class="sidebar-menu">

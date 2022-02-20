@@ -1784,13 +1784,12 @@ textarea.form-control {
 
 .form-group--inline > label {
   float: left;
-  margin-bottom: 0;
+  margin: 0;
   left: 0;
   font-size: 16px;
-  line-height: 1.3em;
   color: #5b5b5b;
-  font-weight: 400;
-  width: 200px;
+  font-weight: bold;
+  width: 150px;
   padding-right: 10px;
 }
 
@@ -1800,7 +1799,7 @@ textarea.form-control {
 
 .form-group--inline .form-group__content {
   float: left;
-  width: calc(100% - 200px);
+  width: calc(100% - 150px);
 }
 
 .form-group--inline.textarea label {
@@ -1863,6 +1862,7 @@ textarea.form-control {
 
 .form-group--number button:hover {
   background-color: #cd9b33;
+  cursor: pointer;
 }
 
 .form-group--number button.minus {
@@ -6708,6 +6708,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 
 .ps-form--shopping .form-group--number button:hover {
   background-color: #cd9b33;
+  cursor: pointer;
 }
 
 .ps-form--shopping .form-group--number button.minus {
@@ -7370,7 +7371,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 }
 
 .ps-checkout .ps-checkout__billing > h3 {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   font-family: "Lora", serif;
   font-size: 30px;
   font-weight: 700;
@@ -7410,7 +7411,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 .ps-checkout .ps-checkout__block {
   margin-bottom: 10px;
   padding: 20px;
-  border-bottom: 1px solid #4d4d4d;
+  border-bottom: 1px solid white;
 }
 
 .ps-checkout .ps-checkout__block .ps-radio label {
@@ -7428,6 +7429,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 }
 
 .ps-checkout__order {
+  
   margin-bottom: 30px;
   background-color: #4f3535;
 }
@@ -7449,7 +7451,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 .ps-checkout__order > header {
   margin-bottom: 10px;
   padding: 20px 30px;
-  border-bottom: 1px solid #4d4d4d;
+  border-bottom: 1px solid white;
 }
 
 .ps-checkout__order .content {
@@ -7460,16 +7462,6 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
   padding: 10px 30px;
 }
 
-.ps-checkout__order > footer .cheque {
-  padding: 20px 30px;
-  border-top: 1px solid #4d4d4d;
-  border-bottom: 1px solid #4d4d4d;
-}
-
-.ps-checkout__order > footer .cheque p {
-  color: #fff;
-  font-size: 12px;
-}
 
 .ps-checkout__order > footer .paypal {
   padding: 10px 30px;
@@ -8213,7 +8205,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 }
 
 .ps-related-product {
-  padding: 80px 0;
+  padding: 60px 0;
   background-color: #f7f7f7;
 }
 
@@ -9002,7 +8994,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
 
 .header--3 .ps-logo {
   display: inline-block;
-  /* max-width: 1px; */
+  max-width: 170px;
   line-height: 80px;
 }
 
