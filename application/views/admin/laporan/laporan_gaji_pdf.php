@@ -26,7 +26,7 @@
     <div style="padding:0 50px">
         <div align="center" style="margin-left: 80px; position: static;">
             <h2>TOKO MARINS CAKE
-                <br>KEDIRI JAWATIMUR
+                <br>KEDIRI JAWA TIMUR
             </h2>
             <div style="margin-top: -15px; margin-bottom: 7px;">Jalan Dandang Gendis No. 335B  
                 <br>Kelurahan Doko Kecamatan Ngasem Kediri
@@ -37,7 +37,23 @@
         <hr style="border: 1.5px solid black;margin-top:-10px;position:static">
         <div align="center">
             LAPORAN GAJI KARYAWAN
-            <br>Bulan .... Tahun ....
+            <?php 
+                $tahun  = strstr($bulan_tahun, '-', true);
+                $bln    = substr($bulan_tahun, strpos($bulan_tahun, "-") + 1); 
+                if     ($bln == '01') {$bulan = 'Januari';}
+                elseif ($bln == '02') {$bulan = 'Februari';}
+                elseif ($bln == '03') {$bulan = 'Maret';}
+                elseif ($bln == '04') {$bulan = 'April';}
+                elseif ($bln == '05') {$bulan = 'Mei';}
+                elseif ($bln == '06') {$bulan = 'Juni';}
+                elseif ($bln == '07') {$bulan = 'Juli';}
+                elseif ($bln == '08') {$bulan = 'Agustus';}
+                elseif ($bln == '09') {$bulan = 'September';}
+                elseif ($bln == '10') {$bulan = 'Oktober';}
+                elseif ($bln == '11') {$bulan = 'November';}
+                elseif ($bln == '12') {$bulan = 'Desember';}
+            ?>
+            <br>Bulan <?= $bulan ?> Tahun <?= $tahun ?>
         </div>
         <br>
         <div class="container-fluid" align="center" style="margin-top: 20px;">
@@ -53,7 +69,7 @@
                 $no = 1;
                 foreach ($data_karyawan as $data_kr): ?>
                 <tr>
-                    <td colspan="3" align="center" height="15" style="padding: 5px 0;">
+                     <td colspan="3" align="center" height="15" style="padding: 5px 0;">
                         <?= $no++ ?>
                     </td>
                     <td colspan="5" align="left" style="margin-left: 5px; padding-left:10px">
@@ -83,8 +99,22 @@
         </div>
         <br>
         <div align="right">
-            Madiun, 10 Januari 2022
-            <br>Pimpinan Toko Kue
+            <?php $bln2 = date('m'); 
+                if     ($bln2 == '01') {$bulan2 = 'Januari';}
+                elseif ($bln2 == '02') {$bulan2 = 'Februari';}
+                elseif ($bln2 == '03') {$bulan2 = 'Maret';}
+                elseif ($bln2 == '04') {$bulan2 = 'April';}
+                elseif ($bln2 == '05') {$bulan2 = 'Mei';}
+                elseif ($bln2 == '06') {$bulan2 = 'Juni';}
+                elseif ($bln2 == '07') {$bulan2 = 'Juli';}
+                elseif ($bln2 == '08') {$bulan2 = 'Agustus';}
+                elseif ($bln2 == '09') {$bulan2 = 'September';}
+                elseif ($bln2 == '10') {$bulan2 = 'Oktober';}
+                elseif ($bln2 == '11') {$bulan2 = 'November';}
+                elseif ($bln2 == '12') {$bulan2 = 'Desember';}
+            ?>
+            Kediri, <?= date('d').' '.$bulan2.' '.date('Y') ?>
+            <br>Pimpinan Toko Marins Cake
             <br><br><br><br>
             <h4>Ahmad Syah M.</h4>    
         </div>

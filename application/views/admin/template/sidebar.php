@@ -37,12 +37,13 @@
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'laporan') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="file-text"></i><span>Laporan</span></a>
                 <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_modal">Laporan Modal</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_gaji">Laporan Gaji</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_penjualan">Laporan Penjualan</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_keuntungan">Laporan Keuntungan</a></li>
                 </ul>
             </li>
-            <li class="menu-header">Laporan</li>
+            <li class="menu-header">Lainnya</li>
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'pengaturan') ? 'active' : '' ?>">
                 <a href="<?php echo base_url()?>admin/pengaturan" class="nav-link "><i data-feather="settings"></i><span>Pengaturan Akun</span></a>
 

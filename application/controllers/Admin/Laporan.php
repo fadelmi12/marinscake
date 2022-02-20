@@ -13,13 +13,23 @@ class Laporan extends CI_Controller
         }
     }
 
+    public function laporan_modal()
+    {   
+        $data['data_modal'] = $this->Model_laporan->get_data_modal()->result_array();
+        $data['detail_modal'] = $this->Model_laporan->get_detail_modal()->result_array();
+        //echo "<pre>"; print_r($data); exit;
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+        $this->load->view('admin/laporan/laporan_modal', $data);
+        $this->load->view('admin/template/footer');
+    }
+
 
     public function laporan_gaji()
     {   
         $data['data_karyawan'] = $this->Model_karyawan->get_data_karyawan()->result_array();
         $data['gaji_karyawan'] = $this->Model_laporan->get_gaji_karyawan(date('Y-m'));
 
-        //echo "<pre>"; print_r($data); exit;
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/laporan/laporan_gaji', $data);

@@ -39,4 +39,14 @@ class Model_laporan extends CI_Model {
         return $this->db->get()->result_array();
 
     }
+
+    public function get_data_modal()
+    {
+        return $this->db->get('modal');
+    }
+
+    public function get_detail_modal()
+    {
+        return $this->db->get('detail_modal');
+    }  
 }
