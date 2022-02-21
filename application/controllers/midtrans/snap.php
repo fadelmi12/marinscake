@@ -23,7 +23,7 @@ class Snap extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$params = array('server_key' => 'SB-Mid-server-kEpnfRm6ZrmRyIjJPlhrNVQE', 'production' => false);
+		$params = array('server_key' => 'SB-Mid-server-QWkM1P8gDTi_0ehrXR3nf4N0', 'production' => false);
 		$this->load->library('midtrans');
 		$this->midtrans->config($params);
 		$this->load->helper('url');
@@ -101,8 +101,8 @@ class Snap extends CI_Controller
 		$time = time();
 		$custom_expiry = array(
 			'start_time' => date("Y-m-d H:i:s O", $time),
-			'unit' => 'minute',
-			'duration'  => 2
+			'unit' => 'day',
+			'duration'  => 1
 		);
 
 		$transaction_data = array(

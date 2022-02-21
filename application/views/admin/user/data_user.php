@@ -96,7 +96,7 @@
                             <h6>Level User</h6>
                         </label>
                         <select class="form-control selectric" name="role" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required>
-                            <option value="" disabled selected hidden>pilih level user</option>
+                            <!-- <option value="" disabled selected hidden>pilih level user</option> -->
                             <option value="77">
                                 <h6>Admin</h6>
                             </option>
@@ -137,14 +137,14 @@
                             </label>
                             <input type="email" name="email" class="form-control" oninvalid="this.setCustomValidity('Form input email belum sesuai!')" oninput="setCustomValidity('')" required value="<?= $usr['email'] ?>">
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label>
                                 <h6>Password</h6>
                             </label>
+
+                            <small class="text-danger col-12">*biarkan kosong jika tidak merubah password</small>
                             <input type="text" name="password" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')">
-                            <div>
-                                <h6 class="mt-2">*biarkan kosong jika tidak merubah password</h6>
-                            </div>
+
                         </div>
                         <div class="form-group">
                             <label>
