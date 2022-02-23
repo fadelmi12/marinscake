@@ -2,6 +2,7 @@
 
 class Model_laporan extends CI_Model {
 
+    //          Transaksi
     public function get_pengeluaran($idUser)
     {
         $this->db->select_sum('jumlah');
@@ -21,32 +22,41 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
-    public function get_gaji_karyawan($bln_ini)
-    {
-        $result = $this->db->get_where('gaji_karyawan', array('bulan' => $bln_ini));
-        if($result->num_rows() >= 0){
-            return $result->result_array();
-        }else{
-            return array();
-        }
-    }
-
-    public function search_bulan($query)
+    //          Penggajian
+    public function get_gaji_karyawan($query)
     {
         $this->db->select('*');
         $this->db->from('gaji_karyawan');
         $this->db->like('bulan', $query);
-        return $this->db->get()->result_array();
-
+        return $this->db->get();
     }
 
-    public function get_data_modal()
+    public function get_gaji($idKaryawan)
     {
-        return $this->db->get('modal');
+        $this->db->select('gaji');
+        $this->db->from('karyawan');
+        $this->db->where('idKaryawan', $idKaryawan);
+        return $this->db->get();
+    } 
+
+    //          Permodalan
+    public function get_data_modal($bulan)
+    {
+        $this->db->select('*');
+        $this->db->from('modal');
+        $this->db->like('tanggal', $bulan);
+        return $this->db->get();
     }
 
     public function get_detail_modal()
     {
         return $this->db->get('detail_modal');
-    }  
+    }
+
+    public function get_detail_modal_where($idModal)
+    {
+        return $this->db->get_where('detail_modal', array('idModal' => $idModal));
+    } 
+
+    
 }

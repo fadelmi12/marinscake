@@ -1,4 +1,4 @@
-<?php echo $this->session->flashdata('gajiLunas'); ?>
+<?php echo $this->session->flashdata('gaji_karyawan'); ?>
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -13,18 +13,16 @@
                         <form method="post" enctype="multipart/form-data">
                             <div class="form-group d-flex align-items-center">
                                 <label class="mr-3 mb-0">Pilih Bulan :</label>
-                                    <input id="bulan" type="month" name="search_bulan" class="form-control mr-3" style="width:max-content" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?php echo date('Y-m');?>">
+                                    <input id="bulan" type="month" name="search_bulan" class="form-control mr-3" style="width:max-content" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $bulan?>">
                                     <button type="button" onclick="ambil_bulan()" class="btn btn-primary"><i class="fas fa-align-center mr-2"></i>Filter</button>
-                                    <button class="btn btn-warning ml-3" type="button" onclick="window.location.href='<?php echo base_url('admin/cetak_pdf/cetak_gaji_pdf/'.date('Y-m')) ?>'"> <i class="fas fa-file mr-2"></i>  Export pdf</button>
+                                    <a href="<?php echo base_url('admin/cetak_pdf/cetak_gaji_pdf/'.$bulan) ?>" target="_blank" class="btn btn-warning ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
                             </div>
                         </form>
                         <div class="table-responsive">
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">
-                                            No
-                                        </th>
+                                        <th class="text-center">No</th>
                                         <th>Nama Karyawan</th>
                                         <th>Gaji</th>
                                         <th>Status</th>
@@ -43,47 +41,67 @@
                                             <?= $data_kr['nama'] ?>
                                         </td>
                                         <td>
-                                            Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
+                                            <?php 
+                                                if ($gaji_karyawan == null):?>
+                                                    Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
+                                                <?php else:
+                                                    foreach ($gaji_karyawan as $gaji_kr):
+                                                        $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
+                                                    endforeach;
+
+                                                    if (in_array($data_kr['idKaryawan'].$bulan, $gj_kr)):
+
+                                                        foreach ($gaji_karyawan as $gaji_kr):
+                                                            if ($gaji_kr['idKaryawan'] == $data_kr['idKaryawan'] && $gaji_kr['bulan'] == $bulan): ?>
+                                                                <?= 'Rp'.number_format($gaji_kr['uangGaji'], 0, '', '.'); ?>
+                                                            <?php endif;
+                                                        endforeach; ?>
+                                                        
+                                                    <?php else:?>
+                                                    Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
                                         </td>
                                         <td>
                                             <?php 
                                                 if ($gaji_karyawan == null) {
                                                     echo "Belum Terbayar";
                                                 }else{
-                                                    $bln_th = date('Y-m');
-
                                                     foreach ($gaji_karyawan as $gaji_kr):
                                                         $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
                                                     endforeach;
 
-                                                    if (in_array($data_kr['idKaryawan'].$bln_th, $gj_kr))
+                                                    if (in_array($data_kr['idKaryawan'].$bulan, $gj_kr))
                                                         {echo "Terbayar";}
                                                     else{echo "Belum terbayar";}
                                                 }
                                             ?>
                                         </td>
-                                        <td>
-                                            <div class="dropdown" align="center">
-                                                <a href="#" data-toggle="dropdown" class="btn btn-success dropdown-toggle">Options</a>
-                                                <div class="dropdown-menu">
-                                                    <?php 
-                                                        if ($gaji_karyawan == null):?>
-                                                            <a href="<?= base_url('admin/laporan/gaji_lunas/'. $data_kr['idKaryawan']) ?>" class="dropdown-item has-icon"><i class="far fa-edit"></i>Bayar</a>
-                                                        <?php else:
-                                                            $bln_th = date('Y-m');
+                                        <td align="center">
+                                            <?php 
+                                                if ($gaji_karyawan == null) {?>
+                                                    <div id="Konfirmasi1<?= $data_kr['idKaryawan']?>">
+                                                        <button onclick="window.location.href='<?php echo base_url('admin/laporan/gaji_lunas/'.$data_kr['idKaryawan'].'_'.$bulan)?>'" class="btn btn-success" type="button"><i class="fas fa-check mr-2"></i>Konfirmasi</button>
+                                                    </div>
+                                                    
+                                               <?php }else{
+                                                    foreach ($gaji_karyawan as $gaji_kr):
+                                                        $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
+                                                    endforeach;
 
-                                                            foreach ($gaji_karyawan as $gaji_kr):
-                                                                $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
-                                                            endforeach;
-
-                                                            if (in_array($data_kr['idKaryawan'].$bln_th, $gj_kr)):?>
-                                                                <a href="#" class="dropdown-item has-icon"><i class="fas fa-check"></i>Terbayar</a>
-                                                            <?php else: ?>
-                                                                <a href="<?= base_url('admin/laporan/gaji_lunas/'.$data_kr['idKaryawan']) ?>" class="dropdown-item has-icon"><i class="far fa-edit"></i>Bayar</a>
+                                                    if (in_array($data_kr['idKaryawan'].$bulan, $gj_kr)){?>
+                                                        <?php foreach ($gaji_karyawan as $gaji_kr):
+                                                            if ($gaji_kr['idKaryawan'] == $data_kr['idKaryawan'] && $gaji_kr['bulan'] == $bulan): ?>
+                                                                <button onclick="window.location.href='<?php echo base_url('admin/laporan/hapus_gaji/'.$gaji_kr['idGaji'])?>'" class="btn btn-danger col-6" type="button"><i class="fas fa-times mr-2"></i>Batal</button>
                                                             <?php endif;
-                                                        endif; ?>
-                                                </div>
-                                            </div>
+                                                        endforeach; ?>
+                                                    <?php }else{?>
+                                                        <div id="Konfirmasi2<?= $data_kr['idKaryawan']?>">
+                                                            <button onclick="window.location.href='<?php echo base_url('admin/laporan/gaji_lunas/'.$data_kr['idKaryawan'].'_'.$bulan)?>'" class="btn btn-success" type="button"><i class="fas fa-check mr-2"></i>Konfirmasi</button>
+                                                        </div>
+                                                    <?php }
+                                                }
+                                            ?>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -102,7 +120,7 @@
     function ambil_bulan(){
         var bulan = document.getElementById('bulan').value;
         if (bulan != '') {
-            window.location="<?php echo base_url('admin/laporan/gaji_filter_bulan/')?>"+bulan;
+            window.location="<?php echo base_url('admin/laporan/laporan_gaji/')?>"+bulan;
         }else{
             swal('Informasi','Bulan dan tahun tidak ditemukan', 'info');
         }

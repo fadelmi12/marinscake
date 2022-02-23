@@ -38,6 +38,7 @@
         <div align="center">
             LAPORAN GAJI KARYAWAN
             <?php 
+                date_default_timezone_set('Asia/Jakarta');
                 $tahun  = strstr($bulan_tahun, '-', true);
                 $bln    = substr($bulan_tahun, strpos($bulan_tahun, "-") + 1); 
                 if     ($bln == '01') {$bulan = 'Januari';}
@@ -76,7 +77,26 @@
                         <?= $data_kr['nama'] ?>
                     </td>
                     <td colspan="5" align="center">
-                        Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
+                        <?php 
+                            if ($gaji_karyawan == null):?>
+                                Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
+                            <?php else:
+                                foreach ($gaji_karyawan as $gaji_kr):
+                                    $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
+                                endforeach;
+
+                                if (in_array($data_kr['idKaryawan'].$bulan_tahun, $gj_kr)):
+
+                                    foreach ($gaji_karyawan as $gaji_kr):
+                                        if ($gaji_kr['idKaryawan'] == $data_kr['idKaryawan'] && $gaji_kr['bulan'] == $bulan_tahun): ?>
+                                            <?= 'Rp'.number_format($gaji_kr['uangGaji'], 0, '', '.'); ?>
+                                        <?php endif;
+                                    endforeach; ?>
+                                    
+                                <?php else:?>
+                                Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     </td>
                     <td colspan="5" align="center">
                         <?php 
