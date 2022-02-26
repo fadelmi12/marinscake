@@ -101,7 +101,8 @@
                                     </div>
 
                                     <!-- Input tanggal digunakan saat preorder -->
-                                    <input hidden id="tglDikirim" type="text" name="tglDikirim" class="form-control">
+                                    <input id="tglDikirim" type="text" name="tglDikirim" class="form-control" hidden>
+                                    <input id="pembayaran" type="text" name="pembayaran" class="form-control" hidden>
 
                                     <div class="d-flex">
                                         <div class="btn btn-danger mr-3" type="button">
@@ -152,12 +153,20 @@
                                                 <input id="tanggalDikirim" type="date" <?php date_default_timezone_set('Asia/Jakarta');?> min="<?= date('Y-m-d') ?>" name="tanggalDikirim" class="form-control" >
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label>
+                                                Pembayaran
+                                            </label>
+                                            <div class="input-group">
+                                                <input type="text" name="pembayaran_1" id="pembayaran_1" class="form-control" >
+                                            </div>
+                                        </div>
                                         <div class="d-flex justify-content-around">
                                             <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">
                                                 <i class="fas fa-check mr-1"></i>
                                                 Batal
                                             </button>
-                                            <button type="button" class="btn btn-primary" onclick="submit_preorder()">
+                                            <button type="button" class="btn btn-primary" onclick="simpan_Preorder()">
                                                 <i class="fas fa-save mr-1"></i>
                                                 Simpan
                                             </button>
@@ -225,5 +234,68 @@
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="<?= base_url() ?>assets/js/cart.js"></script>
+    <script type="text/javascript">    
+        function lanjut_bayar() {
+            az = 1;
+            var cek     = document.getElementById('uang').value;
+            var uang    = parseInt(document.getElementById('uang').value);
+            var total   = document.getElementById('total-cart').value;
+            var kembalian = uang - total;
+            
+            if (total == '0') {
+                swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
+            }else{
+                if (document.getElementById('uang').value == '') {
+                    swal("Informasi", "Nominal uang pembayaran masih kosong", "info");
+                }else{
+                    if (uang < total) {
+                        swal("Informasi", "Nominal uang pembayaran kurang", "info");
+                    }else{
+                        document.getElementById('total_belanja1').value = total;
+                        document.getElementById('kembalian').value = kembalian;
+
+                        $('#modal_kembalian').appendTo("body").modal('show');
+                    }
+                }
+            }
+        }
+
+        function submit_terjual(){
+            document.getElementById('formTerjual').submit();
+            sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
+        }
+
+        function preorder(){
+            var total    = document.getElementById('total-cart').value;
+            if(total == '0'){
+             swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
+            }else{
+             var total   = document.getElementById('total-cart').value;
+             document.getElementById('total_belanja2').value = total;
+
+             $('#modal_preorder').appendTo("body").modal('show');
+            }    
+        }
+
+        function simpan_Preorder(){
+            var tgl  = document.getElementById('tanggalDikirim').value;
+            document.getElementById('tglDikirim').value = tgl;
+            var pembayaran   = document.getElementById('pembayaran_1').value;
+            document.getElementById('pembayaran').value = pembayaran;
+            
+            if (tgl == '') {
+                swal("Informasi", "Tanggal pengiriman masih kosong", "info");
+            }else{
+                if (pembayaran == '') {
+                    swal("Informasi", "Metode pembayaran masih kosong", "info");
+                }else{
+                    $('#modal_preorder').appendTo("body").modal('hide');
+
+                    document.getElementById('formTerjual').submit();
+                    sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
+                }
+            }
+        }
+    </script>
 </div>
 

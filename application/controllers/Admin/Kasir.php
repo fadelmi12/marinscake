@@ -35,13 +35,15 @@ class Kasir extends CI_Controller
 
 			$tanggalDikirim = $this->input->post('tglDikirim');
 			$total_belanja = $this->input->post('total_belanja');
+			$pembayaran = $this->input->post('pembayaran');
 
 			$data = array(
 				'jumlah' 			=> $total_belanja,
 				'metode'			=> "Offline",
+				'pembayaran'		=> $pembayaran,
 				'tanggalPesan'		=> date("Y-m-d"),
 				'tanggalDikirim'	=> $tanggalDikirim,
-				'status'			=> "Belum Dikirim",
+				'status'			=> "Menunggu Pengiriman",
 
 			);
 
