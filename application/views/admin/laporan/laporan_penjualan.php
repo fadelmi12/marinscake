@@ -20,7 +20,7 @@
                             <a style="display: none;" id="pdf_langsung" href="<?php echo base_url('admin/cetak_pdf/cetak_langsung_pdf/'.$bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
                             <a style="display: none;" id="pdf_preorder" href="<?php echo base_url('admin/cetak_pdf/cetak_preorder_pdf/'.$bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
                         </div>
-                        <div class="table-responsive" id="semua" style="display: ;">
+                        <div class="table-responsive" id="semua">
                             <table class="table table-striped" id="table-1" >
                                 <thead>
                                     <tr>

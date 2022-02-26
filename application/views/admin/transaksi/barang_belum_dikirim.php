@@ -6,29 +6,10 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h4>
-                            Daftar Transaksi Preorder
+                            Daftar Transaksi Preorder Belum Dikirim
                         </h4>
-                        <button class="btn btn-success d-flex" type="button" onclick="window.location.href='<?php echo base_url('admin/transaksi/barang_belum_dikirim/')?>'">
-                            Barang belum dikirim 
-                            <div class="bg-white text-dark ml-2" style="width: 25px; height: auto; border-radius: 100%;">
-                                <strong><?= count($barang_belum_dikirim)?></strong>
-                            </div>
-                        </button>
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo base_url('admin/transaksi/preorder/')?>" method="post" enctype="multipart/form-data">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="form-group d-flex align-items-center mr-3 mb-0">
-                                    <h6 class="w-100 mr-3 my-0" style="color:black">Pilih Tanggal : </h6>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control mr-3" 
-                                        value="<?= $tanggal; ?>" name="filter_tanggal">
-                                    </div>
-                                    <button class="btn btn-primary d-flex h-100 " type="submit"><i class="fas fa-filter my-auto mr-2"></i>Filter</button>
-                                </div>
-                            </div>
-                        </form>
-
                         <div class="table-responsive">
                             <table class="table table-striped" id="table-1">
                                 <thead>
@@ -171,7 +152,7 @@
                             <label>
                                 Jumlah Transaksi
                             </label>
-                            <input type="date" class="form-control mr-3" value="<?= $tanggal; ?>" name="filter_tanggal" hidden>
+                            <input type="date" class="form-control mr-3" value="" name="filter_tanggal" hidden>
                             <input type="text" name="jumlah" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['jumlah'] ?>">
                         </div>
                         <div class="row">
@@ -256,7 +237,7 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/transaksi/hapus_preorder/') ?>" + $idPreorder + "<?php echo '_'.$tanggal?>";
+                window.location = "<?php echo base_url('admin/transaksi/hapus_preorder/') ?>" + $idPreorder + "<?php echo '_kosong'?>";
             } else {
                 swal("Data preorder batal dihapus");
             }

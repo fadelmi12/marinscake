@@ -12,10 +12,15 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
-    public function index(){
+    public function index()
+	{
+		$data['produk'] 			= $this->Model_dashboard->get_produk()->result_array();
+        $data['transaksi_langsung'] = $this->Model_dashboard->transaksi_langsung()->result_array();
+		$data['transaksi_preorder'] = $this->Model_dashboard->transaksi_preorder()->result_array();
+		//echo "<pre>"; print_r($data); exit;
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
-        $this->load->view('admin/dashboard');
+        $this->load->view('admin/dashboard', $data);
         $this->load->view('admin/template/footer');
     }
 }

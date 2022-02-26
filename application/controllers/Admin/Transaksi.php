@@ -104,12 +104,25 @@ class Transaksi extends CI_Controller
         }
         
         $data['tanggal'] = $tanggal;
-        $data['riwayat_preorder'] = $this->Model_transaksi->get_riwayat_preorder($tanggal)->result_array();
-        $data['detail_preorder'] = $this->Model_transaksi->detail_riwayat_preorder()->result_array();
-        
+        $data['riwayat_preorder']       = $this->Model_transaksi->get_riwayat_preorder($tanggal)->result_array();
+        $data['detail_preorder']        = $this->Model_transaksi->detail_riwayat_preorder()->result_array();
+        $data['barang_belum_dikirim']   = $this->Model_transaksi->barang_belum_dikirim()->result_array();
+        //echo "<pre>"; print_r($data2);exit;
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/transaksi/preorder', $data);
+        $this->load->view('admin/template/footer');
+    } 
+
+    public function barang_belum_dikirim()
+    {   
+        
+        $data['detail_preorder']    = $this->Model_transaksi->detail_riwayat_preorder()->result_array();
+        $data['riwayat_preorder']   = $this->Model_transaksi->barang_belum_dikirim()->result_array();
+
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+        $this->load->view('admin/transaksi/barang_belum_dikirim', $data);
         $this->load->view('admin/template/footer');
     } 
 
@@ -122,9 +135,8 @@ class Transaksi extends CI_Controller
         $tanggalDikirim = $this->input->post('tanggalDikirim');
         $filter_tanggal = $this->input->post('filter_tanggal');
 
-        //print_r($filter_tanggal);exit;
         $data = array(
-            'jumlah' => $jumlah,
+            'jumlah'        => $jumlah,
             'metode'        => $metode,
             'pembayaran'    => $pembayaran,
             'status'        => $status,
@@ -139,8 +151,12 @@ class Transaksi extends CI_Controller
                         swal("Berhasil","Data preorder berhasil diupdate","success")  
                         </script>'  
                 );
-        $this->session->set_flashdata('tgl_filter', $filter_tanggal);
-        redirect('admin/transaksi/preorder/');
+        if($filter_tanggal == ''){
+            header("Location: ".$_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('tgl_filter', $filter_tanggal);
+            redirect('admin/transaksi/preorder/');
+        }
     }
 
     public function hapus_preorder($filterTgl_idPreorder)
@@ -149,14 +165,18 @@ class Transaksi extends CI_Controller
         $filterTgl    = substr($filterTgl_idPreorder, strpos($filterTgl_idPreorder, "_") + 1);
 
         $where = array('idPreorder' => $idPreorder);
-
+        
         $this->db->delete('preorder', $where);
         $this->session->set_flashdata('preorder',
                         '<script type ="text/JavaScript">  
                         swal("Berhasil","Data transaksi berhasil dihapus","success")  
                         </script>'  
                 );
-        $this->session->set_flashdata('tgl_filter', $filterTgl);
-        redirect('admin/transaksi/preorder/');
+        if($filterTgl == 'kosong'){
+            header("Location: ".$_SERVER['HTTP_REFERER']);
+        }else{
+            $this->session->set_flashdata('tgl_filter', $filterTgl);
+            redirect('admin/transaksi/preorder/');
+        }
     }
 }

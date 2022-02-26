@@ -27,4 +27,9 @@ class Model_transaksi extends CI_Model{
         $this->db->join('produk', 'produk.idProduk = detail_preorder.idProduk');
         return $this->db->get('');
     }
+
+    public function barang_belum_dikirim()
+    {
+        return $this->db->get_where('preorder', array('status' => 'Menunggu Pengiriman'));
+    }
 } 

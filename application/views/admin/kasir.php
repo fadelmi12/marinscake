@@ -102,12 +102,8 @@
 
                                     <!-- Input tanggal digunakan saat preorder -->
                                     <input id="tglDikirim" type="text" name="tglDikirim" class="form-control" hidden>
-                                    <input id="pembayaran" type="text" name="pembayaran" class="form-control" hidden>
 
-                                    <div class="d-flex">
-                                        <div class="btn btn-danger mr-3" type="button">
-                                            Batal
-                                        </div>
+                                    <div class="d-flex justify-content-around">
                                         <div class="btn btn-info mr-3" type="button" onclick="preorder()" type="button">
                                             Preorder
                                         </div>
@@ -151,14 +147,6 @@
                                             </label>
                                             <div class="input-group">
                                                 <input id="tanggalDikirim" type="date" <?php date_default_timezone_set('Asia/Jakarta');?> min="<?= date('Y-m-d') ?>" name="tanggalDikirim" class="form-control" >
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>
-                                                Pembayaran
-                                            </label>
-                                            <div class="input-group">
-                                                <input type="text" name="pembayaran_1" id="pembayaran_1" class="form-control" >
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-around">
@@ -280,20 +268,14 @@
         function simpan_Preorder(){
             var tgl  = document.getElementById('tanggalDikirim').value;
             document.getElementById('tglDikirim').value = tgl;
-            var pembayaran   = document.getElementById('pembayaran_1').value;
-            document.getElementById('pembayaran').value = pembayaran;
             
             if (tgl == '') {
                 swal("Informasi", "Tanggal pengiriman masih kosong", "info");
             }else{
-                if (pembayaran == '') {
-                    swal("Informasi", "Metode pembayaran masih kosong", "info");
-                }else{
                     $('#modal_preorder').appendTo("body").modal('hide');
 
                     document.getElementById('formTerjual').submit();
                     sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
-                }
             }
         }
     </script>
