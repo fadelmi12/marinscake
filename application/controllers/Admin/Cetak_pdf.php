@@ -112,4 +112,27 @@ class Cetak_pdf extends CI_Controller {
 		$this->dompdf->stream("Daftar_Transaksi_Preorder.pdf", array('Attachment' =>0)); 
     }
 
+	//	cetak pdf laporan keuntungan
+    public function cetak_keuntungan_pdf($filter)
+    {
+     	$this->load->library('dompdf_gen');
+
+     	$data['data_transaksi']     = $this->Model_laporan->total_transaksi_langsung($filter)->result_array();
+        $data['data_preorder']      = $this->Model_laporan->total_transaksi_preorder($filter)->result_array();
+        $data['data_modal']         = $this->Model_laporan->total_pengeluaran_modal($filter)->result_array();
+        $data['data_gaji']          = $this->Model_laporan->total_pengeluaran_gaji($filter)->result_array();
+        $data['bulan_tahun'] = $filter;
+     	
+     	$this->load->view('admin/laporan/laporan_keuntungan_pdf', $data);
+
+     	$paper_size 	= 'A4';
+		$orientation 	= 'portrait';
+		$html 			= $this->output->get_output();
+		$this->dompdf->set_paper($paper_size, $orientation);
+
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		$this->dompdf->stream("Daftar_Transaksi_Preorder.pdf", array('Attachment' =>0)); 
+    }
+
 }   

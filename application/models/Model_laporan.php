@@ -98,6 +98,7 @@ class Model_laporan extends CI_Model {
         $this->db->select('SUM(total_belanja) as langsung');
         $this->db->from('transaksi');
         $this->db->like('tanggal', $filter);
+        $this->db->where(array('status' => 'Selesai'));
         return $this->db->get();
     }
 
@@ -106,6 +107,7 @@ class Model_laporan extends CI_Model {
         $this->db->select('SUM(jumlah) as preorder');
         $this->db->from('preorder');
         $this->db->like('tanggalPesan', $filter);
+        $this->db->where(array('status' => 'Selesai'));
         return $this->db->get();
     }
 
