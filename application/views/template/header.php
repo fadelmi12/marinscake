@@ -32,10 +32,10 @@
     <div class="ps-search">
         <div class="ps-search__content">
             <a class="ps-search__close" href="#"><span></span></a>
-            <form class="ps-form--search-2" action="do_action" method="post">
-                <h3>Enter your keyword</h3>
+            <form class="ps-form--search-2" action="<?= base_url() ?>produk/cari" method="post">
+                <h3>Cari produk yang Anda inginkan</h3>
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="" />
+                    <input class="form-control" type="text" name="cari" placeholder="" />
                     <button class="ps-btn active ps-btn--fullwidth">Search</button>
                 </div>
             </form>
@@ -50,16 +50,16 @@
                         <ul class="menu d-flex justify-content-between w-100">
                             <li class="menu-item-has-children current-menu-item">
                                 <a href="index.html">Home</a>
-                                
+
                             </li>
                             <li><a href="#company-info">About</a></li>
                             <li>
-                                <a href="product-listing.html">Product</a>
+                                <a href="<?= base_url() ?>produk">Product</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-2 d-flex align-items-center">
-                        <a class="ps-logo" href="index.html"><img src="<?= base_url() ?>assets/client/images/logo-light2.svg" alt="" /></a>
+                        <a class="ps-logo" href="<?= base_url() ?>"><img src="<?= base_url() ?>assets/client/images/logo-light2.svg" alt="" /></a>
                     </div>
                     <div class="col-5 d-flex align-items-center justify-content-between pl-5">
                         <ul class="menu d-flex justify-content-between w-75">
@@ -68,42 +68,9 @@
                         </ul>
                         <div class="header__actions w-50 text-right">
                             <a class="ps-search-btn" href="#"><i class="ba-magnifying-glass"></i></a>
-                            <div class="ps-cart">
-                                <a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ba-shopping"></i></a>
+                            <div class="ps-cart"><a class="ps-cart__toggle" href="#"><i class="ba-shopping"></i></a>
                                 <div class="ps-cart__listing">
-                                    <div class="ps-cart__content">
-                                        <div class="ps-cart-item">
-                                            <a class="ps-cart-item__close" href="#"></a>
-                                            <div class="ps-cart-item__thumbnail">
-                                                <a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/3.png" alt="" />
-                                            </div>
-                                            <div class="ps-cart-item__content">
-                                                <a class="ps-cart-item__title" href="product-detail.html">Todd Snyder</a>
-                                                <p>
-                                                    <span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="ps-cart-item">
-                                            <a class="ps-cart-item__close" href="#"></a>
-                                            <div class="ps-cart-item__thumbnail">
-                                                <a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/1.png" alt="" />
-                                            </div>
-                                            <div class="ps-cart-item__content">
-                                                <a class="ps-cart-item__title" href="product-detail.html">Todd Snyder</a>
-                                                <p>
-                                                    <span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="ps-cart__total">
-                                        <p>Number of items:<span>36</span></p>
-                                        <p>Item Total:<span>£528.00</span></p>
-                                    </div>
-                                    <div class="ps-cart__footer">
-                                        <a href="cart.html">Check out</a>
-                                    </div>
+                                    <div id="detail_cart"></div>
                                 </div>
                             </div>
                         </div>

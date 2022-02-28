@@ -32,60 +32,13 @@
     <!-- header-->
     <header class="header header--3" data-sticky="false">
         <nav class="navigation">
-            <div class="container"><a class="ps-logo" href="<?= base_url() ?>"><img src="<?= base_url() ?>assets/client/images/logo-light3.svg" alt="" ></a>
+            <div class="container"><a class="ps-logo" href="<?= base_url() ?>"><img src="<?= base_url() ?>assets/client/images/logo-light3.svg" alt=""></a>
                 <div class="menu-toggle"><span></span></div>
-                <div class="header__actions"><a class="ps-search-btn" href="#"><i class="ba-magnifying-glass"></i></a>
-                    <div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ba-shopping"></i></a>
+                <div class="header__actions">
+                    <a class="ps-search-btn" href="#"><i class="ba-magnifying-glass"></i></a>
+                    <div class="ps-cart"><a class="ps-cart__toggle" href="#"><i class="ba-shopping"></i></a>
                         <div class="ps-cart__listing">
-                            <div class="ps-cart__content">
-                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/1.png" alt="">
-                                    </div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Kingsman</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
-                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/2.png" alt="">
-                                    </div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Joseph</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
-                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/3.png" alt="">
-                                    </div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Todd Snyder</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
-                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/1.png" alt="">
-                                    </div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Todd Snyder</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
-                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/1.png" alt="">
-                                    </div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Todd Snyder</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
-                                <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-                                    <div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<?= base_url() ?>assets/client/images/shopping-cart/1.png" alt="">
-                                    </div>
-                                    <div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Todd Snyder</a>
-                                        <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ps-cart__total">
-                                <p>Number of items:<span>36</span></p>
-                                <p>Item Total:<span>£528.00</span></p>
-                            </div>
-                            <div class="ps-cart__footer"><a href="cart.html">Check out</a></div>
+                            <div id="detail_cart"></div>
                         </div>
                     </div>
                 </div>
