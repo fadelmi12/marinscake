@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/client/plugins/slick/slick/slick.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/client/plugins/lightGallery-master/dist/css/lightgallery.min.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/client/css/style.css" />
+
+    <!-- swal -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -49,8 +52,7 @@
                     <div class="col-5 d-flex align-items-center pr-5">
                         <ul class="menu d-flex justify-content-between w-100">
                             <li class="menu-item-has-children current-menu-item">
-                                <a href="index.html">Home</a>
-
+                                <a href="">Home</a>
                             </li>
                             <li><a href="#company-info">About</a></li>
                             <li>
@@ -63,7 +65,7 @@
                     </div>
                     <div class="col-5 d-flex align-items-center justify-content-between pl-5">
                         <ul class="menu d-flex justify-content-between w-75">
-                            <li><a href="#">Preorder</a></li>
+                            <li><a href="<?= base_url() ?>preorder">Preorder</a></li>
                             <li><a href="contact.html">kontak</a></li>
                         </ul>
                         <div class="header__actions w-50 text-right">

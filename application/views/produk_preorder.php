@@ -1,8 +1,8 @@
 <div class="ps-hero bg--cover" data-background="<?= base_url() ?>assets/client/images/hero/product.jpg">
     <div class="ps-hero__content ">
-        <h1> Daftar Produk</h1>
+        <h1> Produk Preorder</h1>
         <div class="text-center">
-            Home > Shop Page
+            Home > Preorder
         </div>
     </div>
 </div>
@@ -11,27 +11,19 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 order-lg-last">
-
-                <!-- <div class="ps-shop__sort">
-                    <select class="ps-select" title="Default Sorting">
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                </div> -->
                 <div class="row">
                     <?php foreach ($produk as $prd) : ?>
                         <div class="col-lg-4">
                             <div class="ps-product">
-                                <div class="ps-product__thumbnail"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""><a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"></a>
+                                <div class="ps-product__thumbnail"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""><a class="ps-product__overlay" href="<?= base_url() ?>preorder/detail/<?= $prd['idProduk'] ?>"></a>
                                     <ul class="ps-product__actions">
-                                        <li><a href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
+                                        <li><a href="<?= base_url() ?>preorder/detail/<?= $prd['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
                                         <li><a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $prd['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>"><i class="ba-shopping"></i></a></li>
                                     </ul>
                                     <script></script>
                                 </div>
-                                <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"><?= $prd['namaProduk'] ?></a>
-                                    <p><a href="">Stok Produk : <?= $prd['stok'] ?></a></p>
+                                <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>preorder/detail/<?= $prd['idProduk'] ?>"><?= $prd['namaProduk'] ?></a>
+                                    <!-- <p><a href="">Stok Produk : <?= $prd['stok'] ?></a></p> -->
                                     <p class="ps-product__price">Rp <?= number_format($prd['harga'], 0, ',', '.') ?></p>
                                 </div>
                             </div>

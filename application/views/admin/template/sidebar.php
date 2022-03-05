@@ -7,10 +7,10 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
             <li class="dropdown <?php echo ($this->uri->segment(2) == '') ? 'active' : '' ?>">
-                <a href="<?php echo base_url()?>admin" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
+                <a href="<?php echo base_url() ?>admin" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown <?php echo ($this->uri->segment(2) == 'kasir') ? 'active' : '' ?>">
-                <a href="<?php echo base_url()?>admin/kasir" class="nav-link"><i data-feather="monitor"></i><span>Kasir</span></a>
+                <a href="<?php echo base_url() ?>admin/kasir" class="nav-link"><i data-feather="monitor"></i><span>Kasir</span></a>
             </li>
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'produk') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="package"></i><span>Produk</span></a>
@@ -31,23 +31,27 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="user"></i><span>Karyawan</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/karyawan">Daftar Karyawan</a></li>
-                    
+
                 </ul>
             </li>
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'laporan') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="file-text"></i><span>Laporan</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/modal/pengeluaran_modal/<?= date('Y-m')?>">Laporan Modal</a></li>
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_gaji/<?= date('Y-m')?>">Laporan Gaji</a></li>
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_penjualan/<?= date('Y-m')?>">Laporan Penjualan</a></li>
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_keuntungan/<?= date('Y-m')?>">Laporan Keuntungan</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/modal/pengeluaran_modal/<?= date('Y-m') ?>">Laporan Modal</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_gaji/<?= date('Y-m') ?>">Laporan Gaji</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_penjualan/<?= date('Y-m') ?>">Laporan Penjualan</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_keuntungan/<?= date('Y-m') ?>">Laporan Keuntungan</a></li>
                 </ul>
             </li>
             <li class="menu-header">Lainnya</li>
-            <li class="dropdown <?php echo ($this->uri->segment(2) === 'pengaturan') ? 'active' : '' ?>">
-                <a href="<?php echo base_url()?>admin/pengaturan" class="nav-link "><i data-feather="settings"></i><span>Pengaturan Akun</span></a>
-
+            <li class="dropdown <?php echo ($this->uri->segment(2) == 'user' || $this->uri->segment(2) == 'pengiriman') ? 'active' : '' ?>">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="settings"></i><span>Pengaturan</span></a>
+                <ul class="dropdown-menu">
+                    <li> <a href="<?php echo base_url() ?>admin/user" class="nav-link "><i data-feather="user"></i><span>Pengaturan User</span></a></li>
+                    <li> <a href="<?php echo base_url() ?>admin/pengiriman" class="nav-link "><i data-feather="send"></i><span>Pengiriman</span></a></li>
+                </ul>
             </li>
+
 
         </ul>
     </aside>

@@ -36,59 +36,59 @@ class Snap extends CI_Controller
 
 	public function token()
 	{
+		$id_transaksi 	= $this->input->post('idTransaksi');
+		$total_bayar	= $this->input->post('total_bayar');
+		$produk			= $this->Model_transaksi->get_transaksi($id_transaksi)->row();
+		$pengiriman		= $this->Model_transaksi->get_pengiriman($id_transaksi)->row();
+		$item			= $this->Model_transaksi->get_detailTransaksi($id_transaksi)->result_array();
 		// Required
 		$transaction_details = array(
-			'order_id' => rand(),
-			'gross_amount' => 100000, // no decimal allowed for creditcard
+			'order_id' => $id_transaksi,
+			'gross_amount' => $total_bayar, // no decimal allowed for creditcard
 		);
 
-		// Optional
-		$item1_details = array(
-			'id' => 'a1',
-			'price' => 50000,
+		// $item_details = array();
+		foreach ($item as $xyz) {
+			$item_details[] = array(
+				'price'     => $xyz['total'] / $xyz['jumlah'],
+				'quantity'  => $xyz['jumlah'],
+				'name'      => $xyz['namaProduk'],
+			);
+		}
+		$item_details[] = array(
+			'price' => $produk->ongkir,
 			'quantity' => 1,
-			'name' => "Apple"
+			'name' => "Ongkir"
 		);
-
-		// Optional
-		$item2_details = array(
-			'id' => 'a2',
-			'price' => 50000,
-			'quantity' => 1,
-			'name' => "Orange"
-		);
-
-		// Optional
-		$item_details = array($item1_details, $item2_details);
 
 		// Optional
 		$billing_address = array(
-			'first_name'    => "Andri",
-			'last_name'     => "Litani",
-			'address'       => "Mangga 20",
-			'city'          => "Jakarta",
-			'postal_code'   => "16602",
-			'phone'         => "081122334455",
+			'first_name'    => $pengiriman->nama,
+			// 'last_name'     => "Litani",
+			'address'       => $pengiriman->alamat,
+			'city'          => $pengiriman->kota,
+			// 'postal_code'   => "16602",
+			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'
 		);
 
 		// Optional
 		$shipping_address = array(
-			'first_name'    => "Obet",
-			'last_name'     => "Supriadi",
-			'address'       => "Manggis 90",
-			'city'          => "Jakarta",
-			'postal_code'   => "16601",
-			'phone'         => "08113366345",
+			'first_name'    => $pengiriman->nama,
+			// 'last_name'     => "Litani",
+			'address'       => $pengiriman->alamat,
+			'city'          => $pengiriman->kota,
+			// 'postal_code'   => "16602",
+			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'
 		);
 
 		// Optional
 		$customer_details = array(
-			'first_name'    => "Andri",
-			'last_name'     => "Litani",
-			'email'         => "andri@litani.com",
-			'phone'         => "081122334455",
+			'first_name'    => $pengiriman->nama,
+			// 'last_name'     => "Litani",
+			'email'         => $pengiriman->email,
+			'phone'         => $pengiriman->no_hp,
 			'billing_address'  => $billing_address,
 			'shipping_address' => $shipping_address
 		);
@@ -121,9 +121,32 @@ class Snap extends CI_Controller
 
 	public function finish()
 	{
-		$result = json_decode($this->input->post('result_data'));
-		echo 'RESULT <br><pre>';
-		var_dump($result);
-		echo '</pre>';
+		$result = json_decode($this->input->post('result_data'), true);
+
+		if ($result['payment_type'] == "gopay") {
+			$data = array(
+				'id_transaksi' 		=> $result['order_id'],
+				'status'			=> $result['status_code'],
+				'total_bayar'		=> $result['gross_amount'],
+				'metode'			=> $result['payment_type'],
+				'waktu'				=> $result['transaction_time']
+			);
+		} elseif ($result['payment_type'] == "bank_transfer") {
+			$data = array(
+				'id_transaksi' 		=> $result['order_id'],
+				'status'			=> $result['status_code'],
+				'total_bayar'		=> $result['gross_amount'],
+				'metode'			=> $result['payment_type'],
+				'waktu'				=> $result['transaction_time'],
+				'url'				=> $result['pdf_url']
+			);
+		}
+
+		$simpan = $this->db->insert('midtrans', $data);
+
+		if ($simpan) {
+			$id_transaksi = $result['order_id'];
+			redirect('checkout/pembayaran/' . $id_transaksi);
+		}
 	}
 }

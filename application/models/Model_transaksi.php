@@ -1,6 +1,7 @@
 <?php
 
-class Model_transaksi extends CI_Model{
+class Model_transaksi extends CI_Model
+{
 
     public function get_riwayat_transaksi($tanggal)
     {
@@ -16,7 +17,7 @@ class Model_transaksi extends CI_Model{
     }
 
     public function get_riwayat_preorder($tanggal)
-    {   
+    {
         return $this->db->get_where('preorder', array('tanggalPesan' => $tanggal));
     }
 
@@ -32,4 +33,36 @@ class Model_transaksi extends CI_Model{
     {
         return $this->db->get_where('preorder', array('status' => 'Menunggu Pengiriman'));
     }
-} 
+
+    public function get_transaksi($id_transaksi)
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi');
+        $this->db->where('idTransaksi', $id_transaksi);
+        return $this->db->get('');
+    }
+
+    public function get_detailTransaksi($id_transaksi)
+    {
+        $this->db->select('*');
+        $this->db->from('detail_transaksi');
+        $this->db->where('idTransaksi', $id_transaksi);
+        return $this->db->get('');
+    }
+
+    public function get_pengiriman($id_transaksi)
+    {
+        $this->db->select('*');
+        $this->db->from('pengiriman');
+        $this->db->where('idTransaksi', $id_transaksi);
+        return $this->db->get('');
+    }
+
+    public function get_midtrans($id_transaksi)
+    {
+        $this->db->select('*');
+        $this->db->from('midtrans');
+        $this->db->where('id_transaksi', $id_transaksi);
+        return $this->db->get('');
+    }
+}

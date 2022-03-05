@@ -140,7 +140,6 @@
                         <h3 class="widget-title">Kategori</h3>
                         <ul class="ps-list--checked">
                             <?php foreach ($kategori as $ktg) : ?>
-                                <input type="checkbox">
                                 <li><a href=""><?= $ktg['namaJenis'] ?></a></li>
                             <?php endforeach ?>
                             <!-- <li><a href="product-listing.html">Donut(76)</a></li>

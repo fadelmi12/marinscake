@@ -7,6 +7,12 @@ class Keranjang extends CI_Controller
 
 	public function index()
 	{
+		$cart = $this->cart->contents();
+		foreach ($cart as $key) {
+			echo json_encode($key['id']);
+		}
+		// echo json_encode($cart);
+		exit;
 		$this->load->view('template/header2');
 		$this->load->view('keranjang');
 		$this->load->view('template/footer');
@@ -14,14 +20,65 @@ class Keranjang extends CI_Controller
 
 	function add_to_cart()
 	{
+		$id		= $this->input->post('produk_id');
+		$name 	= $this->input->post('produk_nama');
+		$price 	= $this->input->post('produk_harga');
+		$gambar	= $this->input->post('produk_gambar');
+		$stok	= $this->input->post('produk_stok');
+		$qty 	= $this->input->post('quantity');
+
+		// $ada = false;
+		// foreach ($this->cart->contents() as $items) {
+		// 	if ($items['id'] == $id) {
+		// 		$ada = true;
+		// 	}
+		// }
+		// if ($ada == true) {
+		// 	$qty_new = $items['qty'] + $qty;
+		// 	if ($qty_new <= $stok) {
+		// 		$data = array(
+		// 			'id' => $id,
+		// 			'name' => $name,
+		// 			'price' => $price,
+		// 			'gambar' => $gambar,
+		// 			'qty' => $qty
+		// 		);
+		// 		$this->cart->insert($data);
+		// 		$proses = true;
+		// 		$this->session->set_flashdata(
+		// 			'keranjang',
+		// 			'<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+		//                     <script type ="text/JavaScript">  
+		//                     swal("Sukses","Produk ditambahkan ke keranjang","success"); 
+		//                     </script>'
+		// 		);
+		// 	} else {
+		// 		$proses = false;
+		// 		$this->session->set_flashdata(
+		// 			'keranjang',
+		// 			'<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+		//                     <script type ="text/JavaScript">  
+		//                     swal("Gagal","Stok produk tidak cukup","warning"); 
+		//                     </script>'
+		// 		);
+		// 	}
+		// } else {
 		$data = array(
-			'id' => $this->input->post('produk_id'),
-			'name' => $this->input->post('produk_nama'),
-			'price' => $this->input->post('produk_harga'),
-			'gambar' => $this->input->post('produk_gambar'),
-			'qty' => $this->input->post('quantity'),
+			'id'		=> $id,
+			'name' 		=> $name,
+			'price' 	=> $price,
+			'gambar'	=> $gambar,
+			'qty' 		=> $qty
 		);
 		$this->cart->insert($data);
+		// $this->session->set_flashdata(
+		// 	'keranjang',
+		// 	'<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+		//                     <script type ="text/JavaScript">  
+		//                     swal("Sukses","Produk ditambahkan ke keranjang","success"); 
+		//                     </script>'
+		// );
+		// }
 		echo $this->show_cart(); //tampilkan cart setelah added
 	}
 
@@ -62,6 +119,7 @@ class Keranjang extends CI_Controller
 
 
 		return $output;
+		// return $proses;
 	}
 
 	function load_cart()

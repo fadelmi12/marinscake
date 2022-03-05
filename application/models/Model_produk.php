@@ -18,6 +18,16 @@ class Model_produk extends CI_Model
 		$this->db->where('idProduk', $id_produk);
 		return $this->db->get();
 	}
+
+	public function get_produk_terbaru()
+	{
+		$this->db->select('*');
+		$this->db->from('produk');
+		$this->db->limit(6);
+		$this->db->order_by('idProduk', 'DESC');
+		return $this->db->get();
+	}
+
 	public function get_produk_kategori($id_kategori, $id_produk)
 	{
 		$this->db->select('*');

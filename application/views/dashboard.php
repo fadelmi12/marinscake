@@ -3,11 +3,11 @@
         <div class="ps-carousel--animate ps-carousel--1st">
             <div class="item">
                 <div class="ps-product--banner">
-                    <span class="ps-badge ps-badge--sale"><img src="<?=base_url()?>assets/client/images/icons/badge-brown.png" alt="" /> <i>0.5</i>
+                    <span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt="" /> <i>0.5</i>
                     </span>
-                    <img src="<?=base_url()?>assets/client/images/banner/slider-5.png" alt="" />
+                    <img src="<?= base_url() ?>assets/client/images/banner/slider-5.png" alt="" />
                     <div class="ps-product__footer">
-                        <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="order-form.html">
+                        <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="<?= base_url() ?>produk">
                             Pesan Sekarang
                         </a>
                     </div>
@@ -15,9 +15,9 @@
             </div>
             <div class="item">
                 <div class="ps-product--banner">
-                    <span class="ps-badge ps-badge--sale"><img src="<?=base_url()?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?=base_url()?>assets/client/images/banner/slider-6.png" alt="" />
+                    <span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?= base_url() ?>assets/client/images/banner/slider-6.png" alt="" />
                     <div class="ps-product__footer">
-                        <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="order-form.html">Pesan Sekarang</a>
+                        <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="<?= base_url() ?>produk">Pesan Sekarang</a>
                     </div>
                 </div>
             </div>
@@ -31,13 +31,13 @@
         <div class="ps-section__header">
             <h3 class="ps-section__title">Tentang Kita</h3>
             <p>SELAMAT DATANG DI MARINS CAKE</p>
-            <span><img src="<?=base_url()?>assets/client/images/icons/floral.png" alt="" /></span>
+            <span><img src="<?= base_url() ?>assets/client/images/icons/floral.png" alt="" /></span>
         </div>
         <div class="ps-section__content">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="ps-block--award">
-                        <img src="<?=base_url()?>assets/client/images/icons/award-1.png" alt="" />
+                        <img src="<?= base_url() ?>assets/client/images/icons/award-1.png" alt="" />
                         <h4>BAHAN PREMIUM DAN BERKUALITAS</h4>
                         <p>
                             Tart bear claw cake tiramisu chocolate bar gummies dragée
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="ps-block--award">
-                        <img src="<?=base_url()?>assets/client/images/icons/award-2.png" alt="" />
+                        <img src="<?= base_url() ?>assets/client/images/icons/award-2.png" alt="" />
                         <h4>ROTI FRESH TIAP HARI</h4>
                         <p>
                             Tart bear claw cake tiramisu chocolate bar gummies dragée
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="ps-block--award">
-                        <img src="<?=base_url()?>assets/client/images/icons/award-2.png" alt="" />
+                        <img src="<?= base_url() ?>assets/client/images/icons/award-2.png" alt="" />
                         <h4>BAKERY OF THE YEAR</h4>
                         <p>
                             Tart bear claw cake tiramisu chocolate bar gummies dragée
@@ -70,19 +70,44 @@
     </div>
 </div>
 <!-- Home 1 products-->
-<div class="ps-home-product bg--cover" data-background="<?=base_url()?>assets/client/images/bg/home-product.jpg">
+<div class="ps-home-product bg--cover" data-background="<?= base_url() ?>assets/client/images/bg/home-product.jpg">
     <div class="container">
         <div class="ps-section__header">
-            <h3 class="ps-section__title">Roti Hari Ini</h3>
+            <h3 class="ps-section__title">Produk Terbaru</h3>
             <p>FRESH FROM OVEN</p>
-            <span><img src="<?=base_url()?>assets/client/images/icons/floral.png" alt="" /></span>
+            <span><img src="<?= base_url() ?>assets/client/images/icons/floral.png" alt="" /></span>
         </div>
         <div class="ps-section__content">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <?php foreach ($produk as $prd) : ?>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="ps-product ps-product--horizontal d-flex align-items-center">
+                            <div class="ps-product__thumbnail">
+                                <img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt="" />
+                                <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"></a>
+                                <ul class="ps-product__actions">
+                                    <li>
+                                        <a href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="tambah_cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $prd['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="ps-product__content">
+                                <a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"><?= $prd['namaProduk'] ?></a>
+                                <p>
+                                    Ready <?= $prd['stok'] ?> Stok
+                                </p>
+                                <p class="ps-product__price">Rp <?= number_format($prd['harga'], '0', ',', '.') ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach ?>
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="ps-product ps-product--horizontal d-flex align-items-center">
                         <div class="ps-product__thumbnail">
-                            <img src="<?=base_url()?>assets/client/images/products/1.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <span class="ps-badge"><img src="<?= base_url() ?>assets/client/images/icons/badge-red.png" alt="" /><i>New</i></span><img src="<?= base_url() ?>assets/client/images/products/2.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
                             <ul class="ps-product__actions">
                                 <li>
                                     <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
@@ -104,7 +129,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="ps-product ps-product--horizontal d-flex align-items-center">
                         <div class="ps-product__thumbnail">
-                            <span class="ps-badge"><img src="<?=base_url()?>assets/client/images/icons/badge-red.png" alt="" /><i>New</i></span><img src="<?=base_url()?>assets/client/images/products/2.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <span class="ps-badge"><img src="<?= base_url() ?>assets/client/images/icons/badge-red.png" alt="" /><i>New</i></span><img src="<?= base_url() ?>assets/client/images/products/3.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
                             <ul class="ps-product__actions">
                                 <li>
                                     <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
@@ -126,7 +151,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="ps-product ps-product--horizontal d-flex align-items-center">
                         <div class="ps-product__thumbnail">
-                            <span class="ps-badge"><img src="<?=base_url()?>assets/client/images/icons/badge-red.png" alt="" /><i>New</i></span><img src="<?=base_url()?>assets/client/images/products/3.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?= base_url() ?>assets/client/images/products/4.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
                             <ul class="ps-product__actions">
                                 <li>
                                     <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
@@ -148,7 +173,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="ps-product ps-product--horizontal d-flex align-items-center">
                         <div class="ps-product__thumbnail">
-                            <span class="ps-badge ps-badge--sale"><img src="<?=base_url()?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?=base_url()?>assets/client/images/products/4.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <img src="<?= base_url() ?>assets/client/images/products/5.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
                             <ul class="ps-product__actions">
                                 <li>
                                     <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
@@ -170,7 +195,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="ps-product ps-product--horizontal d-flex align-items-center">
                         <div class="ps-product__thumbnail">
-                            <img src="<?=base_url()?>assets/client/images/products/5.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
+                            <img src="<?= base_url() ?>assets/client/images/products/6.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
                             <ul class="ps-product__actions">
                                 <li>
                                     <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
@@ -188,29 +213,7 @@
                             <p class="ps-product__price">Rp 2.500</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="ps-product ps-product--horizontal d-flex align-items-center">
-                        <div class="ps-product__thumbnail">
-                            <img src="<?=base_url()?>assets/client/images/products/6.png" alt="" /><a class="ps-product__overlay" href="product-detail.html"></a>
-                            <ul class="ps-product__actions">
-                                <li>
-                                    <a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="ps-product__content">
-                            <a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
-                            <p>
-                                Ready 100 Buah
-                            </p>
-                            <p class="ps-product__price">Rp 2.500</p>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
             </div>
             <div class="text-center ps-product__footer">
                 <a class="ps-btn mb-5 py-3 px-5" href="order-form.html">Produk Lainnya</a>
@@ -219,14 +222,17 @@
     </div>
 </div>
 <!--delivery form-->
-<div class="ps-delivery-form bg--parallax" data-background="<?=base_url()?>assets/client/images/bg/delivery-form.jpg" id="company-info">
+<div class="ps-delivery-form bg--parallax" data-background="<?= base_url() ?>assets/client/images/bg/delivery-form.jpg" id="company-info">
     <div class="ps-block--delivery">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="ps-block__content">
                     <div class="ps-block--contact">
                         <h4>KONTAK</h4>
-                        <h5>Whatsapp : 0812-1700-3696</h5>
+                        <h5>Whatsapp : 0858-1260-1646</h5>
+                        <a class="btn btn-light" target="_blank" href="https://wa.me/6285812601646?text=Halo%20Admin%20Marins%20Cake,%20Saya%20mau%20order..">
+                            <h4 class="text-dark">Chat Admin</h4>
+                        </a>
                     </div>
                     <div class="ps-block--contact">
                         <h4>ALAMAT TOKO</h4>

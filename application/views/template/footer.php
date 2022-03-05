@@ -80,6 +80,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsUcTjt43mTheN9ruCsQVgBE-wgN6_AfY&amp;region=GB"></script>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -88,7 +89,22 @@
       var produk_nama = $(this).data("produknama");
       var produk_harga = $(this).data("produkharga");
       var produk_gambar = $(this).data("produkgambar");
+      var produk_stok = $(this).data("produkstok");
       var quantity = $('#' + produk_id).val();
+      // var cart = '<?= json_encode($this->cart->contents()) ?>';
+
+      // var inc = cart.includes(produk_id);
+      // if (cart.includes(produk_id)) {
+      //   $.each(cart, function(i, data) {
+      //     console.log(data);
+      //   });
+      // }
+      // if (quantity > produk_stok) {
+      // alert("stok tidak cukup!");
+      // swal('Gagal', 'Stok tidak cukup!', 'error');
+      // } elseif() {
+      //   swal('Gagal', 'Stok tidak cukup!', 'error');
+      // } else {
       $.ajax({
         url: "<?php echo base_url(); ?>keranjang/add_to_cart",
         method: "POST",
@@ -97,12 +113,44 @@
           produk_nama: produk_nama,
           produk_harga: produk_harga,
           produk_gambar: produk_gambar,
+          produk_stok: produk_stok,
           quantity: quantity
         },
         success: function(data) {
           $('#detail_cart').html(data);
+          swal('Sukses', 'Produk ditambahkan ke keranjang', 'success');
         }
       });
+      // }
+    });
+
+    $(document).on('click', '.tambah_cart', function() {
+      var produk_id = $(this).data("produkid");
+      var produk_nama = $(this).data("produknama");
+      var produk_harga = $(this).data("produkharga");
+      var produk_gambar = $(this).data("produkgambar");
+      var produk_stok = $(this).data("produkstok");
+      var quantity = 1;
+      // if (quantity > produk_stok) {
+      //   alert("stok tidak cukup!");
+      // } else {
+      $.ajax({
+        url: "<?php echo base_url(); ?>keranjang/add_to_cart",
+        method: "POST",
+        data: {
+          produk_id: produk_id,
+          produk_nama: produk_nama,
+          produk_harga: produk_harga,
+          produk_gambar: produk_gambar,
+          produk_stok: produk_stok,
+          quantity: quantity
+        },
+        success: function(data) {
+          $('#detail_cart').html(data);
+          swal('Sukses', 'Produk ditambahkan ke keranjang', 'success');
+        }
+      });
+      // }
     });
 
     // Load shopping cart

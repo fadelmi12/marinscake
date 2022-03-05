@@ -1,6 +1,6 @@
 <div class="ps-hero bg--cover" data-background="<?= base_url() ?>assets/client/images/hero/about.jpg">
     <div class="ps-hero__content ">
-        <h1> Detail Produk</h1>
+        <h1> Produk Preorder</h1>
         <div class="text-center">
             Home > Detail Produk
         </div>
@@ -51,9 +51,9 @@
                                 <h5>DESKRIPSI</h5>
                                 <p><?= $prd['deskripsi'] ?></p>
                             </div>
-                            <div class="ps-product__status">
+                            <!-- <div class="ps-product__status">
                                 <h5>Stok : <span> <?= $prd['stok'] ?></span></h5>
-                            </div>
+                            </div> -->
                             <div class="ps-product__shopping">
                                 <form class="ps-form--shopping" id="cart" action="" method="post">
                                     <div class="form-group--number">
@@ -102,7 +102,7 @@
                                 </ul>
                             </div>
                             <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"><?= $rkm['namaProduk'] ?></a>
-                                <p><a href="">Stok Produk : <?= $rkm['stok'] ?></a></p>
+                                <!-- <p><a href="">Stok Produk : <?= $rkm['stok'] ?></a></p> -->
                                 <p class="ps-product__price">Rp <?= number_format($rkm['harga'], 0, ',', '.') ?></p>
                             </div>
                         </div>
