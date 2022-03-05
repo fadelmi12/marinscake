@@ -6,7 +6,6 @@ class Kasir extends CI_Controller
 
 	public function __construct()
 	{
-
 		parent::__construct();
 		if ($this->session->userdata('idUser') == null) {
 			redirect('admin/auth/login');
@@ -15,6 +14,7 @@ class Kasir extends CI_Controller
 		}
 	}
 
+	// tampilan kasir
 	public function index()
 	{
 		$data['jenis_produk'] = $this->Model_produk->get_kategori_produk()->result_array();
@@ -26,6 +26,7 @@ class Kasir extends CI_Controller
 		$this->load->view('admin/template/footer');
 	}
 
+	// tambah data transaksi
 	public function terjual_atau_preorder()
 	{
 		date_default_timezone_set('Asia/Jakarta');

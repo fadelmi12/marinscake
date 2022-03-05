@@ -13,6 +13,7 @@ class Produk extends CI_Controller
         }
     }
 
+    // tampil produk
     public function index()
     {
         $data['produk'] = $this->Model_produk->get_produk()->result_array();
@@ -23,6 +24,7 @@ class Produk extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    // tampil edit produk
     public function edit_produk($id_produk)
     {
         $data['kategori']   = $this->Model_produk->get_kategori_produk()->result_array();
@@ -34,6 +36,7 @@ class Produk extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    // tampil tambah produk
     public function tambah_produk()
     {
         $data['kategori'] = $this->Model_produk->get_kategori_produk()->result_array();
@@ -44,6 +47,7 @@ class Produk extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    // tambah data produk
     public function insert_produk()
     {
         $nama_produk    = $this->input->post("nama_produk");
@@ -52,7 +56,7 @@ class Produk extends CI_Controller
         $kategori       = $this->input->post("kategori");
         $stok           = $this->input->post("stok");
         $gambar         = $_FILES['gambar']['name'];
-        // print_r($gambar); exit;
+        
         if ($gambar =''){}else{
             $config ['upload_path'] = './uploads/gambar_produk';
             $config ['allowed_types'] = 'jpg|jpeg|png|gif';
@@ -90,6 +94,7 @@ class Produk extends CI_Controller
         redirect('Admin/Produk/');
     }
 
+    //hapus data produk
     public function hapus_produk($id_produk){
         $data = array('idProduk' => $id_produk);
         $this->db->delete('produk', $data);
@@ -102,6 +107,7 @@ class Produk extends CI_Controller
         redirect('Admin/Produk/');
     }
 
+    // hapus data produk
     public function update_produk($id_produk){
         $nama_produk    = $this->input->post("nama_produk");
         $harga          = $this->input->post("harga");

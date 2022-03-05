@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Modal extends CI_Controller
 {
-
+    
     public function __construct()
     {
 
@@ -14,6 +14,7 @@ class Modal extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
     }
 
+    // Tampilan pengeluaran modal
     public function pengeluaran_modal($bulan)
     {   
         $data['data_modal'] 	= $this->Model_laporan->get_data_modal($bulan)->result_array();
@@ -26,6 +27,7 @@ class Modal extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    // tambah data pengeluaran modal
     public function tambah_data_modal()
     {
         $totalHargaSemua = 0;
@@ -60,8 +62,10 @@ class Modal extends CI_Controller
         redirect('admin/modal/pengeluaran_modal/'.date('Y-m'));
     }
 
+    // hapus data pengeluaran modal
     public function hapus_modal($idModal_tanggal)
     {
+        // pecah id modal dan tanggal
     	$idModal = strstr($idModal_tanggal, '_', true);
         $tanggal = substr($idModal_tanggal, strpos($idModal_tanggal, "_") + 1);
 
@@ -69,14 +73,14 @@ class Modal extends CI_Controller
  
     	$this->db->delete('modal', $where);
     	$this->session->set_flashdata('berhasil_tambah_modal',
-                        '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-                        <script type ="text/JavaScript">  
+                        '<script type ="text/JavaScript">  
                         swal("Berhasil","Data modal berhasil dihapus","success")  
                         </script>'  
                 );
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        redirect('admin/modal/pengeluaran_modal/'.$tanggal);
     }    
 
+    // tampilan edit data pengeluaran modal
     public function edit_modal($idModal)
     {
     	$data['detail_modal'] = $this->Model_laporan->get_detail_modal_where($idModal)->result_array();
@@ -87,6 +91,7 @@ class Modal extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    // hapus bahan pada data pengeluaran modal
     public function hapus_bahan()
     {
     	$id_detailModal = $this->input->post('idDetailModal');
@@ -116,6 +121,7 @@ class Modal extends CI_Controller
 
     }
 
+    // update bahan pada data pengeluaran modal
     public function update_bahan()
     {
     	$idModal = $this->input->post('idModal');

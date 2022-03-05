@@ -248,6 +248,7 @@ input[type=number] {
     </div>
 <?php endforeach; ?>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -260,7 +261,7 @@ input[type=number] {
         $(add_button).click(function(e) { //on add input button click
             e.preventDefault();
             //max input box allowed
-            x++; //text box increment
+            x++; //text box increment 
             $(wrapper).append(''+
                 '<div class="row">'+
                     '<div class="col-3">'+

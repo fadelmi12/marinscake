@@ -12,6 +12,7 @@ class User extends CI_Controller
         }
     }
 
+    // Tampilan akun
     public function index()
     {
         $data['user'] = $this->Model_user->get_data_user()->result_array();
@@ -22,6 +23,7 @@ class User extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    // tambah akun
     public function tambah_user()
     {
         $nama       = $this->input->post('nama');
@@ -48,6 +50,7 @@ class User extends CI_Controller
         redirect('admin/user');
     }
 
+    // update akun
     public function update_user($idUser)
     {
         $nama       = $this->input->post('nama');
@@ -83,6 +86,7 @@ class User extends CI_Controller
         redirect('admin/user');
     }
 
+    // hapus akun
     public function hapus_user($idUser)
     {
 

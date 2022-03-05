@@ -12,6 +12,7 @@ class Karyawan extends CI_Controller
         }
     }
 
+    // tampilan karyawan
     public function index()
     {
         $data['data_karyawan'] = $this->Model_karyawan->get_data_karyawan()->result_array();
@@ -22,6 +23,7 @@ class Karyawan extends CI_Controller
         $this->load->view('admin/template/footer');
     }
 
+    // tambah data karyawan
     public function tambah_karyawan()
     {
         $nama     = $this->input->post('nama');
@@ -40,14 +42,14 @@ class Karyawan extends CI_Controller
 
         $this->db->insert('karyawan', $data);
         $this->session->set_flashdata('karyawan',
-                            '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-                            <script type ="text/JavaScript">  
+                            '<script type ="text/JavaScript">  
                             swal("Sukses","Data karyawan berhasil ditambahkan","success"); 
                             </script>'  
                     );
         redirect('admin/karyawan/index/');
     }
 
+    // update data karyawan
     public function update_karyawan($idKaryawan)
     {
         $nama     = $this->input->post('nama');
@@ -68,14 +70,14 @@ class Karyawan extends CI_Controller
 
         $this->db->update('karyawan', $data, $where);
         $this->session->set_flashdata('karyawan',
-                            '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-                            <script type ="text/JavaScript">  
+                            '<script type ="text/JavaScript">  
                             swal("Sukses","Data karyawan berhasil diupdate","success"); 
                             </script>'  
                     );
         redirect('admin/karyawan/index/');
     }
 
+    // update data karyawan
     public function hapus_karyawan($idKaryawan)
     {
         

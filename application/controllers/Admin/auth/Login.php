@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
+	// tampil login
 	public function index()
 	{	
 		$this->session->sess_destroy();
@@ -11,6 +12,7 @@ class Login extends CI_Controller
 		$this->load->view('admin/auth/template/footer');
 	}
 
+	// fungsi login
 	public function login_user()
 	{
 		$this->form_validation->set_rules('email', 'email', 'required', ['required' => 'Email wajib diisi!']);
@@ -44,6 +46,7 @@ class Login extends CI_Controller
 		}
 	}
 
+	// fungsi log-out
 	public function logout()
 	{
 		$this->session->sess_destroy();

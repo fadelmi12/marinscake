@@ -7,6 +7,7 @@ class Cetak_pdf extends CI_Controller {
 		require_once APPPATH.'third_party/dompdf/dompdf_config.inc.php';
 	}
 
+	//	cetak pdf laporan gaji
 	public function cetak_gaji_pdf($blnTh)
     {
      	$this->load->library('dompdf_gen');
@@ -27,6 +28,7 @@ class Cetak_pdf extends CI_Controller {
 		$this->dompdf->stream("Gaji_Karyawan.pdf", array('Attachment' =>0)); 
     }
 
+	//	cetak pdf laporan pengeluaran modal
     public function cetak_modal_pdf($blnTh)
     {
      	$this->load->library('dompdf_gen');

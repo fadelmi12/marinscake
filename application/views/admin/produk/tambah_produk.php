@@ -60,20 +60,10 @@
                                         <label>Stok</label>
                                         <input type="number" class="form-control" name="stok">
                                     </div>
-
-
-
                                 </div>
-
-
-
                             </div>
                             <div class="form-group">
                                 <label>Gambar Produk</label>
-                                <!-- <button class="btn btn-info d-flex align-items-center">
-                                    <i class="fas fa-plus mr-2"></i>
-                                    Upload Gambar
-                                </button> -->
                                 <input type="file" name="gambar" class="form-control">
                             </div>
 
@@ -83,6 +73,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Gambar Produk</h4>
+                    </div>
+                    <div class="card-body">
+                        ciman asu
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 </div>
