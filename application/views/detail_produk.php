@@ -15,13 +15,17 @@
                         <div class="ps-product__thumbnail">
                             <!-- <span class="ps-badge"><img src="<?= base_url() ?>assets/client/images/icons/badge-red.png" alt=""><i>New</i></span><span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt=""><i>50%</i></span> -->
                             <div class="ps-product__image">
-                                <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
-                                <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
-                                <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
+                                <?php foreach ($gambar as $gbr) : ?>
+                                    <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $gbr['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $gbr['gambar'] ?>" alt=""></a></div>
+                                <?php endforeach ?>
+                                <!-- <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
+                                <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div> -->
                             </div>
                             <div class="ps-product__preview">
                                 <div class="ps-product__variants">
-                                    <div class="item"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></div>
+                                    <?php foreach ($gambar as $gbr) : ?>
+                                        <div class="item"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $gbr['gambar'] ?>" alt=""></div>
+                                    <?php endforeach ?>
                                     <!-- <div class="item">
                                         <div class="ps-video"><a class="popup-youtube ps-product__video" href="https://www.youtube.com/watch?v=kJQP7kiw5Fk"><img src="<?= base_url() ?>assets/client/images/products/detail/variant-4.png" alt=""><i class="fa fa-play"></i></a></div>
                                     </div> -->
@@ -46,17 +50,17 @@
                                 <form class="ps-form--shopping" id="cart" action="" method="post">
                                     <div class="form-group--number">
                                         <button class="minus"><span>-</span></button>
-                                        <input id="<?= $prd['idProduk'] ?>" class="form-control" type="text" value="1">
+                                        <input id="<?= $prd['idProduk'] ?>" class="form-control" type="text" value="<?= $prd['min_order'] ?>">
                                         <button class="plus"><span>+</span></button>
                                     </div>
                                 </form>
                             </div>
                             <div class="ps-product__shopping">
-                                <?php if ($prd['stok'] > 0) : ?>
-                                    <button class="add_cart ps-btn ps-btn--yellow" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $prd['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>">Masukkan Keranjang</button>
-                                <?php else : ?>
-                                    <button class="ps-btn ps-btn--yellow">Stok Kosong</button>
-                                <?php endif; ?>
+                                <?php foreach ($gambar_rekom as $gbr_rkm) :
+                                    if ($gbr_rkm['id_produk'] == $prd['idProduk']) : ?>
+                                        <button class="add_cart ps-btn ps-btn--yellow" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr_rkm['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-minorder="<?= $prd['min_order'] ?>">Masukkan Keranjang</button>
+                                <?php endif;
+                                endforeach; ?>
                             </div>
                             <div class="ps-product__sharing">
                                 <!-- <a class="ps-btn ps-btn--yellow" href="onclick=" document.getElementById('cart').submit();"">Order Now</a> -->
@@ -66,7 +70,6 @@
                     </div>
                 <?php endforeach ?>
             </div>
-
         </div>
     </div>
 </main>
@@ -82,11 +85,23 @@
                 <?php foreach ($rekom as $rkm) : ?>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
                         <div class="ps-product">
-                            <div class="ps-product__thumbnail"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $rkm['gambar'] ?>" alt=""><a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"></a>
+                            <div class="ps-product__thumbnail">
+                                <?php foreach ($gambar_rekom as $gbr2) :
+                                    if ($gbr2['id_produk'] == $rkm['idProduk']) : ?>
+                                        <img src="<?= base_url() ?>uploads/gambar_produk/<?= $gbr2['gambar'] ?>" alt="">
+                                <?php endif;
+                                endforeach ?>
+                                <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"></a>
                                 <ul class="ps-product__actions">
                                     <li><a href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
                                     <!-- <li><a href="#" data-tooltip="Favorite"><i class="ba-heart"></i></a></li> -->
-                                    <li><a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $rkm['idProduk'] ?>" data-produknama="<?= $rkm['namaProduk'] ?>" data-produkharga="<?= $rkm['harga'] ?>" data-produkgambar="<?= $rkm['gambar'] ?>" data-produkstok="<?= $rkm['stok'] ?>"><i class="ba-shopping"></i></a></li>
+                                    <li>
+                                        <?php foreach ($gambar_rekom as $gbr2) :
+                                            if ($gbr2['id_produk'] == $rkm['idProduk']) : ?>
+                                                <a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $rkm['idProduk'] ?>" data-produknama="<?= $rkm['namaProduk'] ?>" data-produkharga="<?= $rkm['harga'] ?>" data-produkgambar="<?= $gbr2['gambar'] ?>" data-produkstok="<?= $rkm['stok'] ?>" data-minorder="<?= $rkm['min_order'] ?>"><i class="ba-shopping"></i></a>
+                                        <?php endif;
+                                        endforeach ?>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"><?= $rkm['namaProduk'] ?></a>

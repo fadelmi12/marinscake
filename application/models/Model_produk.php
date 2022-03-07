@@ -61,6 +61,8 @@ class Model_produk extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('gambar_produk');
+		$this->db->group_by('id_produk');
+		// $this->db->where('id_produk', $idProduk);
 		return $this->db->get();
 	}
 

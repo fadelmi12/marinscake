@@ -90,38 +90,63 @@
       var produk_harga = $(this).data("produkharga");
       var produk_gambar = $(this).data("produkgambar");
       var produk_stok = $(this).data("produkstok");
+      var min_order = $(this).data("minorder");
       var quantity = $('#' + produk_id).val();
-      // var cart = '<?= json_encode($this->cart->contents()) ?>';
 
-      // var inc = cart.includes(produk_id);
-      // if (cart.includes(produk_id)) {
-      //   $.each(cart, function(i, data) {
-      //     console.log(data);
-      //   });
-      // }
-      // if (quantity > produk_stok) {
-      // alert("stok tidak cukup!");
-      // swal('Gagal', 'Stok tidak cukup!', 'error');
-      // } elseif() {
-      //   swal('Gagal', 'Stok tidak cukup!', 'error');
-      // } else {
       $.ajax({
-        url: "<?php echo base_url(); ?>keranjang/add_to_cart",
+        url: "<?php echo base_url(); ?>keranjang/get_cart",
         method: "POST",
         data: {
-          produk_id: produk_id,
-          produk_nama: produk_nama,
-          produk_harga: produk_harga,
-          produk_gambar: produk_gambar,
-          produk_stok: produk_stok,
-          quantity: quantity
+          produk_id: produk_id
         },
         success: function(data) {
-          $('#detail_cart').html(data);
-          swal('Sukses', 'Produk ditambahkan ke keranjang', 'success');
+          if (data == 0) {
+            if (quantity < min_order) {
+              swal('Gagal', 'Jumlah produk kurang dari minimal order', 'error');
+            } else {
+              $.ajax({
+                url: "<?php echo base_url(); ?>keranjang/add_to_cart",
+                method: "POST",
+                data: {
+                  produk_id: produk_id,
+                  produk_nama: produk_nama,
+                  produk_harga: produk_harga,
+                  produk_gambar: produk_gambar,
+                  produk_stok: produk_stok,
+                  quantity: quantity
+                },
+                success: function(data) {
+                  $('#detail_cart').html(data);
+                  var a1 = ' ditambahkan ke keranjang ';
+                  var a2 = ' pcs';
+                  var text = produk_nama + a1 + quantity + a2;
+                  swal('Sukses', text, 'success');
+                }
+              });
+            }
+          } else {
+            $.ajax({
+              url: "<?php echo base_url(); ?>keranjang/add_to_cart",
+              method: "POST",
+              data: {
+                produk_id: produk_id,
+                produk_nama: produk_nama,
+                produk_harga: produk_harga,
+                produk_gambar: produk_gambar,
+                produk_stok: produk_stok,
+                quantity: quantity
+              },
+              success: function(data) {
+                $('#detail_cart').html(data);
+                var a1 = ' ditambahkan ke keranjang ';
+                var a2 = ' pcs';
+                var text = produk_nama + a1 + quantity + a2;
+                swal('Sukses', text, 'success');
+              }
+            });
+          }
         }
       });
-      // }
     });
 
     $(document).on('click', '.tambah_cart', function() {
@@ -130,27 +155,43 @@
       var produk_harga = $(this).data("produkharga");
       var produk_gambar = $(this).data("produkgambar");
       var produk_stok = $(this).data("produkstok");
-      var quantity = 1;
-      // if (quantity > produk_stok) {
-      //   alert("stok tidak cukup!");
-      // } else {
+      var min_order = $(this).data("minorder");
+      var cart = '<?php $this->cart->contents() ?>';
+
       $.ajax({
-        url: "<?php echo base_url(); ?>keranjang/add_to_cart",
+        url: "<?php echo base_url(); ?>keranjang/get_cart",
         method: "POST",
         data: {
-          produk_id: produk_id,
-          produk_nama: produk_nama,
-          produk_harga: produk_harga,
-          produk_gambar: produk_gambar,
-          produk_stok: produk_stok,
-          quantity: quantity
+          produk_id: produk_id
         },
         success: function(data) {
-          $('#detail_cart').html(data);
-          swal('Sukses', 'Produk ditambahkan ke keranjang', 'success');
+          if (data == 0) {
+            quantity = min_order;
+          } else {
+            quantity = 1;
+          }
+          $.ajax({
+            url: "<?php echo base_url(); ?>keranjang/add_to_cart",
+            method: "POST",
+            data: {
+              produk_id: produk_id,
+              produk_nama: produk_nama,
+              produk_harga: produk_harga,
+              produk_gambar: produk_gambar,
+              produk_stok: produk_stok,
+              quantity: quantity
+            },
+            success: function(data) {
+              $('#detail_cart').html(data);
+              var a1 = ' ditambahkan ke keranjang ';
+              var a2 = ' pcs';
+              var text = produk_nama + a1 + quantity + a2;
+              swal('Sukses', text, 'success');
+            }
+          });
         }
       });
-      // }
+
     });
 
     // Load shopping cart

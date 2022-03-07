@@ -136,4 +136,18 @@ class Keranjang extends CI_Controller
 		$this->cart->update($data);
 		echo $this->show_cart();
 	}
+
+	function get_cart()
+	{
+		$id_produk = $this->input->post('produk_id');
+		$cart = $this->cart->contents();
+		$nilai = 0;
+		foreach ($cart as $key) {
+			if ($id_produk == $key['id']) {
+				$nilai = 1;
+			}
+		}
+
+		echo $nilai;
+	}
 }

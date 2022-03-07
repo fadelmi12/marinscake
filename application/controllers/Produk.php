@@ -10,9 +10,7 @@ class Produk extends CI_Controller
 		$data['kategori']	= $this->Model_produk->get_kategori_produk()->result_array();
 		$data['produk']		= $this->Model_produk->get_produk()->result_array();
 		$data['gambar'] = $this->Model_produk->get_gambar()->result_array();
-
-		// echo json_encode($data['gambar']);
-		// exit;
+		$data['gambar_rekom'] = $this->Model_produk->get_gambar()->result_array();
 
 		$this->load->view('template/header2');
 		$this->load->view('daftar_produk', $data);
@@ -25,10 +23,7 @@ class Produk extends CI_Controller
 		$id_kategori	= $this->Model_produk->get_produk_where($id_produk)->row()->idJenis;
 		$data['rekom']	= $this->Model_produk->get_produk_kategori($id_kategori, $id_produk)->result_array();
 		$data['gambar'] = $this->Model_produk->get_gambar_produk($id_produk)->result_array();
-
-		// echo json_encode($data['produk']);
-		// exit;
-
+		$data['gambar_rekom'] = $this->Model_produk->get_gambar()->result_array();
 
 		$this->load->view('template/header2');
 		$this->load->view('detail_produk', $data);

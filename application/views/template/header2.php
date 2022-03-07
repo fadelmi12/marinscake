@@ -51,6 +51,7 @@
                     <li><a href="<?= base_url() ?>produk">Product</a></li>
                     <li><a href="<?= base_url() ?>checkout">Checkout</a></li>
                     <li><a href="<?= base_url() ?>#company-info">About</a></li>
+                    <li><a href="https://wa.me/6285812601646?text=Halo%20Admin%20Marins%20Cake,%20Saya%20mau%20order.." target="_blank">Contact WA</a></li>
                     <!-- <li class="menu-item-has-children"><a href="about.html">Pages</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
                         <ul class="sub-menu">
                             <li><a href="menu.html">Menu</a></li>

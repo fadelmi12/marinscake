@@ -32,9 +32,14 @@
                                     <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"></a>
                                     <ul class="ps-product__actions">
                                         <li><a href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
-                                        <li><a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkstok="<?= $prd['stok'] ?>"><i class="ba-shopping"></i></a></li>
+                                        <li>
+                                            <?php foreach ($gambar_rekom as $gbr2) :
+                                                if ($gbr2['id_produk'] == $prd['idProduk']) : ?>
+                                                    <a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr2['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-minorder="<?= $prd['min_order'] ?>"><i class="ba-shopping"></i></a>
+                                            <?php endif;
+                                            endforeach ?>
+                                        </li>
                                     </ul>
-                                    <script></script>
                                 </div>
                                 <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"><?= $prd['namaProduk'] ?></a>
                                     <p>Min Order : <?= $prd['min_order'] ?> pcs</p>
