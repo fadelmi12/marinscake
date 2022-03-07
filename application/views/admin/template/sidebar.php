@@ -48,7 +48,8 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="settings"></i><span>Pengaturan</span></a>
                 <ul class="dropdown-menu">
                     <li> <a href="<?php echo base_url() ?>admin/user" class="nav-link "><i data-feather="user"></i><span>Pengaturan User</span></a></li>
-                    <li> <a href="<?php echo base_url() ?>admin/pengiriman" class="nav-link "><i data-feather="send"></i><span>Pengiriman</span></a></li>
+                    <li> <a href="<?php echo base_url() ?>admin/pengiriman" class="nav-link "><i data-feather="truck"></i><span>Pengiriman</span></a></li>
+                    <li> <a href="<?php echo base_url() ?>admin/slider" class="nav-link "><i data-feather="airplay"></i><span>Slider</span></a></li>
                 </ul>
             </li>
 

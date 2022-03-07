@@ -104,7 +104,7 @@
                                         Ongkir
                                     </div>
                                     <div class="col-4">
-                                        Rp <?= number_format($transaksi->ongkir, '0', ',', '.') ?>
+                                        Rp <?= number_format($preorder->ongkir, '0', ',', '.') ?>
                                     </div>
                                 </div>
                                 <hr style="border-top: 1px solid white">
@@ -113,7 +113,7 @@
                                         Total Harga
                                     </div>
                                     <div class="col-4 font-weight-bold">
-                                        Rp <?= number_format($transaksi->total_belanja, '0', ',', '.') ?>
+                                        Rp <?= number_format($preorder->jumlah, '0', ',', '.') ?>
                                     </div>
                                 </div>
                             </div>
@@ -133,15 +133,15 @@
                     <h3>Informasi Pembayaran</h3>
                     <table class="table table-bordered table-striped">
                         <tr class="text-center">
-                            <th>ID Transaksi</th>
+                            <th>ID Order</th>
                             <th>Total Pembayaran</th>
-                            <th>Motode Pembayaran</th>
+                            <th>Metode Pembayaran</th>
                             <th>Waktu</th>
                             <th>Status</th>
                             <th>Panduan</th>
                         </tr>
                         <tr class="text-center">
-                            <td><?= $midtrans->id_transaksi ?></td>
+                            <td><?= $midtrans->id_preorder ?></td>
                             <td>Rp. <?= number_format($midtrans->total_bayar, '0', ',', '.') ?></td>
                             <td>
                                 <?php if ($midtrans->metode == "bank_transfer") :
@@ -218,8 +218,8 @@
             cache: false,
             method: "POST",
             data: {
-                idTransaksi: '<?= $this->uri->segment(3) ?>',
-                total_bayar: '<?= $transaksi->total_belanja ?>'
+                idPreorder: '<?= $this->uri->segment(3) ?>',
+                total_bayar: '<?= $preorder->jumlah ?>'
             },
             success: function(data) {
                 //location = data;

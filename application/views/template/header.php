@@ -54,10 +54,10 @@
                             <li class="menu-item-has-children current-menu-item">
                                 <a href="">Home</a>
                             </li>
-                            <li><a href="#company-info">About</a></li>
                             <li>
                                 <a href="<?= base_url() ?>produk">Product</a>
                             </li>
+                            <li><a href="<?= base_url() ?>checkout">Checkout</a></li>
                         </ul>
                     </div>
                     <div class="col-2 d-flex align-items-center">
@@ -65,8 +65,8 @@
                     </div>
                     <div class="col-5 d-flex align-items-center justify-content-between pl-5">
                         <ul class="menu d-flex justify-content-between w-75">
-                            <li><a href="<?= base_url() ?>preorder">Preorder</a></li>
-                            <li><a href="contact.html">kontak</a></li>
+                            <li><a href="#company-info">About</a></li>
+                            <li><a href="https://wa.me/6285812601646?text=Halo%20Admin%20Marins%20Cake,%20Saya%20mau%20order.." target="_blank">Contact WA</a></li>
                         </ul>
                         <div class="header__actions w-50 text-right">
                             <a class="ps-search-btn" href="#"><i class="ba-magnifying-glass"></i></a>

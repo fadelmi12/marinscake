@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		$data['produk'] = $this->Model_produk->get_produk_terbaru()->result_array();
+		$data['gambar'] = $this->Model_produk->get_gambar()->result_array();
 
 		$this->load->view('template/header');
 		$this->load->view('dashboard', $data);

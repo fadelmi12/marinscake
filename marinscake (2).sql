@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2022 at 11:37 AM
+-- Generation Time: Mar 07, 2022 at 05:09 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.32
 
@@ -82,7 +82,13 @@ INSERT INTO `detail_preorder` (`id_detailPreorder`, `idPreorder`, `idProduk`, `n
 (2, 6, 19, 'Roti Roma', 3, 30000),
 (3, 6, 20, 'Roti Malkist', 2, 12000),
 (4, 7, 23, 'Roti Donat', 2, 10000),
-(5, 7, 19, 'Roti Roma', 2, 20000);
+(5, 7, 19, 'Roti Roma', 2, 20000),
+(6, 8, 25, 'Roti Boyo', 1, 10000),
+(7, 8, 24, 'Roti Hatari', 1, 5000),
+(8, 9, 25, 'Roti Boyo', 1, 10000),
+(9, 9, 24, 'Roti Hatari', 1, 5000),
+(10, 10, 25, 'Roti Boyo', 1, 10000),
+(11, 10, 23, 'Roti Donat', 1, 5000);
 
 -- --------------------------------------------------------
 
@@ -180,6 +186,31 @@ INSERT INTO `gaji_karyawan` (`idGaji`, `idKaryawan`, `uangGaji`, `bulan`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gambar_produk`
+--
+
+CREATE TABLE `gambar_produk` (
+  `id_gambarProduk` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
+  `gambar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `gambar_produk`
+--
+
+INSERT INTO `gambar_produk` (`id_gambarProduk`, `id_produk`, `gambar`) VALUES
+(1, 19, '1.png'),
+(2, 20, '3.png'),
+(3, 21, '6.png'),
+(4, 23, '4.png'),
+(5, 24, '12.png'),
+(6, 25, '9.png'),
+(7, 19, '2.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jenis_produk`
 --
 
@@ -231,7 +262,7 @@ INSERT INTO `karyawan` (`idKaryawan`, `nama`, `jenisKelamin`, `posisi`, `noHp`, 
 
 CREATE TABLE `midtrans` (
   `id_midtrans` int(11) NOT NULL,
-  `id_transaksi` int(11) NOT NULL,
+  `id_preorder` int(11) NOT NULL,
   `total_bayar` int(11) NOT NULL,
   `metode` varchar(50) NOT NULL,
   `waktu` datetime NOT NULL,
@@ -243,13 +274,8 @@ CREATE TABLE `midtrans` (
 -- Dumping data for table `midtrans`
 --
 
-INSERT INTO `midtrans` (`id_midtrans`, `id_transaksi`, `total_bayar`, `metode`, `waktu`, `status`, `url`) VALUES
-(1, 28, 10000, 'bank_transfer', '2022-03-03 04:46:32', 200, ''),
-(3, 29, 7000, 'bank_transfer', '2022-03-03 04:53:50', 201, 'https://app.sandbox.midtrans.com/snap/v1/transactions/839ed3'),
-(4, 30, 12000, 'bank_transfer', '2022-03-03 17:54:50', 201, 'https://app.sandbox.midtrans.com/snap/v1/transactions/171a8b18-2476-4bf0-83e3-ef40cbceeed2/pdf'),
-(5, 32, 18000, 'bank_transfer', '2022-03-04 02:34:54', 201, 'https://app.sandbox.midtrans.com/snap/v1/transactions/4e122633-7ef4-4874-b14d-822660c1e083/pdf'),
-(6, 33, 18000, 'bank_transfer', '2022-03-05 12:45:23', 201, 'https://app.sandbox.midtrans.com/snap/v1/transactions/9034c77c-7299-4679-8de1-d8217d7c7f40/pdf'),
-(7, 36, 27000, 'bank_transfer', '2022-03-05 13:42:08', 201, 'https://app.sandbox.midtrans.com/snap/v1/transactions/22cfd897-7aef-46e8-974b-09d7dbbac94e/pdf');
+INSERT INTO `midtrans` (`id_midtrans`, `id_preorder`, `total_bayar`, `metode`, `waktu`, `status`, `url`) VALUES
+(8, 10, 17000, 'bank_transfer', '2022-03-07 16:18:28', 201, 'https://app.sandbox.midtrans.com/snap/v1/transactions/16cafc82-4186-45e3-ad1c-745c506d3f20/pdf');
 
 -- --------------------------------------------------------
 
@@ -281,6 +307,14 @@ CREATE TABLE `pengiriman` (
   `catatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pengiriman`
+--
+
+INSERT INTO `pengiriman` (`id_pengiriman`, `idPreorder`, `nama`, `email`, `no_hp`, `kota`, `alamat`, `catatan`) VALUES
+(16, 9, 'Eko Purwanto', 'dimasafpurn@gmail.com', '089333456777', 'Kota Malang', 'Sawojajar', 'segera dikirim'),
+(17, 10, 'djfksghfds', 'dimasafpurn@gmail.com', '089555362723', 'Kota Kediri', 'shagfvasdusabdygsavfvsagdgsa', 'djfasdgafdgaddsad');
+
 -- --------------------------------------------------------
 
 --
@@ -303,7 +337,10 @@ CREATE TABLE `preorder` (
 
 INSERT INTO `preorder` (`idPreorder`, `jumlah`, `metode`, `tanggalPesan`, `tanggalDikirim`, `status`, `ongkir`) VALUES
 (6, 62000, 'Offline', '2022-02-15', '2022-02-28', 'Belum Dikirim', 20220215),
-(7, 30000, 'Offline', '2022-02-15', '2022-02-19', 'Belum Dikirim', 20220215);
+(7, 30000, 'Offline', '2022-02-15', '2022-02-19', 'Belum Dikirim', 20220215),
+(8, 23000, 'Online', '2022-03-07 15:59:34', '2022-03-10', 'Menunggu Pembayaran', 8000),
+(9, 23000, 'Online', '2022-03-07 16:00:07', '2022-03-10', 'Menunggu Pembayaran', 8000),
+(10, 17000, 'Online', '2022-03-07 16:09:11', '2022-03-16', 'Menunggu Pembayaran', 2000);
 
 -- --------------------------------------------------------
 
@@ -318,11 +355,8 @@ CREATE TABLE `produk` (
   `harga` int(11) NOT NULL,
   `status` varchar(255) NOT NULL,
   `stok` int(11) NOT NULL,
+  `min_order` int(11) NOT NULL,
   `deskripsi` text NOT NULL,
-  `gambar` varchar(255) NOT NULL,
-  `gambar2` varchar(50) NOT NULL,
-  `gambar3` varchar(50) NOT NULL,
-  `gambar4` varchar(50) NOT NULL,
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -330,13 +364,32 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`idProduk`, `idJenis`, `namaProduk`, `harga`, `status`, `stok`, `deskripsi`, `gambar`, `gambar2`, `gambar3`, `gambar4`, `created_at`) VALUES
-(19, 2, 'Roti Roma', 10000, 'Ready', 0, 'ndfashgfshagfhsagfhgashgfhsagfhsahfshagfhgsfsajfsghfgashfgsha', '1.png', '', '', '', '2022-02-11'),
-(20, 1, 'Roti Malkist', 6000, 'Kosong', 3, 'safhghsacvajvscuasvcsahisavcschavcsscsac', '3.png', '', '', '', '2022-02-11'),
-(21, 2, 'Kue Ulang Tahun', 3000, 'Preorder', 7, 'sahgfsofausfgahbfsjafhoifuegfbdasbnsbsafsahfabf', '6.png', '', '', '', '2022-02-11'),
-(23, 2, 'Roti Donat', 5000, 'Ready', 3, 'sakjgdhasffgoeugfcbheacuebcueacaehbceeabhscvegceceec', '4.png', '', '', '', '2022-02-14'),
-(24, 1, 'Roti Hatari', 5000, 'Ready', 6, 'sakhgfeaofeufebcajsbceyceacucaoeuegabceudeeybeyag', '12.png', '', '', '', '2022-02-14'),
-(25, 1, 'Roti Boyo', 10000, 'Ready', 7, 'shadfagsvcebcruicbrycvechbebeyvcyahayasbgcsyai', '9.png', '', '', '', '2022-02-14');
+INSERT INTO `produk` (`idProduk`, `idJenis`, `namaProduk`, `harga`, `status`, `stok`, `min_order`, `deskripsi`, `created_at`) VALUES
+(19, 2, 'Roti Roma', 10000, 'Ready', 20, 5, 'ndfashgfshagfhsagfhgashgfhsagfhsahfshagfhgsfsajfsghfgashfgsha', '2022-02-11'),
+(20, 1, 'Roti Malkist', 6000, 'Kosong', 3, 5, 'safhghsacvajvscuasvcsahisavcschavcsscsac', '2022-02-11'),
+(21, 2, 'Kue Ulang Tahun', 3000, 'Preorder', 7, 1, 'sahgfsofausfgahbfsjafhoifuegfbdasbnsbsafsahfabf', '2022-02-11'),
+(23, 2, 'Roti Donat', 5000, 'Ready', 3, 2, 'sakjgdhasffgoeugfcbheacuebcueacaehbceeabhscvegceceec', '2022-02-14'),
+(24, 1, 'Roti Hatari', 5000, 'Ready', 6, 5, 'sakhgfeaofeufebcajsbceyceacucaoeuegabceudeeybeyag', '2022-02-14'),
+(25, 1, 'Roti Boyo', 10000, 'Ready', 7, 1, 'shadfagsvcebcruicbrycvechbebeyvcyahayasbgcsyai', '2022-02-14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slider`
+--
+
+CREATE TABLE `slider` (
+  `id_slider` int(11) NOT NULL,
+  `gambar` varchar(50) NOT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `slider`
+--
+
+INSERT INTO `slider` (`id_slider`, `gambar`, `status`) VALUES
+(1, '21.png', 1);
 
 -- --------------------------------------------------------
 
@@ -441,6 +494,13 @@ ALTER TABLE `gaji_karyawan`
   ADD KEY `gaji` (`idKaryawan`);
 
 --
+-- Indexes for table `gambar_produk`
+--
+ALTER TABLE `gambar_produk`
+  ADD PRIMARY KEY (`id_gambarProduk`),
+  ADD KEY `id_produk` (`id_produk`);
+
+--
 -- Indexes for table `jenis_produk`
 --
 ALTER TABLE `jenis_produk`
@@ -457,7 +517,7 @@ ALTER TABLE `karyawan`
 --
 ALTER TABLE `midtrans`
   ADD PRIMARY KEY (`id_midtrans`),
-  ADD KEY `id_transaksi` (`id_transaksi`);
+  ADD KEY `midtrans_ibfk_1` (`id_preorder`);
 
 --
 -- Indexes for table `modal`
@@ -484,6 +544,12 @@ ALTER TABLE `preorder`
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`idProduk`),
   ADD KEY `jenis` (`idJenis`);
+
+--
+-- Indexes for table `slider`
+--
+ALTER TABLE `slider`
+  ADD PRIMARY KEY (`id_slider`);
 
 --
 -- Indexes for table `transaksi`
@@ -517,7 +583,7 @@ ALTER TABLE `detail_modal`
 -- AUTO_INCREMENT for table `detail_preorder`
 --
 ALTER TABLE `detail_preorder`
-  MODIFY `id_detailPreorder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_detailPreorder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `detail_transaksi`
@@ -530,6 +596,12 @@ ALTER TABLE `detail_transaksi`
 --
 ALTER TABLE `gaji_karyawan`
   MODIFY `idGaji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `gambar_produk`
+--
+ALTER TABLE `gambar_produk`
+  MODIFY `id_gambarProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jenis_produk`
@@ -547,7 +619,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `midtrans`
 --
 ALTER TABLE `midtrans`
-  MODIFY `id_midtrans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_midtrans` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `modal`
@@ -559,19 +631,25 @@ ALTER TABLE `modal`
 -- AUTO_INCREMENT for table `pengiriman`
 --
 ALTER TABLE `pengiriman`
-  MODIFY `id_pengiriman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pengiriman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `preorder`
 --
 ALTER TABLE `preorder`
-  MODIFY `idPreorder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idPreorder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
   MODIFY `idProduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `slider`
+--
+ALTER TABLE `slider`
+  MODIFY `id_slider` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
@@ -616,10 +694,16 @@ ALTER TABLE `gaji_karyawan`
   ADD CONSTRAINT `gaji` FOREIGN KEY (`idKaryawan`) REFERENCES `karyawan` (`idKaryawan`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `gambar_produk`
+--
+ALTER TABLE `gambar_produk`
+  ADD CONSTRAINT `gambar_produk_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`idProduk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `midtrans`
 --
 ALTER TABLE `midtrans`
-  ADD CONSTRAINT `midtrans_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`idTransaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `midtrans_ibfk_1` FOREIGN KEY (`id_preorder`) REFERENCES `preorder` (`idPreorder`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pengiriman`

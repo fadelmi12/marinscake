@@ -36,14 +36,14 @@ class Snap extends CI_Controller
 
 	public function token()
 	{
-		$id_transaksi 	= $this->input->post('idTransaksi');
+		$id_preorder	= $this->input->post('idPreorder');
 		$total_bayar	= $this->input->post('total_bayar');
-		$produk			= $this->Model_transaksi->get_transaksi($id_transaksi)->row();
-		$pengiriman		= $this->Model_transaksi->get_pengiriman($id_transaksi)->row();
-		$item			= $this->Model_transaksi->get_detailTransaksi($id_transaksi)->result_array();
+		$produk			= $this->Model_preorder->get_preorder($id_preorder)->row();
+		$pengiriman		= $this->Model_preorder->get_pengiriman($id_preorder)->row();
+		$item			= $this->Model_preorder->get_detailPreorder($id_preorder)->result_array();
 		// Required
 		$transaction_details = array(
-			'order_id' => $id_transaksi,
+			'order_id' => $id_preorder,
 			'gross_amount' => $total_bayar, // no decimal allowed for creditcard
 		);
 
@@ -125,7 +125,7 @@ class Snap extends CI_Controller
 
 		if ($result['payment_type'] == "gopay") {
 			$data = array(
-				'id_transaksi' 		=> $result['order_id'],
+				'id_preorder' 		=> $result['order_id'],
 				'status'			=> $result['status_code'],
 				'total_bayar'		=> $result['gross_amount'],
 				'metode'			=> $result['payment_type'],
@@ -133,7 +133,7 @@ class Snap extends CI_Controller
 			);
 		} elseif ($result['payment_type'] == "bank_transfer") {
 			$data = array(
-				'id_transaksi' 		=> $result['order_id'],
+				'id_preorder' 		=> $result['order_id'],
 				'status'			=> $result['status_code'],
 				'total_bayar'		=> $result['gross_amount'],
 				'metode'			=> $result['payment_type'],
@@ -145,8 +145,8 @@ class Snap extends CI_Controller
 		$simpan = $this->db->insert('midtrans', $data);
 
 		if ($simpan) {
-			$id_transaksi = $result['order_id'];
-			redirect('checkout/pembayaran/' . $id_transaksi);
+			$id_preorder = $result['order_id'];
+			redirect('checkout/pembayaran/' . $id_preorder);
 		}
 	}
 }

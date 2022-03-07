@@ -6,6 +6,7 @@ class Model_produk extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('produk');
+		// $this->db->join('gambar_produk', 'gambar_produk.id_produk = produk.idProduk');
 		$this->db->join('jenis_produk', 'jenis_produk.idJenis = produk.idJenis');
 		return $this->db->get();
 	}
@@ -14,6 +15,7 @@ class Model_produk extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('produk');
+		// $this->db->join('gambar_produk', 'produk.idProduk = gambar_produk.id_produk', 'left');
 		$this->db->join('jenis_produk', 'jenis_produk.idJenis = produk.idJenis');
 		$this->db->where('idProduk', $id_produk);
 		return $this->db->get();
@@ -23,6 +25,7 @@ class Model_produk extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('produk');
+		// $this->db->join('gambar_produk', 'gambar_produk.id_produk = produk.idProduk');
 		$this->db->limit(6);
 		$this->db->order_by('idProduk', 'DESC');
 		return $this->db->get();
@@ -32,6 +35,7 @@ class Model_produk extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('produk');
+		// $this->db->join('gambar_produk', 'gambar_produk.id_produk = produk.idProduk');
 		$this->db->where('idJenis', $id_kategori);
 		$this->db->where('idProduk!=', $id_produk);
 		$this->db->limit(4);
@@ -48,7 +52,23 @@ class Model_produk extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('produk');
+		// $this->db->join('gambar_produk', 'gambar_produk.id_produk = produk.idProduk');
 		$this->db->like('namaProduk', $keyword);
+		return $this->db->get();
+	}
+
+	public function get_gambar()
+	{
+		$this->db->select('*');
+		$this->db->from('gambar_produk');
+		return $this->db->get();
+	}
+
+	public function get_gambar_produk($id_produk)
+	{
+		$this->db->select('*');
+		$this->db->from('gambar_produk');
+		$this->db->where('id_produk', $id_produk);
 		return $this->db->get();
 	}
 }

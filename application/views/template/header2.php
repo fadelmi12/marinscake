@@ -47,8 +47,11 @@
                     </div>
                 </div>
                 <ul class="menu">
-                    <li><a href="about.html">About</a></li>
-                    <li class="menu-item-has-children"><a href="about.html">Pages</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
+                    <li><a href="<?= base_url() ?>">Home</a></li>
+                    <li><a href="<?= base_url() ?>produk">Product</a></li>
+                    <li><a href="<?= base_url() ?>checkout">Checkout</a></li>
+                    <li><a href="<?= base_url() ?>#company-info">About</a></li>
+                    <!-- <li class="menu-item-has-children"><a href="about.html">Pages</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
                         <ul class="sub-menu">
                             <li><a href="menu.html">Menu</a></li>
                             <li><a href="cart.html">Shopping Cart</a></li>
@@ -70,7 +73,7 @@
                             <li><a href="blog-detail.html">Blog Detail</a></li>
                         </ul>
                     </li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li> -->
                 </ul>
             </div>
         </nav>

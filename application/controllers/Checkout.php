@@ -29,12 +29,12 @@ class Checkout extends CI_Controller
 		$tanggal_kirim	= $this->input->post('tanggal_kirim');
 		$ongkir			= $this->input->post('ongkir');
 		$data_preorder	= array(
-			'jumlah'		=> $total_belanja,
-			'metode'		=> $metode,
-			'status'		=> $status,
-			'tanggal'		=> $tanggal,
-			'tgl_kirim'		=> $tanggal_kirim,
-			'ongkir'		=> $ongkir
+			'jumlah'			=> $total_belanja,
+			'metode'			=> $metode,
+			'status'			=> $status,
+			'tanggalPesan'		=> $tanggal,
+			'tanggalDikirim'	=> $tanggal_kirim,
+			'ongkir'			=> $ongkir
 		);
 		$insert_preorder = $this->db->insert('preorder', $data_preorder);
 		if ($insert_preorder) {
@@ -53,7 +53,7 @@ class Checkout extends CI_Controller
 			}
 			if ($insert_detailPreorder) {
 				$data_pengiriman = array(
-					'idTransaksi' 	=> $id_preorder,
+					'idPreorder' 	=> $id_preorder,
 					'nama'			=> $this->input->post('nama'),
 					'email'			=> $this->input->post('email'),
 					'no_hp'			=> $this->input->post('no_hp'),
@@ -70,12 +70,12 @@ class Checkout extends CI_Controller
 		}
 	}
 
-	public function pembayaran($id_transaksi)
+	public function pembayaran($id_preorder)
 	{
-		$data['transaksi'] 	= $this->Model_transaksi->get_transaksi($id_transaksi)->row();
-		$data['detail'] 	= $this->Model_transaksi->get_detailTransaksi($id_transaksi)->result_array();
-		$data['pengiriman'] = $this->Model_transaksi->get_pengiriman($id_transaksi)->result_array();
-		$data['midtrans']	= $this->Model_transaksi->get_midtrans($id_transaksi)->row();
+		$data['preorder'] 	= $this->Model_preorder->get_preorder($id_preorder)->row();
+		$data['detail'] 	= $this->Model_preorder->get_detailPreorder($id_preorder)->result_array();
+		$data['pengiriman'] = $this->Model_preorder->get_pengiriman($id_preorder)->result_array();
+		$data['midtrans']	= $this->Model_preorder->get_midtrans($id_preorder)->row();
 
 		$this->load->view('template/header2');
 		$this->load->view('pembayaran', $data);

@@ -16,24 +16,12 @@
                             <!-- <span class="ps-badge"><img src="<?= base_url() ?>assets/client/images/icons/badge-red.png" alt=""><i>New</i></span><span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt=""><i>50%</i></span> -->
                             <div class="ps-product__image">
                                 <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
-                                <?php if ($prd['gambar2'] != null) : ?>
-                                    <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar2'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar2'] ?>" alt=""></a></div>
-                                <?php elseif ($prd['gambar3'] != null) : ?>
-                                    <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar3'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar3'] ?>" alt=""></a></div>
-                                <?php elseif ($prd['gambar4'] != null) : ?>
-                                    <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar4'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar4'] ?>" alt=""></a></div>
-                                <?php endif ?>
+                                <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
+                                <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
                             </div>
                             <div class="ps-product__preview">
                                 <div class="ps-product__variants">
                                     <div class="item"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></div>
-                                    <?php if ($prd['gambar2'] != null) : ?>
-                                        <div class="item"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar2'] ?>" alt=""></div>
-                                    <?php elseif ($prd['gambar3'] != null) : ?>
-                                        <div class="item"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar3'] ?>" alt=""></div>
-                                    <?php elseif ($prd['gambar4'] != null) : ?>
-                                        <div class="item"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar4'] ?>" alt=""></div>
-                                    <?php endif ?>
                                     <!-- <div class="item">
                                         <div class="ps-video"><a class="popup-youtube ps-product__video" href="https://www.youtube.com/watch?v=kJQP7kiw5Fk"><img src="<?= base_url() ?>assets/client/images/products/detail/variant-4.png" alt=""><i class="fa fa-play"></i></a></div>
                                     </div> -->
@@ -52,7 +40,7 @@
                                 <p><?= $prd['deskripsi'] ?></p>
                             </div>
                             <div class="ps-product__status">
-                                <h5>Stok : <span> <?= $prd['stok'] ?></span></h5>
+                                <h5>Min order : <span> <?= $prd['min_order'] ?></span></h5>
                             </div>
                             <div class="ps-product__shopping">
                                 <form class="ps-form--shopping" id="cart" action="" method="post">
@@ -102,7 +90,7 @@
                                 </ul>
                             </div>
                             <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"><?= $rkm['namaProduk'] ?></a>
-                                <p><a href="">Stok Produk : <?= $rkm['stok'] ?></a></p>
+                                <p><a href="">Min order : <?= $rkm['min_order'] ?></a></p>
                                 <p class="ps-product__price">Rp <?= number_format($rkm['harga'], 0, ',', '.') ?></p>
                             </div>
                         </div>
