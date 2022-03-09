@@ -242,12 +242,10 @@ input[type=number] {
                             <button class="btn btn-info" type="button" data-dismiss="modal">Tutup</button>
                         </div>
                 </div>
-                
             </div>
         </div>
     </div>
 <?php endforeach; ?>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
