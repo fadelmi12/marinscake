@@ -99,8 +99,11 @@
                                         <strong>Aksi</strong>
                                     </div>
                                 </div>
+                                <!-- id produk -->
+                                <input hidden id="id_produk" type="text" value="<?= $data_produk['idProduk'] ?>">
+                                <!-- total gambar -->
+                                <input hidden id="total_gambar" type="text" value="">
                                 <div class="col-12 input_gambar" id="jumlah_gambar">
-                                    <input hidden id="id_produk" type="text" value="<?= $data_produk['idProduk'] ?>">
                                     <?php foreach ($gambar as $gb_produk) :
                                         if ($data_produk['idProduk'] == $gb_produk['id_produk']) : ?>
                                             <form onsubmit="return false" id="form_gambar<?= $gb_produk['id_gambarProduk'] ?>" method="POST" enctype="multipart/form-data">
@@ -169,10 +172,21 @@
         });
 
         $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
-            e.preventDefault();
-            $(this).parent('div').parent('div').remove();
-            x--;
+            total_gambar = document.getElementById('total_gambar').value;
+            if(total_gambar <= 1){
+                swal('Gagal hapus','Produk minimal memiliki 1 gambar','error');
+            }else{
+                e.preventDefault();
+                $(this).parent('div').parent('div').parent('form').remove();
+                x--;
+            }
         })
+
+        setInterval(function(){
+            var box = document.getElementById('jumlah_gambar');
+            var directChildren = box.children.length;
+            document.getElementById('total_gambar').value = directChildren;
+        },500);
     });
 
     function update_gambar(id) {
@@ -215,36 +229,48 @@
     };
 
     function hapus_gambar(id_gambar) {
-        $.ajax({
-            url: "<?php echo base_url('admin/produk/hapus_gambar') ?>",
-            type: "POST",
-            dataType: "text",
-            data: {
-                id_gambarProduk: id_gambar,
-            },
-            success: function(data) {
-                document.getElementById("row_gambar" + id_gambar).innerHTML = data;
-            },
-            error: function() {
-                alert("error");
-            }
-        });
+        total_gambar = document.getElementById('total_gambar').value;
+        if(total_gambar <= 1){
+            swal('Gagal hapus','Produk minimal memiliki 1 gambar','error');
+        }else{
+            $.ajax({
+                url: "<?php echo base_url('admin/produk/hapus_gambar') ?>",
+                type: "POST",
+                dataType: "text",
+                data: {
+                    id_gambarProduk: id_gambar,
+                },
+                success: function(data) {
+                    document.getElementById("row_gambar" + id_gambar).innerHTML = data;
+                    document.getElementById("form_gambar" + id_gambar).remove();
+                },
+                error: function() {
+                    alert("error");
+                }
+            });
+        }
     }
 
     function hapus_gambarLangsung(id_gambar) {
-        $.ajax({
-            url: "<?php echo base_url('admin/produk/hapus_gambar') ?>",
-            type: "POST",
-            dataType: "text",
-            data: {
-                id_gambarProduk: id_gambar,
-            },
-            success: function(data) {
-                //document.getElementById("row_gambar" + id_gambar).innerHTML = data;
-            },
-            error: function() {
-                alert("error");
-            }
-        });
+        total_gambar = document.getElementById('total_gambar').value;
+        if(total_gambar <= 1){
+            swal('Gagal hapus','Produk minimal memiliki 1 gambar','error');
+        }else{
+            $.ajax({
+                url: "<?php echo base_url('admin/produk/hapus_gambar') ?>",
+                type: "POST",
+                dataType: "text",
+                data: {
+                    id_gambarProduk: id_gambar,
+                },
+                success: function(data) {
+                    //document.getElementById("row_gambar" + id_gambar).innerHTML = data;
+                },
+                error: function() {
+                    alert("error");
+                }
+            });
+        }
     }
+
 </script>
