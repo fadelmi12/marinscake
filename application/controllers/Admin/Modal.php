@@ -40,7 +40,7 @@ class Modal extends CI_Controller
                 );
         }
         
-        $simpan     = $this->db->insert('modal', $data);
+        $this->db->insert('modal', $data);
         $idModal    = $this->db->insert_id();
 
         foreach ($_POST['namaBahan'] as $key => $val): 
@@ -48,7 +48,7 @@ class Modal extends CI_Controller
                 'idModal'       => $idModal,
                 'namaBahan'     => $_POST['namaBahan'][$key],
                 'jumlah'        => $_POST['jumlah'][$key],
-                'hargaSatuan'   => $_POST['hargaSatuan'][$key],
+                'harga_satuan'   => $_POST['hargaSatuan'][$key],
                 'totalHarga'    => $_POST['totalHarga'][$key],
             );
         endforeach;     
@@ -81,44 +81,15 @@ class Modal extends CI_Controller
     }    
 
     // tampilan edit data pengeluaran modal
-    public function edit_modal($idModal)
+    public function edit_modal($idModal, $tanggal)
     {
-    	$data['detail_modal'] = $this->Model_laporan->get_detail_modal_where($idModal)->result_array();
+        $data['detail_modal'] = $this->Model_laporan->get_detail_modal_where($idModal)->result_array();
+        $data['bulan'] = $tanggal;
         
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/modal_pengeluaran/edit_modal', $data);
         $this->load->view('admin/template/footer');
-    }
-
-    // hapus bahan pada data pengeluaran modal
-    public function hapus_bahan()
-    {
-    	$id_detailModal = $this->input->post('idDetailModal');
-    	$idModal 		= $this->input->post('idModal');
-
-    	$where 	= array('id_detailModal' 	=> $id_detailModal);
-    	$where2 = array('idModal' 			=> $idModal);
-
-    	// hapus bahan
-    	$this->db->delete('detail_modal', $where);
-
-    	// update total pengeluaran pada tb_modal
-    	$detail_modal = $this->Model_laporan->get_detail_modal_where($idModal)->result_array();
-
-    	$totalHargaSemua = 0;
-    	foreach($detail_modal as $key => $val):
-			
-	        $totalHargaSemua += $val['totalHarga'];
-
-	        $data = array(
-	            'totalModal'    => $totalHargaSemua,
-	            'tanggalEdit'  	=> date('Y-m-d'),
-	            );
-        endforeach;
-
-        $simpan     = $this->db->update('modal', $data, $where2);
-
     }
 
     // update bahan pada data pengeluaran modal
@@ -140,21 +111,27 @@ class Modal extends CI_Controller
                 'totalModal'    => $totalHargaSemua,
                 'tanggalEdit'  	=> date('Y-m-d'),
                 );
-        }
-        $simpan     = $this->db->update('modal', $data, $where);
 
-        // simpan/insert data perubahan pada tb_detailModal
-    	foreach ($_POST['namaBahan'] as $key => $val): 
+            $this->db->update('modal', $data, $where);
+        }
+        
+        foreach ($_POST['namaBahan'] as $key => $val): 
             $data2[]    = array(                
                 'idModal'       => $idModal,
                 'namaBahan'     => $_POST['namaBahan'][$key],
                 'jumlah'        => $_POST['jumlah'][$key],
-                'hargaSatuan'   => $_POST['hargaSatuan'][$key],
+                'harga_satuan'  => $_POST['hargaSatuan'][$key],
                 'totalHarga'    => $_POST['totalHarga'][$key],
             );
-        endforeach;  
+        endforeach;     
         
-        $this->db->insert_batch('detail_modal', $data2);	
+        $this->db->insert_batch('detail_modal', $data2);
+        $this->session->set_flashdata('edit_modal',
+                        '<script type ="text/JavaScript">  
+                            swal("Berhasil","Data modal berhasil diupdate","success")  
+                        </script>'  
+                );
+        header("Location: ".$_SERVER['HTTP_REFERER']);
     }
 
 }

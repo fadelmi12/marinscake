@@ -153,7 +153,7 @@
                                 Jumlah Transaksi
                             </label>
                             <input type="date" class="form-control mr-3" value="" name="filter_tanggal" hidden>
-                            <input type="text" name="jumlah" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['jumlah'] ?>">
+                            <input disabled type="text" name="jumlah" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['jumlah'] ?>">
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -161,7 +161,8 @@
                                     <label>
                                         Metode
                                     </label>
-                                    <select class="form-control selectric" name="metode" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required>
+                                    <input type="text" name="metode" class="form-control" disabled value="<?= $rw_pr['metode']?>">
+                                    <!-- <select class="form-control selectric" name="metode" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required>
                                         <option <?php if ($rw_pr['metode'] == 'Online') : echo "selected";
                                                 endif; ?>>
                                             Online
@@ -170,7 +171,7 @@
                                                 endif; ?>>
                                             Offline
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-6">
@@ -178,7 +179,12 @@
                                     <label>
                                         Pembayaran
                                     </label>
-                                    <input type="text" name="pembayaran" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['pembayaran'] ?>">
+                                    <?php foreach($data_midtrans as $midtrans): 
+                                        if($midtrans['id_preorder'] == $rw_pr['idPreorder']){$pembayaran =  $midtrans['metode'];}
+                                        else{$pembayaran = 'Tunai';}
+                                    endforeach;?>
+                                    <input type="text" name="pembayaran" class="form-control" disabled value="<?= $pembayaran?>">
+                                    <!-- <input type="text" name="pembayaran" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['pembayaran'] ?>"> -->
                                 </div>
                             </div>
                         </div>
@@ -237,7 +243,7 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/transaksi/hapus_preorder/') ?>" + $idPreorder + "<?php echo '_kosong'?>";
+                window.location = "<?php echo base_url('admin/transaksi/hapus_preorder/') ?>" + $idPreorder;
             } else {
                 swal("Data preorder batal dihapus");
             }

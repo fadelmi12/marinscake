@@ -5,7 +5,11 @@ class Model_transaksi extends CI_Model
 
     public function get_riwayat_transaksi($tanggal)
     {
-        return $this->db->get_where('transaksi', array('tanggal' => $tanggal));
+        $this->db->select('*');
+        $this->db->from('transaksi');
+        $this->db->like('tanggal',$tanggal);
+        return $this->db->get();
+        //return $this->db->get_where('transaksi', array('tanggal' => $tanggal));
     }
 
     public function detail_riwayat_transaksi()
@@ -18,7 +22,11 @@ class Model_transaksi extends CI_Model
 
     public function get_riwayat_preorder($tanggal)
     {
-        return $this->db->get_where('preorder', array('tanggalPesan' => $tanggal));
+        $this->db->select('*');
+        $this->db->from('preorder');
+        $this->db->like('tanggalPesan',$tanggal);
+        return $this->db->get();
+        //return $this->db->get_where('preorder', array('tanggalPesan' => $tanggal));
     }
 
     public function detail_riwayat_preorder()

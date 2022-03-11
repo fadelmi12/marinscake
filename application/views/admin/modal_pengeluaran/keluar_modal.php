@@ -49,7 +49,7 @@
                                                 <div class="d-flex justify-content-around">
                                                     <button class="btn btn-info" data-toggle="modal" data-target="#detail_modal<?= $dt_modal['idModal'] ?>">
                                                         <i class="fas fa-search"></i> Detail</button>
-                                                    <button class="btn btn-warning" type="button" onclick="window.location.href='<?php echo base_url('admin/modal/edit_modal/'.$dt_modal['idModal']) ?>'">
+                                                    <button class="btn btn-warning" type="button" onclick="window.location.href='<?php echo base_url('admin/modal/edit_modal/'.$dt_modal['idModal'].'/'.$tanggal) ?>'">
                                                         <i class="fas fa-pen"></i> Edit</button>
                                                     <button class="btn btn-danger" onclick="hapus_modal(<?= $dt_modal['idModal'];?>)" type="button">
                                                         <i class="fas fa-trash"></i> Hapus</button>
@@ -224,7 +224,7 @@ input[type=number] {
                                             <?= $dtl_modal['jumlah'] ?>
                                         </td>
                                         <td>
-                                            Rp <?= number_format($dtl_modal['hargaSatuan'], 0, '', '.') ?>
+                                            Rp <?= number_format($dtl_modal['harga_satuan'], 0, '', '.') ?>
                                         </td>
                                         <td>
                                             Rp <?= number_format($dtl_modal['totalHarga'], 0, '', '.') ?>
@@ -253,7 +253,7 @@ input[type=number] {
         var max_fields = 20; //maximum input boxes allowed
         var wrapper = $(".input_fields_wrap"); //Fields wrapper
         var add_button = $(".add_field_button"); //Add button ID
-
+ 
         var x = 1; //initlal text box count
         a = 1; b = 1; c = 1; d = 1; j = 1; f = 1; g = 1; h = 1; i = 1;
         $(add_button).click(function(e) { //on add input button click

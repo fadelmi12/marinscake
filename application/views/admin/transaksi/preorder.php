@@ -16,18 +16,16 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo base_url('admin/transaksi/preorder/')?>" method="post" enctype="multipart/form-data">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="form-group d-flex align-items-center mr-3 mb-0">
-                                    <h6 class="w-100 mr-3 my-0" style="color:black">Pilih Tanggal : </h6>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control mr-3" 
-                                        value="<?= $tanggal; ?>" name="filter_tanggal">
-                                    </div>
-                                    <button class="btn btn-primary d-flex h-100 " type="submit"><i class="fas fa-filter my-auto mr-2"></i>Filter</button>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="form-group d-flex align-items-center mr-3 mb-0">
+                                <h6 class="w-100 mr-3 my-0" style="color:black">Pilih Tanggal : </h6>
+                                <div class="input-group">
+                                    <input type="month" class="form-control mr-3" 
+                                    value="<?= $tanggal; ?>" id="filter_tanggal">
                                 </div>
+                                <button class="btn btn-primary d-flex h-100 " type="button" onclick="filter()"><i class="fas fa-filter my-auto mr-2"></i>Filter</button>
                             </div>
-                        </form>
+                        </div>
 
                         <div class="table-responsive">
                             <table class="table table-striped" id="table-1">
@@ -172,7 +170,7 @@
                                 Jumlah Transaksi
                             </label>
                             <input type="date" class="form-control mr-3" value="<?= $tanggal; ?>" name="filter_tanggal" hidden>
-                            <input type="text" name="jumlah" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['jumlah'] ?>">
+                            <input type="text" name="jumlah" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" disabled value="<?= $rw_pr['jumlah'] ?>">
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -180,7 +178,8 @@
                                     <label>
                                         Metode
                                     </label>
-                                    <select class="form-control selectric" name="metode" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required>
+                                    <input type="text" name="metode" class="form-control" disabled value="<?= $rw_pr['metode']?>">
+                                    <!-- <select class="form-control selectric" name="metode" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" disabled>
                                         <option <?php if ($rw_pr['metode'] == 'Online') : echo "selected";
                                                 endif; ?>>
                                             Online
@@ -189,7 +188,7 @@
                                                 endif; ?>>
                                             Offline
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-6">
@@ -197,7 +196,11 @@
                                     <label>
                                         Pembayaran
                                     </label>
-                                    <input type="text" name="pembayaran" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['pembayaran'] ?>">
+                                    <?php foreach($data_midtrans as $midtrans): 
+                                        if($midtrans['id_preorder'] == $rw_pr['idPreorder']){$pembayaran =  $midtrans['metode'];}
+                                        else{$pembayaran = 'Tunai';}
+                                    endforeach;?>
+                                    <input type="text" name="pembayaran" class="form-control" disabled value="<?= $pembayaran?>">
                                 </div>
                             </div>
                         </div>
@@ -224,7 +227,7 @@
                                     <label>
                                         Tanggal Pengiriman
                                     </label>
-                                    <input type="date" name="tanggalDikirim" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['tanggalDikirim'] ?>">
+                                    <input type="date" min="<?= date('Y-m-d', strtotime($rw_pr['tanggalPesan'])) ?>" name="tanggalDikirim" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['tanggalDikirim'] ?>">
                                 </div>
                             </div>
                         </div>
@@ -256,10 +259,15 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/transaksi/hapus_preorder/') ?>" + $idPreorder + "<?php echo '_'.$tanggal?>";
+                window.location = "<?php echo base_url('admin/transaksi/hapus_preorder/') ?>" + $idPreorder;
             } else {
                 swal("Data preorder batal dihapus");
             }
         });
+    }
+
+    function filter(){
+        var tanggal = document.getElementById('filter_tanggal').value;
+        window.location = "<?php echo base_url('admin/transaksi/preorder/')?>"+ tanggal;
     }
 </script>

@@ -10,18 +10,16 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo base_url('admin/transaksi/')?>" method="post" enctype="multipart/form-data">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="form-group d-flex align-items-center mr-3 mb-0">
                                     <h6 class="w-100 mr-3 my-0" style="color:black">Pilih Tanggal : </h6>
                                     <div class="input-group">
-                                        <input type="date" class="form-control mr-3" 
-                                        value="<?= $tanggal; ?>" name="filter_tanggal">
+                                        <input type="month" class="form-control mr-3" 
+                                        value="<?= $tanggal; ?>" id="filter_tanggal">
                                     </div>
-                                    <button class="btn btn-primary d-flex h-100 " type="submit"><i class="fas fa-filter my-auto mr-2"></i>Filter</button>
+                                    <button class="btn btn-primary d-flex h-100 " type="button" onclick="filter()"><i class="fas fa-filter my-auto mr-2"></i>Filter</button>
                                 </div>
                             </div>
-                        </form>
                         <div class="table-responsive">
                             <table class="table table-hover" id="table-1">
                                 <thead>
@@ -160,15 +158,39 @@
                 </div>
                 <div class="modal-body">
                     <form action="<?= base_url('admin/transaksi/update_transaksi/') . $rw_tr['idTransaksi']; ?>" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>
-                                Jumlah Transaksi
-                            </label>
-                            <input type="date" class="form-control mr-3" value="<?= $tanggal; ?>" name="filter_tanggal" hidden>
-                            <input type="text" name="total_belanja" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['total_belanja'] ?>">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        Jumlah Transaksi
+                                    </label>
+                                    <input type="date" class="form-control mr-3" value="<?= $tanggal; ?>" name="filter_tanggal" hidden>
+                                    <!-- <input readonly type="text" name="total_belanja" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['total_belanja'] ?>"> -->
+                                    <!-- <div class="col-3">
+                                        <div class="form-group"> -->
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        Rp
+                                                    </div>
+                                                </div>
+                                                <input readonly value="<?= $rw_tr['total_belanja'] ?>" class="form-control" type="number" name="total_belanja">
+                                            </div>
+                                        <!-- </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>
+                                        Pembayaran
+                                    </label>
+                                    <input type="text" name="pembayaran" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['pembayaran'] ?>">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>
                                         Metode
@@ -185,17 +207,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>
-                                        Pembayaran
-                                    </label>
-                                    <input type="text" name="pembayaran" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['pembayaran'] ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>
                                         Status
@@ -212,14 +224,17 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6">
+                        </div>
+                        <div class="row">
+                            
+                            <!-- <div class="col-6">
                                 <div class="form-group">
                                     <label>
                                         Tanggal Transaksi
                                     </label>
                                     <input type="date" name="tanggal" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['tanggal'] ?>">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="d-flex justify-content-around">
                             <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">
@@ -249,10 +264,15 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/transaksi/hapus_transaksi/') ?>" + $idTransaksi + "<?php echo '_'.$tanggal?>";
+                window.location = "<?php echo base_url('admin/transaksi/hapus_transaksi/') ?>" + $idTransaksi;
             } else {
                 swal("Data transaksi batal dihapus");
             }
         });
+    }
+
+    function filter(){
+        var tanggal = document.getElementById('filter_tanggal').value;
+        window.location = "<?php echo base_url('admin/transaksi/langsung/')?>"+ tanggal;
     }
 </script>

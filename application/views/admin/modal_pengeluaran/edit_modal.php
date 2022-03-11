@@ -59,67 +59,70 @@ input[type=number] {
                             </div>
                         </div>
                         <!-- body -->
-                    <form id="form_editBahan" method="post" enctype="multipart/form-data">
-                    <?php $a=0; $b = 0; $c = 0; $d = 0; $e = 0; $f = 0; $g = 0; $h = 0; $i = 0;
-                    foreach($detail_modal as $dtl_modal): ?>
-                        <div id="tampil_bahan<?= $dtl_modal['id_detailModal']?>">
-                            <div class="row">
-                                <div class="col-3">
-                                    <input value="<?= $dtl_modal['id_detailModal']?>" required hidden class="form-control" type="text" name="id_detailModal">
-                                    <input value="<?= $dtl_modal['idModal']?>" required hidden class="form-control" type="text" name="idModal">
-                                    <input value="<?= $dtl_modal['namaBahan']?>" required class="form-control" type="text" name="namaBahan[<?= $a++ ?>]">
-                                </div>
-                                <div class="col-2 ">
-                                    <input value="<?= $dtl_modal['jumlah']?>" required class="form-control" type="number" id="jumlah<?= $b++ ?>" onkeyup="jumlah(<?= $c++ ?>)" name="jumlah[<?= $d++ ?>]">
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    Rp
+                        <form id="form_editBahan" action="<?php echo base_url('admin/modal/update_bahan') ?>" method="post" enctype="multipart/form-data">
+                            <!-- total row bahan -->
+                            <input id="total_row_bahan" type="text" value="" hidden>
+                            <div id="box" class="input_fields_wrap">
+                                <?php 
+                                    $a=0; $b = 0; $c = 0; $d = 0; $e = 0; $f = 0; $g = 0; $h = 0; $i = 0;
+                                    foreach($detail_modal as $dtl_modal): ?>
+                                    <div id="tampil_bahan<?= $dtl_modal['id_detailModal']?>">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <input value="<?= $dtl_modal['id_detailModal']?>" required hidden class="form-control" type="text" name="id_detailModal">
+                                                <input value="<?= $dtl_modal['idModal']?>" required hidden class="form-control" type="text" name="idModal">
+                                                <input value="<?= $dtl_modal['namaBahan']?>" required class="form-control" type="text" name="namaBahan[<?= $a++ ?>]">
+                                            </div>
+                                            <div class="col-2 ">
+                                                <input value="<?= $dtl_modal['jumlah']?>" required class="form-control" type="number" id="jumlah<?= $b++ ?>" onkeyup="jumlah(<?= $c++ ?>)" name="jumlah[<?= $d++ ?>]">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                Rp
+                                                            </div>
+                                                        </div>
+                                                        <input value="<?= $dtl_modal['harga_satuan']?>" required class="form-control" type="number" id="hargaSatuan<?= $e++ ?>" onkeyup="hargaSatuan(<?= $f++ ?>)" name="hargaSatuan[<?= $g++ ?>]">
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                Rp
+                                                            </div>
+                                                        </div>
+                                                        <input value="<?= $dtl_modal['totalHarga']?>" readonly class="form-control" type="text" id="totalHarga<?= $h++ ?>"  name="totalHarga[<?= $i++ ?>]">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <input value="<?= $dtl_modal['hargaSatuan']?>" required class="form-control" type="number" id="hargaSatuan<?= $e++ ?>" onkeyup="hargaSatuan(<?= $f++ ?>)" name="hargaSatuan[<?= $g++ ?>]">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    Rp
-                                                </div>
+                                            <div class="col-1">
+                                                <button type="button" onclick="hapus_bahan(<?= $dtl_modal['id_detailModal']?>)" class="btn btn-danger mt-1"><i class="fas fa-trash"></i></button>
                                             </div>
-                                            <input value="<?= $dtl_modal['totalHarga']?>" readonly class="form-control" type="text" id="totalHarga<?= $h++ ?>"  name="totalHarga[<?= $i++ ?>]">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-1">
-                                    <button type="button" onclick="hapus_bahan(<?= $dtl_modal['id_detailModal']?>)" class="btn btn-danger mt-1"><i class="fas fa-trash"></i></button>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-                        <input id="idModal" value="<?= $dtl_modal['idModal']?>" required hidden class="form-control" type="text" name="idModal">
-                        <div class="input_fields_wrap">
-                            
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-info add_field_button" type="button"><i class="fas fa-plus mr-2"></i>Tambah Bahan</button>
-                        </div>
-                        <div class="d-flex justify-content-around mt-3">
-                            <button type="button" class="btn btn-danger col-2" onclick="window.location.href='javascript:history.go(-1)'">
-                                <i class="fas fa-arrow-left"></i>
-                                Kembali
-                            </button>
-                            <button type="button" onclick="simpan_perubahan()" class="btn btn-primary col-2">
-                                <i class="fas fa-save mr-1"></i>
-                                Simpan
-                            </button>
-                        </div>
-                    </form>
+                            <input id="idModal" value="<?= $dtl_modal['idModal']?>" required hidden class="form-control" type="text" name="idModal">
+                            <div class="text-center">
+                                <button class="btn btn-info add_field_button" type="button"><i class="fas fa-plus mr-2"></i>Tambah Bahan</button>
+                            </div>
+                            <div class="d-flex justify-content-around mt-3">
+                                <button type="button" class="btn btn-danger col-2" onclick="window.location.href='<?= base_url('admin/modal/pengeluaran_modal/'.$bulan)?>'">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Kembali
+                                </button>
+                                <button type="submit"  class="btn btn-primary col-2">
+                                    <i class="fas fa-save mr-1"></i>
+                                    Simpan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,6 +131,12 @@ input[type=number] {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
+    setInterval(function(){
+        var box = document.getElementById('box');
+        var directChildren = box.children.length;
+        document.getElementById('total_row_bahan').value = directChildren;
+    },500);
+
     function jumlah($a){
         return hitung($a);
     }
@@ -144,45 +153,13 @@ input[type=number] {
     }
 
     function hapus_bahan($idDetailModal)
-    {
-        var id_modal = document.getElementById("idModal").value;
-        $.ajax({
-            url      :"<?php echo base_url('admin/modal/hapus_bahan') ?>",
-            type     :"POST",
-            dataType : "text",
-            data     :{
-                idDetailModal : $idDetailModal,
-                idModal       : id_modal,
-            },
-
-            success:function(data) {
-                document.getElementById("tampil_bahan"+$idDetailModal).innerHTML = data;
-                swal("Berhasil","Bahan berhasil dihapus","success");
-            },
-
-            error:function(){
-                alert("error");
-            }
-        });
-    }
-
-    function simpan_perubahan()
-    {
-        var data = $("#form_editBahan").serialize();
-        $.ajax({
-            url      :"<?php echo base_url('admin/modal/update_bahan') ?>",
-            type     :"POST",
-            dataType :"text",
-            data     : data,
-
-            success:function(data) {
-                swal("Berhasil","Perubahan berhasil disimpan","success");
-            },
-
-            error:function(){
-                alert("error");
-            }
-        });
+    {   
+        var total_row_bahan = document.getElementById("total_row_bahan").value;
+        if(total_row_bahan <= 1){
+            swal('Gagal hapus','Detail pengeluaran tidak boleh kosong','error');
+        }else{
+            document.getElementById("tampil_bahan"+$idDetailModal).remove();
+        }
     }
 
     $(document).ready(function() {
@@ -191,18 +168,18 @@ input[type=number] {
         var add_button = $(".add_field_button"); //Add button ID
 
         var x = 1; //initlal text box count
-        a = 100; b = 100; c = 100; d = 100; j = 100; f = 100; g = 100; h = 100; i = 100;
         $(add_button).click(function(e) { //on add input button click
             e.preventDefault();
             //max input box allowed
             x++; //text box increment
+            var random_kode = Math.floor((Math.random() * 1000000) + 1); //random kode
             $(wrapper).append(''+
                 '<div class="row">'+
                     '<div class="col-3">'+
-                        '<input required class="form-control" type="text" name="namaBahan['+ a++ +']">'+
+                        '<input required class="form-control" type="text" name="namaBahan['+ random_kode +']">'+
                     '</div>'+
                     '<div class="col-2 ">'+
-                        '<input style="" required class="form-control" type="number" id="jumlah'+ g++ +'" onkeyup="jumlah('+ j++ +')" name="jumlah['+ b++ +']">'+
+                        '<input style="" required class="form-control" type="number" id="jumlah'+ random_kode +'" onkeyup="jumlah('+ random_kode +')" name="jumlah['+ random_kode +']">'+
                     '</div>'+
                     '<div class="col-3">'+
                         '<div class="form-group">'+
@@ -210,7 +187,7 @@ input[type=number] {
                                 '<div class="input-group-prepend">'+
                                     '<div class="input-group-text">Rp</div>'+
                                 '</div>'+
-                                '<input required class="form-control" type="number" id="hargaSatuan'+ h++ +'" onkeyup="hargaSatuan('+ f++ +')" name="hargaSatuan['+ c++ +']">'+
+                                '<input required class="form-control" type="number" id="hargaSatuan'+ random_kode +'" onkeyup="hargaSatuan('+ random_kode +')" name="hargaSatuan['+ random_kode +']">'+
                             '</div>'+
                         '</div>'+
                     '</div>'+
@@ -220,7 +197,7 @@ input[type=number] {
                                 '<div class="input-group-prepend">'+
                                     '<div class="input-group-text">Rp</div>'+
                                 '</div>'+
-                                '<input readonly class="form-control" type="text" id="totalHarga'+ i++ +'" name="totalHarga['+ d++ +']">'+
+                                '<input readonly class="form-control" type="text" id="totalHarga'+ random_kode +'" name="totalHarga['+ random_kode +']">'+
                             '</div>'+
                         '</div>'+
                     '</div>'+
@@ -232,9 +209,14 @@ input[type=number] {
         });
 
         $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
-            e.preventDefault();
-            $(this).parent('div').parent('div').remove();
-            x--;
+            var total_row_bahan = document.getElementById("total_row_bahan").value;
+            if(total_row_bahan <= 1){
+                swal('Gagal hapus','Detail pengeluaran tidak boleh kosong','error');
+            }else{
+                e.preventDefault();
+                $(this).parent('div').parent('div').remove();
+                x--;
+            }
         })
     });
 </script>
