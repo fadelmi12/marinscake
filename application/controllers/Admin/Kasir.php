@@ -17,8 +17,9 @@ class Kasir extends CI_Controller
 	// tampilan kasir
 	public function index()
 	{
-		$data['jenis_produk'] = $this->Model_produk->get_kategori_produk()->result_array();
-		$data['daftar_produk'] = $this->Model_produk->get_produk()->result_array();
+		$data['jenis_produk'] 	= $this->Model_produk->get_kategori_produk()->result_array();
+		$data['daftar_produk'] 	= $this->Model_produk->get_produk()->result_array();
+		$data['gambar'] 		= $this->Model_produk->get_gambar()->result_array();
 
 		$this->load->view('admin/template/header');
 		$this->load->view('admin/template/sidebar');
@@ -40,7 +41,7 @@ class Kasir extends CI_Controller
 			$data = array(
 				'jumlah' 			=> $total_belanja,
 				'metode'			=> "Offline",
-				'pembayaran'		=> "Tunai",
+				// 'pembayaran'		=> "Tunai",
 				'tanggalPesan'		=> date("Y-m-d"),
 				'tanggalDikirim'	=> $tanggalDikirim,
 				'status'			=> "Menunggu Pengiriman",
@@ -84,7 +85,7 @@ class Kasir extends CI_Controller
 			$data = array(
 				'total_belanja' => $total_belanja,
 				'metode'		=> "Offline",
-				'pembayaran'	=> "Tunai",
+				// 'pembayaran'	=> "Tunai",
 				'status'		=> "Selesai",
 				'tanggal'		=> date("Y-m-d"),
 			);

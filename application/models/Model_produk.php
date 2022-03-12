@@ -11,6 +11,13 @@ class Model_produk extends CI_Model
 		return $this->db->get();
 	}
 
+	public function get_max_harga()
+	{
+		$this->db->select_max('harga');
+		$this->db->from('produk');
+		return $this->db->get();
+	}
+
 	public function get_produk_where($id_produk)
 	{
 		$this->db->select('*');
@@ -18,6 +25,16 @@ class Model_produk extends CI_Model
 		// $this->db->join('gambar_produk', 'produk.idProduk = gambar_produk.id_produk', 'left');
 		$this->db->join('jenis_produk', 'jenis_produk.idJenis = produk.idJenis');
 		$this->db->where('idProduk', $id_produk);
+		return $this->db->get();
+	}
+
+	public function get_filter($where)
+	{
+		$this->db->select('*');
+		$this->db->from('produk');
+		foreach ($where as $whr) {
+			$this->db->where($whr);
+		}
 		return $this->db->get();
 	}
 
@@ -40,6 +57,14 @@ class Model_produk extends CI_Model
 		$this->db->where('idProduk!=', $id_produk);
 		$this->db->limit(4);
 		$this->db->order_by('idProduk', 'random');
+		return $this->db->get();
+	}
+
+	public function get_per_kategori($id_kategori)
+	{
+		$this->db->select('*');
+		$this->db->from('produk');
+		$this->db->where('idJenis', $id_kategori);
 		return $this->db->get();
 	}
 
@@ -72,5 +97,29 @@ class Model_produk extends CI_Model
 		$this->db->from('gambar_produk');
 		$this->db->where('id_produk', $id_produk);
 		return $this->db->get();
+	}
+
+	// Fetch records
+	public function getData($rowno, $rowperpage)
+	{
+
+		$this->db->select('*');
+		$this->db->from('produk');
+		$this->db->limit($rowperpage, $rowno);
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
+	// Select total records
+	public function getrecordCount()
+	{
+
+		$this->db->select('count(*) as allcount');
+		$this->db->from('produk');
+		$query = $this->db->get();
+		$result = $query->result_array();
+
+		return $result[0]['allcount'];
 	}
 }

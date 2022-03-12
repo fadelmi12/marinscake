@@ -19,7 +19,13 @@
                                             <?php if ($dt_produk['stok'] > '0') : ?>
                                                 <div class="col-lg-3">
                                                     <div class="form-group text-center">
-                                                        <a href="#" data-id="<?= $dt_produk['idProduk'] ?>" data-name="<?php echo str_replace(" ", "_", $dt_produk['namaProduk']); ?>" data-price="<?= $dt_produk['harga'] ?>" class="add-to-cart"><img src="<?php echo base_url() . '/uploads/gambar_produk/' . $dt_produk["gambar"]; ?>" alt="" style="border-radius:5px;" class="img-fluid"></a>
+                                                        <a href="#" data-id="<?= $dt_produk['idProduk'] ?>" data-name="<?php echo str_replace(" ", "_", $dt_produk['namaProduk']); ?>" data-price="<?= $dt_produk['harga'] ?>" class="add-to-cart">
+                                                            <?php foreach ($gambar as $gbr) :
+                                                                if ($gbr['id_produk'] == $dt_produk['idProduk']) : ?>
+                                                                    <img src="<?php echo base_url() . '/uploads/gambar_produk/' . $gbr["gambar"]; ?>" alt="" style="border-radius:5px;" class="img-fluid">
+                                                            <?php endif;
+                                                            endforeach ?>
+                                                        </a>
                                                         <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark"><?= $dt_produk['namaProduk'] ?></h6>
                                                         <h6 class="text-dark font-15">Rp. <?= number_format($dt_produk['harga'], 0, '', '.') ?></h6>
                                                     </div>
@@ -101,12 +107,9 @@
                                     </div>
 
                                     <!-- Input tanggal digunakan saat preorder -->
-                                    <input hidden id="tglDikirim" type="text" name="tglDikirim" class="form-control">
+                                    <input id="tglDikirim" type="text" name="tglDikirim" class="form-control" hidden>
 
-                                    <div class="d-flex">
-                                        <div class="btn btn-danger mr-3" type="button">
-                                            Batal
-                                        </div>
+                                    <div class="d-flex justify-content-around">
                                         <div class="btn btn-info mr-3" type="button" onclick="preorder()" type="button">
                                             Preorder
                                         </div>
@@ -157,7 +160,7 @@
                                         <i class="fas fa-check mr-1"></i>
                                         Batal
                                     </button>
-                                    <button type="button" class="btn btn-primary" onclick="submit_preorder()">
+                                    <button type="button" class="btn btn-primary" onclick="simpan_Preorder()">
                                         <i class="fas fa-save mr-1"></i>
                                         Simpan
                                     </button>
@@ -225,4 +228,61 @@
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="<?= base_url() ?>assets/js/cart.js"></script>
+    <script type="text/javascript">
+        function lanjut_bayar() {
+            az = 1;
+            var cek = document.getElementById('uang').value;
+            var uang = parseInt(document.getElementById('uang').value);
+            var total = document.getElementById('total-cart').value;
+            var kembalian = uang - total;
+
+            if (total == '0') {
+                swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
+            } else {
+                if (document.getElementById('uang').value == '') {
+                    swal("Informasi", "Nominal uang pembayaran masih kosong", "info");
+                } else {
+                    if (uang < total) {
+                        swal("Informasi", "Nominal uang pembayaran kurang", "info");
+                    } else {
+                        document.getElementById('total_belanja1').value = total;
+                        document.getElementById('kembalian').value = kembalian;
+
+                        $('#modal_kembalian').appendTo("body").modal('show');
+                    }
+                }
+            }
+        }
+
+        function submit_terjual() {
+            document.getElementById('formTerjual').submit();
+            sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
+        }
+
+        function preorder() {
+            var total = document.getElementById('total-cart').value;
+            if (total == '0') {
+                swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
+            } else {
+                var total = document.getElementById('total-cart').value;
+                document.getElementById('total_belanja2').value = total;
+
+                $('#modal_preorder').appendTo("body").modal('show');
+            }
+        }
+
+        function simpan_Preorder() {
+            var tgl = document.getElementById('tanggalDikirim').value;
+            document.getElementById('tglDikirim').value = tgl;
+
+            if (tgl == '') {
+                swal("Informasi", "Tanggal pengiriman masih kosong", "info");
+            } else {
+                $('#modal_preorder').appendTo("body").modal('hide');
+
+                document.getElementById('formTerjual').submit();
+                sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
+            }
+        }
+    </script>
 </div>

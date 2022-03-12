@@ -11,4 +11,9 @@ class Model_slider extends CI_Model
         $this->db->where('id_slider', $id_slider);
         return $this->db->get('slider');
     }
+    public function get_slider_aktif()
+    {
+        $this->db->where('status', 1);
+        return $this->db->get('slider');
+    }
 }
