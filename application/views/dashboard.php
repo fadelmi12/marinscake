@@ -1,26 +1,28 @@
 <div class="container">
     <div class="pb-80" id="slider">
         <div class="ps-carousel--animate ps-carousel--1st">
-            <div class="item">
-                <div class="ps-product--banner">
-                    <span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt="" /> <i>0.5</i>
-                    </span>
-                    <img src="<?= base_url() ?>assets/client/images/banner/slider-5.png" alt="" />
-                    <div class="ps-product__footer">
-                        <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="<?= base_url() ?>produk">
-                            Pesan Sekarang
-                        </a>
+            <?php foreach ($slider as $slide) : ?>
+                <div class="item">
+                    <div class="ps-product--banner">
+                        <!-- <span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt="" /> <i>0.5</i>
+                    </span> -->
+                        <img src="<?= base_url() ?>uploads/slider/<?= $slide['gambar'] ?>" alt="" />
+                        <div class="ps-product__footer">
+                            <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="<?= base_url() ?>produk">
+                                Pesan Sekarang
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="item">
+            <?php endforeach ?>
+            <!-- <div class="item">
                 <div class="ps-product--banner">
                     <span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt="" /><i>50%</i></span><img src="<?= base_url() ?>assets/client/images/banner/slider-6.png" alt="" />
                     <div class="ps-product__footer">
                         <a class="ps-btn py-2 px-4 py-lg-3 px-lg-5" href="<?= base_url() ?>produk">Pesan Sekarang</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

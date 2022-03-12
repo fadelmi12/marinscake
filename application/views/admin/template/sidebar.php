@@ -44,7 +44,7 @@
                 </ul>
             </li>
             <li class="menu-header">Lainnya</li>
-            <li class="dropdown <?php echo ($this->uri->segment(2) == 'user' || $this->uri->segment(2) == 'pengiriman') ? 'active' : '' ?>">
+            <li class="dropdown <?php echo ($this->uri->segment(2) == 'user' || $this->uri->segment(2) == 'pengiriman' || $this->uri->segment(2) == 'slider') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="settings"></i><span>Pengaturan</span></a>
                 <ul class="dropdown-menu">
                     <li> <a href="<?php echo base_url() ?>admin/user" class="nav-link "><i data-feather="user"></i><span>Pengaturan User</span></a></li>

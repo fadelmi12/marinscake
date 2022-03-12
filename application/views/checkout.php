@@ -109,8 +109,8 @@
                                     </div>
                                 <?php endforeach ?>
                                 <div class="row my-3">
-                                    <div class="col-8">
-                                        Ongkir
+                                    <div id="nama_ongkir" class="col-8">
+
                                     </div>
                                     <div class="col-4">
                                         <div id="ongkir"></div>
@@ -189,6 +189,7 @@
     function cek_ongkir(sel) {
         var opt = sel.options[sel.selectedIndex];
         var price = opt.dataset.ongkir
+        document.getElementById("nama_ongkir").innerHTML = "Ongkir";
         document.getElementById("ongkir").innerHTML = "Rp " + price;
         var total_awal = '<?= $this->cart->total() ?>';
         var total_akhir = parseInt(total_awal) + parseInt(price);

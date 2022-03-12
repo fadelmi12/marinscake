@@ -7,14 +7,14 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
             <li class="dropdown <?php echo ($this->uri->segment(2) == '') ? 'active' : '' ?>">
-                <a href="<?php echo base_url() ?>admin" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
+                <a href="<?php echo base_url() ?>kasir/kasir_page/dashboard" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown <?php echo ($this->uri->segment(2) == 'kasir') ? 'active' : '' ?>">
-                <a href="<?php echo base_url() ?>admin/kasir" class="nav-link"><i data-feather="monitor"></i><span>Kasir</span></a>
+                <a href="<?php echo base_url() ?>kasir/kasir_page" class="nav-link"><i data-feather="monitor"></i><span>Kasir</span></a>
             </li>
             <li class="menu-header">Pengaturan</li>
-            <li class="dropdown <?php echo ($this->uri->segment(2) === 'pengaturan') ? 'active' : '' ?>">
-                <a href="<?php echo base_url() ?>admin/pengaturan" class="nav-link "><i data-feather="settings"></i><span>Pengaturan Akun</span></a>
+            <li class="dropdown <?php echo ($this->uri->segment(2) === 'akun') ? 'active' : '' ?>">
+                <a href="<?php echo base_url() ?>kasir/akun" class="nav-link "><i data-feather="settings"></i><span>Pengaturan Akun</span></a>
 
             </li>
 

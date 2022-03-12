@@ -23,7 +23,6 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Simpan</button>
-
                         </form>
                     </div>
                 </div>
@@ -38,7 +37,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </div>
