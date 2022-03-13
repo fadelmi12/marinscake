@@ -89,8 +89,8 @@
                 <div class="modal-body pb-2 pt-4">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body " style="height: 70vh;">
+                            <div class="card" style="overflow-y: hidden;">
+                                <div class="card-body " style="height: 70vh; overflow-y: scroll;">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">

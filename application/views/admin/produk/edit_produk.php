@@ -4,7 +4,7 @@
         foreach ($produk as $data_produk) : ?>
             <div class="row">
                 <div class="col-lg-6">
-                    <form action="<?php echo base_url("Admin/Produk/update_produk/") . $data_produk['idProduk']; ?>" method="post" enctype="multipart/form-data">
+                    <form id="form_edit_produk" action="<?php echo base_url("Admin/Produk/update_produk/") . $data_produk['idProduk']; ?>" method="post" enctype="multipart/form-data">
                         <div class="card">
                             <div class="card-header">
                                 <h4>
@@ -21,7 +21,7 @@
                                                     <i class="fas fa-quote-left"></i>
                                                 </div>
                                             </div>
-                                            <input required type="text" class="form-control" name="nama_produk" value="<?php echo $data_produk['namaProduk'] ?>">
+                                            <input required id="nama_produk" type="text" class="form-control" name="nama_produk" value="<?php echo $data_produk['namaProduk'] ?>">
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-6">
@@ -32,17 +32,16 @@
                                                     Rp
                                                 </div>
                                             </div>
-                                            <input required type="text" class="form-control" name="harga" value="<?php echo $data_produk['harga'] ?>">
+                                            <input required id="harga" type="text" class="form-control" name="harga" value="<?php echo $data_produk['harga'] ?>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
                                         <label>Kategori</label>
-                                        <select class="form-control selectric" name="kategori">
+                                        <select id="kategori" class="form-control selectric" name="kategori">
                                             <?php foreach ($kategori as $ktg) : ?>
-                                                <option value="<?php echo $ktg['idJenis'] ?>" <?php if ($data_produk['idJenis'] == $ktg['idJenis']) : echo "selected";
-                                                                                                endif; ?>>
+                                                <option value="<?php echo $ktg['idJenis'] ?>" <?php if ($data_produk['idJenis'] == $ktg['idJenis']) : echo "selected"; endif; ?>>
                                                     <?php echo $ktg['namaJenis'] ?>
                                                 </option>
                                             <?php endforeach; ?>
@@ -50,7 +49,7 @@
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label>Status</label>
-                                        <select class="form-control selectric" name="status">
+                                        <select id="status" class="form-control selectric" name="status">
                                             <option <?php if ($data_produk['status'] == 'Preorder') : echo "selected";
                                                     endif; ?>>Preorder</option>
                                             <option <?php if ($data_produk['status'] == 'Ready') : echo "selected";
@@ -63,20 +62,20 @@
                                 <div class="row">
                                     <div class="form-group col-lg-6">
                                         <label>Stok</label>
-                                        <input required type="number" class="form-control" name="stok" value="<?php echo $data_produk['stok'] ?>">
+                                        <input required id="stok" type="number" class="form-control" name="stok" value="<?php echo $data_produk['stok'] ?>">
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label>Minimal Order</label>
-                                        <input required type="number" class="form-control" name="min_order" value="<?= $data_produk['min_order'] ?>">
+                                        <input required id="min_order" type="number" class="form-control" name="min_order" value="<?= $data_produk['min_order'] ?>">
                                     </div>
                                 </div>
                                 <div class="form-group " style="height: auto;">
                                     <label>Deskripsi Produk</label>
-                                    <textarea style="resize: none;" class="form-control" cols="59" rows="5" name="deskripsi">
-                                    <?= $data_produk['deskripsi'] ?>
-                                </textarea>
+                                    <textarea id="deskripsi" class="form-control" name="deskripsi">
+                                        <?= $data_produk['deskripsi'] ?>
+                                    </textarea>
                                 </div>
-                                <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Simpan</button>
+                                <button onclick="simpanPerubahan()" type="button" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Simpan</button>
                             </div>
                         </div>
                     </form>
@@ -103,6 +102,8 @@
                                 <input hidden id="id_produk" type="text" value="<?= $data_produk['idProduk'] ?>">
                                 <!-- total gambar -->
                                 <input hidden id="total_gambar" type="text" value="">
+                                <!-- random kode -->
+                                <input hidden id="list_kode" type="text" value="">
                                 <div class="col-12 input_gambar" id="jumlah_gambar">
                                     <?php foreach ($gambar as $gb_produk) :
                                         if ($data_produk['idProduk'] == $gb_produk['id_produk']) : ?>
@@ -147,7 +148,7 @@
         var add_button = $(".tambah_gambar"); //Add button ID
         var jumlah = document.getElementById('jumlah_gambar');
 
-        var x = 1; //initlal text box count
+        var x = 1; a=0;//initlal text box count
         $(add_button).click(function(e) { //on add input button click
             e.preventDefault();
             //max input box allowed
@@ -161,24 +162,34 @@
                         '</div>' +
                         '<div class="col-6 col align-self-center">' +
                             '<input required id="upload'+ random_kode +'" class="form-control-file" type="file" accept="image/*" name="gambar" onchange="insert_gambar('+ random_kode +')">' +
+                            //'<input hidden type="text" id="random'+ a++ +'" value="'+ random_kode +'">'+
                         '</div>' +
                         '<div class="col-2 col align-self-center">' +
-                            '<button id="hapus'+ random_kode +'" type="button" class="btn btn-danger remove_field"><i class="fas fa-trash"></button>' +
+                            '<button id="hapus'+ random_kode +'" onclick="delete_form_gambar('+parseInt(random_kode)+')" type="button" class="btn btn-danger remove_field"><i class="fas fa-trash"></button>' +
                         '</div>' +
                     '</div>' +
                 '</form>'
             ); // add input boxes.
             $("#upload"+ random_kode).focus();
+            var kode = document.getElementById('list_kode').value;
+            if(kode == ''){
+                document.getElementById('list_kode').value = random_kode;
+            }else{
+                document.getElementById('list_kode').value = kode+','+random_kode;
+            } 
+            //console.log([list]);
         });
 
         $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
-            total_gambar = document.getElementById('total_gambar').value;
+
+            total_gambar = parseInt(document.getElementById('total_gambar').value);
             if(total_gambar <= 1){
                 swal('Gagal hapus','Produk minimal memiliki 1 gambar','error');
             }else{
+                // hapus tampilan div
                 e.preventDefault();
                 $(this).parent('div').parent('div').parent('form').remove();
-                x--;
+                x--; 
             }
         })
 
@@ -223,7 +234,7 @@
                 success: function(data) {
                     var data2 = Object.entries(data)[0][1];
                     var btn_hapus = document.getElementById("hapus"+id);
-                    btn_hapus.setAttribute('onclick','hapus_gambarLangsung('+ String(data2) +')')
+                    btn_hapus.setAttribute('onblur','hapus_gambarLangsung('+ String(data2) +')')
                 },
             });
     };
@@ -268,6 +279,77 @@
                 },
                 error: function() {
                     alert("error");
+                }
+            });
+        }
+    }
+
+    function delete_form_gambar(id){
+        //console.log(id);
+        total_gambar = parseInt(document.getElementById('total_gambar').value);
+        if(total_gambar <= 1){}
+        else{
+
+            let data = document.getElementById('list_kode').value;
+            var kode_array = data.split(",");
+
+            var myIndex = kode_array.indexOf(''+ id +'');
+            if (myIndex !== -1) {
+                kode_array.splice(myIndex, 1);
+            }
+            document.getElementById('list_kode').value = kode_array;
+        }
+    }
+
+    var total_gambar_awal = document.getElementById('jumlah_gambar').children.length;
+    function simpanPerubahan(){
+        var cekTambah_formGambar = document.getElementById('total_gambar').value;
+
+        if(total_gambar_awal != cekTambah_formGambar){
+            let data = document.getElementById('list_kode').value;
+            const kode_array = data.split(",");
+            max = kode_array.length;
+            // console.log(max);
+            for(i=0; i<max; i++){
+                if(document.getElementById("upload"+kode_array[i]).files.length == 0){
+                    swal('Gagal Menyimpan','Form gambar tidak boleh kosong','error');
+                    document.getElementById("upload"+kode_array[i]).focus();
+                    return false;
+                }
+            }
+
+            // if sukses semua lanjut submit    
+            return validasi_dataProduk();
+        }else{
+            return validasi_dataProduk();
+        }
+    }
+
+    function validasi_dataProduk(){
+        var nama_produk = document.getElementById('nama_produk').value;
+        var harga       = document.getElementById('harga').value;
+        var kategori    = document.getElementById('kategori').value;
+        var status      = document.getElementById('status').value;
+        var stok        = document.getElementById('stok').value;
+        var min_order   = document.getElementById('min_order').value;
+        var deskripsi   = document.getElementById('deskripsi').value;
+        if( nama_produk != '' && harga != '' && kategori != '' && status != '' && stok != '' && min_order != '' && deskripsi != ''){
+            document.getElementById('form_edit_produk').submit();
+        }else{
+            swal({
+                title: "Gagal Menyimpan",
+                text: "Form input tidak boleh kosong!",
+                icon: "error",
+                buttons: {cancel: false, confirm: true}
+            }).then((oke) => {
+                if (oke) {
+                    if(nama_produk    == '') {document.getElementById('nama_produk' ).focus();}
+                    else if(harga     == '') {document.getElementById('harga'       ).focus();}
+                    else if(kategori  == '') {document.getElementById('kategori'    ).focus();}
+                    else if(status    == '') {document.getElementById('status'      ).focus();}
+                    else if(stok      == '') {document.getElementById('stok'        ).focus();}
+                    else if(min_order == '') {document.getElementById('min_order'   ).focus();}
+                    else if(deskripsi == '') {document.getElementById('deskripsi'   ).focus();}
                 }
             });
         }
