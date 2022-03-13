@@ -2,16 +2,16 @@
 
 class Model_transaksi extends CI_Model
 {
-
+    // get data transaksi sesuai parameter
     public function get_riwayat_transaksi($tanggal)
     {
         $this->db->select('*');
         $this->db->from('transaksi');
         $this->db->like('tanggal',$tanggal);
         return $this->db->get();
-        //return $this->db->get_where('transaksi', array('tanggal' => $tanggal));
     }
 
+    // get data detail transaksi dan produk join
     public function detail_riwayat_transaksi()
     {
         $this->db->select('*');
@@ -20,15 +20,16 @@ class Model_transaksi extends CI_Model
         return $this->db->get('');
     }
 
+    // get data preorder sesuai parameter
     public function get_riwayat_preorder($tanggal)
     {
         $this->db->select('*');
         $this->db->from('preorder');
         $this->db->like('tanggalPesan',$tanggal);
         return $this->db->get();
-        //return $this->db->get_where('preorder', array('tanggalPesan' => $tanggal));
     }
 
+    // get data detail preorder join produk
     public function detail_riwayat_preorder()
     {
         $this->db->select('*');
@@ -37,11 +38,13 @@ class Model_transaksi extends CI_Model
         return $this->db->get('');
     }
 
+    // get data preorder where status menunggu pengiriman
     public function barang_belum_dikirim()
     {
         return $this->db->get_where('preorder', array('status' => 'Menunggu Pengiriman'));
     }
 
+    // get data transaksi sesuai parameter
     public function get_transaksi($id_transaksi)
     {
         $this->db->select('*');
@@ -50,6 +53,7 @@ class Model_transaksi extends CI_Model
         return $this->db->get('');
     }
 
+    // get data detail transaksi sesuai parameter
     public function get_detailTransaksi($id_transaksi)
     {
         $this->db->select('*');
@@ -58,6 +62,7 @@ class Model_transaksi extends CI_Model
         return $this->db->get('');
     }
 
+    // get data pengiriman sesuai parameter
     public function get_pengiriman($id_transaksi)
     {
         $this->db->select('*');
@@ -66,6 +71,7 @@ class Model_transaksi extends CI_Model
         return $this->db->get('');
     }
 
+    // get data midtrans sesuai parameter
     public function get_midtrans($id_transaksi)
     {
         $this->db->select('*');

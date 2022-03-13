@@ -9,7 +9,6 @@ class Model_laporan extends CI_Model {
         $this->db->from('transaksi');
         $this->db->where('idUser' , $idUser);
         $this->db->where('tipe_transaksi' , 'Pengeluaran');
-
         return $this->db->get();
     }
 
@@ -18,11 +17,12 @@ class Model_laporan extends CI_Model {
         $this->db->from('transaksi');
         $this->db->where('idUser' , $idUser);
         $this->db->where('tipe_transaksi' , 'Pemasukan');
-
         return $this->db->get();
     }
 
+
     //          Penggajian
+    // get data gaji karyawan sesuai parameter
     public function get_gaji_karyawan($query)
     {
         $this->db->select('*');
@@ -31,6 +31,7 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+    // get data karyawan sesuai parameter
     public function get_gaji($idKaryawan)
     {
         $this->db->select('gaji');
@@ -39,7 +40,9 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     } 
 
+
     //          Permodalan
+    // get data modal sesai parameter
     public function get_data_modal($bulan)
     {
         $this->db->select('*');
@@ -48,17 +51,21 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+    // get data detail modal
     public function get_detail_modal()
     {
         return $this->db->get('detail_modal');
     }
 
+    // get data detai modal where id modal sesuai parameter
     public function get_detail_modal_where($idModal)
     {
         return $this->db->get_where('detail_modal', array('idModal' => $idModal));
     } 
 
+
     //              Transaksi Langsung
+    // get data transaksi langsung 
     public function get_transaksi_langsung($filter)
     {
         $this->db->select('*');
@@ -67,6 +74,7 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+    // get data produk dan detail transaksi join
     public function get_detail_transaksi_langsung()
     {
         $this->db->select('*');
@@ -75,7 +83,9 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+
      //              Transaksi Preorder
+     // get data transaksi preorder 
     public function get_transaksi_preorder($filter)
     {
         $this->db->select('*');
@@ -84,6 +94,7 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+    // get data produk dan detail preorder join
     public function get_detail_transaksi_preorder()
     {
         $this->db->select('*');
@@ -92,7 +103,9 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
-    //      Laporan Keuntungan
+
+    //          Laporan Keuntungan
+    //get data dan hitung jumlah pemasukan transaksi langsung
     public function total_transaksi_langsung($filter)
     {
         $this->db->select('SUM(total_belanja) as langsung');
@@ -102,6 +115,7 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+    //get data dan hitung jumlah pemasukan transaksi preorder
     public function total_transaksi_preorder($filter)
     {
         $this->db->select('SUM(jumlah) as preorder');
@@ -111,6 +125,7 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+    //get data dan hitung jumlah pengeluaran modal
     public function total_pengeluaran_modal($filter)
     {
         $this->db->select('SUM(totalModal) as keluar_modal');
@@ -119,6 +134,7 @@ class Model_laporan extends CI_Model {
         return $this->db->get();
     }
 
+    //get data dan hitung jumlah pengeluaran gaji
     public function total_pengeluaran_gaji($filter)
     {
         $this->db->select('SUM(uangGaji) as keluar_gaji');
