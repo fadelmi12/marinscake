@@ -9,12 +9,11 @@ var shoppingCart = (function () {
 	cart = [];
 
 	// Constructor
-	function Item(name, price, count, idProduk, stok) {
+	function Item(name, price, count, idProduk) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
 		this.idProduk = idProduk;
-		this.stok = stok;
 	}
 
 	// Save cart
@@ -40,7 +39,6 @@ var shoppingCart = (function () {
 		for (var item in cart) {
 			if (cart[item].name === name) {
 				cart[item].count++;
-				console.log(cart[item].count);
 				saveCart();
 				return;
 			}
@@ -149,17 +147,6 @@ $(".add-to-cart").click(function (event) {
 	// console.log(id);
 	var price = Number($(this).data("price"));
 	shoppingCart.addItemToCart(name, price, 1,id);
-	displayCart();
-});
-
-$(".add-to-cart-langsung").click(function (event) {
-	event.preventDefault();
-	var name = $(this).data("name");
-	var id = $(this).data("id");
-	var stok = $(this).data("stok");
-	// console.log(id);
-	var price = Number($(this).data("price"));
-	shoppingCart.addItemToCart(name, price, 1, id, stok);
 	displayCart();
 });
 
