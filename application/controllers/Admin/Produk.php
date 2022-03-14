@@ -53,75 +53,73 @@ class Produk extends CI_Controller
     // tambah data produk
     public function insert_produk()
     {
-        for ($x = 0; $x <= 100; $x++) {
-            $nama_produk    = $this->input->post("nama_produk");
-            $harga          = $this->input->post("harga");
-            $status         = $this->input->post("status");
-            $kategori       = $this->input->post("kategori");
-            $stok           = $this->input->post("stok");
-            $min_order      = $this->input->post("min_order");
-            $deskripsi      = $this->input->post("deskripsi");
-            $jumlah_gambar  = count($_FILES['gambar']['name']);
+        $nama_produk    = $this->input->post("nama_produk");
+        $harga          = $this->input->post("harga");
+        $status         = $this->input->post("status");
+        $kategori       = $this->input->post("kategori");
+        $stok           = $this->input->post("stok");
+        $min_order      = $this->input->post("min_order");
+        $deskripsi      = $this->input->post("deskripsi");
+        $jumlah_gambar  = count($_FILES['gambar']['name']);
 
 
-            $data = array(
-                'namaProduk'    => $nama_produk,
-                'harga'         => $harga,
-                'status'        => $status,
-                'idJenis'       => $kategori,
-                'stok'          => $stok,
-                'min_order'     => $min_order,
-                'deskripsi'     => $deskripsi,
-            );
+        $data = array(
+            'namaProduk'    => $nama_produk,
+            'harga'         => $harga,
+            'status'        => $status,
+            'idJenis'       => $kategori,
+            'stok'          => $stok,
+            'min_order'     => $min_order,
+            'deskripsi'     => $deskripsi,
+        );
 
-            $this->db->insert('produk', $data);
-            $id_produk = $this->db->insert_id();
+        $this->db->insert('produk', $data);
+        $id_produk = $this->db->insert_id();
 
-            $data2 = [];
-            for ($i = 0; $i < $jumlah_gambar; $i++) :
-                if (!empty($_FILES['gambar']['name'][$i])) {
-                    $_FILES['file']['name']     = $_FILES['gambar']['name'][$i];
-                    $_FILES['file']['type']     = $_FILES['gambar']['type'][$i];
-                    $_FILES['file']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
-                    $_FILES['file']['error']    = $_FILES['gambar']['error'][$i];
-                    $_FILES['file']['size']     = $_FILES['gambar']['size'][$i];
+        $data2 = [];
+        for ($i = 0; $i < $jumlah_gambar; $i++) :
+            if (!empty($_FILES['gambar']['name'][$i])) {
+                $_FILES['file']['name']     = $_FILES['gambar']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['gambar']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
+                $_FILES['file']['error']    = $_FILES['gambar']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['gambar']['size'][$i];
 
-                    $config['upload_path']     = './uploads/gambar_produk';
-                    $config['allowed_types']   = 'jpg|jpeg|png|gif';
+                $config['upload_path']     = './uploads/gambar_produk';
+                $config['allowed_types']   = 'jpg|jpeg|png|gif';
 
-                    $this->load->library('upload', $config);
+                $this->load->library('upload', $config);
 
-                    if ($this->upload->do_upload('file')) {
-                        // upload ke folder sesuai nama
-                        $this->upload->data()['file_name'];
-                        // replace spasi menjadi "_"
-                        $replace_spasi[$i] = str_replace(" ", "_", $_FILES['gambar']['name'][$i]);
-                        // file gambar dimasukkan ke array
-                        $data2[] = array(
-                            'id_produk' => $id_produk,
-                            'gambar'    => $replace_spasi[$i],
-                        );
-                    } else {
-                        $this->session->set_flashdata(
-                            'gagal_insert_produk',
-                            '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                if ($this->upload->do_upload('file')) {
+                    // upload ke folder sesuai nama
+                    $this->upload->data()['file_name'];
+                    // replace spasi menjadi "_"
+                    $replace_spasi[$i] = str_replace(" ", "_", $_FILES['gambar']['name'][$i]);
+                    // file gambar dimasukkan ke array
+                    $data2[] = array(
+                        'id_produk' => $id_produk,
+                        'gambar'    => $replace_spasi[$i],
+                    );
+                } else {
+                    $this->session->set_flashdata(
+                        'gagal_insert_produk',
+                        '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
                             <script type ="text/JavaScript">  
                             swal("Gagal","Format gambar tidak sesuai","error")  
                             </script>'
-                        );
-                    }
+                    );
                 }
-            endfor;
-            // insert gambar ke db
-            $this->db->insert_batch('gambar_produk', $data2);
-            $this->session->set_flashdata(
-                'produk',
-                '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+            }
+        endfor;
+        // insert gambar ke db
+        $this->db->insert_batch('gambar_produk', $data2);
+        $this->session->set_flashdata(
+            'produk',
+            '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
                             <script type ="text/JavaScript">  
                             swal("Sukses","Data berhasil ditambahkan","success")  
                             </script>'
-            );
-        }
+        );
         redirect('Admin/Produk/');
     }
 

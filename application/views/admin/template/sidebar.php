@@ -9,9 +9,9 @@
             <li class="dropdown <?php echo ($this->uri->segment(2) == '') ? 'active' : '' ?>">
                 <a href="<?php echo base_url() ?>admin" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
             </li>
-            <li class="dropdown <?php echo ($this->uri->segment(2) == 'kasir') ? 'active' : '' ?>">
+            <!-- <li class="dropdown <?php echo ($this->uri->segment(2) == 'kasir') ? 'active' : '' ?>">
                 <a href="<?php echo base_url() ?>admin/kasir" class="nav-link"><i data-feather="monitor"></i><span>Kasir</span></a>
-            </li>
+            </li> -->
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'produk') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="package"></i><span>Produk</span></a>
                 <ul class="dropdown-menu">
@@ -22,8 +22,8 @@
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'transaksi') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="shopping-cart"></i><span>Transaksi</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi/langsung/<?= date('Y-m')?>">Transaksi Langsung</a></li>
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi/preorder/<?= date('Y-m')?>">Transaksi Preorder</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi/langsung/<?= date('Y-m') ?>">Transaksi Langsung</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/transaksi/preorder/<?= date('Y-m') ?>">Transaksi Preorder</a></li>
                 </ul>
             </li>
             <li class="menu-header">Laporan</li>
