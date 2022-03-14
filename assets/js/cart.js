@@ -9,11 +9,12 @@ var shoppingCart = (function () {
 	cart = [];
 
 	// Constructor
-	function Item(name, price, count, idProduk) {
+	function Item(name, price, count, idProduk, stok) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
 		this.idProduk = idProduk;
+		this.stok = stok;
 	}
 
 	// Save cart
@@ -39,6 +40,7 @@ var shoppingCart = (function () {
 		for (var item in cart) {
 			if (cart[item].name === name) {
 				cart[item].count++;
+				console.log(cart[item].count);
 				saveCart();
 				return;
 			}
@@ -47,11 +49,13 @@ var shoppingCart = (function () {
 		cart.push(item);
 		saveCart();
 	};
+	
 	// Set count from item
 	obj.setCountForItem = function (name, count) {
 		for (var i in cart) {
 			if (cart[i].name === name) {
 				cart[i].count = count;
+				console.log(count);
 				break;
 			}
 		}
@@ -148,6 +152,17 @@ $(".add-to-cart").click(function (event) {
 	displayCart();
 });
 
+$(".add-to-cart-langsung").click(function (event) {
+	event.preventDefault();
+	var name = $(this).data("name");
+	var id = $(this).data("id");
+	var stok = $(this).data("stok");
+	// console.log(id);
+	var price = Number($(this).data("price"));
+	shoppingCart.addItemToCart(name, price, 1, id, stok);
+	displayCart();
+});
+
 // Clear items
 $(".clear-cart").click(function () {
 	shoppingCart.clearCart();
@@ -166,7 +181,7 @@ function displayCart() {
 			cartArray[i].name.replace(/\_/g, ' ') +
 			"' readonly></div><div class='col-3 my-auto text-center'><div class='d-flex justify-content-start pl-0 ml-0'><button type='button' class='minus-item bg-white text-dark m-0 p-0' style='border:none' data-name=" +
 			cartArray[i].name +
-			">-</button><input type='text' class='item-count mx-2' name='jumlahProduk[" + ac++ + "]' style='width:50px;text-align: center;border:solid 1px #e4e6fc'  data-name='" +
+			">-</button><input type='number' max='3' class='item-count mx-2' name='jumlahProduk[" + ac++ + "]' style='width:50px;text-align: center;border:solid 1px #e4e6fc'  data-name='" +
 			cartArray[i].name +
 			"' value='" +
 			cartArray[i].count +

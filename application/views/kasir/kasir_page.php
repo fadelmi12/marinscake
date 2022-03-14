@@ -19,7 +19,7 @@
                                             <?php if ($dt_produk['stok'] > '0') : ?>
                                                 <div class="col-lg-3">
                                                     <div class="form-group text-center">
-                                                        <a href="#" data-id="<?= $dt_produk['idProduk'] ?>" data-name="<?php echo str_replace(" ", "_", $dt_produk['namaProduk']); ?>" data-price="<?= $dt_produk['harga'] ?>" class="add-to-cart">
+                                                        <a href="#" data-id="<?= $dt_produk['idProduk'] ?>" data-name="<?php echo str_replace(" ", "_", $dt_produk['namaProduk']); ?>" data-price="<?= $dt_produk['harga'] ?>" data-stok="<?= $dt_produk['stok'] ?>" class="add-to-cart-langsung">
                                                             <?php foreach ($gambar as $gbr) :
                                                                 if ($gbr['id_produk'] == $dt_produk['idProduk']) : ?>
                                                                     <img src="<?php echo base_url() . '/uploads/gambar_produk/' . $gbr["gambar"]; ?>" alt="" style="border-radius:5px;" class="img-fluid">
@@ -28,6 +28,7 @@
                                                         </a>
                                                         <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark"><?= $dt_produk['namaProduk'] ?></h6>
                                                         <h6 class="text-dark font-15">Rp. <?= number_format($dt_produk['harga'], 0, '', '.') ?></h6>
+                                                        <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Stok <?= $dt_produk['stok'] ?> pcs</h6>
                                                     </div>
                                                 </div>
                                             <?php endif ?>

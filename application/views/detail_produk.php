@@ -18,8 +18,6 @@
                                 <?php foreach ($gambar as $gbr) : ?>
                                     <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $gbr['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $gbr['gambar'] ?>" alt=""></a></div>
                                 <?php endforeach ?>
-                                <!-- <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div>
-                                <div class="item"><a href="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>"><img src="<?= base_url() ?>uploads/gambar_produk/<?= $prd['gambar'] ?>" alt=""></a></div> -->
                             </div>
                             <div class="ps-product__preview">
                                 <div class="ps-product__variants">
@@ -56,10 +54,12 @@
                                 </form>
                             </div>
                             <div class="ps-product__shopping">
-                                <?php foreach ($gambar_rekom as $gbr_rkm) :
-                                    if ($gbr_rkm['id_produk'] == $prd['idProduk']) : ?>
-                                        <button class="add_cart ps-btn ps-btn--yellow" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr_rkm['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-minorder="<?= $prd['min_order'] ?>">Masukkan Keranjang</button>
+                                <?php $i = 0;
+                                foreach ($gambar as $gbr) :
+                                    if ($i == 0) : ?>
+                                        <button class="add_cart ps-btn ps-btn--yellow" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-minorder="<?= $prd['min_order'] ?>">Masukkan Keranjang</button>
                                 <?php endif;
+                                    $i++;
                                 endforeach; ?>
                             </div>
                             <div class="ps-product__sharing">
@@ -86,21 +86,13 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
                         <div class="ps-product">
                             <div class="ps-product__thumbnail">
-                                <?php foreach ($gambar_rekom as $gbr2) :
-                                    if ($gbr2['id_produk'] == $rkm['idProduk']) : ?>
-                                        <img src="<?= base_url() ?>uploads/gambar_produk/<?= $gbr2['gambar'] ?>" alt="">
-                                <?php endif;
-                                endforeach ?>
+                                <img src="<?= base_url() ?>uploads/gambar_produk/<?= $rkm['gambar'] ?>" alt="">
                                 <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"></a>
                                 <ul class="ps-product__actions">
                                     <li><a href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
                                     <!-- <li><a href="#" data-tooltip="Favorite"><i class="ba-heart"></i></a></li> -->
                                     <li>
-                                        <?php foreach ($gambar_rekom as $gbr2) :
-                                            if ($gbr2['id_produk'] == $rkm['idProduk']) : ?>
-                                                <a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $rkm['idProduk'] ?>" data-produknama="<?= $rkm['namaProduk'] ?>" data-produkharga="<?= $rkm['harga'] ?>" data-produkgambar="<?= $gbr2['gambar'] ?>" data-produkstok="<?= $rkm['stok'] ?>" data-minorder="<?= $rkm['min_order'] ?>"><i class="ba-shopping"></i></a>
-                                        <?php endif;
-                                        endforeach ?>
+                                        <a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $rkm['idProduk'] ?>" data-produknama="<?= $rkm['namaProduk'] ?>" data-produkharga="<?= $rkm['harga'] ?>" data-produkgambar="<?= $rkm['gambar'] ?>" data-produkstok="<?= $rkm['stok'] ?>" data-minorder="<?= $rkm['min_order'] ?>"><i class="ba-shopping"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -111,53 +103,33 @@
                         </div>
                     </div>
                 <?php endforeach ?>
-                <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                    <div class="ps-product">
-                        <div class="ps-product__thumbnail"><span class="ps-badge"><img src="<?= base_url() ?>assets/client/images/icons/badge-red.png" alt=""><i>New</i></span><img src="<?= base_url() ?>assets/client/images/products/2.png" alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
-                            <ul class="ps-product__actions">
-                                <li><a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
-                                <li><a href="#" data-tooltip="Favorite"><i class="ba-heart"></i></a></li>
-                                <li><a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
-                            <p><a href="product-list.html">Bakery</a> - <a href="product-list.html">Sweet</a> - <a href="product-list.html">Bio</a></p>
-                            <p class="ps-product__price">£5.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                    <div class="ps-product">
-                        <div class="ps-product__thumbnail"><span class="ps-badge"><img src="<?= base_url() ?>assets/client/images/icons/badge-red.png" alt=""><i>New</i></span><img src="<?= base_url() ?>assets/client/images/products/3.png" alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
-                            <ul class="ps-product__actions">
-                                <li><a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
-                                <li><a href="#" data-tooltip="Favorite"><i class="ba-heart"></i></a></li>
-                                <li><a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
-                            <p><a href="product-list.html">Bakery</a> - <a href="product-list.html">Sweet</a> - <a href="product-list.html">Bio</a></p>
-                            <p class="ps-product__price">£5.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                    <div class="ps-product">
-                        <div class="ps-product__thumbnail"><span class="ps-badge ps-badge--sale"><img src="<?= base_url() ?>assets/client/images/icons/badge-brown.png" alt=""><i>50%</i></span><img src="<?= base_url() ?>assets/client/images/products/4.png" alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
-                            <ul class="ps-product__actions">
-                                <li><a href="#" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
-                                <li><a href="#" data-tooltip="Favorite"><i class="ba-heart"></i></a></li>
-                                <li><a href="#" data-tooltip="Add to Cart"><i class="ba-shopping"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html">Red sugar flower</a>
-                            <p><a href="product-list.html">Bakery</a> - <a href="product-list.html">Sweet</a> - <a href="product-list.html">Bio</a></p>
-                            <p class="ps-product__price"><del>£8.50</del> £5.00</p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
-            <div class="ps-section__footer text-center mt-0 pt-0"><a class="ps-btn" href="#">Load more</a></div>
+            <div id="btn_load" class="ps-section__footer text-center mt-0 pt-0">
+                <a class="ps-btn">Load more</a>
+            </div>
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type='text/javascript'>
+    $(document).ready(function() {
+        $('#btn_load').click(function() {
+            var id_produk = ['<?= $this->uri->segment("3") ?>'];
+            alert(id_produk);
+        });
+    });
+
+    loadRekom();
+
+    function loadRekom() {
+        $.ajax({
+            url: '<?= base_url() ?>Produk/load_rekom/',
+            type: 'get',
+            dataType: 'json',
+            success: function(response) {
+                $('#pagination').html(response.pagination);
+                createTable(response.result, response.row);
+            }
+        });
+    }
+</script>

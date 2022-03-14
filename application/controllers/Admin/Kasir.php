@@ -9,8 +9,6 @@ class Kasir extends CI_Controller
 		parent::__construct();
 		if ($this->session->userdata('idUser') == null) {
 			redirect('admin/auth/login');
-		} elseif ($this->session->userdata('role') == 24) {
-			redirect('kasir/kasir_page');
 		}
 	}
 

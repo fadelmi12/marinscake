@@ -11,18 +11,6 @@ class Kasir_page extends CI_Controller
         }
     }
 
-    public function index()
-    {
-        $data['jenis_produk'] = $this->Model_produk->get_kategori_produk()->result_array();
-        $data['daftar_produk'] = $this->Model_produk->get_produk()->result_array();
-        $data['gambar']         = $this->Model_produk->get_gambar()->result_array();
-
-        $this->load->view('kasir/template/header');
-        $this->load->view('kasir/template/sidebar');
-        $this->load->view('kasir/kasir_page', $data);
-        $this->load->view('kasir/template/footer');
-    }
-
     public function dashboard()
     {
         $id_user        = $this->session->userdata('idUser');
@@ -31,6 +19,29 @@ class Kasir_page extends CI_Controller
         $this->load->view('kasir/template/header');
         $this->load->view('kasir/template/sidebar');
         $this->load->view('kasir/dashboard', $data);
+        $this->load->view('kasir/template/footer');
+    }
+
+    public function langsung()
+    {
+        $data['jenis_produk']   = $this->Model_produk->get_kategori_produk()->result_array();
+        $data['daftar_produk']  = $this->Model_produk->get_produk()->result_array();
+        $data['gambar']         = $this->Model_produk->get_gambar()->result_array();
+
+        $this->load->view('kasir/template/header');
+        $this->load->view('kasir/template/sidebar');
+        $this->load->view('kasir/kasir_page', $data);
+        $this->load->view('kasir/template/footer');
+    }
+    public function preorder()
+    {
+        $data['jenis_produk']   = $this->Model_produk->get_kategori_produk()->result_array();
+        $data['daftar_produk']  = $this->Model_produk->get_produk()->result_array();
+        $data['gambar']         = $this->Model_produk->get_gambar()->result_array();
+
+        $this->load->view('kasir/template/header');
+        $this->load->view('kasir/template/sidebar');
+        $this->load->view('kasir/preorder', $data);
         $this->load->view('kasir/template/footer');
     }
 

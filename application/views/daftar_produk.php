@@ -12,53 +12,12 @@
         <div class="row">
             <div class="col-lg-9 order-lg-last">
 
-                <!-- <div class="ps-shop__sort">
-                    <select class="ps-select" title="Default Sorting">
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                </div> -->
+                <div id="product_item" class="row">
+
+                </div>
                 <div class="row">
-                    <?php foreach ($produk as $prd) : ?>
-                        <div class="col-lg-4">
-                            <div class="ps-product">
-                                <div class="ps-product__thumbnail">
-                                    <?php foreach ($gambar as $gbr) :
-                                        if ($gbr['id_produk'] == $prd['idProduk']) : ?>
-                                            <img src="<?= base_url() ?>uploads/gambar_produk/<?= $gbr['gambar'] ?>" alt="">
-                                    <?php endif;
-                                    endforeach ?>
-                                    <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"></a>
-                                    <ul class="ps-product__actions">
-                                        <li><a href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
-                                        <li>
-                                            <?php foreach ($gambar as $gbr) :
-                                                if ($gbr['id_produk'] == $prd['idProduk']) : ?>
-                                                    <a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-minorder="<?= $prd['min_order'] ?>"><i class="ba-shopping"></i></a>
-                                            <?php endif;
-                                            endforeach ?>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"><?= $prd['namaProduk'] ?></a>
-                                    <p>Min Order : <?= $prd['min_order'] ?> pcs</p>
-                                    <p class="ps-product__price">Rp <?= number_format($prd['harga'], 0, ',', '.') ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach ?>
-                    <div class="col-lg-12 mb-lg-5">
-                        <div class="ps-pagination mb-lg-5 ">
-                            <ul class="pagination">
-                                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">...</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
+                    <div id="pagination" class="col-lg-12 mb-lg-5">
+
                     </div>
                 </div>
             </div>
@@ -72,9 +31,8 @@
                             <ul class="ps-list--checked">
                                 <?php foreach ($kategori as $ktg) : ?>
                                     <li>
-                                        <div> <input type="checkbox" name="checkbox_ktg[]" value="<?= $ktg['idJenis'] ?>"><span><?= $ktg['namaJenis'] ?></span>
-                                        </div>
-                                        <!-- <a class="active" href="<?= base_url() ?>produk/kategori_produk/<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a> -->
+                                        <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                        <input id="ktg_<?= $ktg['idJenis'] ?>" style="display: none;" type="checkbox" name="kategori_box[]" value="<?= $ktg['idJenis'] ?>">
                                     </li>
                                 <?php endforeach ?>
                             </ul>
@@ -82,9 +40,15 @@
                         <div class="widget widget_filter widget_sidebar">
                             <h3 class="widget-title">Filter Price</h3>
                             <div class="ps-slider" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"></div>
-                            <p class="ps-slider__meta">Price:<span class="ps-slider__value ps-slider__min"></span>-<span class="ps-slider__value ps-slider__max"></span></p>
+                            <!-- <input class="ps-slider" type="range" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"> -->
+                            <p class="ps-slider__meta">Price:<span id="span1" class="ps-slider__value ps-slider__min"></span>-<span id="span2" class="ps-slider__value ps-slider__max"></span></p>
                             <!-- <a class="ac-slider__filter ps-btn ps-btn--sm" href="#">Filter</a> -->
+                            <!-- <form class="ps-slider-meta" id="form_filter" action="<?= base_url() ?>produk/filter" method="post"> -->
+                            <input type="text" name="min_price" id="min_price">
+                            <input type="text" name="max_price" id="max_price">
+                            <!-- <input type="range" class="form-range" min="0" max="<?= $max->harga ?>"> -->
                             <button class="ac-slider__filter ps-btn ps-btn--sm" type="submit">Filter</button>
+                            <!-- </form> -->
                         </div>
                     </div>
                 </form>
@@ -92,3 +56,108 @@
         </div>
     </div>
 </main>
+
+<!-- Script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type='text/javascript'>
+    $(document).ready(function() {
+
+        $('.add_ktg').click(function() {
+            var jenis = $(this).data("jenis");
+            var element = document.getElementById('ktg_' + jenis);
+            if (element.checked == true) {
+                element.classList.remove("active");
+                element.checked = false;
+            } else {
+                element.classList.add("active");
+                element.checked = true;
+            }
+        });
+
+        setInterval(function() {
+            var min = document.getElementById('span1').innerText;
+            var min2 = min.replace(/\D/g, '');
+            var max = document.getElementById('span2').innerText;
+            var max2 = max.replace(/\D/g, '');
+            document.getElementById('min_price').value = min2;
+            document.getElementById('max_price').value = max2;
+        }, 250);
+
+        // $("#span1").change(function() {
+        //     alert("The text has been changed.");
+        // });
+
+        // Detect pagination click
+        $('#pagination').on('click', 'a', function(e) {
+            e.preventDefault();
+            var pageno = $(this).attr('data-ci-pagination-page');
+            loadPagination(pageno);
+        });
+
+        loadPagination(0);
+
+        // Load pagination
+        function loadPagination(pagno) {
+            $.ajax({
+                url: '<?= base_url() ?>Produk/pagination/' + pagno,
+                type: 'get',
+                dataType: 'json',
+                success: function(response) {
+                    $('#pagination').html(response.pagination);
+                    createTable(response.result, response.row);
+                }
+            });
+        }
+
+        // Create table list
+        function createTable(result, sno) {
+            sno = Number(sno);
+            $('#product_item').empty();
+            for (index in result) {
+                var id = result[index].idProduk;
+                var nama = result[index].namaProduk;
+                var price = result[index].harga;
+                var harga = formatRupiah(price, 'Rp ');
+                var stok = result[index].stok;
+                var min = result[index].min_order;
+                var gambar = result[index].gambar;
+                sno += 1;
+
+                var x = '<div class="col-lg-4">';
+                x += '<div class="ps-product">';
+                x += '<div class="ps-product__thumbnail">';
+                x += '<img src="<?= base_url() ?>uploads/gambar_produk/' + gambar + '" alt="">';
+                x += '<a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/' + id + '"></a>';
+                x += '<ul class="ps-product__actions">';
+                x += '<li><a href="<?= base_url() ?>produk/detail/' + id + '" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>';
+                x += '<li><a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="' + id + '" data-produknama="' + nama + '" data-produkharga="' + price + '" data-produkgambar="' + gambar + '" data-produkstok="' + stok + '" data-minorder="' + min + '"><i class="ba-shopping"></i></a></li>'
+                x += '</ul>';
+                x += '</div>';
+                x += '<div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/' + id + '">' + nama + '</a>'
+                x += '<p>Min Order : ' + min + ' pcs</p>';
+                x += '<p class="ps-product__price">' + harga + '</p>';
+                x += '</div>';
+                x += '</div>';
+                x += '</div>';
+                $('#product_item').append(x);
+            }
+        }
+
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp ' + rupiah : '');
+        }
+    });
+</script>

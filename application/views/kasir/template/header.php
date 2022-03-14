@@ -25,7 +25,7 @@
   <link rel='shortcut icon' type='image/x-icon' href='<?= base_url() ?>assets/img/favicon.ico' />
 </head>
 
-<body class="<?php echo ($this->uri->segment(2) == 'kasir') ? 'sidebar-mini' : '' ?>">
+<body class="<?php echo ($this->uri->segment(3) === 'langsung' || $this->uri->segment(3) === 'preorder') ? 'sidebar-mini' : '' ?>">
   <!-- <div class="loader"></div> -->
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
@@ -33,12 +33,10 @@
       <nav class="navbar navbar-expand-lg main-navbar sticky">
         <div class="form-inline mr-auto">
           <ul class="navbar-nav mr-3">
-            <?php if ($this->uri->segment(2) == 'kasir') { ?>
+            <?php if ($this->uri->segment(3) === 'langsung' || $this->uri->segment(3) === 'preorder') { ?>
             <?php } else { ?>
-              <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
-									collapse-btn"> <i data-feather="align-justify"></i></a></li>
+              <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg collapse-btn"> <i data-feather="align-justify"></i></a></li>
             <?php } ?>
-
             <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
                 <i data-feather="maximize"></i>
               </a></li>
