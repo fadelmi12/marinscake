@@ -9,7 +9,7 @@
                             <h5 class="mb-0 mt-3 text-dark"><?= count($produk);?></h5>
                         </div>
                         <div class="col-5 text-center d-flex align-content-center flex-wrap">
-                            <img src="assets/img/cake.gif" width="90" height="auto" style="margin-top: -10px;">
+                            <img src="<?= base_url('assets/img/cake.gif')?>" width="90" height="auto" style="margin-top: -10px;">
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                             <h5 class="mb-0 mt-3 text-dark"><?= count($transaksi_langsung);?></h5>
                         </div>
                         <div class="col-5 text-center d-flex align-content-center flex-wrap">
-                            <img src="assets/img/tr_langsung.gif" width="100" height="auto" style="margin-top: -10px;">
+                            <img src="<?= base_url('assets/img/tr_langsung.gif')?>" width="100" height="auto" style="margin-top: -10px;">
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                             <h5 class="mb-0 mt-3 text-dark"><?= count($transaksi_preorder);?></h5>
                             </div>
                         <div class="col-5 text-center d-flex align-content-center flex-wrap">
-                            <img src="assets/img/tr_preorder.gif" width="100" height="auto" style="margin-top: -10px;">
+                            <img src="<?= base_url('assets/img/tr_preorder.gif')?>" width="100" height="auto" style="margin-top: -10px;">
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="card-body">
                         <div class="col-12">
-                                <canvas id="linechart" width="100" height="40" class="mb-4"></canvas>
+                            <canvas id="linechart" width="100" height="40" class="mb-4"></canvas>
                             <div class="row mb-0">
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="list-inline text-center">
