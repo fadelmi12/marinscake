@@ -9,6 +9,7 @@ class Kasir_page extends CI_Controller
         if ($this->session->userdata('idUser') == null) {
             redirect('admin/auth/login');
         }
+        date_default_timezone_set('Asia/Jakarta');
     }
 
     public function dashboard()
@@ -48,7 +49,6 @@ class Kasir_page extends CI_Controller
     // tambah data transaksi
     public function terjual_atau_preorder()
     {
-        date_default_timezone_set('Asia/Jakarta');
         if ($this->input->post('tglDikirim') != null) {
 
             // Pembelian Preorder
@@ -86,13 +86,13 @@ class Kasir_page extends CI_Controller
 
                 $this->db->insert_batch('detail_preorder', $data2);
                 $this->session->set_flashdata(
-                    'berhasil_beli',
+                    'berhasil_preorder',
                     '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 	                            <script type ="text/JavaScript">  
 	                            swal("Berhasil","Data Preorder berhasil ditambahkan","success")  
 	                            </script>'
                 );
-                redirect('admin/kasir/index/');
+                header("Location: ".$_SERVER['HTTP_REFERER']);
             }
         } else {
 
@@ -134,7 +134,7 @@ class Kasir_page extends CI_Controller
 	                            swal("Berhasil","Pembelian berhasil dilakukan","success")  
 	                            </script>'
                 );
-                redirect('admin/kasir/index/');
+                header("Location: ".$_SERVER['HTTP_REFERER']);
             }
         }
     }

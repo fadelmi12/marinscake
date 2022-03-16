@@ -141,13 +141,12 @@ var shoppingCart = (function () {
 // *****************************************
 // Add item
 $(".add-to-cart").click(function (event) {
-	let stok = $('#stok'+$(this).data("id")).val();
+	let min = parseInt($('#min_order'+$(this).data("id")).val());
 	let jumlah = parseInt($('#jumlah'+$(this).data("id")).val());
-
+    
 	if(jumlah !== 'undefined'){
-		if(stok <= jumlah){
-			swal('Gagal','Stok tidak mencukupi','error');
-		}else{
+		if(jumlah >= min){
+            //console.log('if');
 			event.preventDefault();
 			var name = $(this).data("name");
 			var id = $(this).data("id");
@@ -155,15 +154,16 @@ $(".add-to-cart").click(function (event) {
 			var price = Number($(this).data("price"));
 			shoppingCart.addItemToCart(name, price, 1,id);
 			displayCart();
+		}else{
+			event.preventDefault();
+			var name = $(this).data("name");
+			var id = $(this).data("id");
+			
+			var price = Number($(this).data("price"));
+			shoppingCart.addItemToCart(name, price, min,id);
+			displayCart();
 		}
 	}
-	// event.preventDefault();
-	// var name = $(this).data("name");
-	// var id = $(this).data("id");
-	
-	// var price = Number($(this).data("price"));
-	// shoppingCart.addItemToCart(name, price, 1,id);
-	// displayCart();
 });
 
 // Clear items
@@ -185,7 +185,7 @@ function displayCart() {
 				"</div>"+
 				"<div class='col-3 my-auto text-center'>"+
 					"<div class='d-flex justify-content-start pl-0 ml-0'>"+
-						"<button type='button' class='minus-item bg-white text-dark m-0 p-0' style='border:none' data-name=" + cartArray[i].name + ">-</button>"+
+						"<button type='button' class='minus-item bg-white text-dark m-0 p-0' style='border:none' data-id='"+ cartArray[i].idProduk +"' data-name=" + cartArray[i].name + ">-</button>"+
 						"<input type='number' id='jumlah"+ cartArray[i].idProduk +"' max='3' class='item-count mx-2' name='jumlahProduk[" + ac++ + "]' style='width:50px;text-align: center;border:solid 1px #e4e6fc' data-id='"+ cartArray[i].idProduk +"' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"+
 						"<button type='button' class='plus-item bg-white text-dark p-0 m-0' style='border:none' data-id='"+ cartArray[i].idProduk +"' data-name=" + cartArray[i].name + ">+</button>"+
 					"</div>"+
@@ -213,47 +213,43 @@ $(".show-cart").on("click", ".delete-item", function (event) {
 
 // -1
 $(".show-cart").on("click", ".minus-item", function (event) {
-	var name = $(this).data("name");
-	shoppingCart.removeItemFromCart(name);
-	displayCart();
+    let min = parseInt($('#min_order'+$(this).data("id")).val());
+	let jumlah = parseInt($('#jumlah'+$(this).data("id")).val());
+
+	if(jumlah <= min){
+		swal('Gagal','Tidak bisa membeli dibawah minimal order','error');
+		$('#jumlah'+$(this).data("id")).val(min);
+	}else{
+        var name = $(this).data("name");
+        shoppingCart.removeItemFromCart(name);
+        displayCart();
+    }
 });
 // +1
 $(".show-cart").on("click", ".plus-item", function (event) {
-	let stok = $('#stok'+$(this).data("id")).val();
-	let jumlah = parseInt($('#jumlah'+$(this).data("id")).val());
-	if(stok <= jumlah){
-		swal('Gagal','Stok tidak mencukupi','error');
-	}else{
-		var name = $(this).data("name");
-		shoppingCart.addItemToCart(name);
-		displayCart();
-	}
-	// var name = $(this).data("name");
-	// shoppingCart.addItemToCart(name);
-	// displayCart();
+	var name = $(this).data("name");
+	shoppingCart.addItemToCart(name);
+	displayCart();
 });
 
 // Item count input
 $(".show-cart").on("change", ".item-count", function (event) {
-	let stok = $('#stok'+$(this).data("id")).val();
+	let min = parseInt($('#min_order'+$(this).data("id")).val());
 	let jumlah = parseInt($('#jumlah'+$(this).data("id")).val());
-	if(stok < jumlah){
-		swal('Gagal','Stok tidak mencukupi','error');
-		$('#jumlah'+$(this).data("id")).val(stok);
-		var name = $(this).data("name");
+
+	if(jumlah < min){
+		swal('Gagal','Tidak bisa membeli dibawah minimal order','error');
+		$('#jumlah'+$(this).data("id")).val(min);
+        var name = $(this).data("name");
 		var count = Number($(this).val());
 		shoppingCart.setCountForItem(name, count);
-		displayCart();	
+		displayCart();
 	}else{
 		var name = $(this).data("name");
 		var count = Number($(this).val());
 		shoppingCart.setCountForItem(name, count);
 		displayCart();
 	}
-	// var name = $(this).data("name");
-	// var count = Number($(this).val());
-	// shoppingCart.setCountForItem(name, count);
-	// displayCart();
 });
 
 displayCart();

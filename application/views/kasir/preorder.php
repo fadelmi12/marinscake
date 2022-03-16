@@ -1,4 +1,17 @@
-<?php echo $this->session->flashdata('berhasil_beli') ?>
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+<?php echo $this->session->flashdata('berhasil_preorder') ?>
 <div class="main-content">
     <section class="section">
         <div class="row">
@@ -28,6 +41,7 @@
                                                     <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark"><?= $dt_produk['namaProduk'] ?></h6>
                                                     <h6 class="text-dark font-15">Rp. <?= number_format($dt_produk['harga'], 0, '', '.') ?></h6>
                                                     <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Min order <?= $dt_produk['min_order'] ?> pcs</h6>
+                                                    <input hidden type="text" id="min_order<?= $dt_produk['idProduk'] ?>" value="<?= $dt_produk['min_order'] ?>">
                                                 </div>
                                             </div>
                                         <?php endif ?>
@@ -40,15 +54,12 @@
             </div>
 
             <div class="col-lg-5">
-                <form id="formTerjual" action="<?php echo base_url('admin/kasir/terjual_atau_preorder/') ?>" method="post" enctype="multipart/form-data">
+                <form id="formTransaksiPreorder" action="<?php echo base_url('kasir/kasir_page/terjual_atau_preorder/') ?>" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-12">
                             <div class="card h-100" style="overflow: hidden;">
                                 <div class="card-header">
-                                    <h4>
-                                        Transaksi
-                                    </h4>
-
+                                    <h4> Transaksi</h4>
                                 </div>
                                 <div class="card-body" style="height: 25vh;overflow-y:scroll">
                                     <div class="container">
@@ -64,25 +75,20 @@
                                             </div>
                                             <hr>
                                         </div>
-
                                         <div class="show-cart table">
 
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-12 mt-3">
-                            <div class="card h-100">
+                            <div class="card ">
                                 <div class="card-header">
-                                    <h4>
-                                        Pembayaran
-                                    </h4>
+                                    <h4>Pembayaran</h4>
                                 </div>
                                 <div class="card-body">
-
                                     <div class="form-group mb-2">
                                         <label for="">Total Belanja</label>
                                         <div class="input-group">
@@ -91,41 +97,45 @@
                                                     Rp
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control " id="total-cart" name="total_belanja" readonly>
+                                            <input hidden readonly type="text" class="form-control " id="total-cart" name="total_belanja">
+                                            <input type="text" class="form-control " id="total-belanja" disabled>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label for="">Uang</label>
+                                    <div class="form-group mb-2">
+                                        <label for="">Uang Pembayaran</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     Rp
                                                 </div>
                                             </div>
-                                            <input type="number" class="form-control" name="nama" id="uang">
+                                            <input type="text" class="form-control" id="uang" placeholder="Masukkan uang pembayaran disini!">
                                         </div>
                                     </div>
-
-                                    <!-- Input tanggal digunakan saat preorder -->
+                                    <div class="form-group mb-2">
+                                        <label for="">Kembalian</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    Rp
+                                                </div>
+                                            </div>
+                                            <input readonly type="text" class="form-control"  id="kembalian">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="">Tanggal Pengiriman</label>
                                         <div class="input-group">
-                                            <?php $today = date('Y-m-d');
+                                            <?php date_default_timezone_set('Asia/Jakarta');
+                                            $today = date('Y-m-d');
                                             $tgl = date('Y-m-d', strtotime('+3 days', strtotime($today)));
                                             ?>
-                                            <input type="date" class="form-control " name="tglDikirim" min="<?= $tgl ?>">
+                                            <input id="tglDikirim" type="date" class="form-control " name="tglDikirim" min="<?= $tgl ?>">
                                         </div>
                                     </div>
-
-                                    <!-- <input id="tglDikirim" type="text" name="tglDikirim" class="form-control" hidden> -->
-
                                     <div class="d-flex justify-content-around">
-                                        <div class="btn btn-info mr-3" type="button" onclick="preorder()" type="button">
-                                            Preorder
-                                        </div>
-                                        <div class="btn btn-primary" onclick="lanjut_bayar()" type="button">
-                                            Lanjut ke Pembayaran
+                                        <div class="btn btn-info mr-3" type="button" onclick="simpan_preorder()" type="button">
+                                            Lanjutkan Simpan
                                         </div>
                                     </div>
                                 </div>
@@ -133,167 +143,149 @@
                         </div>
                     </div>
                 </form>
-
-                <!-- Modal Preorder-->
-                <div class="modal fade" id="modal_preorder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-center">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Preorder</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>
-                                        Total Belanja
-                                    </label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                Rp
-                                            </div>
-                                        </div>
-                                        <input id="total_belanja2" type="text" name="nama" class="form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        Tanggal Pengiriman
-                                    </label>
-                                    <div class="input-group">
-                                        <input id="tanggalDikirim" type="date" <?php date_default_timezone_set('Asia/Jakarta'); ?> min="<?= date('Y-m-d') ?>" name="tanggalDikirim" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-around">
-                                    <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">
-                                        <i class="fas fa-check mr-1"></i>
-                                        Batal
-                                    </button>
-                                    <button type="button" class="btn btn-primary" onclick="simpan_Preorder()">
-                                        <i class="fas fa-save mr-1"></i>
-                                        Simpan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- tutup modal -->
-
-                <!-- Modal Pembayaran-->
-                <div class="modal fade" id="modal_kembalian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-center">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Pembayaran</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>
-                                        Total Belanja
-                                    </label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                Rp
-                                            </div>
-                                        </div>
-                                        <input id="total_belanja1" type="text" name="nama" class="form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        Kembalian
-                                    </label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                Rp
-                                            </div>
-                                        </div>
-                                        <input id="kembalian" type="text" name="nama" class="form-control" disabled>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-around">
-                                    <button type="button" class="btn btn-danger mr-3" data-dismiss="modal">
-                                        <i class="fas fa-check mr-1"></i>
-                                        Batal
-                                    </button>
-                                    <button type="button" class="btn btn-primary" onclick="submit_terjual()">
-                                        <i class="fas fa-save mr-1"></i>
-                                        Simpan
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- tutup modal -->
             </div>
         </div>
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/cart.js"></script>
-    <script type="text/javascript">
-        function lanjut_bayar() {
-            az = 1;
-            var cek = document.getElementById('uang').value;
-            var uang = parseInt(document.getElementById('uang').value);
-            var total = document.getElementById('total-cart').value;
-            var kembalian = uang - total;
+</div>
 
-            if (total == '0') {
-                swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
-            } else {
-                if (document.getElementById('uang').value == '') {
-                    swal("Informasi", "Nominal uang pembayaran masih kosong", "info");
-                } else {
-                    if (uang < total) {
-                        swal("Informasi", "Nominal uang pembayaran kurang", "info");
-                    } else {
-                        document.getElementById('total_belanja1').value = total;
-                        document.getElementById('kembalian').value = kembalian;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="<?= base_url() ?>assets/js/cart_preorder.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // total belanja
+        setInterval(function(){
+            var total_cart = document.getElementById('total-cart').value;
+                const format = total_cart.toString().split('').reverse().join('');
+                const convert = format.match(/\d{1,3}/g);
+                const rupiah = convert.join('.').split('').reverse().join('');
+            document.getElementById('total-belanja').value = rupiah;
+        },500);
 
-                        $('#modal_kembalian').appendTo("body").modal('show');
-                    }
+        // uang pelanggan
+        var uang = document.getElementById('uang');
+        uang.addEventListener('keyup', function(e)
+        {
+            uang.value = formatRupiah(this.value);
+        });
+        
+        /* Fungsi */
+        function formatRupiah(angka, prefix)
+        {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split    = number_string.split(','),
+                sisa     = split[0].length % 3,
+                rupiah     = split[0].substr(0, sisa),
+                ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+                
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+            
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
+
+        // hitung kembalian
+        setInterval(function(){
+            // get total belanja
+            let total_belanja = document.getElementById('total-cart').value;
+            let ttb = total_belanja.replace(/[^,\d]/g, '').toString();
+
+            // get uang pelanggan
+            let uang_pelanggan = document.getElementById('uang').value;
+            let up = uang_pelanggan.replace(/[^,\d]/g, '').toString();
+
+            // fungsi hitung
+            let hitung =  parseInt(up) - parseInt(ttb);
+            if(uang_pelanggan != ''){
+                const format2 = hitung.toString().split('').reverse().join('');
+                const convert2 = format2.match(/\d{1,3}/g);
+                const hitung2 = convert2.join('.').split('').reverse().join('');
+                if(hitung < 0){
+                    document.getElementById('kembalian').value = '-'+hitung2;
+                }else{
+                    document.getElementById('kembalian').value = hitung2;   
                 }
+            }else{
+                document.getElementById('kembalian').value = '0';
+            }
+            
+        },500);
+    });
+
+    function simpan_preorder() {
+        // cek pembelian
+        var pembelian = document.getElementById('total-cart').value;
+        if (pembelian == '0') {
+            swal("Gagal", "Belum ada roti/kue yang dipilih", "error"); 
+            return false;
+        }
+
+        //cek uang pembayaran
+        var uang_pb = document.getElementById('uang').value;
+        if (uang_pb == '') {
+            swal({
+                title: "Gagal Menyimpan",
+                text: "Uang pembayaran belum dimasukkan",
+                icon: "error",
+                buttons: {cancel: false, confirm: true}
+            }).then((oke) => {
+                if (oke) { document.getElementById('uang').focus(); }
+            });
+            return false;
+        }
+
+        // cek uang kembalian
+        var kembalian = document.getElementById('kembalian').value;
+        var uang_kl = kembalian.replace(/[.]/i, '').toString();
+        if (uang_kl < 0) {
+            swal("Gagal Menyimpan", "Uang pembayaran kurang", "error"); 
+            return false;
+        }
+
+        //cek tanggal pengiriman
+        var tgl = document.getElementById('tglDikirim').value;
+        if ( tgl == '') {
+            //swal("Informasi", "Tanggal pengiriman masih kosong", "info");
+            swal({
+                title: "Gagal Menyimpan",
+                text: "Tanggal pengiriman masih kosong",
+                icon: "error",
+                buttons: {cancel: false, confirm: true}
+            }).then((oke) => {
+                if (oke) { document.getElementById('tglDikirim').focus(); }
+            });
+            return false;
+        }else{
+            //set tgl dikirim min + 3 hari kedepan
+            const date = new Date(); date.setDate(date.getDate() + 3);
+
+            // parse tanggal
+            var tgl_min = Date.parse(date); var tgl2 = Date.parse(tgl);
+
+            // cek tgl kirim
+            if(tgl2 < tgl_min ){
+                swal("Gagal Menyimpan", "Tanggal pengiriman minimal 3 hari kedepan", "error"); 
+                return false;
             }
         }
 
-        function submit_terjual() {
-            document.getElementById('formTerjual').submit();
-            sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
-        }
-
-        function preorder() {
-            var total = document.getElementById('total-cart').value;
-            if (total == '0') {
-                swal("Informasi", "Belum ada roti/kue yang dipilih", "info");
-            } else {
-                var total = document.getElementById('total-cart').value;
-                document.getElementById('total_belanja2').value = total;
-
-                $('#modal_preorder').appendTo("body").modal('show');
-            }
-        }
-
-        function simpan_Preorder() {
-            var tgl = document.getElementById('tanggalDikirim').value;
-            document.getElementById('tglDikirim').value = tgl;
-
-            if (tgl == '') {
-                swal("Informasi", "Tanggal pengiriman masih kosong", "info");
-            } else {
-                $('#modal_preorder').appendTo("body").modal('hide');
-
-                document.getElementById('formTerjual').submit();
+        // simpan data
+        Swal.fire({
+            title: "Simpan Data",
+            text: "Apakah anda yakin ingin menyimpan data ini ?",
+            icon: "question",
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Tdak',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Simpan'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('formTransaksiPreorder').submit();
                 sessionStorage.removeItem("shoppingCart", JSON.stringify(cart));
             }
-        }
-    </script>
-</div>
+        });
+    }
+</script>
