@@ -448,7 +448,6 @@
                 }
             });
             var values = el.slider("option", "values");
-            console.log(values[1]);
             min.text('Rp ' + values[0]);
             max.text('Rp ' + values[1]);
         }

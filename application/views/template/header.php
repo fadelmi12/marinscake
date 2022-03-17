@@ -57,7 +57,7 @@
                             <li>
                                 <a href="<?= base_url() ?>produk">Product</a>
                             </li>
-                            <li><a href="<?= base_url() ?>checkout">Checkout</a></li>
+                            <li><a href="<?= base_url() ?>keranjang">Keranjang</a></li>
                         </ul>
                     </div>
                     <div class="col-2 d-flex align-items-center">
@@ -65,8 +65,8 @@
                     </div>
                     <div class="col-5 d-flex align-items-center justify-content-between pl-5">
                         <ul class="menu d-flex justify-content-between w-75">
-                            <li><a href="#company-info">About</a></li>
-                            <li><a href="https://wa.me/6285812601646?text=Halo%20Admin%20Marins%20Cake,%20Saya%20mau%20order.." target="_blank">Contact WA</a></li>
+                            <li><a href="<?= base_url() ?>checkout">Checkout</a></li>
+                            <li><a href="<?= base_url() ?>#company-info">About</a></li>
                         </ul>
                         <div class="header__actions w-50 text-right">
                             <a class="ps-search-btn" href="#"><i class="ba-magnifying-glass"></i></a>
@@ -85,16 +85,21 @@
                 <a class="ps-logo" href="#"><img src="<?= base_url() ?>assets/client/images/logo-light3.svg" alt="" /></a>
                 <ul class="menu menu--mobile">
                     <li class="current-menu-item menu-item-has-children">
-                        <a href="#">Home</a>
-                    </li>
-                    <li><a href="about.html">About</a></li>
-                    <li>
-                        <a href="product-listing.html">produk</a>
+                        <a href="">Home</a>
                     </li>
                     <li>
-                        <a href="product-listing.html">preorder</a>
+                        <a href="<?= base_url() ?>produk">Product</a>
                     </li>
-                    <li><a href="contact.html">Kontak</a></li>
+                    <li><a href="<?= base_url() ?>keranjang">Keranjang</a></li>
+                    <li>
+                        <a href="<?= base_url() ?>checkout">Checkout</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url() ?>#company-info">About</a>
+                    </li>
+                    <!-- <li>
+                        <a href="https://wa.me/6285812601646?text=Halo%20Admin%20Marins%20Cake,%20Saya%20mau%20order.." target="_blank">Contact WA</a>
+                    </li> -->
                 </ul>
                 <div class="menu-toggle"><span></span></div>
                 <div class="header__actions">
@@ -102,7 +107,9 @@
                     <div class="ps-cart">
                         <a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ba-shopping"></i></a>
                         <div class="ps-cart__listing">
-                            <div class="ps-cart__content">
+                            <div id="detail_cart2"></div>
+
+                            <!-- <div class="ps-cart__content">
                                 <div class="ps-cart-item">
                                     <a class="ps-cart-item__close" href="#"></a>
                                     <div class="ps-cart-item__thumbnail">
@@ -182,7 +189,7 @@
                             </div>
                             <div class="ps-cart__footer">
                                 <a href="cart.html">Check out</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

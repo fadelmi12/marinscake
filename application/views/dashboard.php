@@ -98,7 +98,7 @@
                                     <li>
                                         <?php foreach ($gambar as $gbr) :
                                             if ($gbr['id_produk'] == $prd['idProduk']) : ?>
-                                                <a class="tambah_cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-minorder="<?= $prd['min_order'] ?>" data-tooltip="Add To Cart"><i class="ba-shopping"></i></a>
+                                                <a class="tambah_cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-minorder="<?= $prd['min_order'] ?>" data-tooltip="Add To Cart"><i class="ba-shopping"></i></a>
                                         <?php endif;
                                         endforeach ?>
                                     </li>

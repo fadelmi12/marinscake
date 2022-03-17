@@ -40,7 +40,8 @@
                 <div class="menu-toggle"><span></span></div>
                 <div class="header__actions">
                     <a class="ps-search-btn" href="#"><i class="ba-magnifying-glass"></i></a>
-                    <div class="ps-cart"><a class="ps-cart__toggle" href="#"><i class="ba-shopping"></i></a>
+                    <div class="ps-cart">
+                        <a class=" ps-cart__toggle" href="#"><i class="ba-shopping"></i></a>
                         <div class="ps-cart__listing">
                             <div id="detail_cart"></div>
                         </div>
@@ -48,10 +49,17 @@
                 </div>
                 <ul class="menu">
                     <li><a href="<?= base_url() ?>">Home</a></li>
-                    <li><a href="<?= base_url() ?>produk">Product</a></li>
-                    <li><a href="<?= base_url() ?>checkout">Checkout</a></li>
+                    <li class="<?= ($this->uri->segment(1) == 'produk') ? 'current-menu-item' : '' ?>">
+                        <a href="<?= base_url() ?>produk">Product</a>
+                    </li>
+                    <li class="<?= ($this->uri->segment(1) == 'keranjang') ? 'current-menu-item' : '' ?>">
+                        <a href="<?= base_url() ?>keranjang">Keranjang</a>
+                    </li>
+                    <li class="<?= ($this->uri->segment(1) == 'checkout') ? 'current-menu-item' : '' ?>">
+                        <a href="<?= base_url() ?>checkout">Checkout</a>
+                    </li>
                     <li><a href="<?= base_url() ?>#company-info">About</a></li>
-                    <li><a href="https://wa.me/6285812601646?text=Halo%20Admin%20Marins%20Cake,%20Saya%20mau%20order.." target="_blank">Contact WA</a></li>
+                    <!-- <li><a href="https://wa.me/6285812601646?text=Halo%20Admin%20Marins%20Cake,%20Saya%20mau%20order.." target="_blank">Contact WA</a></li> -->
                     <!-- <li class="menu-item-has-children"><a href="about.html">Pages</a><span class="sub-toggle"><i class="fa fa-angle-down"></i></span>
                         <ul class="sub-menu">
                             <li><a href="menu.html">Menu</a></li>

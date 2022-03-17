@@ -103,6 +103,7 @@
           if (data == 0) {
             if (quantity < min_order) {
               swal('Gagal', 'Jumlah produk kurang dari minimal order', 'error');
+              document.getElementById(produk_id).value = min_order;
             } else {
               $.ajax({
                 url: "<?php echo base_url(); ?>keranjang/add_to_cart",
@@ -113,10 +114,13 @@
                   produk_harga: produk_harga,
                   produk_gambar: produk_gambar,
                   produk_stok: produk_stok,
+                  min_order: min_order,
                   quantity: quantity
                 },
-                success: function(data) {
-                  $('#detail_cart').html(data);
+                dataType: 'json',
+                success: function(response) {
+                  $('#detail_cart').html(response.cart);
+                  $('#detail_cart2').html(response.cart);
                   var a1 = ' ditambahkan ke keranjang ';
                   var a2 = ' pcs';
                   var text = produk_nama + a1 + quantity + a2;
@@ -134,10 +138,13 @@
                 produk_harga: produk_harga,
                 produk_gambar: produk_gambar,
                 produk_stok: produk_stok,
+                min_order: min_order,
                 quantity: quantity
               },
-              success: function(data) {
-                $('#detail_cart').html(data);
+              dataType: 'json',
+              success: function(response) {
+                $('#detail_cart').html(response.cart);
+                $('#detail_cart2').html(response.cart);
                 var a1 = ' ditambahkan ke keranjang ';
                 var a2 = ' pcs';
                 var text = produk_nama + a1 + quantity + a2;
@@ -156,7 +163,6 @@
       var produk_gambar = $(this).data("produkgambar");
       var produk_stok = $(this).data("produkstok");
       var min_order = $(this).data("minorder");
-      var cart = '<?php $this->cart->contents() ?>';
 
       $.ajax({
         url: "<?php echo base_url(); ?>keranjang/get_cart",
@@ -179,10 +185,13 @@
               produk_harga: produk_harga,
               produk_gambar: produk_gambar,
               produk_stok: produk_stok,
+              min_order: min_order,
               quantity: quantity
             },
-            success: function(data) {
-              $('#detail_cart').html(data);
+            dataType: 'json',
+            success: function(response) {
+              $('#detail_cart').html(response.cart);
+              $('#detail_cart2').html(response.cart);
               var a1 = ' ditambahkan ke keranjang ';
               var a2 = ' pcs';
               var text = produk_nama + a1 + quantity + a2;
@@ -196,18 +205,23 @@
 
     // Load shopping cart
     $('#detail_cart').load("<?php echo base_url(); ?>keranjang/load_cart");
+    $('#detail_cart2').load("<?php echo base_url(); ?>keranjang/load_cart");
 
     //Hapus Item Cart
     $(document).on('click', '.hapus_cart', function() {
       var row_id = $(this).attr("id"); //mengambil row_id dari artibut id
+      var nama = $(this).attr("nama"); //mengambil row_id dari artibut 
       $.ajax({
         url: "<?php echo base_url(); ?>keranjang/hapus_cart",
         method: "POST",
         data: {
           row_id: row_id
         },
-        success: function(data) {
-          $('#detail_cart').html(data);
+        dataType: 'json',
+        success: function(response) {
+          $('#detail_cart').html(response.cart);
+          $('#detail_cart2').html(response.cart);
+          swal('Hapus', nama + ' dikeluarkan dari keranjang', 'success');
         }
       });
     });

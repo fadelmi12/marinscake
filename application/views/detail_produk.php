@@ -80,56 +80,38 @@
             <h3 class="ps-section__title">Related Products</h3>
             <p>Maybe you like</p><span><img src="<?= base_url() ?>assets/client/images/icons/floral.png" alt=""></span>
         </div>
-        <div class="ps-section__content">
-            <div class="row">
-                <?php foreach ($rekom as $rkm) : ?>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-                        <div class="ps-product">
-                            <div class="ps-product__thumbnail">
-                                <img src="<?= base_url() ?>uploads/gambar_produk/<?= $rkm['gambar'] ?>" alt="">
-                                <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"></a>
-                                <ul class="ps-product__actions">
-                                    <li><a href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
-                                    <!-- <li><a href="#" data-tooltip="Favorite"><i class="ba-heart"></i></a></li> -->
-                                    <li>
-                                        <a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="<?= $rkm['idProduk'] ?>" data-produknama="<?= $rkm['namaProduk'] ?>" data-produkharga="<?= $rkm['harga'] ?>" data-produkgambar="<?= $rkm['gambar'] ?>" data-produkstok="<?= $rkm['stok'] ?>" data-minorder="<?= $rkm['min_order'] ?>"><i class="ba-shopping"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $rkm['idProduk'] ?>"><?= $rkm['namaProduk'] ?></a>
-                                <p><a href="">Min order : <?= $rkm['min_order'] ?></a></p>
-                                <p class="ps-product__price">Rp <?= number_format($rkm['harga'], 0, ',', '.') ?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach ?>
-            </div>
-            <div id="btn_load" class="ps-section__footer text-center mt-0 pt-0">
-                <a class="ps-btn">Load more</a>
-            </div>
+        <div id="produk_rekom" class="ps-section__content">
         </div>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type='text/javascript'>
     $(document).ready(function() {
-        $('#btn_load').click(function() {
-            var id_produk = ['<?= $this->uri->segment("3") ?>'];
-            alert(id_produk);
+
+        $(document).on('click', '#btn_load', function(e) {
+            var no = $(this).data("no");
+            loadRekom(no);
         });
+
+        loadRekom(0);
+
+        function load_more() {
+            alert('anjink');
+        }
+
+        function loadRekom(no) {
+            var id_produk = '<?= $this->uri->segment("3") ?>';
+            $.ajax({
+                url: '<?= base_url() ?>Produk/load_rekom/' + no,
+                type: 'post',
+                data: {
+                    id_produk: id_produk
+                },
+                success: function(response) {
+                    $('#produk_rekom').html(response);
+                }
+            });
+        }
+
     });
-
-    loadRekom();
-
-    function loadRekom() {
-        $.ajax({
-            url: '<?= base_url() ?>Produk/load_rekom/',
-            type: 'get',
-            dataType: 'json',
-            success: function(response) {
-                $('#pagination').html(response.pagination);
-                createTable(response.result, response.row);
-            }
-        });
-    }
 </script>

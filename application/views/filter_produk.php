@@ -2,7 +2,7 @@
     <div class="ps-hero__content ">
         <h1> Daftar Produk</h1>
         <div class="text-center">
-            Home > Shop Page <?= json_encode($where) ?>
+            Home > Shop Page
         </div>
     </div>
 </div>
@@ -29,26 +29,42 @@
                                 <h3 class="widget-title">Kategori</h3>
                             </div>
                             <ul class="ps-list--checked">
-                                <?php foreach ($kategori as $ktg) : ?>
-                                    <li>
-                                        <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
-                                        <input id="ktg_<?= $ktg['idJenis'] ?>" style="display: none;" type="checkbox" name="kategori_box[]" value="<?= $ktg['idJenis'] ?>">
-                                    </li>
-                                <?php endforeach ?>
+                                <?php foreach ($kategori as $ktg) :
+                                    $cek = 0; ?>
+                                    <?php if ($where == null) : ?>
+                                        <li id="jenis<?= $ktg['idJenis'] ?>" class="current">
+                                            <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                        </li>
+                                        <?php else :
+                                        foreach ($where as $wer) :
+                                            if ($ktg['idJenis'] == $wer['idJenis']) :
+                                                $cek++;
+                                            endif;
+                                        endforeach;
+                                        if ($cek > 0) : ?>
+                                            <li id="jenis<?= $ktg['idJenis'] ?>" class="current">
+                                                <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <li id="jenis<?= $ktg['idJenis'] ?>" class="">
+                                                <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                            </li> <?php endif ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?php if ($where == null) : ?>
+                                    <input id="kategori" type="text" name="kategori" value="1,2">
+                                <?php else : ?>
+                                    <input id="kategori" type="text" name="kategori" value="<?= $jenis ?>">
+                                <?php endif ?>
                             </ul>
                         </div>
                         <div class="widget widget_filter widget_sidebar">
                             <h3 class="widget-title">Filter Price</h3>
-                            <div class="ps-slider" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"></div>
-                            <!-- <input class="ps-slider" type="range" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"> -->
+                            <div class="ps-slider" data-min="0" data-default-min="<?= $min_price ?>" data-default-max="<?= $max_price ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"></div>
                             <p class="ps-slider__meta">Price:<span id="span1" class="ps-slider__value ps-slider__min"></span>-<span id="span2" class="ps-slider__value ps-slider__max"></span></p>
-                            <!-- <a class="ac-slider__filter ps-btn ps-btn--sm" href="#">Filter</a> -->
-                            <!-- <form class="ps-slider-meta" id="form_filter" action="<?= base_url() ?>produk/filter" method="post"> -->
-                            <input type="text" name="min_price" id="min_price">
-                            <input type="text" name="max_price" id="max_price">
-                            <!-- <input type="range" class="form-range" min="0" max="<?= $max->harga ?>"> -->
+                            <input type="hidden" name="min_price" id="min_price">
+                            <input type="hidden" name="max_price" id="max_price">
                             <button class="ac-slider__filter ps-btn ps-btn--sm" type="submit">Filter</button>
-                            <!-- </form> -->
                         </div>
                     </div>
                 </form>
@@ -64,13 +80,26 @@
 
         $('.add_ktg').click(function() {
             var jenis = $(this).data("jenis");
-            var element = document.getElementById('ktg_' + jenis);
-            if (element.checked == true) {
-                element.classList.remove("active");
-                element.checked = false;
+            var input_ktg = document.getElementById('kategori');
+            var abc = document.getElementById('jenis' + jenis).className;
+            if (abc == '') {
+                document.getElementById('jenis' + jenis).classList.add("current");
+                var cek = document.getElementById('kategori').value;
+                if (cek == "") {
+                    document.getElementById('kategori').value += jenis;
+                } else {
+                    document.getElementById('kategori').value += ',' + jenis;
+                }
             } else {
-                element.classList.add("active");
-                element.checked = true;
+                document.getElementById('jenis' + jenis).classList.remove("current");
+                let data = document.getElementById('kategori').value;
+                var kode_array = data.split(",");
+
+                var myIndex = kode_array.indexOf('' + jenis + '');
+                if (myIndex !== -1) {
+                    kode_array.splice(myIndex, 1);
+                }
+                document.getElementById('kategori').value = kode_array;
             }
         });
 
@@ -82,10 +111,6 @@
             document.getElementById('min_price').value = min2;
             document.getElementById('max_price').value = max2;
         }, 250);
-
-        // $("#span1").change(function() {
-        //     alert("The text has been changed.");
-        // });
 
         // Detect pagination click
         $('#pagination').on('click', 'a', function(e) {
@@ -100,25 +125,24 @@
         function loadPagination(pagno) {
             var min_price = '<?= $min_price ?>';
             var max_price = '<?= $max_price ?>';
-            console.log(list);
-            // console.log(max_price);
+            var where = '<?= $jenis ?>';
+
             $.ajax({
                 url: '<?= base_url() ?>Produk/filter_page/' + pagno,
                 type: 'post',
                 data: {
                     min_price: min_price,
-                    max_price: max_price
+                    max_price: max_price,
+                    where: where
                 },
                 dataType: 'json',
                 success: function(response) {
-                    alert('sukses');
                     $('#pagination').html(response.pagination);
-                    console.log(response);
                     createTable(response.result, response.row);
+                    console.log(response);
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
+                error: function(request, status, error) {
+                    alert(request.responseText);
                 }
             });
         }

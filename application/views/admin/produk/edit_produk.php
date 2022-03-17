@@ -41,7 +41,8 @@
                                         <label>Kategori</label>
                                         <select id="kategori" class="form-control selectric" name="kategori">
                                             <?php foreach ($kategori as $ktg) : ?>
-                                                <option value="<?php echo $ktg['idJenis'] ?>" <?php if ($data_produk['idJenis'] == $ktg['idJenis']) : echo "selected"; endif; ?>>
+                                                <option value="<?php echo $ktg['idJenis'] ?>" <?php if ($data_produk['idJenis'] == $ktg['idJenis']) : echo "selected";
+                                                                                                endif; ?>>
                                                     <?php echo $ktg['namaJenis'] ?>
                                                 </option>
                                             <?php endforeach; ?>
@@ -148,56 +149,57 @@
         var add_button = $(".tambah_gambar"); //Add button ID
         var jumlah = document.getElementById('jumlah_gambar');
 
-        var x = 1; a=0;//initlal text box count
+        var x = 1;
+        a = 0; //initlal text box count
         $(add_button).click(function(e) { //on add input button click
             e.preventDefault();
             //max input box allowed
             x++; //text box increment 
             var random_kode = Math.floor((Math.random() * 1000000) + 1); //random_kode
             $(wrapper).append('' +
-                '<form onsubmit="return false" id="form_gambar'+ random_kode +'" method="POST" enctype="multipart/form-data"> ' +
-                    '<div class="row mb-2" id="row_gambar'+ random_kode +'">' +
-                        '<div class="col-4 col align-self-center" align="center">' +
-                            '<img id="gambar'+ random_kode +'" alt="your image" width="100" height="auto"/>' +
-                        '</div>' +
-                        '<div class="col-6 col align-self-center">' +
-                            '<input required id="upload'+ random_kode +'" class="form-control-file" type="file" accept="image/*" name="gambar" onchange="insert_gambar('+ random_kode +')">' +
-                            //'<input hidden type="text" id="random'+ a++ +'" value="'+ random_kode +'">'+
-                        '</div>' +
-                        '<div class="col-2 col align-self-center">' +
-                            '<button id="hapus'+ random_kode +'" onclick="delete_form_gambar('+parseInt(random_kode)+')" type="button" class="btn btn-danger remove_field"><i class="fas fa-trash"></button>' +
-                        '</div>' +
-                    '</div>' +
+                '<form onsubmit="return false" id="form_gambar' + random_kode + '" method="POST" enctype="multipart/form-data"> ' +
+                '<div class="row mb-2" id="row_gambar' + random_kode + '">' +
+                '<div class="col-4 col align-self-center" align="center">' +
+                '<img id="gambar' + random_kode + '" alt="your image" width="100" height="auto"/>' +
+                '</div>' +
+                '<div class="col-6 col align-self-center">' +
+                '<input required id="upload' + random_kode + '" class="form-control-file" type="file" accept="image/*" name="gambar" onchange="insert_gambar(' + random_kode + ')">' +
+                //'<input hidden type="text" id="random'+ a++ +'" value="'+ random_kode +'">'+
+                '</div>' +
+                '<div class="col-2 col align-self-center">' +
+                '<button id="hapus' + random_kode + '" onclick="delete_form_gambar(' + parseInt(random_kode) + ')" type="button" class="btn btn-danger remove_field"><i class="fas fa-trash"></button>' +
+                '</div>' +
+                '</div>' +
                 '</form>'
             ); // add input boxes.
-            $("#upload"+ random_kode).focus();
+            $("#upload" + random_kode).focus();
             var kode = document.getElementById('list_kode').value;
-            if(kode == ''){
+            if (kode == '') {
                 document.getElementById('list_kode').value = random_kode;
-            }else{
-                document.getElementById('list_kode').value = kode+','+random_kode;
-            } 
+            } else {
+                document.getElementById('list_kode').value = kode + ',' + random_kode;
+            }
             //console.log([list]);
         });
 
         $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
 
             total_gambar = parseInt(document.getElementById('total_gambar').value);
-            if(total_gambar <= 1){
-                swal('Gagal hapus','Produk minimal memiliki 1 gambar','error');
-            }else{
+            if (total_gambar <= 1) {
+                swal('Gagal hapus', 'Produk minimal memiliki 1 gambar', 'error');
+            } else {
                 // hapus tampilan div
                 e.preventDefault();
                 $(this).parent('div').parent('div').parent('form').remove();
-                x--; 
+                x--;
             }
         })
 
-        setInterval(function(){
+        setInterval(function() {
             var box = document.getElementById('jumlah_gambar');
             var directChildren = box.children.length;
             document.getElementById('total_gambar').value = directChildren;
-        },500);
+        }, 500);
     });
 
     function update_gambar(id) {
@@ -225,25 +227,25 @@
         var id_produk = document.getElementById('id_produk').value; //get id produk
 
         $.ajax({
-                url: '<?php echo base_url("admin/produk/insert_gambar/") ?>' + id_produk,
-                type: "POST",
-                data: new FormData(document.getElementById("form_gambar" + id)),
-                contentType: false,
-                processData: false,
-                cache: false,
-                success: function(data) {
-                    var data2 = Object.entries(data)[0][1];
-                    var btn_hapus = document.getElementById("hapus"+id);
-                    btn_hapus.setAttribute('onblur','hapus_gambarLangsung('+ String(data2) +')')
-                },
-            });
+            url: '<?php echo base_url("admin/produk/insert_gambar/") ?>' + id_produk,
+            type: "POST",
+            data: new FormData(document.getElementById("form_gambar" + id)),
+            contentType: false,
+            processData: false,
+            cache: false,
+            success: function(data) {
+                var data2 = Object.entries(data)[0][1];
+                var btn_hapus = document.getElementById("hapus" + id);
+                btn_hapus.setAttribute('onblur', 'hapus_gambarLangsung(' + String(data2) + ')')
+            },
+        });
     };
 
     function hapus_gambar(id_gambar) {
         total_gambar = document.getElementById('total_gambar').value;
-        if(total_gambar <= 1){
-            swal('Gagal hapus','Produk minimal memiliki 1 gambar','error');
-        }else{
+        if (total_gambar <= 1) {
+            swal('Gagal hapus', 'Produk minimal memiliki 1 gambar', 'error');
+        } else {
             $.ajax({
                 url: "<?php echo base_url('admin/produk/hapus_gambar') ?>",
                 type: "POST",
@@ -264,9 +266,9 @@
 
     function hapus_gambarLangsung(id_gambar) {
         total_gambar = document.getElementById('total_gambar').value;
-        if(total_gambar <= 1){
-            swal('Gagal hapus','Produk minimal memiliki 1 gambar','error');
-        }else{
+        if (total_gambar <= 1) {
+            swal('Gagal hapus', 'Produk minimal memiliki 1 gambar', 'error');
+        } else {
             $.ajax({
                 url: "<?php echo base_url('admin/produk/hapus_gambar') ?>",
                 type: "POST",
@@ -284,16 +286,15 @@
         }
     }
 
-    function delete_form_gambar(id){
+    function delete_form_gambar(id) {
         //console.log(id);
         total_gambar = parseInt(document.getElementById('total_gambar').value);
-        if(total_gambar <= 1){}
-        else{
+        if (total_gambar <= 1) {} else {
 
             let data = document.getElementById('list_kode').value;
             var kode_array = data.split(",");
 
-            var myIndex = kode_array.indexOf(''+ id +'');
+            var myIndex = kode_array.indexOf('' + id + '');
             if (myIndex !== -1) {
                 kode_array.splice(myIndex, 1);
             }
@@ -302,57 +303,68 @@
     }
 
     var total_gambar_awal = document.getElementById('jumlah_gambar').children.length;
-    function simpanPerubahan(){
+
+    function simpanPerubahan() {
         var cekTambah_formGambar = document.getElementById('total_gambar').value;
 
-        if(total_gambar_awal != cekTambah_formGambar){
+        if (total_gambar_awal != cekTambah_formGambar) {
             let data = document.getElementById('list_kode').value;
             const kode_array = data.split(",");
             max = kode_array.length;
             // console.log(max);
-            for(i=0; i<max; i++){
-                if(document.getElementById("upload"+kode_array[i]).files.length == 0){
-                    swal('Gagal Menyimpan','Form gambar tidak boleh kosong','error');
-                    document.getElementById("upload"+kode_array[i]).focus();
+            for (i = 0; i < max; i++) {
+                if (document.getElementById("upload" + kode_array[i]).files.length == 0) {
+                    swal('Gagal Menyimpan', 'Form gambar tidak boleh kosong', 'error');
+                    document.getElementById("upload" + kode_array[i]).focus();
                     return false;
                 }
             }
 
             // if sukses semua lanjut submit    
             return validasi_dataProduk();
-        }else{
+        } else {
             return validasi_dataProduk();
         }
     }
 
-    function validasi_dataProduk(){
+    function validasi_dataProduk() {
         var nama_produk = document.getElementById('nama_produk').value;
-        var harga       = document.getElementById('harga').value;
-        var kategori    = document.getElementById('kategori').value;
-        var status      = document.getElementById('status').value;
-        var stok        = document.getElementById('stok').value;
-        var min_order   = document.getElementById('min_order').value;
-        var deskripsi   = document.getElementById('deskripsi').value;
-        if( nama_produk != '' && harga != '' && kategori != '' && status != '' && stok != '' && min_order != '' && deskripsi != ''){
+        var harga = document.getElementById('harga').value;
+        var kategori = document.getElementById('kategori').value;
+        var status = document.getElementById('status').value;
+        var stok = document.getElementById('stok').value;
+        var min_order = document.getElementById('min_order').value;
+        var deskripsi = document.getElementById('deskripsi').value;
+        if (nama_produk != '' && harga != '' && kategori != '' && status != '' && stok != '' && min_order != '' && deskripsi != '') {
             document.getElementById('form_edit_produk').submit();
-        }else{
+        } else {
             swal({
                 title: "Gagal Menyimpan",
                 text: "Form input tidak boleh kosong!",
                 icon: "error",
-                buttons: {cancel: false, confirm: true}
+                buttons: {
+                    cancel: false,
+                    confirm: true
+                }
             }).then((oke) => {
                 if (oke) {
-                    if(nama_produk    == '') {document.getElementById('nama_produk' ).focus();}
-                    else if(harga     == '') {document.getElementById('harga'       ).focus();}
-                    else if(kategori  == '') {document.getElementById('kategori'    ).focus();}
-                    else if(status    == '') {document.getElementById('status'      ).focus();}
-                    else if(stok      == '') {document.getElementById('stok'        ).focus();}
-                    else if(min_order == '') {document.getElementById('min_order'   ).focus();}
-                    else if(deskripsi == '') {document.getElementById('deskripsi'   ).focus();}
+                    if (nama_produk == '') {
+                        document.getElementById('nama_produk').focus();
+                    } else if (harga == '') {
+                        document.getElementById('harga').focus();
+                    } else if (kategori == '') {
+                        document.getElementById('kategori').focus();
+                    } else if (status == '') {
+                        document.getElementById('status').focus();
+                    } else if (stok == '') {
+                        document.getElementById('stok').focus();
+                    } else if (min_order == '') {
+                        document.getElementById('min_order').focus();
+                    } else if (deskripsi == '') {
+                        document.getElementById('deskripsi').focus();
+                    }
                 }
             });
         }
     }
-
 </script>

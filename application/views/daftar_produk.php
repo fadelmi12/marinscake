@@ -30,25 +30,20 @@
                             </div>
                             <ul class="ps-list--checked">
                                 <?php foreach ($kategori as $ktg) : ?>
-                                    <li>
+                                    <li class="current" id="jenis<?= $ktg['idJenis'] ?>">
                                         <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
-                                        <input id="ktg_<?= $ktg['idJenis'] ?>" style="display: none;" type="checkbox" name="kategori_box[]" value="<?= $ktg['idJenis'] ?>">
                                     </li>
                                 <?php endforeach ?>
                             </ul>
+                            <input id="kategori" type="text" name="kategori" value="1,2">
                         </div>
                         <div class="widget widget_filter widget_sidebar">
                             <h3 class="widget-title">Filter Price</h3>
                             <div class="ps-slider" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"></div>
-                            <!-- <input class="ps-slider" type="range" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"> -->
                             <p class="ps-slider__meta">Price:<span id="span1" class="ps-slider__value ps-slider__min"></span>-<span id="span2" class="ps-slider__value ps-slider__max"></span></p>
-                            <!-- <a class="ac-slider__filter ps-btn ps-btn--sm" href="#">Filter</a> -->
-                            <!-- <form class="ps-slider-meta" id="form_filter" action="<?= base_url() ?>produk/filter" method="post"> -->
                             <input type="text" name="min_price" id="min_price">
                             <input type="text" name="max_price" id="max_price">
-                            <!-- <input type="range" class="form-range" min="0" max="<?= $max->harga ?>"> -->
                             <button class="ac-slider__filter ps-btn ps-btn--sm" type="submit">Filter</button>
-                            <!-- </form> -->
                         </div>
                     </div>
                 </form>
@@ -64,14 +59,38 @@
 
         $('.add_ktg').click(function() {
             var jenis = $(this).data("jenis");
-            var element = document.getElementById('ktg_' + jenis);
-            if (element.checked == true) {
-                element.classList.remove("active");
-                element.checked = false;
+            var input_ktg = document.getElementById('kategori');
+            var abc = document.getElementById('jenis' + jenis).className;
+            if (abc == '') {
+                document.getElementById('jenis' + jenis).classList.add("current");
+                var cek = document.getElementById('kategori').value;
+                if (cek == "") {
+                    document.getElementById('kategori').value += jenis;
+                } else {
+                    document.getElementById('kategori').value += ',' + jenis;
+                }
             } else {
-                element.classList.add("active");
-                element.checked = true;
+                document.getElementById('jenis' + jenis).classList.remove("current");
+                let data = document.getElementById('kategori').value;
+                var kode_array = data.split(",");
+
+                var myIndex = kode_array.indexOf('' + jenis + '');
+                if (myIndex !== -1) {
+                    kode_array.splice(myIndex, 1);
+                }
+                document.getElementById('kategori').value = kode_array;
             }
+
+
+            // if (def == null) {
+            //     abc.classList.remove("current");
+            //     val_ktg += jenis;
+            //     alert(val_ktg);
+            //     kategori.value = val_ktg;
+            // } else {
+            //     abc.classList.add("current");
+            //     element.checked = true;
+            // }
         });
 
         setInterval(function() {
@@ -105,6 +124,7 @@
                 success: function(response) {
                     $('#pagination').html(response.pagination);
                     createTable(response.result, response.row);
+                    console.log(response);
                 }
             });
         }
@@ -130,7 +150,7 @@
                 x += '<a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/' + id + '"></a>';
                 x += '<ul class="ps-product__actions">';
                 x += '<li><a href="<?= base_url() ?>produk/detail/' + id + '" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>';
-                x += '<li><a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="' + id + '" data-produknama="' + nama + '" data-produkharga="' + price + '" data-produkgambar="' + gambar + '" data-produkstok="' + stok + '" data-minorder="' + min + '"><i class="ba-shopping"></i></a></li>'
+                x += '<li><a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="' + id + '" data-produknama="' + nama + '" data-produkharga="' + price + '" data-produkgambar="' + gambar + '" data-minorder="' + min + '"><i class="ba-shopping"></i></a></li>'
                 x += '</ul>';
                 x += '</div>';
                 x += '<div class="ps-product__content"><a class="ps-product__title" href="<?= base_url() ?>produk/detail/' + id + '">' + nama + '</a>'
