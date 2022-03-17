@@ -188,14 +188,34 @@
 <script>
     function cek_ongkir(sel) {
         var opt = sel.options[sel.selectedIndex];
-        var price = opt.dataset.ongkir
-        document.getElementById("nama_ongkir").innerHTML = "Ongkir";
-        document.getElementById("ongkir").innerHTML = "Rp " + price;
+        var price = opt.dataset.ongkir;
         var total_awal = '<?= $this->cart->total() ?>';
-        var total_akhir = parseInt(total_awal) + parseInt(price);
-        document.getElementById("total").innerHTML = "Rp " + total_akhir;
+        var total = parseInt(total_awal) + parseInt(price);
+        var total_akhir = total.toString();
         document.getElementById("total_belanja").value = total_akhir;
         document.getElementById("ongkos").value = price;
+        var price2 = formatRupiah(price, "Rp ");
+        var total_akhir2 = formatRupiah(total_akhir, "Rp ");
+        document.getElementById("nama_ongkir").innerHTML = "Ongkir";
+        document.getElementById("ongkir").innerHTML = price2;
+        document.getElementById("total").innerHTML = total_akhir2;
 
+    }
+
+    function formatRupiah(angka, prefix) {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp ' + rupiah : '');
     }
 </script>

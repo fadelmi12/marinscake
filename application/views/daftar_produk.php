@@ -35,14 +35,14 @@
                                     </li>
                                 <?php endforeach ?>
                             </ul>
-                            <input id="kategori" type="text" name="kategori" value="1,2">
+                            <input id="kategori" type="hidden" name="kategori" value="1,2">
                         </div>
                         <div class="widget widget_filter widget_sidebar">
                             <h3 class="widget-title">Filter Price</h3>
                             <div class="ps-slider" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"></div>
                             <p class="ps-slider__meta">Price:<span id="span1" class="ps-slider__value ps-slider__min"></span>-<span id="span2" class="ps-slider__value ps-slider__max"></span></p>
-                            <input type="text" name="min_price" id="min_price">
-                            <input type="text" name="max_price" id="max_price">
+                            <input type="hidden" name="min_price" id="min_price">
+                            <input type="hidden" name="max_price" id="max_price">
                             <button class="ac-slider__filter ps-btn ps-btn--sm" type="submit">Filter</button>
                         </div>
                     </div>
@@ -80,17 +80,6 @@
                 }
                 document.getElementById('kategori').value = kode_array;
             }
-
-
-            // if (def == null) {
-            //     abc.classList.remove("current");
-            //     val_ktg += jenis;
-            //     alert(val_ktg);
-            //     kategori.value = val_ktg;
-            // } else {
-            //     abc.classList.add("current");
-            //     element.checked = true;
-            // }
         });
 
         setInterval(function() {
@@ -101,10 +90,6 @@
             document.getElementById('min_price').value = min2;
             document.getElementById('max_price').value = max2;
         }, 250);
-
-        // $("#span1").change(function() {
-        //     alert("The text has been changed.");
-        // });
 
         // Detect pagination click
         $('#pagination').on('click', 'a', function(e) {

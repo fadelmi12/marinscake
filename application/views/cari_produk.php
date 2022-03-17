@@ -1,8 +1,8 @@
 <div class="ps-hero bg--cover" data-background="<?= base_url() ?>assets/client/images/hero/product.jpg">
     <div class="ps-hero__content ">
-        <h1> Daftar Produk</h1>
+        <h1> Pencarian Produk</h1>
         <div class="text-center">
-            Home > Shop Page
+            Home > Pencarian "<?= $cari ?>"
         </div>
     </div>
 </div>
@@ -41,8 +41,8 @@
                             <h3 class="widget-title">Filter Price</h3>
                             <div class="ps-slider" data-default-min="0" data-default-max="<?= $max->harga ?>" data-max="<?= $max->harga ?>" data-step="100" data-unit="Rp"></div>
                             <p class="ps-slider__meta">Price:<span id="span1" class="ps-slider__value ps-slider__min"></span>-<span id="span2" class="ps-slider__value ps-slider__max"></span></p>
-                            <input type="text" name="min_price" id="min_price">
-                            <input type="text" name="max_price" id="max_price">
+                            <input type="hidden" name="min_price" id="min_price">
+                            <input type="hidden" name="max_price" id="max_price">
                             <button class="ac-slider__filter ps-btn ps-btn--sm" type="submit">Filter</button>
                         </div>
                     </div>

@@ -52,9 +52,9 @@
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                                 <?php if ($where == null) : ?>
-                                    <input id="kategori" type="text" name="kategori" value="1,2">
+                                    <input id="kategori" type="hidden" name="kategori" value="1,2">
                                 <?php else : ?>
-                                    <input id="kategori" type="text" name="kategori" value="<?= $jenis ?>">
+                                    <input id="kategori" type="hidden" name="kategori" value="<?= $jenis ?>">
                                 <?php endif ?>
                             </ul>
                         </div>

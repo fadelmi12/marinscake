@@ -121,6 +121,7 @@
                 success: function(response) {
                   $('#detail_cart').html(response.cart);
                   $('#detail_cart2').html(response.cart);
+                  $('#detail_keranjang').html(response.cart2);
                   var a1 = ' ditambahkan ke keranjang ';
                   var a2 = ' pcs';
                   var text = produk_nama + a1 + quantity + a2;
@@ -145,6 +146,7 @@
               success: function(response) {
                 $('#detail_cart').html(response.cart);
                 $('#detail_cart2').html(response.cart);
+                $('#detail_keranjang').html(response.cart2);
                 var a1 = ' ditambahkan ke keranjang ';
                 var a2 = ' pcs';
                 var text = produk_nama + a1 + quantity + a2;
@@ -192,6 +194,7 @@
             success: function(response) {
               $('#detail_cart').html(response.cart);
               $('#detail_cart2').html(response.cart);
+              $('#detail_keranjang').html(response.cart2);
               var a1 = ' ditambahkan ke keranjang ';
               var a2 = ' pcs';
               var text = produk_nama + a1 + quantity + a2;
@@ -221,6 +224,7 @@
         success: function(response) {
           $('#detail_cart').html(response.cart);
           $('#detail_cart2').html(response.cart);
+          $('#detail_keranjang').html(response.cart2);
           swal('Hapus', nama + ' dikeluarkan dari keranjang', 'success');
         }
       });

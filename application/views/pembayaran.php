@@ -151,23 +151,34 @@
                                 endif ?>
                             </td>
                             <td><?php echo date('j F Y H:i:s', strtotime($midtrans->waktu)) ?> WIB</td>
+                            <?php $waktu_bayar = $midtrans->waktu;
+                            $today = date('Y-m-d H:i:s');
+                            $batas = date('Y-m-d H:i:s', strtotime('+1 days', strtotime($waktu_bayar)));
+                            $batas_bayar = date('j F Y H:i:s', strtotime('+1 days', strtotime($waktu_bayar))); ?>
                             <td>
                                 <?php if ($midtrans->status == 201) : ?>
-                                    <span class="badge bg-warning">Menunggu</span>
+                                    <?php if (strtotime($today) > strtotime($batas)) : ?>
+                                        <span class="btn btn-danger text-light">Gagal</span>
+                                    <?php else : ?>
+                                        <span class="btn btn-warning text-light">Menunggu</span>
+                                    <?php endif ?>
                                 <?php elseif ($midtrans->status == 200) : ?>
-                                    <span class="badge bg-success">Sukses</span>
+                                    <span class="btn btn-success text-light">Sukses</span>
                                 <?php endif ?>
                             </td>
                             <td><a class="btn btn-info" href="<?= $midtrans->url ?>" target="_blank">Panduan</a></td>
                         </tr>
                     </table>
-                    <?php if ($midtrans->status == 201) :
-                        $waktu_bayar = $midtrans->waktu;
-                        $batas_bayar = date('j F Y H:i:s', strtotime('+1 days', strtotime($waktu_bayar)));
-                    ?>
-                        <div>
-                            <h5 class="text-danger">*Lakukan pembayaran sebelum <?= $batas_bayar ?> WIB</h5>
-                        </div>
+                    <?php if ($midtrans->status == 201) : ?>
+                        <?php if (strtotime($today) > strtotime($batas)) : ?>
+                            <div>
+                                <h5 class="text-danger">*Transaksi Anda gagal! batas pembayaran sudah terlewat</h5>
+                            </div>
+                        <?php else : ?>
+                            <div>
+                                <h5 class="text-danger">*Lakukan pembayaran sebelum <?= $batas_bayar ?> WIB</h5>
+                            </div>
+                        <?php endif ?>
                     <?php endif ?>
                 </div>
             <?php endif ?>
