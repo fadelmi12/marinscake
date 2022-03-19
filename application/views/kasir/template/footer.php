@@ -1,4 +1,4 @@
-<footer class="main-footer">
+<!-- <footer class="main-footer">
   <div class="footer-left">
     <a href="templateshub.net">Templateshub</a></a>
   </div>
@@ -6,7 +6,7 @@
   </div>
 </footer>
 </div>
-</div>
+</div> -->
 <!-- General JS Scripts -->
 
 

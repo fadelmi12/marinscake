@@ -53,7 +53,7 @@ var shoppingCart = (function () {
 		for (var i in cart) {
 			if (cart[i].name === name) {
 				cart[i].count = count;
-				console.log(count);
+				//console.log(count);
 				break;
 			}
 		}

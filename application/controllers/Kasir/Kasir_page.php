@@ -97,13 +97,11 @@ class Kasir_page extends CI_Controller
         } else {
 
             // Pembelian Langsung
-
             $total_belanja = $this->input->post('total_belanja');
-
             $data = array(
                 'total_belanja' => $total_belanja,
                 'metode'        => "Offline",
-                // 'pembayaran'	=> "Tunai",
+                'pembayaran'	=> "Tunai",
                 'status'        => "Selesai",
                 'tanggal'        => date("Y-m-d"),
             );

@@ -46,7 +46,7 @@
             <div class="col-12 col-sm-12 col-lg-12">
                 <div class="card ">
                     <div class="card-header bg-light">
-                        <h4>Grafik Total Transaksi</h4>
+                        <h4>Grafik Pemasukan & Pengeluaran</h4>
                     </div>
                     <div class="card-body">
                         <div class="col-12">
@@ -56,10 +56,15 @@
                                     <div class="list-inline text-center">
                                         <div class="list-inline-item p-r-30"><i data-feather="arrow-up-circle" class="col-red"></i>
                                             <h5 class="mb-0 m-b-0">Rp. 
-                                                <?php foreach($pengeluaran_modal as $p_ml){
-                                                    $tt_modal[] = ($p_ml['totalModal']);};
+                                                <?php 
+                                                if($pengeluaran_modal != null){
+                                                    foreach($pengeluaran_modal as $p_ml){
+                                                        $tt_modal[] = ($p_ml['totalModal']);
+                                                    };
                                                     echo number_format(array_sum($tt_modal), 0, '', '.');
-                                                ?>
+                                                } else{
+                                                    echo "0";
+                                                } ?>
                                             </h5>
                                             <p class="text-muted font-14 m-b-0">Total Pengeluaran</p>
                                         </div>
@@ -69,10 +74,15 @@
                                     <div class="list-inline text-center">
                                         <div class="list-inline-item p-r-30"><i data-feather="arrow-down-circle" class="col-green"></i>
                                         <h5 class="m-b-0">Rp. 
-                                            <?php foreach($transaksi_preorder as $trp){
-                                                $tr_pr[] = ($trp['jumlah']);};
-                                                echo number_format(array_sum($tr_pr), 0, '', '.');
-                                            ?>
+                                            <?php 
+                                            if($transaksi_preorder != null){
+                                                    foreach($transaksi_preorder as $trp){
+                                                        $tr_pr[] = ($trp['jumlah']);
+                                                    };
+                                                    echo number_format(array_sum($tr_pr), 0, '', '.');
+                                            } else{
+                                                echo "0";
+                                            } ?>
                                             </h5>
                                             <p class="text-muted font-14 m-b-0">Pemasukan Transaksi Preorder</p>
                                         </div>
@@ -82,10 +92,15 @@
                                     <div class="list-inline text-center">
                                         <div class="list-inline-item p-r-30"><i data-feather="arrow-down-circle" class="col-blue"></i>
                                             <h5 class="m-b-0">Rp. 
-                                            <?php foreach($transaksi_langsung as $trs){
-                                                $tr_ls[] = ($trs['total_belanja']);};
+                                            <?php 
+                                            if($transaksi_langsung != null){
+                                                foreach($transaksi_langsung as $trs){
+                                                    $tr_ls[] = ($trs['total_belanja']);
+                                                };
                                                 echo number_format(array_sum($tr_ls), 0, '', '.');
-                                            ?>
+                                            } else{
+                                                echo "0";
+                                            } ?>
                                             </h5>
                                             <p class="text-muted font-14 m-b-0">Pemasukan Transaksi Langsung</p>
                                         </div>
