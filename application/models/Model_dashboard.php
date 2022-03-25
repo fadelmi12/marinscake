@@ -57,7 +57,7 @@ class Model_dashboard extends CI_Model
         $tt_klr = array(''.$tahun.'-01',''.$tahun.'-02',''.$tahun.'-03',''.$tahun.'-04',''.$tahun.'-05',''.$tahun.'-06',''.$tahun.'-07',''.$tahun.'-08',''.$tahun.'-09',''.$tahun.'-10',''.$tahun.'-11',''.$tahun.'-12');
             
         for($i=0; $i<count($tt_klr); $i++){
-            $this->db->select_sum('totalModal');
+            $this->db->select_sum('total_modal');
             $this->db->from('modal');
             $this->db->like('tanggal', $tt_klr[$i]);
             $data[$i] = $this->db->get()->result();

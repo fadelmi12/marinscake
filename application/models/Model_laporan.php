@@ -60,7 +60,7 @@ class Model_laporan extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('produk');
-        $this->db->join('detail_transaksi', 'detail_transaksi.idProduk = produk.idProduk');
+        $this->db->join('detail_transaksi', 'detail_transaksi.id_produk = produk.id_produk');
         return $this->db->get();
     }
 
@@ -71,7 +71,7 @@ class Model_laporan extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('preorder');
-        $this->db->like('tanggalPesan', $filter);
+        $this->db->like('tanggal_pesan', $filter);
         return $this->db->get();
     }
 
@@ -80,7 +80,7 @@ class Model_laporan extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('produk');
-        $this->db->join('detail_preorder', 'detail_preorder.idProduk = produk.idProduk');
+        $this->db->join('detail_preorder', 'detail_preorder.id_produk = produk.id_produk');
         return $this->db->get();
     }
 
@@ -101,7 +101,7 @@ class Model_laporan extends CI_Model {
     {
         $this->db->select('SUM(jumlah) as preorder');
         $this->db->from('preorder');
-        $this->db->like('tanggalPesan', $filter);
+        $this->db->like('tanggal_pesan', $filter);
         $this->db->where(array('status' => 'Selesai'));
         return $this->db->get();
     }
@@ -109,7 +109,7 @@ class Model_laporan extends CI_Model {
     //get data dan hitung jumlah pengeluaran modal
     public function total_pengeluaran_modal($filter)
     {
-        $this->db->select('SUM(totalModal) as keluar_modal');
+        $this->db->select('SUM(total_modal) as keluar_modal');
         $this->db->from('modal');
         $this->db->like('tanggal', $filter);
         return $this->db->get();
@@ -118,7 +118,7 @@ class Model_laporan extends CI_Model {
     //get data dan hitung jumlah pengeluaran gaji
     public function total_pengeluaran_gaji($filter)
     {
-        $this->db->select('SUM(uangGaji) as keluar_gaji');
+        $this->db->select('SUM(uang_gaji) as keluar_gaji');
         $this->db->from('gaji_karyawan');
         $this->db->like('bulan', $filter);
         return $this->db->get();
