@@ -86,7 +86,7 @@
                                 <?php foreach ($detail as $det) : ?>
                                     <div class="row my-3">
                                         <div class="col-3">
-                                            <?= $det['namaProduk'] ?>
+                                            <?= $det['nama_produk'] ?>
                                         </div>
                                         <div class="col-2">
                                             <?= $det['jumlah'] ?>

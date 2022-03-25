@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 ">
                         <div class="ps-product__info">
-                            <h1 class="text-uppercase"><?= $prd['namaProduk'] ?></h1>
+                            <h1 class="text-uppercase"><?= $prd['nama_produk'] ?></h1>
                             <div class="ps-product__rating">
                             </div>
                             <h3 class="ps-product__price"><span>Rp <?= number_format($prd['harga'], '0', ',', '.') ?></span></h3>
@@ -48,7 +48,7 @@
                                 <form class="ps-form--shopping" id="cart" action="" method="post">
                                     <div class="form-group--number">
                                         <button class="minus"><span>-</span></button>
-                                        <input id="<?= $prd['idProduk'] ?>" class="form-control" type="text" value="<?= $prd['min_order'] ?>">
+                                        <input id="<?= $prd['id_produk'] ?>" class="form-control" type="text" value="<?= $prd['min_order'] ?>">
                                         <button class="plus"><span>+</span></button>
                                     </div>
                                 </form>
@@ -57,7 +57,7 @@
                                 <?php $i = 0;
                                 foreach ($gambar as $gbr) :
                                     if ($i == 0) : ?>
-                                        <button class="add_cart ps-btn ps-btn--yellow" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-minorder="<?= $prd['min_order'] ?>">Masukkan Keranjang</button>
+                                        <button class="add_cart ps-btn ps-btn--yellow" data-produkid="<?= $prd['id_produk'] ?>" data-produknama="<?= $prd['nama_produk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-produkstok="<?= $prd['stok'] ?>" data-minorder="<?= $prd['min_order'] ?>">Masukkan Keranjang</button>
                                 <?php endif;
                                     $i++;
                                 endforeach; ?>

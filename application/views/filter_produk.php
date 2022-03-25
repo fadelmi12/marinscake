@@ -32,22 +32,22 @@
                                 <?php foreach ($kategori as $ktg) :
                                     $cek = 0; ?>
                                     <?php if ($where == null) : ?>
-                                        <li id="jenis<?= $ktg['idJenis'] ?>" class="current">
-                                            <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                        <li id="jenis<?= $ktg['id_jenis'] ?>" class="current">
+                                            <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
                                         </li>
                                         <?php else :
                                         foreach ($where as $wer) :
-                                            if ($ktg['idJenis'] == $wer['idJenis']) :
+                                            if ($ktg['id_jenis'] == $wer['id_jenis']) :
                                                 $cek++;
                                             endif;
                                         endforeach;
                                         if ($cek > 0) : ?>
-                                            <li id="jenis<?= $ktg['idJenis'] ?>" class="current">
-                                                <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                            <li id="jenis<?= $ktg['id_jenis'] ?>" class="current">
+                                                <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
                                             </li>
                                         <?php else : ?>
                                             <li id="jenis<?= $ktg['idJenis'] ?>" class="">
-                                                <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                                <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
                                             </li> <?php endif ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -152,8 +152,8 @@
             sno = Number(sno);
             $('#product_item').empty();
             for (index in result) {
-                var id = result[index].idProduk;
-                var nama = result[index].namaProduk;
+                var id = result[index].id_produk;
+                var nama = result[index].nama_produk;
                 var price = result[index].harga;
                 var harga = formatRupiah(price, 'Rp ');
                 var stok = result[index].stok;

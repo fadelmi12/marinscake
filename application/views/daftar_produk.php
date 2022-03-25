@@ -31,7 +31,7 @@
                             <ul class="ps-list--checked">
                                 <?php foreach ($kategori as $ktg) : ?>
                                     <li class="current" id="jenis<?= $ktg['idJenis'] ?>">
-                                        <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
+                                        <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
                                     </li>
                                 <?php endforeach ?>
                             </ul>
@@ -119,8 +119,8 @@
             sno = Number(sno);
             $('#product_item').empty();
             for (index in result) {
-                var id = result[index].idProduk;
-                var nama = result[index].namaProduk;
+                var id = result[index].id_produk;
+                var nama = result[index].nama_produk;
                 var price = result[index].harga;
                 var harga = formatRupiah(price, 'Rp ');
                 var stok = result[index].stok;

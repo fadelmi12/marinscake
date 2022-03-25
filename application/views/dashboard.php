@@ -86,26 +86,26 @@
                         <div class="ps-product ps-product--horizontal d-flex align-items-center">
                             <div class="ps-product__thumbnail">
                                 <?php foreach ($gambar as $gbr) :
-                                    if ($gbr['id_produk'] == $prd['idProduk']) : ?>
+                                    if ($gbr['id_produk'] == $prd['id_produk']) : ?>
                                         <img src="<?= base_url() ?>uploads/gambar_produk/<?= $gbr['gambar'] ?>" alt="" />
                                 <?php endif;
                                 endforeach ?>
-                                <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"></a>
+                                <a class="ps-product__overlay" href="<?= base_url() ?>produk/detail/<?= $prd['id_produk'] ?>"></a>
                                 <ul class="ps-product__actions">
                                     <li>
-                                        <a href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
+                                        <a href="<?= base_url() ?>produk/detail/<?= $prd['id_produk'] ?>" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a>
                                     </li>
                                     <li>
                                         <?php foreach ($gambar as $gbr) :
-                                            if ($gbr['id_produk'] == $prd['idProduk']) : ?>
-                                                <a class="tambah_cart" data-produkid="<?= $prd['idProduk'] ?>" data-produknama="<?= $prd['namaProduk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-minorder="<?= $prd['min_order'] ?>" data-tooltip="Add To Cart"><i class="ba-shopping"></i></a>
+                                            if ($gbr['id_produk'] == $prd['id_produk']) : ?>
+                                                <a class="tambah_cart" data-produkid="<?= $prd['id_produk'] ?>" data-produknama="<?= $prd['nama_produk'] ?>" data-produkharga="<?= $prd['harga'] ?>" data-produkgambar="<?= $gbr['gambar'] ?>" data-minorder="<?= $prd['min_order'] ?>" data-tooltip="Add To Cart"><i class="ba-shopping"></i></a>
                                         <?php endif;
                                         endforeach ?>
                                     </li>
                                 </ul>
                             </div>
                             <div class="ps-product__content">
-                                <a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $prd['idProduk'] ?>"><?= $prd['namaProduk'] ?></a>
+                                <a class="ps-product__title" href="<?= base_url() ?>produk/detail/<?= $prd['id_produk'] ?>"><?= $prd['nama_produk'] ?></a>
                                 <p>
                                     min order <?= $prd['min_order'] ?> pcs
                                 </p>
