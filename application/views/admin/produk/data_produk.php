@@ -38,10 +38,10 @@
                                                 <?php echo $no++ ?>
                                             </td>
                                             <td>
-                                                <?php echo $data_produk['namaProduk'] ?>
+                                                <?php echo $data_produk['nama_produk'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $data_produk['namaJenis'] ?>
+                                                <?php echo $data_produk['nama_jenis'] ?>
                                             </td>
                                             <td>
                                                 Rp <?php echo number_format($data_produk['harga'], 0, '', '.') ?>
@@ -54,13 +54,13 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around">
-                                                    <button class="btn btn-info" onclick="$('#detail_produk<?= $data_produk['idProduk'] ?>').appendTo('body').modal('show');">
+                                                    <button class="btn btn-info" onclick="$('#detail_produk<?= $data_produk['id_produk'] ?>').appendTo('body').modal('show');">
                                                         <i class="fas fa-search"></i>
                                                     </button>
-                                                    <button class="btn btn-warning" onclick="window.location.href='<?php echo base_url('admin/produk/edit_produk/' . $data_produk['idProduk']) ?>'">
+                                                    <button class="btn btn-warning" onclick="window.location.href='<?php echo base_url('admin/produk/edit_produk/' . $data_produk['id_produk']) ?>'">
                                                         <i class="fas fa-pen"></i>
                                                     </button>
-                                                    <button class="btn btn-danger" onclick="hapus_produk(<?php echo $data_produk['idProduk']; ?>)">
+                                                    <button class="btn btn-danger" onclick="hapus_produk(<?php echo $data_produk['id_produk']; ?>)">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>
@@ -79,11 +79,11 @@
 
 <!-- modal detail produk -->
 <?php foreach ($produk as $data_produk) : ?>
-    <div class="modal fade bd-example-modal-xl" id="detail_produk<?= $data_produk['idProduk'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-xl" id="detail_produk<?= $data_produk['id_produk'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header justify-content-between">
-                    <h5 class="modal-title">Detail Produk <?php echo $data_produk['namaProduk'] ?></h5>
+                    <h5 class="modal-title">Detail Produk <?php echo $data_produk['nama_produk'] ?></h5>
                     <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal" style="margin-top: -9px;"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="modal-body pb-2 pt-4">
@@ -101,7 +101,7 @@
                                                             <i class="fas fa-quote-left"></i>
                                                         </div>
                                                     </div>
-                                                    <input readonly disabled type="text" class="form-control" name="nama_produk" value="<?php echo $data_produk['namaProduk'] ?>">
+                                                    <input readonly disabled type="text" class="form-control" name="nama_produk" value="<?php echo $data_produk['nama_produk'] ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -124,8 +124,8 @@
                                             <div class="form-group">
                                                 <label>Kategori</label>
                                                 <?php foreach ($kategori as $ktg) :
-                                                    if ($data_produk['idJenis'] == $ktg['idJenis']) : ?>
-                                                        <input readonly disabled type="text" class="form-control" value="<?= $ktg['namaJenis'] ?>">
+                                                    if ($data_produk['id_jenis'] == $ktg['id_jenis']) : ?>
+                                                        <input readonly disabled type="text" class="form-control" value="<?= $ktg['nama_jenis'] ?>">
                                                 <?php endif;
                                                 endforeach; ?>
                                             </div>
@@ -168,7 +168,7 @@
                                     <div class="form-group">
                                         <div class="row justify-content-around">
                                             <?php foreach ($gambar as $gb_produk) :
-                                                if ($gb_produk['id_produk'] == $data_produk['idProduk']) : ?>
+                                                if ($gb_produk['id_produk'] == $data_produk['id_produk']) : ?>
                                                     <img src="<?php echo base_url() . '/uploads/gambar_produk/' . $gb_produk["gambar"]; ?>" alt="" style="width: 40%; height: auto;" class="img-thumbnail shadow p-3 bg-white rounded mb-5" alt="Responsive image">
                                             <?php endif;
                                             endforeach; ?>
@@ -187,7 +187,7 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    function hapus_produk($idProduk) {
+    function hapus_produk($id_produk) {
         swal({
             title: "Hapus produk",
             text: "Apakah anda yakin ingin menghapus produk ini ?",
@@ -196,7 +196,7 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/produk/hapus_produk/') ?>" + $idProduk;
+                window.location = "<?php echo base_url('admin/produk/hapus_produk/') ?>" + $id_produk;
             } else {
                 swal("Produk gagal dihapus");
             }

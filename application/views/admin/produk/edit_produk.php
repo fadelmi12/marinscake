@@ -4,7 +4,7 @@
         foreach ($produk as $data_produk) : ?>
             <div class="row">
                 <div class="col-lg-6">
-                    <form id="form_edit_produk" action="<?php echo base_url("Admin/Produk/update_produk/") . $data_produk['idProduk']; ?>" method="post" enctype="multipart/form-data">
+                    <form id="form_edit_produk" action="<?php echo base_url("Admin/Produk/update_produk/") . $data_produk['id_produk']; ?>" method="post" enctype="multipart/form-data">
                         <div class="card">
                             <div class="card-header">
                                 <h4>
@@ -21,7 +21,7 @@
                                                     <i class="fas fa-quote-left"></i>
                                                 </div>
                                             </div>
-                                            <input required id="nama_produk" type="text" class="form-control" name="nama_produk" value="<?php echo $data_produk['namaProduk'] ?>">
+                                            <input required id="nama_produk" type="text" class="form-control" name="nama_produk" value="<?php echo $data_produk['nama_produk'] ?>">
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-6">
@@ -41,9 +41,9 @@
                                         <label>Kategori</label>
                                         <select id="kategori" class="form-control selectric" name="kategori">
                                             <?php foreach ($kategori as $ktg) : ?>
-                                                <option value="<?php echo $ktg['idJenis'] ?>" <?php if ($data_produk['idJenis'] == $ktg['idJenis']) : echo "selected";
-                                                                                                endif; ?>>
-                                                    <?php echo $ktg['namaJenis'] ?>
+                                                <option value="<?php echo $ktg['id_jenis'] ?>" 
+                                                    <?php if ($data_produk['id_jenis'] == $ktg['id_jenis']) : echo "selected"; endif; ?>>
+                                                    <?php echo $ktg['nama_jenis'] ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
@@ -100,24 +100,24 @@
                                     </div>
                                 </div>
                                 <!-- id produk -->
-                                <input hidden id="id_produk" type="text" value="<?= $data_produk['idProduk'] ?>">
+                                <input hidden id="id_produk" type="text" value="<?= $data_produk['id_produk'] ?>">
                                 <!-- total gambar -->
                                 <input hidden id="total_gambar" type="text" value="">
                                 <!-- random kode -->
                                 <input hidden id="list_kode" type="text" value="">
                                 <div class="col-12 input_gambar" id="jumlah_gambar">
                                     <?php foreach ($gambar as $gb_produk) :
-                                        if ($data_produk['idProduk'] == $gb_produk['id_produk']) : ?>
-                                            <form onsubmit="return false" id="form_gambar<?= $gb_produk['id_gambarProduk'] ?>" method="POST" enctype="multipart/form-data">
-                                                <div class="row mb-2" id="row_gambar<?= $gb_produk['id_gambarProduk']; ?>">
+                                        if ($data_produk['id_produk'] == $gb_produk['id_produk']) : ?>
+                                            <form onsubmit="return false" id="form_gambar<?= $gb_produk['id_gambar_produk'] ?>" method="POST" enctype="multipart/form-data">
+                                                <div class="row mb-2" id="row_gambar<?= $gb_produk['id_gambar_produk']; ?>">
                                                     <div class="col-4 col align-self-center" align="center">
-                                                        <img id="gambar<?= $gb_produk['id_gambarProduk'] ?>" alt="your image" width="100" height="auto" src="<?php echo base_url() . '/uploads/gambar_produk/' . $gb_produk["gambar"]; ?>" />
+                                                        <img id="gambar<?= $gb_produk['id_gambar_produk'] ?>" alt="your image" width="100" height="auto" src="<?php echo base_url() . '/uploads/gambar_produk/' . $gb_produk["gambar"]; ?>" />
                                                     </div>
                                                     <div class="col-6 col align-self-center">
-                                                        <input name="gambar" id="upload<?= $gb_produk['id_gambarProduk'] ?>" class="form-control-file" type="file" accept="image/*" onchange="update_gambar(<?= $gb_produk['id_gambarProduk'] ?>)">
+                                                        <input name="gambar" id="upload<?= $gb_produk['id_gambar_produk'] ?>" class="form-control-file" type="file" accept="image/*" onchange="update_gambar(<?= $gb_produk['id_gambar_produk'] ?>)">
                                                     </div>
                                                     <div class="col-2 col align-self-center">
-                                                        <button type="button" class="btn btn-danger" onclick="hapus_gambar(<?= $gb_produk['id_gambarProduk'] ?>)">
+                                                        <button type="button" class="btn btn-danger" onclick="hapus_gambar(<?= $gb_produk['id_gambar_produk'] ?>)">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </div>
@@ -158,18 +158,18 @@
             var random_kode = Math.floor((Math.random() * 1000000) + 1); //random_kode
             $(wrapper).append('' +
                 '<form onsubmit="return false" id="form_gambar' + random_kode + '" method="POST" enctype="multipart/form-data"> ' +
-                '<div class="row mb-2" id="row_gambar' + random_kode + '">' +
-                '<div class="col-4 col align-self-center" align="center">' +
-                '<img id="gambar' + random_kode + '" alt="your image" width="100" height="auto"/>' +
-                '</div>' +
-                '<div class="col-6 col align-self-center">' +
-                '<input required id="upload' + random_kode + '" class="form-control-file" type="file" accept="image/*" name="gambar" onchange="insert_gambar(' + random_kode + ')">' +
-                //'<input hidden type="text" id="random'+ a++ +'" value="'+ random_kode +'">'+
-                '</div>' +
-                '<div class="col-2 col align-self-center">' +
-                '<button id="hapus' + random_kode + '" onclick="delete_form_gambar(' + parseInt(random_kode) + ')" type="button" class="btn btn-danger remove_field"><i class="fas fa-trash"></button>' +
-                '</div>' +
-                '</div>' +
+                    '<div class="row mb-2" id="row_gambar' + random_kode + '">' +
+                        '<div class="col-4 col align-self-center" align="center">' +
+                            '<img id="gambar' + random_kode + '" alt="your image" width="100" height="auto"/>' +
+                        '</div>' +
+                        '<div class="col-6 col align-self-center">' +
+                            '<input required id="upload' + random_kode + '" class="form-control-file" type="file" accept="image/*" name="gambar" onchange="insert_gambar(' + random_kode + ')">' +
+                        //'<input hidden type="text" id="random'+ a++ +'" value="'+ random_kode +'">'+
+                        '</div>' +
+                        '<div class="col-2 col align-self-center">' +
+                            '<button id="hapus' + random_kode + '" onclick="delete_form_gambar(' + parseInt(random_kode) + ')" type="button" class="btn btn-danger remove_field"><i class="fas fa-trash"></button>' +
+                        '</div>' +
+                    '</div>' +
                 '</form>'
             ); // add input boxes.
             $("#upload" + random_kode).focus();
@@ -251,7 +251,7 @@
                 type: "POST",
                 dataType: "text",
                 data: {
-                    id_gambarProduk: id_gambar,
+                    id_gambar_produk: id_gambar,
                 },
                 success: function(data) {
                     document.getElementById("row_gambar" + id_gambar).innerHTML = data;
@@ -274,7 +274,7 @@
                 type: "POST",
                 dataType: "text",
                 data: {
-                    id_gambarProduk: id_gambar,
+                    id_gambar_produk: id_gambar,
                 },
                 success: function(data) {
                     //document.getElementById("row_gambar" + id_gambar).innerHTML = data;

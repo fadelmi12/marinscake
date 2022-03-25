@@ -40,8 +40,8 @@
                                     <label>Kategori</label>
                                     <select class="form-control selectric" name="kategori">
                                         <?php foreach ($kategori as $ktg) : ?>
-                                            <option value="<?php echo $ktg['idJenis'] ?>">
-                                                <?php echo $ktg['namaJenis'] ?>
+                                            <option value="<?php echo $ktg['id_jenis'] ?>">
+                                                <?php echo $ktg['nama_jenis'] ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>

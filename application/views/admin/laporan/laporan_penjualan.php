@@ -45,20 +45,20 @@
                                             <td><?= $dt_trans['pembayaran']?></td>
                                             <td><?= $dt_trans['status']?></td>
                                             <td>
-                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['idTransaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
+                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['id_transaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
                                         </tr>
                                     <?php endforeach;
                                     foreach($data_preorder as $dt_pre): ?>
                                         <tr>
                                             <td class="text-center"><?= $no++?></td>
-                                            <td class="text-center"><?= $dt_pre['tanggalPesan']?></td>
+                                            <td class="text-center"><?= $dt_pre['tanggal_pesan']?></td>
                                             <td>Rp <?php echo number_format($dt_pre['jumlah'], 0, '', '.') ?></td>
                                             <td><?= $dt_pre['metode']?></td>
                                             <td><?= $dt_pre['pembayaran']?></td>
                                             <td><?= $dt_pre['status']?></td>
                                             <td>
-                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['idPreorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
+                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['id_preorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -90,7 +90,7 @@
                                             <td><?= $dt_trans['pembayaran']?></td>
                                             <td><?= $dt_trans['status']?></td>
                                             <td>
-                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['idTransaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
+                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['id_transaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
                                         </tr>
                                     <?php endforeach;?>
@@ -116,13 +116,13 @@
                                         foreach($data_preorder as $dt_pre): ?>
                                         <tr>
                                             <td class="text-center"><?= $no++?></td>
-                                            <td class="text-center"><?= $dt_pre['tanggalPesan']?></td>
+                                            <td class="text-center"><?= $dt_pre['tanggal_pesan']?></td>
                                             <td>Rp <?php echo number_format($dt_pre['jumlah'], 0, '', '.') ?></td>
                                             <td><?= $dt_pre['metode']?></td>
                                             <td><?= $dt_pre['pembayaran']?></td>
                                             <td><?= $dt_pre['status']?></td>
                                             <td>
-                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['idPreorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
+                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['id_preorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -138,7 +138,7 @@
 
 <!-- modal detail Transaksi -->
 <?php foreach ($data_transaksi as $dt_trans) : ?>
-    <div class="modal fade bd-example-modal-lg" id="modal_detail_transaksi<?= $dt_trans['idTransaksi'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="modal_detail_transaksi<?= $dt_trans['id_transaksi'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -165,13 +165,13 @@
                                 <?php 
                                 $no = 1;
                                 foreach($detail_transaksi as $dtl_trans): 
-                                if ($dt_trans['idTransaksi'] == $dtl_trans['idTransaksi']):?>
+                                if ($dt_trans['id_transaksi'] == $dtl_trans['id_transaksi']):?>
                                     <tr>
                                         <td class="text-center">
                                             <?= $no++?>
                                         </td>
                                         <td>
-                                            <?= $dtl_trans['namaProduk'] ?>
+                                            <?= $dtl_trans['nama_produk'] ?>
                                         </td>
                                         <td>
                                             <?= $dtl_trans['jumlah'] ?>
@@ -202,7 +202,7 @@
 
 <!-- modal detail Preorder -->
 <?php foreach ($data_preorder as $dt_pre) : ?>
-    <div class="modal fade bd-example-modal-lg" id="modal_detail_preorder<?= $dt_pre['idPreorder'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="modal_detail_preorder<?= $dt_pre['id_preorder'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -229,7 +229,7 @@
                                 <?php 
                                 $no = 1;
                                 foreach($detail_preorder as $dtl_pre): 
-                                if ($dt_pre['idPreorder'] == $dtl_pre['idPreorder']):?>
+                                if ($dt_pre['id_preorder'] == $dtl_pre['id_preorder']):?>
                                     <tr>
                                         <td class="text-center">
                                             <?= $no++?>

@@ -75,7 +75,7 @@
                      <td colspan="3" align="center" height="15" style="padding: 5px 0;">
                         <?= $no++ ?>
                     </td>
-                    <td colspan="5" align="left" style="margin-left: 5px; padding-left:10px"><?= $dt_pre['tanggalPesan']?>
+                    <td colspan="5" align="left" style="margin-left: 5px; padding-left:10px"><?= $dt_pre['tanggal_pesan']?>
                     </td>
                     <td colspan="5" align="center">
                         Rp <?php echo number_format($dt_pre['jumlah'], 0, '', '.') ?>

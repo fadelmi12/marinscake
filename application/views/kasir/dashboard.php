@@ -1,31 +1,33 @@
 <div class="main-content">
     <section class="section">
         <div class="row">
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-header justify-content-between" style="background-color: #f0f3ff;">
-                        <h4>Transaksi Langsung <i class="fas fa-info-circle fa-1x" style="color: #6778f0;"></i></h4>
+            <div class="col-md-4">
+                <div class="row justify-content-around">
+                    <div class="card col-12 col-sm-5 col-md-12">
+                        <div class="card-header justify-content-between" style="background-color: #f0f3ff;">
+                            <h4>Transaksi Langsung <i class="fas fa-info-circle fa-1x" style="color: #6778f0;"></i></h4>
+                        </div>
+                        <div class="card-body">
+                            <h7>Total Pendapatan:</h7>
+                            <h4><strong>Rp. 250.000</strong></h4>
+                            <h7>Total Transaksi:</h7>
+                            <h4><strong>25</strong></h4>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h7>Total Pendapatan:</h7>
-                        <h4><strong>Rp. 250.000</strong></h4>
-                        <h7>Total Transaksi:</h7>
-                        <h4><strong>25</strong></h4>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header justify-content-between" style="background-color: #f0f3ff;">
-                        <h4>Transaksi Preorder <i class="fas fa-info-circle fa-1x" style="color: #6778f0;"></i></h4>
-                    </div>
-                    <div class="card-body">
-                        <h7>Total Pendapatan:</h7>
-                        <h4><strong>Rp. 500.000</strong></h4>
-                        <h7>Total Transaksi:</h7>
-                        <h4><strong>50</strong></h4>
+                    <div class="card col-12 col-sm-5 col-md-12">
+                        <div class="card-header justify-content-between" style="background-color: #f0f3ff;">
+                            <h4>Transaksi Preorder <i class="fas fa-info-circle fa-1x" style="color: #6778f0;"></i></h4>
+                        </div>
+                        <div class="card-body">
+                            <h7>Total Pendapatan:</h7>
+                            <h4><strong>Rp. 500.000</strong></h4>
+                            <h7>Total Transaksi:</h7>
+                            <h4><strong>50</strong></h4>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header justify-content-between" style="background-color: #f0f3ff;">
                         <h4>Grafik Penjualan</h4>

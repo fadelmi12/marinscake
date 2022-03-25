@@ -47,11 +47,11 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around">
-                                                    <button class="btn btn-info" data-toggle="modal" data-target="#detail_modal<?= $dt_modal['idModal'] ?>">
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#detail_modal<?= $dt_modal['id_modal'] ?>">
                                                         <i class="fas fa-search"></i> Detail</button>
-                                                    <button class="btn btn-warning" type="button" onclick="window.location.href='<?php echo base_url('admin/modal/edit_modal/'.$dt_modal['idModal'].'/'.$tanggal) ?>'">
+                                                    <button class="btn btn-warning" type="button" onclick="window.location.href='<?php echo base_url('admin/modal/edit_modal/'.$dt_modal['id_modal'].'/'.$tanggal) ?>'">
                                                         <i class="fas fa-pen"></i> Edit</button>
-                                                    <button class="btn btn-danger" onclick="hapus_modal(<?= $dt_modal['idModal'];?>)" type="button">
+                                                    <button class="btn btn-danger" onclick="hapus_modal(<?= $dt_modal['id_modal'];?>)" type="button">
                                                         <i class="fas fa-trash"></i> Hapus</button>
                                                 </div>
                                             </td>
@@ -185,7 +185,7 @@ input[type=number] {
 
 <!-- modal detail biaya produksi-->
 <?php foreach ($data_modal as $dt_modal) : ?>
-    <div class="modal fade bd-example-modal-lg" id="detail_modal<?= $dt_modal['idModal'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="detail_modal<?= $dt_modal['id_modal'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -212,7 +212,7 @@ input[type=number] {
                                 <?php 
                                 $no = 1;
                                 foreach($detail_modal as $dtl_modal): 
-                                if ($dt_modal['idModal'] == $dtl_modal['idModal']):?>
+                                if ($dt_modal['id_modal'] == $dtl_modal['id_modal']):?>
                                     <tr>
                                         <td class="text-center">
                                             <?= $no++?>
@@ -317,7 +317,7 @@ input[type=number] {
         document.getElementById("totalHarga"+$c).value = total;
     }
 
-    function hapus_modal($idModal) {
+    function hapus_modal($id_modal) {
         var tanggal = document.getElementById('tanggal_filter').value;
         swal({
             title: "Hapus Modal",
@@ -327,7 +327,7 @@ input[type=number] {
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/modal/hapus_modal/') ?>" + $idModal +'_'+ tanggal;
+                window.location = "<?php echo base_url('admin/modal/hapus_modal/') ?>" + $id_modal +'_'+ tanggal;
             } else {
                 swal("Data modal batal dihapus");
             }

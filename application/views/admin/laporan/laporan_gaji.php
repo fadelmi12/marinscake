@@ -46,14 +46,14 @@
                                                     Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
                                                 <?php else:
                                                     foreach ($gaji_karyawan as $gaji_kr):
-                                                        $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
+                                                        $gj_kr[] = $gaji_kr['id_karyawan'].$gaji_kr['bulan'];
                                                     endforeach;
 
-                                                    if (in_array($data_kr['idKaryawan'].$bulan, $gj_kr)):
+                                                    if (in_array($data_kr['id_karyawan'].$bulan, $gj_kr)):
 
                                                         foreach ($gaji_karyawan as $gaji_kr):
-                                                            if ($gaji_kr['idKaryawan'] == $data_kr['idKaryawan'] && $gaji_kr['bulan'] == $bulan): ?>
-                                                                <?= 'Rp'.number_format($gaji_kr['uangGaji'], 0, '', '.'); ?>
+                                                            if ($gaji_kr['id_karyawan'] == $data_kr['id_karyawan'] && $gaji_kr['bulan'] == $bulan): ?>
+                                                                <?= 'Rp'.number_format($gaji_kr['uang_gaji'], 0, '', '.'); ?>
                                                             <?php endif;
                                                         endforeach; ?>
                                                         
@@ -68,10 +68,10 @@
                                                     echo "Belum Terbayar";
                                                 }else{
                                                     foreach ($gaji_karyawan as $gaji_kr):
-                                                        $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
+                                                        $gj_kr[] = $gaji_kr['id_karyawan'].$gaji_kr['bulan'];
                                                     endforeach;
 
-                                                    if (in_array($data_kr['idKaryawan'].$bulan, $gj_kr))
+                                                    if (in_array($data_kr['id_karyawan'].$bulan, $gj_kr))
                                                         {echo "Terbayar";}
                                                     else{echo "Belum terbayar";}
                                                 }
@@ -80,24 +80,24 @@
                                         <td align="center">
                                             <?php 
                                                 if ($gaji_karyawan == null) {?>
-                                                    <div id="Konfirmasi1<?= $data_kr['idKaryawan']?>">
-                                                        <button onclick="window.location.href='<?php echo base_url('admin/laporan/gaji_lunas/'.$data_kr['idKaryawan'].'_'.$bulan)?>'" class="btn btn-success" type="button"><i class="fas fa-check mr-2"></i>Konfirmasi</button>
+                                                    <div id="Konfirmasi1<?= $data_kr['id_karyawan']?>">
+                                                        <button onclick="window.location.href='<?php echo base_url('admin/laporan/gaji_lunas/'.$data_kr['id_karyawan'].'_'.$bulan)?>'" class="btn btn-success" type="button"><i class="fas fa-check mr-2"></i>Konfirmasi</button>
                                                     </div>
                                                     
                                                <?php }else{
                                                     foreach ($gaji_karyawan as $gaji_kr):
-                                                        $gj_kr[] = $gaji_kr['idKaryawan'].$gaji_kr['bulan'];
+                                                        $gj_kr[] = $gaji_kr['id_karyawan'].$gaji_kr['bulan'];
                                                     endforeach;
 
-                                                    if (in_array($data_kr['idKaryawan'].$bulan, $gj_kr)){?>
+                                                    if (in_array($data_kr['id_karyawan'].$bulan, $gj_kr)){?>
                                                         <?php foreach ($gaji_karyawan as $gaji_kr):
-                                                            if ($gaji_kr['idKaryawan'] == $data_kr['idKaryawan'] && $gaji_kr['bulan'] == $bulan): ?>
+                                                            if ($gaji_kr['id_karyawan'] == $data_kr['id_karyawan'] && $gaji_kr['bulan'] == $bulan): ?>
                                                                 <button onclick="window.location.href='<?php echo base_url('admin/laporan/hapus_gaji/'.$gaji_kr['idGaji'])?>'" class="btn btn-danger col-6" type="button"><i class="fas fa-times mr-2"></i>Batal</button>
                                                             <?php endif;
                                                         endforeach; ?>
                                                     <?php }else{?>
-                                                        <div id="Konfirmasi2<?= $data_kr['idKaryawan']?>">
-                                                            <button onclick="window.location.href='<?php echo base_url('admin/laporan/gaji_lunas/'.$data_kr['idKaryawan'].'_'.$bulan)?>'" class="btn btn-success" type="button"><i class="fas fa-check mr-2"></i>Konfirmasi</button>
+                                                        <div id="Konfirmasi2<?= $data_kr['id_karyawan']?>">
+                                                            <button onclick="window.location.href='<?php echo base_url('admin/laporan/gaji_lunas/'.$data_kr['id_karyawan'].'_'.$bulan)?>'" class="btn btn-success" type="button"><i class="fas fa-check mr-2"></i>Konfirmasi</button>
                                                         </div>
                                                     <?php }
                                                 }

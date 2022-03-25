@@ -69,22 +69,22 @@
                     </tr>
                     <?php $no = 1;
                     foreach ($detail_modal as $dtl_modal):
-                    if ($dt_modal['idModal'] == $dtl_modal['idModal']):?>
+                    if ($dt_modal['id_modal'] == $dtl_modal['id_modal']):?>
                         <tr>
                              <td align="center" height="15" style="padding: 5px 0;">
                                 <?= $no++ ?>
                             </td>
                             <td align="left" style="margin-left: 5px; padding-left:10px">
-                                 <?= $dtl_modal['namaBahan'] ?>
+                                 <?= $dtl_modal['nama_bahan'] ?>
                             </td>
                             <td align="center">
                                  <?= $dtl_modal['jumlah'] ?>
                             </td>
                             <td align="left" style="padding-left:35px">
-                                Rp <?= number_format($dtl_modal['hargaSatuan'], 0, '', '.') ?>
+                                Rp <?= number_format($dtl_modal['harga_satuan'], 0, '', '.') ?>
                             </td>
                             <td align="left" style="padding-left:35px">
-                                Rp <?= number_format($dtl_modal['totalHarga'], 0, '', '.') ?>
+                                Rp <?= number_format($dtl_modal['total_harga'], 0, '', '.') ?>
                             </td>
                         </tr>
                     <?php 
@@ -94,7 +94,7 @@
                             <strong>Total Pengeluaran</strong>
                         </td>
                         <td align="center" style="padding: 7px 0;">
-                            <strong>Rp. <?php echo number_format($dt_modal['totalModal'], 0, '', '.') ?></strong>
+                            <strong>Rp. <?php echo number_format($dt_modal['total_modal'], 0, '', '.') ?></strong>
                         </td>
                     </tr>
                 </table>

@@ -9,7 +9,7 @@ class Model_produk extends CI_Model
 		$this->db->from('produk');
 		$this->db->join('gambar_produk', 'produk.id_produk = gambar_produk.id_produk');
 		$this->db->join('jenis_produk', 'jenis_produk.id_jenis = produk.id_jenis');
-		$this->db->group_by('id_produk');
+		$this->db->group_by('gambar_produk.id_produk');
 		return $this->db->get();
 	}
 
@@ -88,7 +88,7 @@ class Model_produk extends CI_Model
 		if ($max_price != null) {
 			$this->db->where('harga <=', $max_price);
 		}
-		$this->db->group_by('id_produk', 'ASC');
+		$this->db->group_by('gambar_produk.id_produk', 'ASC');
 		// $this->db->limit(5);
 
 		return $this->db->get();
@@ -110,7 +110,7 @@ class Model_produk extends CI_Model
 		$this->db->select('*');
 		$this->db->from('produk');
 		$this->db->join('gambar_produk', 'produk.id_produk = gambar_produk.id_produk');
-		$this->db->group_by('id_produk');
+		$this->db->group_by('gambar_produk.id_produk');
 		$this->db->where('id_jenis', $id_kategori);
 		$this->db->where('id_produk!=', $id_produk);
 		return $this->db->get();
@@ -121,7 +121,7 @@ class Model_produk extends CI_Model
 		$this->db->select('*');
 		$this->db->from('produk');
 		$this->db->join('gambar_produk', 'produk.id_produk = gambar_produk.id_produk');
-		$this->db->group_by('id_produk');
+		$this->db->group_by('gambar_produk.id_produk');
 		$this->db->where('id_jenis', $id_kategori);
 		$this->db->where('id_produk!=', $id_produk);
 		$this->db->limit($limit);
@@ -149,7 +149,7 @@ class Model_produk extends CI_Model
 		$this->db->select('*');
 		$this->db->from('produk');
 		$this->db->join('gambar_produk', 'produk.id_produk = gambar_produk.id_produk');
-		$this->db->group_by('id_produk');
+		$this->db->group_by('gambar_produk.id_produk');
 		$this->db->like('nama_produk', $keyword);
 		$this->db->limit($rowperpage, $rowno);
 		return $this->db->get();
@@ -171,7 +171,7 @@ class Model_produk extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('gambar_produk');
-		$this->db->group_by('id_produk');
+		$this->db->group_by('gambar_produk.id_produk');
 		return $this->db->get();
 	}
 
@@ -190,7 +190,7 @@ class Model_produk extends CI_Model
 		$this->db->select('*');
 		$this->db->from('produk');
 		$this->db->join('gambar_produk', 'produk.id_produk = gambar_produk.id_produk', 'l');
-		$this->db->group_by('id_produk');
+		$this->db->group_by('gambar_produk.id_produk');
 		$this->db->limit($rowperpage, $rowno);
 		$query = $this->db->get();
 

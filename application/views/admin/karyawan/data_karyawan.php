@@ -38,20 +38,20 @@
                                                 <?php echo $data_kr['nama'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $data_kr['jenisKelamin'] ?>
+                                                <?php echo $data_kr['jenis_kelamin'] ?>
                                             </td>
                                             <td>
                                                 <?php echo $data_kr['posisi'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $data_kr['noHp'] ?>
+                                                <?php echo $data_kr['no_hp'] ?>
                                             </td>
                                             <td>
                                                 Rp <?php echo number_format($data_kr['gaji'], 0, '', '.') ?>
                                             </td>
                                             <td class="d-flex justify-content-around">
-                                                <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#modal_edit_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-pen mr-1"></i> Edit</button>
-                                                <button onclick="hapus_karyawan(<?php echo $data_kr['idKaryawan']; ?>)" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus_karyawan<?php echo $data_kr['idKaryawan'] ?>"><i class="fas fa-trash mr-1"></i> Hapus</button>
+                                                <button type="button" class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-target="#modal_edit_karyawan<?php echo $data_kr['id_karyawan'] ?>"><i class="fas fa-pen mr-1"></i> Edit</button>
+                                                <button onclick="hapus_karyawan(<?php echo $data_kr['id_karyawan']; ?>)" type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_hapus_karyawan<?php echo $data_kr['id_karyawan'] ?>"><i class="fas fa-trash mr-1"></i> Hapus</button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -147,7 +147,7 @@
 
 <!-- Modal edit Karyawan-->
 <?php foreach ($data_karyawan as $data_kr) : ?>
-    <div class="modal fade" id="modal_edit_karyawan<?php echo $data_kr['idKaryawan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_edit_karyawan<?php echo $data_kr['id_karyawan'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-center">
             <div class="modal-content">
                 <div class="modal-header">
@@ -157,7 +157,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('admin/karyawan/update_karyawan/') . $data_kr['idKaryawan']; ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/karyawan/update_karyawan/') . $data_kr['id_karyawan']; ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>
                                 Nama
@@ -171,11 +171,11 @@
                                         Jenis Kelamin
                                     </label>
                                     <select class="form-control selectric" name="kelamin" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required>
-                                        <option <?php if ($data_kr['jenisKelamin'] == 'Laki-Laki') : echo "selected";
+                                        <option <?php if ($data_kr['jenis_kelamin'] == 'Laki-Laki') : echo "selected";
                                                 endif; ?>>
                                             Laki-Laki
                                         </option>
-                                        <option <?php if ($data_kr['jenisKelamin'] == 'Perempuan') : echo "selected";
+                                        <option <?php if ($data_kr['jenis_kelamin'] == 'Perempuan') : echo "selected";
                                                 endif; ?>>
                                             Perempuan
                                         </option>
@@ -195,7 +195,7 @@
                             <label>
                                 No. HP/WA
                             </label>
-                            <input type="number" name="noHp" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $data_kr['noHp'] ?>">
+                            <input type="number" name="noHp" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $data_kr['no_hp'] ?>">
                         </div>
                         <div class="form-group">
                             <label>
@@ -229,7 +229,7 @@
 
 <!-- Pop up hapus Karyawan-->
 <script type="text/javascript">
-    function hapus_karyawan($idKaryawan) {
+    function hapus_karyawan($id_karyawan) {
         swal({
             title: "Hapus karyawan",
             text: "Apakah anda yakin ingin menghapus data karyawan ini ?",
@@ -238,7 +238,7 @@
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/karyawan/hapus_karyawan/') ?>" + $idKaryawan;
+                window.location = "<?php echo base_url('admin/karyawan/hapus_karyawan/') ?>" + $id_karyawan;
             } else {
                 swal("Data karyawan batal dihapus");
             }

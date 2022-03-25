@@ -228,7 +228,7 @@ class Produk extends CI_Controller
     // hapus gambar produk
     public function hapus_gambar()
     {
-        $where = array('id_gambar_produk' => $this->input->post('id_gambarProduk'));
+        $where = array('id_gambar_produk' => $this->input->post('id_gambar_produk'));
         $this->db->delete('gambar_produk', $where);
     }
 }
