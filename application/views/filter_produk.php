@@ -37,7 +37,7 @@
                                         </li>
                                         <?php else :
                                         foreach ($where as $wer) :
-                                            if ($ktg['id_jenis'] == $wer['id_jenis']) :
+                                            if ($ktg['id_jenis'] == $wer['idJenis']) :
                                                 $cek++;
                                             endif;
                                         endforeach;
@@ -46,7 +46,7 @@
                                                 <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
                                             </li>
                                         <?php else : ?>
-                                            <li id="jenis<?= $ktg['idJenis'] ?>" class="">
+                                            <li id="jenis<?= $ktg['id_jenis'] ?>" class="">
                                                 <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
                                             </li> <?php endif ?>
                                     <?php endif; ?>

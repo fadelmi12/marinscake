@@ -41,18 +41,23 @@ class Snap extends CI_Controller
 		$produk			= $this->Model_preorder->get_preorder($id_preorder)->row();
 		$pengiriman		= $this->Model_preorder->get_pengiriman($id_preorder)->row();
 		$item			= $this->Model_preorder->get_detailPreorder($id_preorder)->result_array();
+
 		// Required
+		// $transaction_details = array(
+		// 	'order_id' => $id_preorder,
+		// 	'gross_amount' => $total_bayar, // no decimal allowed for creditcard
+		// );
 		$transaction_details = array(
 			'order_id' => $id_preorder,
 			'gross_amount' => $total_bayar, // no decimal allowed for creditcard
 		);
 
-		// $item_details = array();
+		$item_details = array();
 		foreach ($item as $xyz) {
 			$item_details[] = array(
 				'price'     => $xyz['total'] / $xyz['jumlah'],
 				'quantity'  => $xyz['jumlah'],
-				'name'      => $xyz['namaProduk'],
+				'name'      => $xyz['nama_produk'],
 			);
 		}
 		$item_details[] = array(
@@ -60,6 +65,11 @@ class Snap extends CI_Controller
 			'quantity' => 1,
 			'name' => "Ongkir"
 		);
+		// $item_details[] = array(
+		// 	'price' => $total_bayar,
+		// 	'quantity' => 1,
+		// 	'name' => "Ongkir"
+		// );
 
 		// Optional
 		$billing_address = array(
@@ -71,6 +81,15 @@ class Snap extends CI_Controller
 			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'
 		);
+		// $billing_address = array(
+		// 	'first_name'    => "hasgjkdgsa",
+		// 	// 'last_name'     => "Litani",
+		// 	'address'       => "hgsdfsefud",
+		// 	'city'          => "fdgfhksa",
+		// 	// 'postal_code'   => "16602",
+		// 	'phone'         => "dbshgfids",
+		// 	'country_code'  => 'IDN'
+		// );
 
 		// Optional
 		$shipping_address = array(
@@ -82,6 +101,15 @@ class Snap extends CI_Controller
 			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'
 		);
+		// $shipping_address = array(
+		// 	'first_name'    => "hasgjkdgsa",
+		// 	// 'last_name'     => "Litani",
+		// 	'address'       => "hgsdfsefud",
+		// 	'city'          => "fdgfhksa",
+		// 	// 'postal_code'   => "16602",
+		// 	'phone'         => "dbshgfids",
+		// 	'country_code'  => 'IDN'
+		// );
 
 		// Optional
 		$customer_details = array(
@@ -92,6 +120,14 @@ class Snap extends CI_Controller
 			'billing_address'  => $billing_address,
 			'shipping_address' => $shipping_address
 		);
+		// $customer_details = array(
+		// 	'first_name'    => "hasgjkdgsa",
+		// 	// 'last_name'     => "Litani",
+		// 	'email'         => "jsafka@gmail.com",
+		// 	'phone'         => "dbshgfids",
+		// 	'billing_address'  => $billing_address,
+		// 	'shipping_address' => $shipping_address
+		// );
 
 		// Data yang akan dikirim untuk request redirect_url.
 		$credit_card['secure'] = true;
