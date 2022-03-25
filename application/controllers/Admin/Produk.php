@@ -64,10 +64,10 @@ class Produk extends CI_Controller
 
 
         $data = array(
-            'namaProduk'    => $nama_produk,
+            'nama_produk'    => $nama_produk,
             'harga'         => $harga,
             'status'        => $status,
-            'idJenis'       => $kategori,
+            'id_jenis'       => $kategori,
             'stok'          => $stok,
             'min_order'     => $min_order,
             'deskripsi'     => $deskripsi,
@@ -126,7 +126,7 @@ class Produk extends CI_Controller
     //hapus data produk 
     public function hapus_produk($id_produk)
     {
-        $data = array('idProduk' => $id_produk);
+        $data = array('id_produk' => $id_produk);
         $this->db->delete('produk', $data);
         $this->session->set_flashdata(
             'produk',
@@ -150,16 +150,16 @@ class Produk extends CI_Controller
         $deskripsi      = $this->input->post("deskripsi");
 
         $data = array(
-            'namaProduk'    => $nama_produk,
+            'nama_produk'    => $nama_produk,
             'harga'         => $harga,
             'status'        => $status,
-            'idJenis'       => $kategori,
+            'id_jenis'       => $kategori,
             'stok'          => $stok,
             'min_order'     => $min_order,
             'deskripsi'     => $deskripsi,
         );
 
-        $where = array('idProduk' => $id_produk);
+        $where = array('id_produk' => $id_produk);
 
         $this->db->update('produk', $data,  $where);
         $this->session->set_flashdata(
@@ -220,7 +220,7 @@ class Produk extends CI_Controller
 
             $replace_spasi = str_replace(" ", "_", $gambar);
             $data   = array('gambar' => $replace_spasi);
-            $where  = array('id_gambarProduk' => $id_gambar);
+            $where  = array('id_gambar_roduk' => $id_gambar);
             $this->db->update('gambar_produk', $data, $where);
         }
     }
@@ -228,7 +228,7 @@ class Produk extends CI_Controller
     // hapus gambar produk
     public function hapus_gambar()
     {
-        $where = array('id_gambarProduk' => $this->input->post('id_gambarProduk'));
+        $where = array('id_gambar_produk' => $this->input->post('id_gambarProduk'));
         $this->db->delete('gambar_produk', $where);
     }
 }

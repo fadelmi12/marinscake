@@ -97,7 +97,7 @@ class Akun extends CI_Controller
             }
         }
 
-        $where = array('idUser' => $id_user);
+        $where = array('id_user' => $id_user);
 
         $this->db->update('user', $data, $where);
         $this->session->set_flashdata(

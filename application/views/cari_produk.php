@@ -31,8 +31,8 @@
                             <ul class="ps-list--checked">
                                 <?php foreach ($kategori as $ktg) : ?>
                                     <li>
-                                        <a class="add_ktg" data-jenis="<?= $ktg['idJenis'] ?>"><?= $ktg['namaJenis'] ?></a>
-                                        <input id="ktg_<?= $ktg['idJenis'] ?>" style="display: none;" type="checkbox" name="kategori_box[]" value="<?= $ktg['idJenis'] ?>">
+                                        <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
+                                        <input id="ktg_<?= $ktg['id_jenis'] ?>" style="display: none;" type="checkbox" name="kategori_box[]" value="<?= $ktg['id_jenis'] ?>">
                                     </li>
                                 <?php endforeach ?>
                             </ul>
@@ -118,8 +118,8 @@
             sno = Number(sno);
             $('#product_item').empty();
             for (index in result) {
-                var id = result[index].idProduk;
-                var nama = result[index].namaProduk;
+                var id = result[index].id_produk;
+                var nama = result[index].nama_produk;
                 var price = result[index].harga;
                 var harga = formatRupiah(price, 'Rp ');
                 var stok = result[index].stok;
