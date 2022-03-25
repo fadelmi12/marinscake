@@ -25,23 +25,23 @@
                     <div class="card-body" style="height: 70vh; overflow-y:scroll">
                         <form action="" method="post">
                             <?php foreach ($jenis_produk as $js_produk) : ?>
-                                <h6 class="text-dark"><?= $js_produk['namaJenis'] ?></h6>
+                                <h6 class="text-dark"><?= $js_produk['nama_jenis'] ?></h6>
                                 <div class="row">
                                     <?php foreach ($daftar_produk as $dt_produk) : ?>
-                                        <?php if ($dt_produk['idJenis'] == $js_produk['idJenis']) : ?>
+                                        <?php if ($dt_produk['id_jenis'] == $js_produk['id_jenis']) : ?>
                                             <div class="col-lg-3">
                                                 <div class="form-group text-center">
-                                                    <a href="#" data-id="<?= $dt_produk['idProduk'] ?>" data-name="<?php echo str_replace(" ", "_", $dt_produk['namaProduk']); ?>" data-price="<?= $dt_produk['harga'] ?>" class="add-to-cart">
+                                                    <a href="#" data-id="<?= $dt_produk['id_produk'] ?>" data-name="<?php echo str_replace(" ", "_", $dt_produk['nama_produk']); ?>" data-price="<?= $dt_produk['harga'] ?>" class="add-to-cart">
                                                         <?php foreach ($gambar as $gbr) :
-                                                            if ($gbr['id_produk'] == $dt_produk['idProduk']) : ?>
+                                                            if ($gbr['id_produk'] == $dt_produk['id_produk']) : ?>
                                                                 <img src="<?php echo base_url() . '/uploads/gambar_produk/' . $gbr["gambar"]; ?>" alt="" style="border-radius:5px;" class="img-fluid">
                                                         <?php endif;
                                                         endforeach ?>
                                                     </a>
-                                                    <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark"><?= $dt_produk['namaProduk'] ?></h6>
+                                                    <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark"><?= $dt_produk['nama_produk'] ?></h6>
                                                     <h6 class="text-dark font-15">Rp. <?= number_format($dt_produk['harga'], 0, '', '.') ?></h6>
                                                     <h6 class="font-weight-normal mt-2 mb-0 font-14 text-dark">Min order <?= $dt_produk['min_order'] ?> pcs</h6>
-                                                    <input hidden type="text" id="min_order<?= $dt_produk['idProduk'] ?>" value="<?= $dt_produk['min_order'] ?>">
+                                                    <input hidden type="text" id="min_order<?= $dt_produk['id_produk'] ?>" value="<?= $dt_produk['min_order'] ?>">
                                                 </div>
                                             </div>
                                         <?php endif ?>
