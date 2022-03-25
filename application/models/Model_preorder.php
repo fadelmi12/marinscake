@@ -5,7 +5,7 @@ class Model_preorder extends CI_Model
     // get data preorder sesuai param
     public function get_riwayat_preorder($tanggal)
     {
-        return $this->db->get_where('preorder', array('tanggalPesan' => $tanggal));
+        return $this->db->get_where('preorder', array('tanggal_pesan' => $tanggal));
     }
 
     // get data detail preorder join dengan tb produk
@@ -13,7 +13,7 @@ class Model_preorder extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('detail_preorder');
-        $this->db->join('produk', 'produk.idProduk = detail_preorder.idProduk');
+        $this->db->join('produk', 'produk.id_produk = detail_preorder.id_produk');
         return $this->db->get('');
     }
 
@@ -28,7 +28,7 @@ class Model_preorder extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('preorder');
-        $this->db->where('idPreorder', $id_preorder);
+        $this->db->where('id_preorder', $id_preorder);
         return $this->db->get('');
     }
 
@@ -37,7 +37,7 @@ class Model_preorder extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('detail_preorder');
-        $this->db->where('idPreorder', $id_preorder);
+        $this->db->where('id_preorder', $id_preorder);
         return $this->db->get('');
     }
 
@@ -46,7 +46,7 @@ class Model_preorder extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('pengiriman');
-        $this->db->where('idPreorder', $id_preorder);
+        $this->db->where('id_preorder', $id_preorder);
         return $this->db->get('');
     }
 

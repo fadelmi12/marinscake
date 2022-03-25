@@ -13,11 +13,11 @@ class Model_laporan extends CI_Model {
     }
 
     // get data karyawan sesuai parameter
-    public function get_gaji($idKaryawan)
+    public function get_gaji($id_karyawan)
     {
         $this->db->select('gaji');
         $this->db->from('karyawan');
-        $this->db->where('idKaryawan', $idKaryawan);
+        $this->db->where('id_karyawan', $id_karyawan);
         return $this->db->get();
     } 
 

@@ -44,7 +44,7 @@ class Model_dashboard extends CI_Model
         for($i=0; $i<count($tr_pr); $i++){
             $this->db->select_sum('jumlah');
             $this->db->from('preorder');
-            $this->db->like('tanggalPesan', $tr_pr[$i]);
+            $this->db->like('tanggal_pesan', $tr_pr[$i]);
             $data[$i] = $this->db->get()->result();
         }
         return $data;

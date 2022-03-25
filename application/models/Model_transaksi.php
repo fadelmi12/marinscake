@@ -16,7 +16,7 @@ class Model_transaksi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('detail_transaksi');
-        $this->db->join('produk', 'produk.idProduk = detail_transaksi.idProduk');
+        $this->db->join('produk', 'produk.id_produk = detail_transaksi.id_produk');
         return $this->db->get('');
     }
 
@@ -34,7 +34,7 @@ class Model_transaksi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('detail_preorder');
-        $this->db->join('produk', 'produk.idProduk = detail_preorder.idProduk');
+        $this->db->join('produk', 'produk.id_produk = detail_preorder.id_produk');
         return $this->db->get('');
     }
 
@@ -49,7 +49,7 @@ class Model_transaksi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('transaksi');
-        $this->db->where('idTransaksi', $id_transaksi);
+        $this->db->where('id_transaksi', $id_transaksi);
         return $this->db->get('');
     }
 
@@ -58,7 +58,7 @@ class Model_transaksi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('detail_transaksi');
-        $this->db->where('idTransaksi', $id_transaksi);
+        $this->db->where('id_transaksi', $id_transaksi);
         return $this->db->get('');
     }
 
@@ -67,7 +67,7 @@ class Model_transaksi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('pengiriman');
-        $this->db->where('idTransaksi', $id_transaksi);
+        $this->db->where('id_transaksi', $id_transaksi);
         return $this->db->get('');
     }
 
