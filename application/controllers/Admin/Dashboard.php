@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Dashboard extends CI_Controller
+{
 
 	public function __construct()
 	{
@@ -13,11 +14,11 @@ class Dashboard extends CI_Controller {
 	}
 
 	// tampil dashboard admin
-    public function index()
+	public function index()
 	{
 		// data array transaksi langsung
 		$transaksi_ls = $this->Model_dashboard->total_transaksi_langsung();
-		for($i=0; $i<count($transaksi_ls); $i++){
+		for ($i = 0; $i < count($transaksi_ls); $i++) {
 			$tr_ls[] = array(
 				$i => $transaksi_ls[$i][0]->total_belanja,
 			);
@@ -26,7 +27,7 @@ class Dashboard extends CI_Controller {
 
 		//data array transaksi preorder
 		$transaksi_pr = $this->Model_dashboard->total_transaksi_preorder();
-		for($i=0; $i<count($transaksi_pr); $i++){
+		for ($i = 0; $i < count($transaksi_pr); $i++) {
 			$tr_pr[] = array(
 				$i => $transaksi_pr[$i][0]->jumlah,
 			);
@@ -35,21 +36,21 @@ class Dashboard extends CI_Controller {
 
 		//data array pengeluaram modal
 		$pengeluaran = $this->Model_dashboard->total_pengeluaran();
-		for($i=0; $i<count($pengeluaran); $i++){
+		for ($i = 0; $i < count($pengeluaran); $i++) {
 			$klr_modal[] = array(
-				$i => $pengeluaran[$i][0]->totalModal,
+				$i => $pengeluaran[$i][0]->total_modal,
 			);
 		}
 		$data['pengeluaran'] = $klr_modal;
 
 		$data['produk'] 			= $this->Model_dashboard->get_produk()->result_array();
-        $data['transaksi_langsung'] = $this->Model_dashboard->transaksi_langsung()->result_array();
+		$data['transaksi_langsung'] = $this->Model_dashboard->transaksi_langsung()->result_array();
 		$data['transaksi_preorder'] = $this->Model_dashboard->transaksi_preorder()->result_array();
 		$data['pengeluaran_modal']	= $this->db->get('modal')->result_array();
-		
-        $this->load->view('admin/template/header');
-        $this->load->view('admin/template/sidebar');
-        $this->load->view('admin/dashboard', $data);
-        $this->load->view('admin/template/footer');
-    }
+
+		$this->load->view('admin/template/header');
+		$this->load->view('admin/template/sidebar');
+		$this->load->view('admin/dashboard', $data);
+		$this->load->view('admin/template/footer');
+	}
 }

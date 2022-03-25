@@ -30,7 +30,7 @@
                             </div>
                             <ul class="ps-list--checked">
                                 <?php foreach ($kategori as $ktg) : ?>
-                                    <li class="current" id="jenis<?= $ktg['idJenis'] ?>">
+                                    <li class="current" id="jenis<?= $ktg['id_jenis'] ?>">
                                         <a class="add_ktg" data-jenis="<?= $ktg['id_jenis'] ?>"><?= $ktg['nama_jenis'] ?></a>
                                     </li>
                                 <?php endforeach ?>
