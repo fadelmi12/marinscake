@@ -192,17 +192,17 @@ class Produk extends CI_Controller
 
 		// $cout = array();
 
-		// foreach ($whr as $cok) {
+		// foreach ($whr as $val) {
 		// 	array_push(
 		// 		$cout,
-		// 		$this->Model_produk->get_filter_count($cok, $min_price, $max_price)->result_array()
+		// 		$this->Model_produk->get_filter_count($val, $min_price, $max_price)->result_array()
 		// 	);
 		// }
 		// // $data['result'] = $cout;
 		// echo json_encode($cout);
 		// exit;
-		// foreach ($whr as $cok) {
-		// 	$cout[] = $this->Model_produk->get_filter_count($cok, $min_price, $max_price)->result_array();
+		// foreach ($whr as $val) {
+		// 	$cout[] = $this->Model_produk->get_filter_count($val, $min_price, $max_price)->result_array();
 		// }
 		// $total_where = $cout;
 		// $data['cout'] = $cout;
@@ -248,19 +248,19 @@ class Produk extends CI_Controller
 
 		$cout = array();
 
-		foreach ($where as $cok) {
-			$asu = $this->Model_produk->get_filter_count($cok, $min_price, $max_price)->result_array();
+		foreach ($where as $val) {
+			$i = $this->Model_produk->get_filter_count($val, $min_price, $max_price)->result_array();
 
-			$wkwk = array_merge(
+			$x = array_merge(
 				$cout,
-				$asu
+				$i
 			);
-			$cout += $asu;
+			$cout += $i;
 		}
 		// All records count
-		$allcount = count($wkwk);
+		$allcount = count($x);
 
-		$data['result'] = array_slice($wkwk, $rowno, $rowperpage);
+		$data['result'] = array_slice($x, $rowno, $rowperpage);
 
 		// Pagination Configuration
 		$config['base_url'] = base_url() . 'Produk/filter_page';

@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Modal extends CI_Controller
 {
-    
+
     public function __construct()
     {
 
@@ -16,11 +16,11 @@ class Modal extends CI_Controller
 
     // Tampilan pengeluaran modal
     public function pengeluaran_modal($bulan)
-    {   
-        $data['data_modal'] 	= $this->Model_laporan->get_data_modal($bulan)->result_array();
-        $data['detail_modal'] 	= $this->Model_laporan->get_detail_modal()->result_array();
-        $data['tanggal']		= $bulan;
-        
+    {
+        $data['data_modal']     = $this->Model_laporan->get_data_modal($bulan)->result_array();
+        $data['detail_modal']     = $this->Model_laporan->get_detail_modal()->result_array();
+        $data['tanggal']        = $bulan;
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/modal_pengeluaran/keluar_modal', $data);
@@ -31,61 +31,63 @@ class Modal extends CI_Controller
     public function tambah_data_modal()
     {
         $totalHargaSemua = 0;
-        foreach($_POST['totalHarga'] as $key => $val) {
+        foreach ($_POST['totalHarga'] as $key => $val) {
             $totalHargaSemua += $val;
 
             $data = array(
-                'totalModal'    => $totalHargaSemua,
+                'total_modal'    => $totalHargaSemua,
                 'tanggal'       => date('Y-m-d'),
-                );
+            );
         }
-        
+
         $this->db->insert('modal', $data);
         $idModal    = $this->db->insert_id();
 
-        foreach ($_POST['namaBahan'] as $key => $val): 
-            $data2[]    = array(                
-                'idModal'       => $idModal,
-                'namaBahan'     => $_POST['namaBahan'][$key],
+        foreach ($_POST['namaBahan'] as $key => $val) :
+            $data2[]    = array(
+                'id_modal'       => $idModal,
+                'nama_bahan'     => $_POST['namaBahan'][$key],
                 'jumlah'        => $_POST['jumlah'][$key],
                 'harga_satuan'   => $_POST['hargaSatuan'][$key],
-                'totalHarga'    => $_POST['totalHarga'][$key],
+                'total_harga'    => $_POST['totalHarga'][$key],
             );
-        endforeach;     
-        
+        endforeach;
+
         $this->db->insert_batch('detail_modal', $data2);
-        $this->session->set_flashdata('berhasil_tambah_modal',
-                        '<script type ="text/JavaScript">  
+        $this->session->set_flashdata(
+            'berhasil_tambah_modal',
+            '<script type ="text/JavaScript">  
                             swal("Berhasil","Data modal berhasil ditambahkan","success")  
-                        </script>'  
-                );
-        redirect('admin/modal/pengeluaran_modal/'.date('Y-m'));
+                        </script>'
+        );
+        redirect('admin/modal/pengeluaran_modal/' . date('Y-m'));
     }
 
     // hapus data pengeluaran modal
     public function hapus_modal($idModal_tanggal)
     {
         // pecah id modal dan tanggal
-    	$idModal = strstr($idModal_tanggal, '_', true);
+        $idModal = strstr($idModal_tanggal, '_', true);
         $tanggal = substr($idModal_tanggal, strpos($idModal_tanggal, "_") + 1);
 
-    	$where = array('idModal' => $idModal);
- 
-    	$this->db->delete('modal', $where);
-    	$this->session->set_flashdata('berhasil_tambah_modal',
-                        '<script type ="text/JavaScript">  
+        $where = array('id_modal' => $idModal);
+
+        $this->db->delete('modal', $where);
+        $this->session->set_flashdata(
+            'berhasil_tambah_modal',
+            '<script type ="text/JavaScript">  
                         swal("Berhasil","Data modal berhasil dihapus","success")  
-                        </script>'  
-                );
-        redirect('admin/modal/pengeluaran_modal/'.$tanggal);
-    }    
+                        </script>'
+        );
+        redirect('admin/modal/pengeluaran_modal/' . $tanggal);
+    }
 
     // tampilan edit data pengeluaran modal
     public function edit_modal($idModal, $tanggal)
     {
         $data['detail_modal'] = $this->Model_laporan->get_detail_modal_where($idModal)->result_array();
         $data['bulan'] = $tanggal;
-        
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/modal_pengeluaran/edit_modal', $data);
@@ -95,43 +97,43 @@ class Modal extends CI_Controller
     // update bahan pada data pengeluaran modal
     public function update_bahan()
     {
-    	$idModal = $this->input->post('idModal');
+        $idModal = $this->input->post('idModal');
 
-    	$where = array('idModal' => $idModal);
+        $where = array('id_modal' => $idModal);
 
-    	// hapus semua detail
-    	$this->db->delete('detail_modal', $where);
+        // hapus semua detail
+        $this->db->delete('detail_modal', $where);
 
-    	// update total pengeluaran pada tb_modal
-    	$totalHargaSemua = 0;
-        foreach($_POST['totalHarga'] as $key => $val) {
+        // update total pengeluaran pada tb_modal
+        $totalHargaSemua = 0;
+        foreach ($_POST['totalHarga'] as $key => $val) {
             $totalHargaSemua += $val;
 
             $data = array(
-                'totalModal'    => $totalHargaSemua,
-                'tanggalEdit'  	=> date('Y-m-d'),
-                );
+                'total_modal'    => $totalHargaSemua,
+                'tanggal_edit'      => date('Y-m-d'),
+            );
 
             $this->db->update('modal', $data, $where);
         }
-        
-        foreach ($_POST['namaBahan'] as $key => $val): 
-            $data2[]    = array(                
-                'idModal'       => $idModal,
-                'namaBahan'     => $_POST['namaBahan'][$key],
+
+        foreach ($_POST['namaBahan'] as $key => $val) :
+            $data2[]    = array(
+                'id_modal'       => $idModal,
+                'nama_bahan'     => $_POST['namaBahan'][$key],
                 'jumlah'        => $_POST['jumlah'][$key],
                 'harga_satuan'  => $_POST['hargaSatuan'][$key],
-                'totalHarga'    => $_POST['totalHarga'][$key],
+                'total_harga'    => $_POST['totalHarga'][$key],
             );
-        endforeach;     
-        
-        $this->db->insert_batch('detail_modal', $data2);
-        $this->session->set_flashdata('edit_modal',
-                        '<script type ="text/JavaScript">  
-                            swal("Berhasil","Data modal berhasil diupdate","success")  
-                        </script>'  
-                );
-        header("Location: ".$_SERVER['HTTP_REFERER']);
-    }
+        endforeach;
 
+        $this->db->insert_batch('detail_modal', $data2);
+        $this->session->set_flashdata(
+            'edit_modal',
+            '<script type ="text/JavaScript">  
+                            swal("Berhasil","Data modal berhasil diupdate","success")  
+                        </script>'
+        );
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+    }
 }

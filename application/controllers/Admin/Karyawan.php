@@ -16,7 +16,7 @@ class Karyawan extends CI_Controller
     public function index()
     {
         $data['data_karyawan'] = $this->Model_karyawan->get_data_karyawan()->result_array();
-        
+
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');
         $this->load->view('admin/karyawan/data_karyawan', $data);
@@ -34,18 +34,19 @@ class Karyawan extends CI_Controller
 
         $data = array(
             'nama'         => $nama,
-            'jenisKelamin' => $kelamin,
+            'jenis_kelamin' => $kelamin,
             'posisi'       => $posisi,
-            'noHp'         => $noHp,
+            'no_hp'         => $noHp,
             'gaji'         => $gaji,
         );
 
         $this->db->insert('karyawan', $data);
-        $this->session->set_flashdata('karyawan',
-                            '<script type ="text/JavaScript">  
+        $this->session->set_flashdata(
+            'karyawan',
+            '<script type ="text/JavaScript">  
                             swal("Sukses","Data karyawan berhasil ditambahkan","success"); 
-                            </script>'  
-                    );
+                            </script>'
+        );
         redirect('admin/karyawan/index/');
     }
 
@@ -60,36 +61,38 @@ class Karyawan extends CI_Controller
 
         $data = array(
             'nama'          => $nama,
-            'jenisKelamin'  => $kelamin,
+            'jenis_kelamin'  => $kelamin,
             'posisi'        => $posisi,
-            'noHp'          => $noHp,
+            'no_hp'          => $noHp,
             'gaji'          => $gaji,
         );
-        
-        $where = array('idKaryawan' => $idKaryawan);
+
+        $where = array('id_karyawan' => $idKaryawan);
 
         $this->db->update('karyawan', $data, $where);
-        $this->session->set_flashdata('karyawan',
-                            '<script type ="text/JavaScript">  
+        $this->session->set_flashdata(
+            'karyawan',
+            '<script type ="text/JavaScript">  
                             swal("Sukses","Data karyawan berhasil diupdate","success"); 
-                            </script>'  
-                    );
+                            </script>'
+        );
         redirect('admin/karyawan/index/');
     }
 
     // update data karyawan
     public function hapus_karyawan($idKaryawan)
     {
-        
-        $where = array('idKaryawan' => $idKaryawan);
+
+        $where = array('id_karyawan' => $idKaryawan);
 
         $this->db->delete('karyawan', $where);
-        $this->session->set_flashdata('karyawan',
-                            '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+        $this->session->set_flashdata(
+            'karyawan',
+            '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
                             <script type ="text/JavaScript">  
                             swal("Sukses","Data karyawan berhasil dihapus","success"); 
-                            </script>'  
-                    );
+                            </script>'
+        );
         redirect('admin/karyawan/index/');
     }
 }

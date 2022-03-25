@@ -73,7 +73,7 @@ class User extends CI_Controller
                 'role'      => $role
             );
         }
-        $where = array('idUser' => $idUser);
+        $where = array('id_user' => $idUser);
 
         $this->db->update('user', $data, $where);
         $this->session->set_flashdata(
@@ -90,7 +90,7 @@ class User extends CI_Controller
     public function hapus_user($idUser)
     {
 
-        $where = array('idUser' => $idUser);
+        $where = array('id_user' => $idUser);
 
         $this->db->delete('user', $where);
         $this->session->set_flashdata(

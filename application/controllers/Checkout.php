@@ -32,8 +32,8 @@ class Checkout extends CI_Controller
 			'jumlah'			=> $total_belanja,
 			'metode'			=> $metode,
 			'status'			=> $status,
-			'tanggalPesan'		=> $tanggal,
-			'tanggalDikirim'	=> $tanggal_kirim,
+			'tanggal_pesan'		=> $tanggal,
+			'tanggal_dikirim'	=> $tanggal_kirim,
 			'ongkir'			=> $ongkir
 		);
 		$insert_preorder = $this->db->insert('preorder', $data_preorder);
@@ -43,9 +43,9 @@ class Checkout extends CI_Controller
 			$cart = $this->cart->contents();
 			foreach ($cart as $key) {
 				$data_detailPreorder = array(
-					'idPreorder'	=> $id_preorder,
-					'idProduk'		=> $key['id'],
-					'namaProduk'	=> $key['name'],
+					'id_preorder'	=> $id_preorder,
+					'id_produk'		=> $key['id'],
+					'nama_produk'	=> $key['name'],
 					'jumlah'		=> $key['qty'],
 					'total'			=> $key['price'] * $key['qty']
 				);
@@ -53,7 +53,7 @@ class Checkout extends CI_Controller
 			}
 			if ($insert_detailPreorder) {
 				$data_pengiriman = array(
-					'idPreorder' 	=> $id_preorder,
+					'id_preorder' 	=> $id_preorder,
 					'nama'			=> $this->input->post('nama'),
 					'email'			=> $this->input->post('email'),
 					'no_hp'			=> $this->input->post('no_hp'),

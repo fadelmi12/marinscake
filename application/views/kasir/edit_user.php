@@ -3,7 +3,7 @@
     <section class="section">
         <form action="<?= base_url() ?>kasir/akun/update_user" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <h4>
@@ -29,17 +29,6 @@
                                 <span class="text-danger">*kosongkan jika tidak ingin mengubah password</span>
                             </div>
                             <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="far fa-save"></i> Simpan</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Foto Profil</h4>
-                        </div>
-                        <div class="card-body">
-                            <img id="gambar_profil" src="<?= base_url() ?>uploads/user/<?= $user->foto ?>" alt="" style="border-radius:5px;max-height: 200px;" class="img-fluid my-2">
-                            <input class="form-control" id="input_foto" type="file" name="foto">
                         </div>
                     </div>
                 </div>

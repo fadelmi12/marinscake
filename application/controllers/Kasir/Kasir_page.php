@@ -60,8 +60,8 @@ class Kasir_page extends CI_Controller
                 'jumlah'             => $total_belanja,
                 'metode'            => "Offline",
                 // 'pembayaran'		=> "Tunai",
-                'tanggalPesan'        => date("Y-m-d"),
-                'tanggalDikirim'    => $tanggalDikirim,
+                'tanggal_pesan'        => date("Y-m-d"),
+                'tanggal_dikirim'    => $tanggalDikirim,
                 'status'            => "Menunggu Pengiriman",
 
             );
@@ -76,9 +76,9 @@ class Kasir_page extends CI_Controller
                     $rpl1         = str_replace('Rp. ', '', $ttProduk);
                     $rpl2         = str_replace('.00', '', $rpl1);
                     $data2[]     = array(
-                        'idPreorder'    => $insert_id,
-                        'idProduk'        => $_POST['idProduk'][$key],
-                        'namaProduk'    => $_POST['namaProduk'][$key],
+                        'id_preorder'    => $insert_id,
+                        'id_produk'        => $_POST['idProduk'][$key],
+                        'nama_produk'    => $_POST['namaProduk'][$key],
                         'jumlah'        => $_POST['jumlahProduk'][$key],
                         'total'            => $rpl2,
                     );
@@ -92,7 +92,7 @@ class Kasir_page extends CI_Controller
 	                            swal("Berhasil","Data Preorder berhasil ditambahkan","success")  
 	                            </script>'
                 );
-                header("Location: ".$_SERVER['HTTP_REFERER']);
+                header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         } else {
 
@@ -101,7 +101,7 @@ class Kasir_page extends CI_Controller
             $data = array(
                 'total_belanja' => $total_belanja,
                 'metode'        => "Offline",
-                'pembayaran'	=> "Tunai",
+                'pembayaran'    => "Tunai",
                 'status'        => "Selesai",
                 'tanggal'        => date("Y-m-d"),
             );
@@ -116,9 +116,9 @@ class Kasir_page extends CI_Controller
                     $rpl1         = str_replace('Rp. ', '', $ttProduk);
                     $rpl2         = str_replace('.00', '', $rpl1);
                     $data2[]     = array(
-                        'idTransaksi'    => $insert_id,
-                        'idProduk'        => $_POST['idProduk'][$key],
-                        'namaProduk'    => $_POST['namaProduk'][$key],
+                        'id_transaksi'    => $insert_id,
+                        'id_produk'        => $_POST['idProduk'][$key],
+                        'nama_produk'    => $_POST['namaProduk'][$key],
                         'jumlah'        => $_POST['jumlahProduk'][$key],
                         'total'            => $rpl2,
                     );
@@ -132,7 +132,7 @@ class Kasir_page extends CI_Controller
 	                            swal("Berhasil","Pembelian berhasil dilakukan","success")  
 	                            </script>'
                 );
-                header("Location: ".$_SERVER['HTTP_REFERER']);
+                header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         }
     }
