@@ -49,8 +49,8 @@
                                                 endif; ?>
                                             </td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal_edit_user<?php echo $usr['idUser'] ?>"><i class="fas fa-pen"></i> Edit</button>
-                                                <button type="button" class="btn btn-sm btn-danger ml-5" data-toggle="modal" data-target="#modal_hapus_user<?php echo $usr['idUser'] ?>"><i class="fas fa-trash"></i> Hapus</button>
+                                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal_edit_user<?php echo $usr['id_user'] ?>"><i class="fas fa-pen"></i> Edit</button>
+                                                <button type="button" class="btn btn-sm btn-danger ml-5" data-toggle="modal" data-target="#modal_hapus_user<?php echo $usr['id_user'] ?>"><i class="fas fa-trash"></i> Hapus</button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -117,14 +117,14 @@
 
 <!-- Modal Edit User-->
 <?php foreach ($user as $usr) : ?>
-    <div class="modal fade" id="modal_edit_user<?php echo $usr['idUser'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_edit_user<?php echo $usr['id_user'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header text-center bg-light">
                     <h4 class="modal-title" id="exampleModalLabel"><strong>Edit User</strong></h4>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('admin/user/update_user/') . $usr['idUser']; ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/user/update_user/') . $usr['id_user']; ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>
                                 <h6>Nama</h6>
@@ -174,14 +174,14 @@
 
 <!-- Modal Hapus User-->
 <?php foreach ($user as $usr) : ?>
-    <div class="modal fade" id="modal_hapus_user<?php echo $usr['idUser'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_hapus_user<?php echo $usr['id_user'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center bg-light">
                     <h4 class="modal-title" id="exampleModalLabel"><strong>Hapus User</strong></h4>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('admin/user/hapus_user/') . $usr['idUser']; ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/user/hapus_user/') . $usr['id_user']; ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <h6>Apakah anda yakin ingin menghapus akun <?php echo $usr['nama'] ?> ?</h6>
                         </div>

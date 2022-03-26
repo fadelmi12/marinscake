@@ -7,7 +7,7 @@ class Laporan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('idUser') == null) {
+        if ($this->session->userdata('role') != 77) {
             redirect('admin/auth/login');
         }
         date_default_timezone_set('Asia/Jakarta');

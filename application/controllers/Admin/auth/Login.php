@@ -37,7 +37,7 @@ class Login extends CI_Controller
 				$this->session->set_userdata('nama', $auth->nama);
 				$this->session->set_userdata('email', $auth->email);
 				$this->session->set_userdata('role', $auth->role);
-				$this->session->set_userdata('idUser', $auth->idUser);
+				$this->session->set_userdata('id_user', $auth->id_user);
 				if ($auth->role == 77) {
 					redirect('admin/dashboard');
 				} elseif ($auth->role == 24) {

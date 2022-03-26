@@ -8,7 +8,7 @@ class Produk extends CI_Controller
     {
 
         parent::__construct();
-        if ($this->session->userdata('idUser') == null) {
+        if ($this->session->userdata('role') != 77) {
             redirect('admin/auth/login');
         }
     }

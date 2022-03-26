@@ -4,6 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Cetak_pdf extends CI_Controller {
 	function __construct(){
 		parent::__construct();
+		if ($this->session->userdata('role') != 77) {
+			redirect('admin/auth/login');
+		}
 		require_once APPPATH.'third_party/dompdf/dompdf_config.inc.php';
 	}
 
