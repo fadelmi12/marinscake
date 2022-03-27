@@ -15,7 +15,7 @@ class Akun extends CI_Controller
     // Tampilan akun
     public function index()
     {
-        $id_user        = $this->session->userdata('idUser');
+        $id_user        = $this->session->userdata('id_user');
         $data['user']   = $this->Model_user->get_user_id($id_user)->row();
 
         $this->load->view('kasir/template/header');
@@ -26,7 +26,7 @@ class Akun extends CI_Controller
 
     public function edit_user()
     {
-        $id_user        = $this->session->userdata('idUser');
+        $id_user        = $this->session->userdata('id_user');
         $data['user']   = $this->Model_user->get_user_id($id_user)->row();
 
         $this->load->view('kasir/template/header');
@@ -38,7 +38,7 @@ class Akun extends CI_Controller
     // update akun
     public function update_user()
     {
-        $id_user    = $this->session->userdata('idUser');
+        $id_user    = $this->session->userdata('id_user');
         $nama       = $this->input->post('nama');
         $email      = $this->input->post('email');
         $no_hp      = $this->input->post('no_hp');

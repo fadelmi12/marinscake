@@ -19,13 +19,13 @@
                                 <label><span class="text-danger">*</span>Email</label>
                                 <input class="form-control" type="email" name="email" value="<?= $user->email ?>" required>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label><span class="text-danger">*</span>Nomor HP</label>
                                 <input class="form-control" type="number" name="no_hp" value="<?= $user->no_hp ?>" required>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label>Password</label>
-                                <input class="form-control" type="password" name="password">
+                                <input class="form-control" type="password" name="password2">
                                 <span class="text-danger">*kosongkan jika tidak ingin mengubah password</span>
                             </div>
                             <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="far fa-save"></i> Simpan</button>

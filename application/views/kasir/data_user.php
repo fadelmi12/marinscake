@@ -18,10 +18,6 @@
                             <label>Email</label>
                             <input class="form-control" type="email" name="email" value="<?= $user->email ?>" disabled>
                         </div>
-                        <div class="form-group">
-                            <label>Nomor HP</label>
-                            <input class="form-control" type="number" name="no_hp" value="<?= $user->no_hp ?>" disabled>
-                        </div>
                         <a href="<?= base_url() ?>kasir/akun/edit_user" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i>Edit</a>
                         <!-- <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Simpan</button> -->
                     </div>
