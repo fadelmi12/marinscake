@@ -79,4 +79,13 @@ class Model_transaksi extends CI_Model
         $this->db->where('id_transaksi', $id_transaksi);
         return $this->db->get('');
     }
+
+    //get biaya ongkir
+    public function get_ongkir($id_daerah)
+    {
+        $this->db->select('ongkir');
+        $this->db->from('daerah_kirim');
+        $this->db->where('id_daerah', $id_daerah);
+        return $this->db->get();   
+    }
 }

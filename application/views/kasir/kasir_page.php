@@ -93,72 +93,77 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="lanjut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <div class="">
-                                            <div class="form-group mb-2">
-                                                <label for="">Total Belanja</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            Rp
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control " id="total-belanja" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-2">
-                                                <label for="">Uang Pembayaran</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            Rp
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" id="uang" placeholder="Masukkan uang pembayaran disini!">
-                                                </div>
-                                            </div>
-                                            <div class="form-group ">
-                                                <label for="">Kembalian</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            Rp
-                                                        </div>
-                                                    </div>
-                                                    <input readonly disabled type="text" class="form-control" id="kembalian">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary mr-3" data-dismiss="modal">Close</button>
-                                            <button type="button" onclick="simpan_transaksi()" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </section>
 </div>
+
+<div class="modal fade" id="lanjut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="">
+                    <div class="form-group mb-2">
+                        <label for="">Total Belanja</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    Rp
+                                </div>
+                            </div>
+                            <input type="text" class="form-control " id="total-belanja" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="">Uang Pembayaran</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    Rp
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="uang" placeholder="Masukkan uang pembayaran disini!">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label for="">Kembalian</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    Rp
+                                </div>
+                            </div>
+                            <input readonly disabled type="text" class="form-control" id="kembalian">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary mr-3" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="simpan_transaksi()" class="btn btn-primary">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="<?= base_url() ?>assets/js/cart.js"></script>
 <script type="text/javascript">
     function lanjut(){
+        let total_belanja = document.getElementById('total-belanja').value;
+        if (total_belanja == 0) {
+            swal("Gagal", "Belum ada roti/kue yang dipilih", "error");
+            return false;
+        }
         $('#lanjut').modal('show').appendTo('body');
     }
     $(document).ready(function() {
@@ -224,13 +229,7 @@
     });
 
     function simpan_transaksi() {
-        // cek pembelian
-        var pembelian = document.getElementById('total-cart').value;
-        if (pembelian == '0') {
-            swal("Gagal", "Belum ada roti/kue yang dipilih", "error");
-            return false;
-        }
-
+    
         //cek uang pembayaran
         var uang_pb = document.getElementById('uang').value;
         if (uang_pb == '') {

@@ -82,77 +82,17 @@
                                     <div class="d-flex justify-content-around mt-3">
                                         <!-- <==> WARNING <==> -->
                                         <!-- form input tanggal karo total belanja ojo dihapus. neng controller enek fungsi if seng butuh elemen iki -->
-                                        <input hidden id="tglkirim" type="date" name="tglDikirim" class="form-control" >
-                                        <input hidden type="text" class="form-control " id="total-cart" name="total_belanja">
+                                        <input hidden type="text" id="nama2" name="nama">
+                                        <input hidden type="text" id="no_hp2" name="no_hp">
+                                        <input hidden type="text" id="pilih_daerah2" name="id_daerah">
+                                        <input hidden type="text" id="alamat2" name="alamat">
+                                        <input hidden type="text" id="catatan" name="catatan">
+                                        <input hidden id="tglkirim" type="date" name="tglDikirim">
+                                        <input hidden type="text" id="total-cart" name="total_belanja">
                                         <!-- batas warning -->
-                                        <button class="btn btn-info" type="button" onclick="lanjut()">
+                                        <button class="btn btn-info" type="button" id="open-modal">
                                             Lanjutkan Pembayaran
                                         </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="lanjut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <div class="">
-                                            <div class="form-group mb-2">
-                                                <label for="">Total Belanja</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            Rp
-                                                        </div>
-                                                    </div>
-                                                    <input hidden readonly type="text" class="form-control " id="total-cart" name="total_belanja">
-                                                    <input type="text" class="form-control " id="total-belanja" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-2">
-                                                <label for="">Uang Pembayaran</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            Rp
-                                                        </div>
-                                                    </div>
-                                                    <input type="text" class="form-control" id="uang" placeholder="Masukkan uang pembayaran disini!">
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-2">
-                                                <label for="">Kembalian</label>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            Rp
-                                                        </div>
-                                                    </div>
-                                                    <input readonly type="text" class="form-control" id="kembalian">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Tanggal Pengiriman</label>
-                                                <div class="input-group">
-                                                    <?php date_default_timezone_set('Asia/Jakarta');
-                                                    $today = date('Y-m-d');
-                                                    $tgl = date('Y-m-d', strtotime('+3 days', strtotime($today)));
-                                                    ?>
-                                                    <input id="tglDikirim" type="date" class="form-control" min="<?= $tgl ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <button type="button" class="btn btn-secondary mr-3" data-dismiss="modal">Close</button>
-                                            <button type="button" onclick="simpan_preorder()" class="btn btn-primary">Simpan</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -164,13 +104,164 @@
     </section>
 </div>
 
+<div class="modal fade" id="lanjut" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content shadow-none" style="background-color: transparent;">
+            <div class="modal-body">
+                <div class="row justify-content-around">
+                    <div class="card col-md-7">
+                        <div class="card-header">
+                            <h5>Data User Pemesan</h5>
+                        </div>
+                        <div class="card-body"">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Nama</label>
+                                    <input id="nama" type="text" class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>No. HP/WA</label>
+                                    <input id="no_hp" type="number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Daerah Kirim</label>
+                                    <select class="form-control selectric" id="pilih-daerah">
+                                        <option selected disabled>Pilih Daerah</option>
+                                        <?php foreach($daerah as $d_kirim):?>
+                                        <option value="<?= $d_kirim['id_daerah']?>"><?= $d_kirim['nama_kota']?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Tanggal Pengiriman</label>
+                                    <div class="input-group">
+                                        <?php date_default_timezone_set('Asia/Jakarta');
+                                        $today = date('Y-m-d');
+                                        $tgl = date('Y-m-d', strtotime('+3 days', strtotime($today)));
+                                        ?>
+                                        <input id="tglDikirim" type="date" class="form-control" min="<?= $tgl ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Alamat Pengiriman</label>
+                                    <textarea id="alamat" type="text" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Catatan</label>
+                                    <textarea type="text" class="form-control" placeholder="*Jika tidak perlu silahkan dikosongi"></textarea>
+                                </div>
+                            </div>
+                            <div class="row justify-content-end p-3">
+                                <button type="button" class="btn btn-secondary mr-3 " data-dismiss="modal">Close</button>
+                                <button type="button" onclick="simpan_preorder()" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card col-md-4">
+                        <div class="card-header">
+                            <h5>Keuangan</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="">Total Belanja</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Rp
+                                        </div>
+                                    </div>
+                                    <input hidden readonly type="text" class="form-control " id="total-cart" name="total_belanja">
+                                    <input type="text" class="form-control " id="total-belanja" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Harga Ongkir</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Rp
+                                        </div>
+                                    </div>
+                                    <input id="ongkir" type="text" class="form-control" value="0" name="ongkir" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Uang Pembayaran</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Rp
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" id="uang" placeholder="Masukkan uang pembayaran">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Kembalian</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Rp
+                                        </div>
+                                    </div>
+                                    <input disabled type="text" class="form-control" id="kembalian">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="<?= base_url() ?>assets/js/cart_preorder.js"></script>
 <script type="text/javascript">
-    function lanjut() {
-        $('#lanjut').modal('show').appendTo('body');
-    }
     $(document).ready(function() {
+        $("#open-modal").click(function(){
+            let total_belanja = document.getElementById('total-belanja').value;
+            if (total_belanja == 0) {
+                swal("Gagal", "Belum ada roti/kue yang dipilih", "error");
+                return false;
+            }
+            $('#lanjut').modal('show').appendTo('body');
+         });
+
+        $("#nama").on("keyup", function(){
+            $("#nama2").val($(this).val());
+        });
+
+        $("#no_hp").on("keyup", function(){
+            $("#no_hp2").val($(this).val());
+        });
+
+        $("#alamat").on("keyup", function(){
+            $("#alamat2").val($(this).val());
+        });
+
+        $("#catatan").on("keyup", function(){
+            $("#catatan2").val($(this).val());
+        });
+
+        $("#pilih-daerah").on("change", function(){
+            var id_daerah = $(this).val();
+            $("#pilih_daerah2").val(id_daerah);
+            $.ajax({
+            url: '<?php echo base_url("kasir/kasir_page/get_ongkir/") ?>' + id_daerah,
+            success: function(data) {
+                const format3 = data.toString().split('').reverse().join('');
+                const convert3 = format3.match(/\d{1,3}/g);
+                const rupiah3 = convert3.join('.').split('').reverse().join('');
+                $("#ongkir").val(rupiah3);
+
+            },
+        });
+        });
 
         // total belanja dan tanggal kirim
         setInterval(function() {
@@ -213,12 +304,17 @@
             let total_belanja = document.getElementById('total-cart').value;
             let ttb = total_belanja.replace(/[^,\d]/g, '').toString();
 
+            // get biaya ongkir
+            let ongkir = document.getElementById('ongkir').value;
+            var bo = ongkir.replace(/[^,\d]/g, '').toString();
+
             // get uang pelanggan
             let uang_pelanggan = document.getElementById('uang').value;
             let up = uang_pelanggan.replace(/[^,\d]/g, '').toString();
 
             // fungsi hitung
-            let hitung = parseInt(up) - parseInt(ttb);
+            var tt_semua = parseInt(ttb) + parseInt(bo);
+            let hitung = parseInt(up) - tt_semua;
             if (uang_pelanggan != '') {
                 const format2 = hitung.toString().split('').reverse().join('');
                 const convert2 = format2.match(/\d{1,3}/g);
@@ -236,19 +332,18 @@
     });
 
     function simpan_preorder() {
-        // cek pembelian
-        var pembelian = document.getElementById('total-cart').value;
-        if (pembelian == '0') {
-            swal("Gagal", "Belum ada roti/kue yang dipilih", "error");
-            return false;
-        }
-
-        //cek uang pembayaran
-        var uang_pb = document.getElementById('uang').value;
-        if (uang_pb == '') {
+        // validasi data pemesan
+        var nama    = document.getElementById("nama").value;
+        var no_hp   = document.getElementById("no_hp").value;
+        var daerah  = document.getElementById("ongkir").value;
+        var alamat  = document.getElementById("alamat").value;
+        
+        if(nama != '' && no_hp != '' && daerah != 0 && alamat != ''){
+            // eksekusi selanjutnya
+        }else{
             swal({
                 title: "Gagal Menyimpan",
-                text: "Uang pembayaran belum dimasukkan",
+                text: "Form input tidak boleh kosong!",
                 icon: "error",
                 buttons: {
                     cancel: false,
@@ -256,20 +351,20 @@
                 }
             }).then((oke) => {
                 if (oke) {
-                    document.getElementById('uang').focus();
+                    if (nama == '') {
+                        document.getElementById('nama').focus();
+                    } else if (no_hp == '') {
+                        document.getElementById('no_hp').focus();
+                    } else if (daerah == 0) {
+                        document.getElementById('pilih-daerah').focus();
+                    } else if (alamat == '') {
+                        document.getElementById('alamat').focus();
+                    } 
                 }
             });
             return false;
         }
-
-        // cek uang kembalian
-        var kembalian = document.getElementById('kembalian').value;
-        var uang_kl = kembalian.replace(/[.]/i, '').toString();
-        if (uang_kl < 0) {
-            swal("Gagal Menyimpan", "Uang pembayaran kurang", "error");
-            return false;
-        }
-
+        
         //cek tanggal pengiriman
         var tgl = document.getElementById('tglDikirim').value;
         if (tgl == '') {
@@ -302,6 +397,33 @@
                 swal("Gagal Menyimpan", "Tanggal pengiriman minimal 3 hari kedepan", "error");
                 return false;
             }
+        }
+
+        //cek uang pembayaran
+        var uang_pb = document.getElementById('uang').value;
+        if (uang_pb == '') {
+            swal({
+                title: "Gagal Menyimpan",
+                text: "Uang pembayaran belum dimasukkan",
+                icon: "error",
+                buttons: {
+                    cancel: false,
+                    confirm: true
+                }
+            }).then((oke) => {
+                if (oke) {
+                    document.getElementById('uang').focus();
+                }
+            });
+            return false;
+        }
+
+        // cek uang kembalian
+        var kembalian = document.getElementById('kembalian').value;
+        var uang_kl = kembalian.replace(/[.]/i, '').toString();
+        if (uang_kl < 0) {
+            swal("Gagal Menyimpan", "Uang pembayaran kurang", "error");
+            return false;
         }
 
         // simpan data
