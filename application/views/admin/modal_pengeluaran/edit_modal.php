@@ -115,7 +115,7 @@
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <input id="idModal" value="<?= $dtl_modal['idModal'] ?>" required hidden class="form-control" type="text" name="idModal">
+                            <input id="idModal" value="<?= $dtl_modal['id_modal'] ?>" required hidden class="form-control" type="text" name="idModal">
                             <div class="text-center">
                                 <button class="btn btn-info add_field_button" type="button"><i class="fas fa-plus mr-2"></i>Tambah Bahan</button>
                             </div>

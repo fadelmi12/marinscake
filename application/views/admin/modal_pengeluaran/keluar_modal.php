@@ -15,7 +15,7 @@
                             <input id="tanggal_filter" type="month" name="tanggal" class="form-control mr-3" style="width:max-content" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $tanggal ?>">
                             <button type="button" onclick="filter()" class="btn btn-primary"><i class="fas fa-align-center mr-2"></i>Filter</button>
                             <!-- ekspor pdf -->
-                            <a href="<?php echo base_url('admin/cetak_pdf/cetak_modal_pdf/'.$tanggal) ?>" target="_blank" class="btn btn-warning ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
+                            <a href="<?php echo base_url('admin/cetak_pdf/cetak_modal_pdf/' . $tanggal) ?>" target="_blank" class="btn btn-warning ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
                             <!-- tambah data -->
                             <button class="btn btn-success ml-3" data-toggle="modal" data-target="#biaya_produksi"><i class="fas fa-plus mr-1"></i> Tambah Data Modal</button>
                         </div>
@@ -43,15 +43,15 @@
                                                 <?= $dt_modal['tanggal'] ?>
                                             </td>
                                             <td>
-                                                Rp. <?php echo number_format($dt_modal['totalModal'], 0, '', '.') ?>
+                                                Rp. <?php echo number_format($dt_modal['total_modal'], 0, '', '.') ?>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around">
                                                     <button class="btn btn-info" data-toggle="modal" data-target="#detail_modal<?= $dt_modal['id_modal'] ?>">
                                                         <i class="fas fa-search"></i> Detail</button>
-                                                    <button class="btn btn-warning" type="button" onclick="window.location.href='<?php echo base_url('admin/modal/edit_modal/'.$dt_modal['id_modal'].'/'.$tanggal) ?>'">
+                                                    <button class="btn btn-warning" type="button" onclick="window.location.href='<?php echo base_url('admin/modal/edit_modal/' . $dt_modal['id_modal'] . '/' . $tanggal) ?>'">
                                                         <i class="fas fa-pen"></i> Edit</button>
-                                                    <button class="btn btn-danger" onclick="hapus_modal(<?= $dt_modal['id_modal'];?>)" type="button">
+                                                    <button class="btn btn-danger" onclick="hapus_modal(<?= $dt_modal['id_modal']; ?>)" type="button">
                                                         <i class="fas fa-trash"></i> Hapus</button>
                                                 </div>
                                             </td>
@@ -69,17 +69,17 @@
 </div>
 
 <style>
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 </style>
 
 <!-- modal tambah biaya produksi-->
@@ -133,7 +133,7 @@ input[type=number] {
                                 <input required class="form-control" type="text" name="namaBahan[0]">
                             </div>
                             <div class="col-2 ">
-                                <input required class="form-control" type="number" id="jumlah0" onkeyup="jumlah(<?= '0'?>)" name="jumlah[0]">
+                                <input required class="form-control" type="number" id="jumlah0" onkeyup="jumlah(<?= '0' ?>)" name="jumlah[0]">
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
@@ -143,7 +143,7 @@ input[type=number] {
                                                 Rp
                                             </div>
                                         </div>
-                                        <input required class="form-control" type="number" id="hargaSatuan0" onkeyup="hargaSatuan(<?= '0'?>)" name="hargaSatuan[0]">
+                                        <input required class="form-control" type="number" id="hargaSatuan0" onkeyup="hargaSatuan(<?= '0' ?>)" name="hargaSatuan[0]">
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +155,7 @@ input[type=number] {
                                                 Rp
                                             </div>
                                         </div>
-                                        <input readonly class="form-control" type="text" id="totalHarga0"  name="totalHarga[0]">
+                                        <input readonly class="form-control" type="text" id="totalHarga0" name="totalHarga[0]">
                                     </div>
                                 </div>
                             </div>
@@ -209,28 +209,29 @@ input[type=number] {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                 $no = 1;
-                                foreach($detail_modal as $dtl_modal): 
-                                if ($dt_modal['id_modal'] == $dtl_modal['id_modal']):?>
-                                    <tr>
-                                        <td class="text-center">
-                                            <?= $no++?>
-                                        </td>
-                                        <td>
-                                            <?= $dtl_modal['namaBahan'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $dtl_modal['jumlah'] ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dtl_modal['harga_satuan'], 0, '', '.') ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dtl_modal['totalHarga'], 0, '', '.') ?>
-                                        </td>
-                                    </tr>
-                                <?php endif; endforeach; ?>
+                                foreach ($detail_modal as $dtl_modal) :
+                                    if ($dt_modal['id_modal'] == $dtl_modal['id_modal']) : ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <?= $no++ ?>
+                                            </td>
+                                            <td>
+                                                <?= $dtl_modal['nama_bahan'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $dtl_modal['jumlah'] ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dtl_modal['harga_satuan'], 0, '', '.') ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dtl_modal['total_harga'], 0, '', '.') ?>
+                                            </td>
+                                        </tr>
+                                <?php endif;
+                                endforeach; ?>
                             </tbody>
                             <tfooter>
                                 <td class="text-center" colspan="4"><strong>Total Pengeluaran</strong></td>
@@ -238,9 +239,9 @@ input[type=number] {
                             </tfooter>
                         </table>
                     </div>
-                        <div align="right">
-                            <button class="btn btn-info" type="button" data-dismiss="modal">Tutup</button>
-                        </div>
+                    <div align="right">
+                        <button class="btn btn-info" type="button" data-dismiss="modal">Tutup</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -253,44 +254,52 @@ input[type=number] {
         var max_fields = 20; //maximum input boxes allowed
         var wrapper = $(".input_fields_wrap"); //Fields wrapper
         var add_button = $(".add_field_button"); //Add button ID
- 
+
         var x = 1; //initlal text box count
-        a = 1; b = 1; c = 1; d = 1; j = 1; f = 1; g = 1; h = 1; i = 1;
+        a = 1;
+        b = 1;
+        c = 1;
+        d = 1;
+        j = 1;
+        f = 1;
+        g = 1;
+        h = 1;
+        i = 1;
         $(add_button).click(function(e) { //on add input button click
             e.preventDefault();
             //max input box allowed
             x++; //text box increment 
-            $(wrapper).append(''+
-                '<div class="row">'+
-                    '<div class="col-3">'+
-                        '<input required class="form-control" type="text" name="namaBahan['+ a++ +']">'+
-                    '</div>'+
-                    '<div class="col-2 ">'+
-                        '<input style="" required class="form-control" type="number" id="jumlah'+ g++ +'" onkeyup="jumlah('+ j++ +')" name="jumlah['+ b++ +']">'+
-                    '</div>'+
-                    '<div class="col-3">'+
-                        '<div class="form-group">'+
-                            '<div class="input-group">'+
-                                '<div class="input-group-prepend">'+
-                                    '<div class="input-group-text">Rp</div>'+
-                                '</div>'+
-                                '<input required class="form-control" type="number" id="hargaSatuan'+ h++ +'" onkeyup="hargaSatuan('+ f++ +')" name="hargaSatuan['+ c++ +']">'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                    '<div class="col-3">'+
-                        '<div class="form-group">'+
-                            '<div class="input-group">'+
-                                '<div class="input-group-prepend">'+
-                                    '<div class="input-group-text">Rp</div>'+
-                                '</div>'+
-                                '<input readonly class="form-control" type="text" id="totalHarga'+ i++ +'" name="totalHarga['+ d++ +']">'+
-                            '</div>'+
-                        '</div>'+
-                    '</div>'+
-                    '<div class="col-1">'+
-                        '<button href="#" class="btn btn-danger remove_field mt-1"><i class="fas fa-trash fa-1x"></button>'+
-                    '</div>'+
+            $(wrapper).append('' +
+                '<div class="row">' +
+                '<div class="col-3">' +
+                '<input required class="form-control" type="text" name="namaBahan[' + a++ + ']">' +
+                '</div>' +
+                '<div class="col-2 ">' +
+                '<input style="" required class="form-control" type="number" id="jumlah' + g++ + '" onkeyup="jumlah(' + j++ + ')" name="jumlah[' + b++ + ']">' +
+                '</div>' +
+                '<div class="col-3">' +
+                '<div class="form-group">' +
+                '<div class="input-group">' +
+                '<div class="input-group-prepend">' +
+                '<div class="input-group-text">Rp</div>' +
+                '</div>' +
+                '<input required class="form-control" type="number" id="hargaSatuan' + h++ + '" onkeyup="hargaSatuan(' + f++ + ')" name="hargaSatuan[' + c++ + ']">' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-3">' +
+                '<div class="form-group">' +
+                '<div class="input-group">' +
+                '<div class="input-group-prepend">' +
+                '<div class="input-group-text">Rp</div>' +
+                '</div>' +
+                '<input readonly class="form-control" type="text" id="totalHarga' + i++ + '" name="totalHarga[' + d++ + ']">' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-1">' +
+                '<button href="#" class="btn btn-danger remove_field mt-1"><i class="fas fa-trash fa-1x"></button>' +
+                '</div>' +
                 '</div>'
             ); // add input boxes.
         });
@@ -302,19 +311,19 @@ input[type=number] {
         })
     });
 
-    function jumlah($a){
+    function jumlah($a) {
         return hitung($a);
     }
 
-    function hargaSatuan($b){
+    function hargaSatuan($b) {
         return hitung($b);
     }
 
-    function hitung($c){
-        var jumlah      = document.getElementById("jumlah"+$c).value;
-        var hargaSatuan = document.getElementById('hargaSatuan'+$c).value;
+    function hitung($c) {
+        var jumlah = document.getElementById("jumlah" + $c).value;
+        var hargaSatuan = document.getElementById('hargaSatuan' + $c).value;
         total = jumlah * hargaSatuan;
-        document.getElementById("totalHarga"+$c).value = total;
+        document.getElementById("totalHarga" + $c).value = total;
     }
 
     function hapus_modal($id_modal) {
@@ -327,19 +336,19 @@ input[type=number] {
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location = "<?php echo base_url('admin/modal/hapus_modal/') ?>" + $id_modal +'_'+ tanggal;
+                window.location = "<?php echo base_url('admin/modal/hapus_modal/') ?>" + $id_modal + '_' + tanggal;
             } else {
                 swal("Data modal batal dihapus");
             }
         });
     }
 
-    function filter(){
+    function filter() {
         var tanggal = document.getElementById('tanggal_filter').value;
         if (tanggal != '') {
-            window.location="<?php echo base_url('admin/modal/pengeluaran_modal/') ?>"+tanggal;
-        }else{
-            swal('Informasi','Bulan dan tahun tidak ditemukan', 'info');
+            window.location = "<?php echo base_url('admin/modal/pengeluaran_modal/') ?>" + tanggal;
+        } else {
+            swal('Informasi', 'Bulan dan tahun tidak ditemukan', 'info');
         }
     }
 </script>
