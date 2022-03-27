@@ -7,7 +7,7 @@ class Model_transaksi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('transaksi');
-        $this->db->like('tanggal',$tanggal);
+        $this->db->like('tanggal', $tanggal);
         return $this->db->get();
     }
 
@@ -25,7 +25,7 @@ class Model_transaksi extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('preorder');
-        $this->db->like('tanggalPesan',$tanggal);
+        $this->db->like('tanggal_pesan', $tanggal);
         return $this->db->get();
     }
 

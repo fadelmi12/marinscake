@@ -5,7 +5,7 @@
             </a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Main</li>
+            <li class="menu-header">Main <?= $this->session->userdata('role') ?></li>
             <li class="dropdown <?php echo ($this->uri->segment(2) == '') ? 'active' : '' ?>">
                 <a href="<?php echo base_url() ?>admin" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
             </li>
@@ -34,7 +34,7 @@
 
                 </ul>
             </li>
-            <li class="dropdown <?php echo ($this->uri->segment(2) === 'laporan') ? 'active' : '' ?>">
+            <li class="dropdown <?php echo ($this->uri->segment(2) === 'laporan' || $this->uri->segment(2) === 'modal') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="file-text"></i><span>Laporan</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/modal/pengeluaran_modal/<?= date('Y-m') ?>">Laporan Modal</a></li>
