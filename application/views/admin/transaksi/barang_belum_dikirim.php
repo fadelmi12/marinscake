@@ -26,12 +26,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   <?php 
+                                    <?php
                                     $no = 1;
-                                    foreach($riwayat_preorder as $rw_pr): ?>
+                                    foreach ($riwayat_preorder as $rw_pr) : ?>
                                         <tr>
                                             <td class="text-center">
-                                                <?= $no++?>
+                                                <?= $no++ ?>
                                             </td>
                                             <td>
                                                 Rp <?= number_format($rw_pr['jumlah'], 0, '', '.') ?>
@@ -40,21 +40,21 @@
                                                 <?= $rw_pr['metode'] ?>
                                             </td>
                                             <td>
-                                                <?= $rw_pr['tanggalPesan'] ?>
+                                                <?= $rw_pr['tanggal_pesan'] ?>
                                             </td>
                                             <td>
-                                                <?= $rw_pr['tanggalDikirim'] ?>
+                                                <?= $rw_pr['tanggal_dikirim'] ?>
                                             </td>
                                             <td>
                                                 <?= $rw_pr['status'] ?>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around">
-                                                    <button class="btn btn-info" data-toggle="modal" data-target="#modal_detail_preorder<?= $rw_pr['idPreorder'] ?>">
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#modal_detail_preorder<?= $rw_pr['id_preorder'] ?>">
                                                         <i class="fas fa-search"></i> Detail</button>
-                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal_edit_preorder<?php echo $rw_pr['idPreorder'] ?>">
+                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal_edit_preorder<?php echo $rw_pr['id_preorder'] ?>">
                                                         <i class="fas fa-pen"></i> Edit</button>
-                                                    <button class="btn btn-danger" onclick="hapus_riwayat_preorder(<?php echo $rw_pr['idPreorder'];?>)" type="button">
+                                                    <button class="btn btn-danger" onclick="hapus_riwayat_preorder(<?php echo $rw_pr['id_preorder']; ?>)" type="button">
                                                         <i class="fas fa-trash"></i> Hapus</button>
                                                 </div>
                                             </td>
@@ -73,7 +73,7 @@
 
 <!-- modal detail Transaksi -->
 <?php foreach ($riwayat_preorder as $rw_pr) : ?>
-    <div class="modal fade bd-example-modal-lg" id="modal_detail_preorder<?= $rw_pr['idPreorder'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="modal_detail_preorder<?= $rw_pr['id_preorder'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,28 +97,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                 $no = 1;
-                                foreach($detail_preorder as $dt_tr): 
-                                if ($rw_pr['idPreorder'] == $dt_tr['idPreorder']):?>
-                                    <tr>
-                                        <td class="text-center">
-                                            <?= $no++?>
-                                        </td>
-                                        <td>
-                                            <?= $dt_tr['namaProduk'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $dt_tr['jumlah'] ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dt_tr['harga'], 0, '', '.') ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dt_tr['total'], 0, '', '.') ?>
-                                        </td>
-                                    </tr>
-                                <?php endif; endforeach; ?>
+                                foreach ($detail_preorder as $dt_tr) :
+                                    if ($rw_pr['id_preorder'] == $dt_tr['id_preorder']) : ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <?= $no++ ?>
+                                            </td>
+                                            <td>
+                                                <?= $dt_tr['namaProduk'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $dt_tr['jumlah'] ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dt_tr['harga'], 0, '', '.') ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dt_tr['total'], 0, '', '.') ?>
+                                            </td>
+                                        </tr>
+                                <?php endif;
+                                endforeach; ?>
                             </tbody>
                             <tfooter>
                                 <td class="text-center" colspan="4"><strong>Total Belanja</strong></td>
@@ -137,7 +138,7 @@
 
 <!-- Modal edit preorder-->
 <?php foreach ($riwayat_preorder as $rw_pr) : ?>
-    <div class="modal fade" id="modal_edit_preorder<?php echo $rw_pr['idPreorder'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_edit_preorder<?php echo $rw_pr['id_preorder'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-center">
             <div class="modal-content">
                 <div class="modal-header">
@@ -147,7 +148,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('admin/transaksi/update_preorder/').$rw_pr['idPreorder']; ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/transaksi/update_preorder/') . $rw_pr['id_preorder']; ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>
                                 Jumlah Transaksi
@@ -161,7 +162,7 @@
                                     <label>
                                         Metode
                                     </label>
-                                    <input type="text" name="metode" class="form-control" disabled value="<?= $rw_pr['metode']?>">
+                                    <input type="text" name="metode" class="form-control" disabled value="<?= $rw_pr['metode'] ?>">
                                     <!-- <select class="form-control selectric" name="metode" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required>
                                         <option <?php if ($rw_pr['metode'] == 'Online') : echo "selected";
                                                 endif; ?>>
@@ -179,11 +180,14 @@
                                     <label>
                                         Pembayaran
                                     </label>
-                                    <?php foreach($data_midtrans as $midtrans): 
-                                        if($midtrans['id_preorder'] == $rw_pr['idPreorder']){$pembayaran =  $midtrans['metode'];}
-                                        else{$pembayaran = 'Tunai';}
-                                    endforeach;?>
-                                    <input type="text" name="pembayaran" class="form-control" disabled value="<?= $pembayaran?>">
+                                    <?php foreach ($data_midtrans as $midtrans) :
+                                        if ($midtrans['id_preorder'] == $rw_pr['id_preorder']) {
+                                            $pembayaran =  $midtrans['metode'];
+                                        } else {
+                                            $pembayaran = 'Tunai';
+                                        }
+                                    endforeach; ?>
+                                    <input type="text" name="pembayaran" class="form-control" disabled value="<?= $pembayaran ?>">
                                     <!-- <input type="text" name="pembayaran" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['pembayaran'] ?>"> -->
                                 </div>
                             </div>
@@ -211,7 +215,7 @@
                                     <label>
                                         Tanggal Pengiriman
                                     </label>
-                                    <input type="date" name="tanggalDikirim" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['tanggalDikirim'] ?>">
+                                    <input type="date" name="tanggalDikirim" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['tanggal_dikirim'] ?>">
                                 </div>
                             </div>
                         </div>

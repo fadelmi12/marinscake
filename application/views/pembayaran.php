@@ -250,20 +250,17 @@
                 snap.pay(data, {
 
                     onSuccess: function(result) {
-                        alert('sukses');
                         changeResult('success', result);
                         console.log(result.status_message);
                         console.log(result);
                         $("#payment-form").submit();
                     },
                     onPending: function(result) {
-                        alert('pending');
                         changeResult('pending', result);
                         console.log(result.status_message);
                         $("#payment-form").submit();
                     },
                     onError: function(result) {
-                        alert('error');
                         changeResult('error', result);
                         console.log(result.status_message);
                         $("#payment-form").submit();

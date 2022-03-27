@@ -5,7 +5,7 @@
             </a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Main <?= $this->session->userdata('role') ?></li>
+            <li class="menu-header">Main</li>
             <li class="dropdown <?php echo ($this->uri->segment(2) == '') ? 'active' : '' ?>">
                 <a href="<?php echo base_url() ?>admin" class="nav-link"><i data-feather="home"></i><span>Dashboard</span></a>
             </li>
@@ -15,6 +15,7 @@
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'produk') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="package"></i><span>Produk</span></a>
                 <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/produk/kategori">Kategori Produk</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/produk">Produk</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/produk/tambah_produk">Tambah Produk</a></li>
                 </ul>

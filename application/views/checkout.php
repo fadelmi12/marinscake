@@ -42,7 +42,7 @@
                                     <select class="form-control selectric" name="kota" id="kota" onchange="cek_ongkir(this)" required>
                                         <option value="" hidden>pilih daerah pengiriman</option>
                                         <?php foreach ($kota as $kot) : ?>
-                                            <option value="<?= $kot['nama_kota'] ?>" data-ongkir="<?= $kot['ongkir'] ?>"><?= $kot['nama_kota'] ?></option>
+                                            <option value="<?= $kot['id_daerah'] ?>" data-ongkir="<?= $kot['ongkir'] ?>"><?= $kot['nama_kota'] ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

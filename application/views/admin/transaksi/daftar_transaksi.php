@@ -10,16 +10,15 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="form-group d-flex align-items-center mr-3 mb-0">
-                                    <h6 class="w-100 mr-3 my-0" style="color:black">Pilih Tanggal : </h6>
-                                    <div class="input-group">
-                                        <input type="month" class="form-control mr-3" 
-                                        value="<?= $tanggal; ?>" id="filter_tanggal">
-                                    </div>
-                                    <button class="btn btn-primary d-flex h-100 " type="button" onclick="filter()"><i class="fas fa-filter my-auto mr-2"></i>Filter</button>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="form-group d-flex align-items-center mr-3 mb-0">
+                                <h6 class="w-100 mr-3 my-0" style="color:black">Pilih Tanggal : </h6>
+                                <div class="input-group">
+                                    <input type="month" class="form-control mr-3" value="<?= $tanggal; ?>" id="filter_tanggal">
                                 </div>
+                                <button class="btn btn-primary d-flex h-100 " type="button" onclick="filter()"><i class="fas fa-filter my-auto mr-2"></i>Filter</button>
                             </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-hover" id="table-1">
                                 <thead>
@@ -36,12 +35,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
+                                    <?php
                                     $no = 1;
-                                    foreach($riwayat_transaksi as $rw_tr): ?>
+                                    foreach ($riwayat_transaksi as $rw_tr) : ?>
                                         <tr>
                                             <td class="text-center">
-                                                <?= $no++?>
+                                                <?= $no++ ?>
                                             </td>
                                             <td>
                                                 Rp <?= number_format($rw_tr['total_belanja'], 0, '', '.') ?>
@@ -60,11 +59,11 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-around">
-                                                    <button class="btn btn-info" data-toggle="modal" data-target="#modal_detail_transaksi<?= $rw_tr['idTransaksi'] ?>">
+                                                    <button class="btn btn-info" data-toggle="modal" data-target="#modal_detail_transaksi<?= $rw_tr['id_transaksi'] ?>">
                                                         <i class="fas fa-search"></i> Detail</button>
-                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal_edit_transaksi<?php echo $rw_tr['idTransaksi'] ?>">
+                                                    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#modal_edit_transaksi<?php echo $rw_tr['id_transaksi'] ?>">
                                                         <i class="fas fa-pen"></i> Edit</button>
-                                                    <button class="btn btn-danger" onclick="hapus_riwayat_transaksi(<?php echo $rw_tr['idTransaksi'];?>)" type="button">
+                                                    <button class="btn btn-danger" onclick="hapus_riwayat_transaksi(<?php echo $rw_tr['id_transaksi']; ?>)" type="button">
                                                         <i class="fas fa-trash"></i> Hapus</button>
                                                 </div>
                                             </td>
@@ -82,7 +81,7 @@
 
 <!-- modal detail Transaksi -->
 <?php foreach ($riwayat_transaksi as $rw_tr) : ?>
-    <div class="modal fade bd-example-modal-lg" id="modal_detail_transaksi<?= $rw_tr['idTransaksi'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="modal_detail_transaksi<?= $rw_tr['id_transaksi'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -106,28 +105,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                 $no = 1;
-                                foreach($detail_transaksi as $dt_tr): 
-                                if ($rw_tr['idTransaksi'] == $dt_tr['idTransaksi']):?>
-                                    <tr>
-                                        <td class="text-center">
-                                            <?= $no++?>
-                                        </td>
-                                        <td>
-                                            <?= $dt_tr['namaProduk'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $dt_tr['jumlah'] ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dt_tr['harga'], 0, '', '.') ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dt_tr['total'], 0, '', '.') ?>
-                                        </td>
-                                    </tr>
-                                <?php endif; endforeach; ?>
+                                foreach ($detail_transaksi as $dt_tr) :
+                                    if ($rw_tr['id_transaksi'] == $dt_tr['id_transaksi']) : ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <?= $no++ ?>
+                                            </td>
+                                            <td>
+                                                <?= $dt_tr['nama_produk'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $dt_tr['jumlah'] ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dt_tr['harga'], 0, '', '.') ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dt_tr['total'], 0, '', '.') ?>
+                                            </td>
+                                        </tr>
+                                <?php endif;
+                                endforeach; ?>
                             </tbody>
                             <tfooter>
                                 <td class="text-center" colspan="4"><strong>Total Belanja</strong></td>
@@ -135,11 +135,11 @@
                             </tfooter>
                         </table>
                     </div>
-                        <div align="right">
-                            <button class="btn btn-info" type="button" data-dismiss="modal">Tutup</button>
-                        </div>
+                    <div align="right">
+                        <button class="btn btn-info" type="button" data-dismiss="modal">Tutup</button>
+                    </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -147,7 +147,7 @@
 
 <!-- Modal edit transaksi-->
 <?php foreach ($riwayat_transaksi as $rw_tr) : ?>
-    <div class="modal fade" id="modal_edit_transaksi<?php echo $rw_tr['idTransaksi'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_edit_transaksi<?php echo $rw_tr['id_transaksi'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-center">
             <div class="modal-content">
                 <div class="modal-header">
@@ -157,7 +157,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('admin/transaksi/update_transaksi/') . $rw_tr['idTransaksi']; ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('admin/transaksi/update_transaksi/') . $rw_tr['id_transaksi']; ?>" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
@@ -168,15 +168,15 @@
                                     <!-- <input readonly type="text" name="total_belanja" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_tr['total_belanja'] ?>"> -->
                                     <!-- <div class="col-3">
                                         <div class="form-group"> -->
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        Rp
-                                                    </div>
-                                                </div>
-                                                <input readonly value="<?= $rw_tr['total_belanja'] ?>" class="form-control" type="number" name="total_belanja">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                Rp
                                             </div>
-                                        <!-- </div>
+                                        </div>
+                                        <input readonly value="<?= $rw_tr['total_belanja'] ?>" class="form-control" type="number" name="total_belanja">
+                                    </div>
+                                    <!-- </div>
                                     </div> -->
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            
+
                             <!-- <div class="col-6">
                                 <div class="form-group">
                                     <label>
@@ -271,8 +271,8 @@
         });
     }
 
-    function filter(){
+    function filter() {
         var tanggal = document.getElementById('filter_tanggal').value;
-        window.location = "<?php echo base_url('admin/transaksi/langsung/')?>"+ tanggal;
+        window.location = "<?php echo base_url('admin/transaksi/langsung/') ?>" + tanggal;
     }
 </script>

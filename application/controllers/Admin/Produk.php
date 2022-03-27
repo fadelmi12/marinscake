@@ -231,4 +231,113 @@ class Produk extends CI_Controller
         $where = array('id_gambar_produk' => $this->input->post('id_gambar_produk'));
         $this->db->delete('gambar_produk', $where);
     }
+
+    // kategori produk
+    public function kategori()
+    {
+        $data['kategori']   = $this->Model_produk->get_kategori_produk()->result_array();
+
+        $this->load->view('admin/template/header');
+        $this->load->view('admin/template/sidebar');
+        $this->load->view('admin/produk/kategori', $data);
+        $this->load->view('admin/template/footer');
+    }
+
+    // insert kategori
+    public function insert_kategori()
+    {
+        $kategori   = $this->input->post("kategori");
+        $status     = $this->input->post('status');
+
+        $data = array(
+            'nama_jenis'    => $kategori,
+            'status'        => $status
+        );
+
+        $simpan = $this->db->insert('jenis_produk', $data);
+
+        if ($simpan) {
+            $this->session->set_flashdata(
+                'kategori',
+                '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                            <script type ="text/JavaScript">  
+                            swal("Sukses","Kategori berhasil ditambahkan","success")  
+                            </script>'
+            );
+            redirect('Admin/Produk/Kategori');
+        } else {
+            $this->session->set_flashdata(
+                'kategori',
+                '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                            <script type ="text/JavaScript">  
+                            swal("Gagal","Kategori gagal ditambahkan","error")  
+                            </script>'
+            );
+            redirect('Admin/Produk/Kategori');
+        }
+    }
+
+    // update kategori
+    public function edit_kategori($id_kategori)
+    {
+        $nama_kategori  = $this->input->post('kategori');
+        $status         = $this->input->post('status');
+        $data = array(
+            'nama_jenis'    => $nama_kategori,
+            'status'        => $status
+        );
+
+        $where = array(
+            'id_jenis' => $id_kategori
+        );
+
+        $update = $this->db->update('jenis_produk', $data, $where);
+
+        if ($update) {
+            $this->session->set_flashdata(
+                'kategori',
+                '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                            <script type ="text/JavaScript">  
+                            swal("Sukses","Kategori berhasil diupdate","success")  
+                            </script>'
+            );
+            redirect('Admin/Produk/Kategori');
+        } else {
+            $this->session->set_flashdata(
+                'kategori',
+                '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                            <script type ="text/JavaScript">  
+                            swal("Gagal","Kategori gagal diupdate","error")  
+                            </script>'
+            );
+            redirect('Admin/Produk/Kategori');
+        }
+    }
+
+    // hapus kategori
+    public function hapus_kategori($id_kategori)
+    {
+
+        $delete = $this->db->delete('jenis_produk', array('id_jenis' => $id_kategori));
+
+        if ($delete) {
+            $this->session->set_flashdata(
+                'kategori',
+                '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                            <script type ="text/JavaScript">  
+                            swal("Sukses","Kategori berhasil diupdate","success")  
+                            </script>'
+            );
+            redirect('Admin/Produk/Kategori');
+        } else {
+            $this->session->set_flashdata(
+                'kategori',
+                '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+                            <script type ="text/JavaScript">  
+                            swal("Gagal","Kategori gagal diupdate","error")  
+                            </script>'
+            );
+            redirect('Admin/Produk/Kategori');
+        }
+    }
 }

@@ -12,16 +12,16 @@
                     <div class="card-body">
                         <div class="form-group d-flex align-items-center">
                             <label class="mr-3 mb-0">Pilih Bulan :</label>
-                            <input class="form-control mr-3" style="width:max-content" type="month" name="bulan" id="bulan" value="<?= $bulan?>">
+                            <input class="form-control mr-3" style="width:max-content" type="month" name="bulan" id="bulan" value="<?= $bulan ?>">
                             <button class="btn btn-info" onclick="filter()">
                                 <i class="fas fa-align-center mr-2"></i>Filter
                             </button>
-                            <a style="display: ;" id="pdf_semua" href="<?php echo base_url('admin/cetak_pdf/cetak_semua_pdf/'.$bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
-                            <a style="display: none;" id="pdf_langsung" href="<?php echo base_url('admin/cetak_pdf/cetak_langsung_pdf/'.$bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
-                            <a style="display: none;" id="pdf_preorder" href="<?php echo base_url('admin/cetak_pdf/cetak_preorder_pdf/'.$bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
+                            <a style="display: ;" id="pdf_semua" href="<?php echo base_url('admin/cetak_pdf/cetak_semua_pdf/' . $bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
+                            <a style="display: none;" id="pdf_langsung" href="<?php echo base_url('admin/cetak_pdf/cetak_langsung_pdf/' . $bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
+                            <a style="display: none;" id="pdf_preorder" href="<?php echo base_url('admin/cetak_pdf/cetak_preorder_pdf/' . $bulan) ?>" target="_blank" class="btn btn-primary ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
                         </div>
                         <div class="table-responsive" id="semua">
-                            <table class="table table-striped" id="table-1" >
+                            <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
@@ -34,29 +34,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php   
+                                    <?php
                                     $no = 1;
-                                    foreach($data_transaksi as $dt_trans): ?>
+                                    foreach ($data_transaksi as $dt_trans) : ?>
                                         <tr>
-                                            <td class="text-center"><?= $no++?></td>
-                                            <td class="text-center"><?= $dt_trans['tanggal']?></td>
+                                            <td class="text-center"><?= $no++ ?></td>
+                                            <td class="text-center"><?= $dt_trans['tanggal'] ?></td>
                                             <td>Rp <?php echo number_format($dt_trans['total_belanja'], 0, '', '.') ?></td>
-                                            <td><?= $dt_trans['metode']?></td>
-                                            <td><?= $dt_trans['pembayaran']?></td>
-                                            <td><?= $dt_trans['status']?></td>
+                                            <td><?= $dt_trans['metode'] ?></td>
+                                            <td><?= $dt_trans['pembayaran'] ?></td>
+                                            <td><?= $dt_trans['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['id_transaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
                                         </tr>
                                     <?php endforeach;
-                                    foreach($data_preorder as $dt_pre): ?>
+                                    foreach ($data_preorder as $dt_pre) : ?>
                                         <tr>
-                                            <td class="text-center"><?= $no++?></td>
-                                            <td class="text-center"><?= $dt_pre['tanggal_pesan']?></td>
+                                            <td class="text-center"><?= $no++ ?></td>
+                                            <td class="text-center"><?= $dt_pre['tanggal_pesan'] ?></td>
                                             <td>Rp <?php echo number_format($dt_pre['jumlah'], 0, '', '.') ?></td>
-                                            <td><?= $dt_pre['metode']?></td>
-                                            <td><?= $dt_pre['pembayaran']?></td>
-                                            <td><?= $dt_pre['status']?></td>
+                                            <td><?= $dt_pre['metode'] ?></td>
+                                            <td><?= $dt_pre['pembayaran'] ?></td>
+                                            <td><?= $dt_pre['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['id_preorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
@@ -66,7 +66,7 @@
                             </table>
                         </div>
                         <div class="table-responsive" id="langsung" style="display: none;">
-                            <table class="table table-striped" id="table-1" >
+                            <table class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
@@ -79,21 +79,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php   
-                                        $no = 1;
-                                        foreach($data_transaksi as $dt_trans): ?>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data_transaksi as $dt_trans) : ?>
                                         <tr>
-                                            <td class="text-center"><?= $no++?></td>
-                                            <td class="text-center"><?= $dt_trans['tanggal']?></td>
+                                            <td class="text-center"><?= $no++ ?></td>
+                                            <td class="text-center"><?= $dt_trans['tanggal'] ?></td>
                                             <td>Rp <?php echo number_format($dt_trans['total_belanja'], 0, '', '.') ?></td>
-                                            <td><?= $dt_trans['metode']?></td>
-                                            <td><?= $dt_trans['pembayaran']?></td>
-                                            <td><?= $dt_trans['status']?></td>
+                                            <td><?= $dt_trans['metode'] ?></td>
+                                            <td><?= $dt_trans['pembayaran'] ?></td>
+                                            <td><?= $dt_trans['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['id_transaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
                                         </tr>
-                                    <?php endforeach;?>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -111,16 +111,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php   
-                                        $no = 1;
-                                        foreach($data_preorder as $dt_pre): ?>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($data_preorder as $dt_pre) : ?>
                                         <tr>
-                                            <td class="text-center"><?= $no++?></td>
-                                            <td class="text-center"><?= $dt_pre['tanggal_pesan']?></td>
+                                            <td class="text-center"><?= $no++ ?></td>
+                                            <td class="text-center"><?= $dt_pre['tanggal_pesan'] ?></td>
                                             <td>Rp <?php echo number_format($dt_pre['jumlah'], 0, '', '.') ?></td>
-                                            <td><?= $dt_pre['metode']?></td>
-                                            <td><?= $dt_pre['pembayaran']?></td>
-                                            <td><?= $dt_pre['status']?></td>
+                                            <td><?= $dt_pre['metode'] ?></td>
+                                            <td><?= $dt_pre['pembayaran'] ?></td>
+                                            <td><?= $dt_pre['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['id_preorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
                                             </td>
@@ -129,7 +129,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,28 +162,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                 $no = 1;
-                                foreach($detail_transaksi as $dtl_trans): 
-                                if ($dt_trans['id_transaksi'] == $dtl_trans['id_transaksi']):?>
-                                    <tr>
-                                        <td class="text-center">
-                                            <?= $no++?>
-                                        </td>
-                                        <td>
-                                            <?= $dtl_trans['nama_produk'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $dtl_trans['jumlah'] ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dtl_trans['harga'], 0, '', '.') ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dtl_trans['total'], 0, '', '.') ?>
-                                        </td>
-                                    </tr>
-                                <?php endif; endforeach; ?>
+                                foreach ($detail_transaksi as $dtl_trans) :
+                                    if ($dt_trans['id_transaksi'] == $dtl_trans['id_transaksi']) : ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <?= $no++ ?>
+                                            </td>
+                                            <td>
+                                                <?= $dtl_trans['nama_produk'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $dtl_trans['jumlah'] ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dtl_trans['harga'], 0, '', '.') ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dtl_trans['total'], 0, '', '.') ?>
+                                            </td>
+                                        </tr>
+                                <?php endif;
+                                endforeach; ?>
                             </tbody>
                             <tfooter>
                                 <td class="text-center" colspan="4"><strong>Total Belanja</strong></td>
@@ -226,28 +227,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
                                 $no = 1;
-                                foreach($detail_preorder as $dtl_pre): 
-                                if ($dt_pre['id_preorder'] == $dtl_pre['id_preorder']):?>
-                                    <tr>
-                                        <td class="text-center">
-                                            <?= $no++?>
-                                        </td>
-                                        <td>
-                                            <?= $dtl_pre['namaProduk'] ?>
-                                        </td>
-                                        <td>
-                                            <?= $dtl_pre['jumlah'] ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dtl_pre['harga'], 0, '', '.') ?>
-                                        </td>
-                                        <td>
-                                            Rp <?= number_format($dtl_pre['total'], 0, '', '.') ?>
-                                        </td>
-                                    </tr>
-                                <?php endif; endforeach; ?>
+                                foreach ($detail_preorder as $dtl_pre) :
+                                    if ($dt_pre['id_preorder'] == $dtl_pre['id_preorder']) : ?>
+                                        <tr>
+                                            <td class="text-center">
+                                                <?= $no++ ?>
+                                            </td>
+                                            <td>
+                                                <?= $dtl_pre['nama_produk'] ?>
+                                            </td>
+                                            <td>
+                                                <?= $dtl_pre['jumlah'] ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dtl_pre['harga'], 0, '', '.') ?>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($dtl_pre['total'], 0, '', '.') ?>
+                                            </td>
+                                        </tr>
+                                <?php endif;
+                                endforeach; ?>
                             </tbody>
                             <tfooter>
                                 <td class="text-center" colspan="4"><strong>Total Belanja</strong></td>
@@ -265,7 +267,7 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    function semua(){
+    function semua() {
         $('#semua').show();
         $('#langsung').hide();
         $('#preorder').hide();
@@ -274,7 +276,7 @@
         $('#pdf_preorder').hide();
     }
 
-    function langsung(){
+    function langsung() {
         $('#langsung').show();
         $('#preorder').hide();
         $('#semua').hide();
@@ -283,7 +285,7 @@
         $('#pdf_preorder').hide();
     }
 
-    function preorder(){
+    function preorder() {
         $('#langsung').hide();
         $('#preorder').show();
         $('#semua').hide();
@@ -292,12 +294,12 @@
         $('#pdf_semua').hide();
     }
 
-    function filter(){
+    function filter() {
         var bulan = document.getElementById('bulan').value;
         if (bulan != '') {
-            window.location="<?php echo base_url('admin/laporan/laporan_penjualan/')?>"+bulan;
-        }else{
-            swal('Informasi','Bulan dan tahun tidak ditemukan', 'info');
+            window.location = "<?php echo base_url('admin/laporan/laporan_penjualan/') ?>" + bulan;
+        } else {
+            swal('Informasi', 'Bulan dan tahun tidak ditemukan', 'info');
         }
     }
 </script>
