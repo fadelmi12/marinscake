@@ -9,9 +9,16 @@
                         </div>
                         <div class="card-body">
                             <h7>Total Pendapatan:</h7>
-                            <h4><strong>Rp. 250.000</strong></h4>
+                            <h4><strong>Rp. 
+                                <?php $tt_tr_langsung = 0; 
+                                    foreach($tr_langsung as $langsung):
+                                        $tt_tr_langsung += $langsung['total_belanja'];
+                                    endforeach;   
+                                    echo number_format($tt_tr_langsung, 0, '', '.');
+                                ?>
+                            </strong></h4>
                             <h7>Total Transaksi:</h7>
-                            <h4><strong>25</strong></h4>
+                            <h4><strong><?= count($tr_langsung)?></strong></h4>
                         </div>
                     </div>
                     <div class="card col-12 col-sm-5 col-md-12">
@@ -20,9 +27,16 @@
                         </div>
                         <div class="card-body">
                             <h7>Total Pendapatan:</h7>
-                            <h4><strong>Rp. 500.000</strong></h4>
+                            <h4><strong>Rp.
+                                <?php $tt_tr_preorder = 0; 
+                                    foreach($tr_preorder as $preorder):
+                                        $tt_tr_preorder += $preorder['jumlah'];
+                                    endforeach;   
+                                    echo number_format($tt_tr_preorder, 0, '', '.');
+                                ?>
+                            </strong></h4>
                             <h7>Total Transaksi:</h7>
-                            <h4><strong>50</strong></h4>
+                            <h4><strong><?= count($tr_preorder)?></strong></h4>
                         </div>
                     </div>
                 </div>
@@ -45,7 +59,7 @@
 <script  type="text/javascript">
     var ctx = document.getElementById("linechart").getContext("2d");
     var data = {
-        labels: ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"],
+        labels: ["Minggu", "Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"],
         datasets: [
             {
                 label: "Transaksi Langsung",
@@ -56,9 +70,9 @@
                 pointHoverBackgroundColor: "#29B0D0",
                 pointHoverBorderColor: "#29B0D0",
                 data: [<?= 
-                    '"' . 15 . '","' . 50 . '","' . 15 . '",
-                    "' . 45 . '","' . 25 . '","' . 40 . '",
-                    "' . 30 . '",';
+                    '"' . $grafik_ls[0][0] . '","' . $grafik_ls[1][1] . '","' . $grafik_ls[2][2] . '",
+                    "' . $grafik_ls[3][3] . '","' . $grafik_ls[4][4] . '","' . $grafik_ls[5][5] . '",
+                    "' . $grafik_ls[6][6] . '",';
                 ?>]
             },
             {
@@ -70,9 +84,9 @@
                 pointHoverBackgroundColor: "#FFD700",
                 pointHoverBorderColor: "#FFD700",
                 data: [<?= 
-                    '"' . 30 . '","' . 15 . '","' . 30 . '",
-                    "' . 25 . '","' . 50 . '","' . 20 . '",
-                    "' . 15 . '",';
+                    '"' . $grafik_pr[0][0] . '","' . $grafik_pr[1][1] . '","' . $grafik_pr[2][2] . '",
+                    "' . $grafik_pr[3][3] . '","' . $grafik_pr[4][4] . '","' . $grafik_pr[5][5] . '",
+                    "' . $grafik_pr[6][6] . '",';
                 ?>]
             },
         ],

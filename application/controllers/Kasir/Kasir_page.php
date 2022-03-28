@@ -15,9 +15,30 @@ class Kasir_page extends CI_Controller
     // dashboard kasir
     public function dashboard()
     {
-        $id_user        = $this->session->userdata('idUser');
+        $id_user        = $this->session->userdata('id_user');
         $data['user']   = $this->Model_user->get_user_id($id_user)->row();
-        
+        $data['tr_langsung'] = $this->Model_kasir->get_tr_langsung()->result_array();
+        $data['tr_preorder'] = $this->Model_kasir->get_tr_preorder()->result_array();
+
+        // grafik transaksi langsung mingguan
+        $transaksi_ls = $this->Model_kasir->get_tr_langsung_mingguan();
+        for ($i = 0; $i < count($transaksi_ls); $i++) {
+			$tr_ls[] = array(
+				$i => $transaksi_ls[$i][0]->total_belanja,
+			);
+		}
+		$data['grafik_ls'] = $tr_ls;
+
+        // grafik transaksi preorder mingguan
+        $transaksi_pr = $this->Model_kasir->get_tr_preorder_mingguan();
+        for ($i = 0; $i < count($transaksi_pr); $i++) {
+			$tr_pr[] = array(
+				$i => $transaksi_pr[$i][0]->jumlah,
+			);
+		}
+		$data['grafik_pr'] = $tr_pr;
+        // echo "<pre>"; print_r($data);
+        // exit;
         $this->load->view('kasir/template/header');
         $this->load->view('kasir/template/sidebar');
         $this->load->view('kasir/dashboard', $data);
