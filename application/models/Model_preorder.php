@@ -47,6 +47,7 @@ class Model_preorder extends CI_Model
         $this->db->select('*');
         $this->db->from('pengiriman');
         $this->db->where('id_preorder', $id_preorder);
+        $this->db->join('daerah_kirim', 'pengiriman.id_daerah=daerah_kirim.id_daerah', 'left');
         return $this->db->get('');
     }
 

@@ -95,14 +95,10 @@
 
         loadRekom(0);
 
-        function load_more() {
-            alert('anjink');
-        }
-
         function loadRekom(no) {
             var id_produk = '<?= $this->uri->segment("3") ?>';
             $.ajax({
-                url: '<?= base_url() ?>Produk/load_rekom/' + no,
+                url: '<?= base_url() ?>produk/load_rekom/' + no,
                 type: 'post',
                 data: {
                     id_produk: id_produk

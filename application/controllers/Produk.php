@@ -37,16 +37,17 @@ class Produk extends CI_Controller
 
 	public function load_rekom($no = 0)
 	{
-		$id_produk = $this->input->post('id_produk');
-		// $id_produk = 19;
-		$id_kategori	= $this->Model_produk->get_produk_where($id_produk)->row()->idJenis;
-		$limit = 4;
+		$id_produk		= $this->input->post('id_produk');
+		$id_kategori	= $this->Model_produk->get_produk_where($id_produk)->row()->id_jenis;
+		$limit 			= 4;
+
 		if ($no != 0) {
 			$limit = $limit * $no;
 		}
 		$no++;
 		$rekom_all	= count($this->Model_produk->get_all_rekom($id_kategori, $id_produk)->result_array());
 		$rekom	= $this->Model_produk->get_rekom_limit($id_kategori, $id_produk, $limit)->result_array();
+
 		$tampil = '
 			<div class="row">
 		';
@@ -56,16 +57,16 @@ class Produk extends CI_Controller
 					<div class="ps-product">
 						<div class="ps-product__thumbnail">
 							<img src="' . base_url() . 'uploads/gambar_produk/' . $val['gambar'] . '" alt="">
-							<a class="ps-product__overlay" href="' . base_url() . 'produk/detail/' . $val['idProduk'] . '"></a>
+							<a class="ps-product__overlay" href="' . base_url() . 'produk/detail/' . $val['id_produk'] . '"></a>
 							<ul class="ps-product__actions">
-								<li><a href="' . base_url() . 'produk/detail/' . $val['idProduk'] . '" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
+								<li><a href="' . base_url() . 'produk/detail/' . $val['id_produk'] . '" data-tooltip="Quick View"><i class="ba-magnifying-glass"></i></a></li>
 								<!-- <li><a href="#" data-tooltip="Favorite"><i class="ba-heart"></i></a></li> -->
 								<li>
-									<a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="' . $val['idProduk'] . '" data-produknama="' . $val['namaProduk'] . '" data-produkharga="' . $val['harga'] . '" data-produkgambar="' . $val['gambar'] . '" data-minorder="' . $val['min_order'] . '"><i class="ba-shopping"></i></a>
+									<a class="tambah_cart" data-tooltip="Add to Cart" data-produkid="' . $val['id_produk'] . '" data-produknama="' . $val['nama_produk'] . '" data-produkharga="' . $val['harga'] . '" data-produkgambar="' . $val['gambar'] . '" data-minorder="' . $val['min_order'] . '"><i class="ba-shopping"></i></a>
 								</li>
 							</ul>
 						</div>
-						<div class="ps-product__content"><a class="ps-product__title" href="' . base_url() . 'produk/detail/' . $val['idProduk'] . '">' . $val['namaProduk'] . '</a>
+						<div class="ps-product__content"><a class="ps-product__title" href="' . base_url() . 'produk/detail/' . $val['id_produk'] . '">' . $val['nama_produk'] . '</a>
 							<p><a href="">Min order : ' . $val['min_order'] . '</a></p>
 							<p class="ps-product__price">Rp ' . number_format($val['harga'], '0', ',', '.') . '</p>
 						</div>

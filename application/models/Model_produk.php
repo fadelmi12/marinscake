@@ -112,7 +112,7 @@ class Model_produk extends CI_Model
 		$this->db->join('gambar_produk', 'produk.id_produk = gambar_produk.id_produk');
 		$this->db->group_by('gambar_produk.id_produk');
 		$this->db->where('id_jenis', $id_kategori);
-		$this->db->where('id_produk!=', $id_produk);
+		$this->db->where('produk.id_produk!=', $id_produk);
 		return $this->db->get();
 	}
 
@@ -123,7 +123,7 @@ class Model_produk extends CI_Model
 		$this->db->join('gambar_produk', 'produk.id_produk = gambar_produk.id_produk');
 		$this->db->group_by('gambar_produk.id_produk');
 		$this->db->where('id_jenis', $id_kategori);
-		$this->db->where('id_produk!=', $id_produk);
+		$this->db->where('produk.id_produk!=', $id_produk);
 		$this->db->limit($limit);
 		return $this->db->get();
 	}

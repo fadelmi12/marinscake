@@ -37,16 +37,13 @@ class Snap extends CI_Controller
 	public function token()
 	{
 		$id_preorder	= $this->input->post('idPreorder');
+		// $id_preorder	= 22;
 		$total_bayar	= $this->input->post('total_bayar');
 		$produk			= $this->Model_preorder->get_preorder($id_preorder)->row();
 		$pengiriman		= $this->Model_preorder->get_pengiriman($id_preorder)->row();
 		$item			= $this->Model_preorder->get_detailPreorder($id_preorder)->result_array();
 
 		// Required
-		// $transaction_details = array(
-		// 	'order_id' => $id_preorder,
-		// 	'gross_amount' => $total_bayar, // no decimal allowed for creditcard
-		// );
 		$transaction_details = array(
 			'order_id' => $id_preorder,
 			'gross_amount' => $total_bayar, // no decimal allowed for creditcard
@@ -61,22 +58,17 @@ class Snap extends CI_Controller
 			);
 		}
 		$item_details[] = array(
-			'price' => $produk->ongkir,
+			'price' => $pengiriman->ongkir,
 			'quantity' => 1,
 			'name' => "Ongkir"
 		);
-		// $item_details[] = array(
-		// 	'price' => $total_bayar,
-		// 	'quantity' => 1,
-		// 	'name' => "Ongkir"
-		// );
 
 		// Optional
 		$billing_address = array(
 			'first_name'    => $pengiriman->nama,
 			// 'last_name'     => "Litani",
 			'address'       => $pengiriman->alamat,
-			'city'          => $pengiriman->kota,
+			'city'          => $pengiriman->nama_kota,
 			// 'postal_code'   => "16602",
 			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'
@@ -96,7 +88,7 @@ class Snap extends CI_Controller
 			'first_name'    => $pengiriman->nama,
 			// 'last_name'     => "Litani",
 			'address'       => $pengiriman->alamat,
-			'city'          => $pengiriman->kota,
+			'city'          => $pengiriman->nama_kota,
 			// 'postal_code'   => "16602",
 			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'

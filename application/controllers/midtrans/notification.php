@@ -23,7 +23,8 @@ class Notification extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$params = array('server_key' => 'SB-Mid-server-QWkM1P8gDTi_0ehrXR3nf4N0', 'production' => false);
+		date_default_timezone_set('Asia/Jakarta');
+		$params = array('server_key' => 'SB-Mid-server-QWkM1P8gDTi_0ehrXR3nf4N0', 'production' => true);
 		$this->load->library('veritrans');
 		$this->veritrans->config($params);
 		$this->load->helper('url');
@@ -33,13 +34,26 @@ class Notification extends CI_Controller
 	{
 		echo 'test notification handler';
 		$json_result = file_get_contents('php://input');
-		$result = json_decode($json_result);
+		$result = json_decode($json_result, true);
 
-		if ($result) {
-			$notif = $this->veritrans->status($result->order_id);
+		$id_preorder = $result['order_id'];
+		$data = array(
+			'status' => $result['status_code']
+		);
+
+		echo json_encode($result);
+
+		if ($result['status_code'] == 200) {
+			$update = $this->db->update('midtrans', $data, array('id_preorder' => $id_preorder));
+
+			if ($update) {
+				$dt = array(
+					'status' => "Menunggu Pengiriman"
+				);
+
+				$this->db->update('preorder', $dt, array('id_preorder' => $id_preorder));
+			}
 		}
-
-		error_log(print_r($result, TRUE));
 
 		//notification handler sample
 

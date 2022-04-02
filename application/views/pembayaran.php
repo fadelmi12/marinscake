@@ -17,50 +17,48 @@
                 <div class="row">
                     <div class="col-lg-7 col-md-8 col-sm-12 col-xs-12 ">
                         <div class="ps-checkout__billing px-0">
-                            <?php foreach ($pengiriman as $kirim) : ?>
-                                <h3>Data Pembeli</h3>
-                                <div class="form-group form-group--inline d-flex align-items-center">
-                                    <label class="m-0">Nama<span></span>
-                                    </label>
-                                    <div class="form-group__content">
-                                        <input class="form-control" type="text" value="<?= $kirim['nama'] ?>" disabled>
-                                    </div>
+                            <h3>Data Pembeli</h3>
+                            <div class="form-group form-group--inline d-flex align-items-center">
+                                <label class="m-0">Nama<span></span>
+                                </label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="text" value="<?= $pengiriman->nama ?>" disabled>
                                 </div>
-                                <div class="form-group form-group--inline  d-flex align-items-center">
-                                    <label class="m-0">Email<span></span>
-                                    </label>
-                                    <div class="form-group__content">
-                                        <input class="form-control" type="email" value="<?= $kirim['email'] ?>" disabled>
-                                    </div>
+                            </div>
+                            <div class="form-group form-group--inline  d-flex align-items-center">
+                                <label class="m-0">Email<span></span>
+                                </label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="email" value="<?= $pengiriman->email ?>" disabled>
                                 </div>
-                                <div class="form-group form-group--inline  d-flex align-items-center">
-                                    <label class="m-0">No Hp<span></span>
-                                    </label>
-                                    <div class="form-group__content">
-                                        <input class="form-control" type="number" value="<?= $kirim['no_hp'] ?>" disabled>
-                                    </div>
+                            </div>
+                            <div class="form-group form-group--inline  d-flex align-items-center">
+                                <label class="m-0">No Hp<span></span>
+                                </label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="number" value="<?= $pengiriman->no_hp ?>" disabled>
                                 </div>
-                                <div class="form-group form-group--inline  d-flex align-items-center">
-                                    <label class="m-0">Kota<span></span>
-                                    </label>
-                                    <div class="form-group__content">
-                                        <input class="form-control" type="text" value="<?= $kirim['kota'] ?>" disabled>
-                                    </div>
+                            </div>
+                            <div class="form-group form-group--inline  d-flex align-items-center">
+                                <label class="m-0">Kota<span></span>
+                                </label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="text" value="<?= $pengiriman->nama_kota ?>" disabled>
                                 </div>
-                                <div class="form-group form-group--inline  d-flex align-items-center">
-                                    <label class="m-0">Alamat<span></span>
-                                    </label>
-                                    <div class="form-group__content">
-                                        <textarea class="form-control" rows="5" placeholder="<?= $kirim['alamat'] ?>" disabled></textarea>
-                                    </div>
+                            </div>
+                            <div class="form-group form-group--inline  d-flex align-items-center">
+                                <label class="m-0">Alamat<span></span>
+                                </label>
+                                <div class="form-group__content">
+                                    <textarea class="form-control" rows="5" placeholder="<?= $pengiriman->alamat ?>" disabled></textarea>
                                 </div>
-                                <div class="form-group form-group--inline  d-flex align-items-center">
-                                    <label class="m-0">Catatan Pesanan</label>
-                                    <div class="form-group__content">
-                                        <textarea class="form-control" rows="5" placeholder="<?= $kirim['catatan'] ?>" disabled></textarea>
-                                    </div>
+                            </div>
+                            <div class="form-group form-group--inline  d-flex align-items-center">
+                                <label class="m-0">Catatan Pesanan</label>
+                                <div class="form-group__content">
+                                    <textarea class="form-control" rows="5" placeholder="<?= ($pengiriman->catatan == "") ? "Tidak ada catatan" : $pengiriman->catatan ?>" disabled></textarea>
                                 </div>
-                            <?php endforeach ?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12">
@@ -104,7 +102,7 @@
                                         Ongkir
                                     </div>
                                     <div class="col-4">
-                                        Rp <?= number_format($preorder->ongkir, '0', ',', '.') ?>
+                                        Rp <?= number_format($pengiriman->ongkir, '0', ',', '.') ?>
                                     </div>
                                 </div>
                                 <hr style="border-top: 1px solid white">

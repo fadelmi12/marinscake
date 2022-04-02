@@ -27,14 +27,12 @@ class Checkout extends CI_Controller
 		$status			= "Menunggu Pembayaran";
 		$tanggal		= date('Y-m-d H:i:s');
 		$tanggal_kirim	= $this->input->post('tanggal_kirim');
-		$ongkir			= $this->input->post('ongkir');
 		$data_preorder	= array(
 			'jumlah'			=> $total_belanja,
 			'metode'			=> $metode,
 			'status'			=> $status,
 			'tanggal_pesan'		=> $tanggal,
 			'tanggal_dikirim'	=> $tanggal_kirim,
-			'ongkir'			=> $ongkir
 		);
 		$insert_preorder = $this->db->insert('preorder', $data_preorder);
 		if ($insert_preorder) {
@@ -57,7 +55,7 @@ class Checkout extends CI_Controller
 					'nama'			=> $this->input->post('nama'),
 					'email'			=> $this->input->post('email'),
 					'no_hp'			=> $this->input->post('no_hp'),
-					'kota'			=> $this->input->post('kota'),
+					'id_daerah'		=> $this->input->post('kota'),
 					'alamat'		=> $this->input->post('alamat'),
 					'catatan'		=> $this->input->post('catatan')
 				);
@@ -74,7 +72,7 @@ class Checkout extends CI_Controller
 	{
 		$data['preorder'] 	= $this->Model_preorder->get_preorder($id_preorder)->row();
 		$data['detail'] 	= $this->Model_preorder->get_detailPreorder($id_preorder)->result_array();
-		$data['pengiriman'] = $this->Model_preorder->get_pengiriman($id_preorder)->result_array();
+		$data['pengiriman'] = $this->Model_preorder->get_pengiriman($id_preorder)->row();
 		$data['midtrans']	= $this->Model_preorder->get_midtrans($id_preorder)->row();
 
 		$this->load->view('template/header2');
