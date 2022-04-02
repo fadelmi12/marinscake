@@ -99,7 +99,37 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>
+                                    No Hp
+                                </label>
+                                <input type="text" name="metode" class="form-control" readonly value="<?= $rw_pr['no_hp'] ?>">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>
+                                    Nama Penerima
+                                </label>
+                                <input type="text" name="metode" class="form-control" readonly value="<?= $rw_pr['nama'] ?>">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>
+                                    Alamat Pengiriman
+                                </label>
+                                <input type="text" name="metode" class="form-control" readonly value="<?= $rw_pr['alamat'] ?>">
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
+                        <div class="form-group py-0 m-0">
+                            <label>Daftar Produk</label>
+                        </div>
+
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -179,16 +209,6 @@
                                         Metode
                                     </label>
                                     <input type="text" name="metode" class="form-control" disabled value="<?= $rw_pr['metode'] ?>">
-                                    <!-- <select class="form-control selectric" name="metode" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" disabled>
-                                        <option <?php if ($rw_pr['metode'] == 'Online') : echo "selected";
-                                                endif; ?>>
-                                            Online
-                                        </option>
-                                        <option <?php if ($rw_pr['metode'] == 'Offline') : echo "selected";
-                                                endif; ?>>
-                                            Offline
-                                        </option>
-                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-6">
@@ -196,13 +216,12 @@
                                     <label>
                                         Pembayaran
                                     </label>
-                                    <?php foreach ($data_midtrans as $midtrans) :
-                                        if ($midtrans['id_preorder'] == $rw_pr['id_preorder']) {
-                                            $pembayaran =  $midtrans['metode'];
-                                        } else {
-                                            $pembayaran = 'Tunai';
-                                        }
-                                    endforeach; ?>
+                                    <?php if ($rw_pr['metode'] == 'Online') :
+                                        $pembayaran = 'Transfer';
+                                    else :
+                                        $pembayaran = 'Tunai';
+                                    endif;
+                                    ?>
                                     <input type="text" name="pembayaran" class="form-control" disabled value="<?= $pembayaran ?>">
                                 </div>
                             </div>

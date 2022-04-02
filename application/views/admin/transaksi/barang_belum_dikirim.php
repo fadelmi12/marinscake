@@ -106,7 +106,7 @@
                                                 <?= $no++ ?>
                                             </td>
                                             <td>
-                                                <?= $dt_tr['namaProduk'] ?>
+                                                <?= $dt_tr['nama_produk'] ?>
                                             </td>
                                             <td>
                                                 <?= $dt_tr['jumlah'] ?>
@@ -180,14 +180,14 @@
                                     <label>
                                         Pembayaran
                                     </label>
-                                    <?php foreach ($data_midtrans as $midtrans) :
+                                    <!-- <?php foreach ($data_midtrans as $midtrans) :
                                         if ($midtrans['id_preorder'] == $rw_pr['id_preorder']) {
                                             $pembayaran =  $midtrans['metode'];
                                         } else {
                                             $pembayaran = 'Tunai';
                                         }
-                                    endforeach; ?>
-                                    <input type="text" name="pembayaran" class="form-control" disabled value="<?= $pembayaran ?>">
+                                    endforeach; ?> -->
+                                    <input type="text" name="pembayaran" class="form-control" disabled value="<?php echo ($rw_pr['metode'] == 'Online') ? 'Transfer': 'Tunai'?>">
                                     <!-- <input type="text" name="pembayaran" class="form-control" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $rw_pr['pembayaran'] ?>"> -->
                                 </div>
                             </div>

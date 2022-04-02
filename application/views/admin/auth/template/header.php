@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Otika - Admin Dashboard Template</title>
+  <title>Marins Cake Admin</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?= base_url()?>assets/css/app.min.css">
   <link rel="stylesheet" href="<?= base_url()?>assets/bundles/bootstrap-social/bootstrap-social.css">

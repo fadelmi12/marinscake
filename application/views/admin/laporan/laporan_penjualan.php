@@ -42,7 +42,13 @@
                                             <td class="text-center"><?= $dt_trans['tanggal'] ?></td>
                                             <td>Rp <?php echo number_format($dt_trans['total_belanja'], 0, '', '.') ?></td>
                                             <td><?= $dt_trans['metode'] ?></td>
-                                            <td><?= $dt_trans['pembayaran'] ?></td>
+                                            <td>
+                                                <?php if ($dt_trans['metode'] == 'Offline') { ?>
+                                                    Tunai
+                                                <?php } else { ?>
+                                                    Transfer
+                                                <?php } ?>
+                                            </td>
                                             <td><?= $dt_trans['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['id_transaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
@@ -55,7 +61,13 @@
                                             <td class="text-center"><?= $dt_pre['tanggal_pesan'] ?></td>
                                             <td>Rp <?php echo number_format($dt_pre['jumlah'], 0, '', '.') ?></td>
                                             <td><?= $dt_pre['metode'] ?></td>
-                                            <td><?= $dt_pre['pembayaran'] ?></td>
+                                            <td>
+                                                <?php if ($dt_pre['metode'] == 'Offline') { ?>
+                                                    Tunai
+                                                <?php } else { ?>
+                                                    Transfer
+                                                <?php } ?>
+                                            </td>
                                             <td><?= $dt_pre['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['id_preorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
@@ -87,7 +99,13 @@
                                             <td class="text-center"><?= $dt_trans['tanggal'] ?></td>
                                             <td>Rp <?php echo number_format($dt_trans['total_belanja'], 0, '', '.') ?></td>
                                             <td><?= $dt_trans['metode'] ?></td>
-                                            <td><?= $dt_trans['pembayaran'] ?></td>
+                                            <td>
+                                                <?php if ($dt_trans['metode'] == 'Offline') { ?>
+                                                    Tunai
+                                                <?php } else { ?>
+                                                    Transfer
+                                                <?php } ?>
+                                            </td>
                                             <td><?= $dt_trans['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_transaksi<?= $dt_trans['id_transaksi'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>
@@ -119,7 +137,13 @@
                                             <td class="text-center"><?= $dt_pre['tanggal_pesan'] ?></td>
                                             <td>Rp <?php echo number_format($dt_pre['jumlah'], 0, '', '.') ?></td>
                                             <td><?= $dt_pre['metode'] ?></td>
-                                            <td><?= $dt_pre['pembayaran'] ?></td>
+                                            <td>
+                                                <?php if ($dt_pre['metode'] == 'Offline') { ?>
+                                                    Tunai
+                                                <?php } else { ?>
+                                                    Transfer
+                                                <?php } ?>
+                                            </td>
                                             <td><?= $dt_pre['status'] ?></td>
                                             <td>
                                                 <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_detail_preorder<?= $dt_pre['id_preorder'] ?>"><i class="fas fa-search mr-1"></i>Detail</button>

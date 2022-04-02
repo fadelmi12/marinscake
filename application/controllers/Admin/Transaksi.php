@@ -79,6 +79,8 @@ class Transaksi extends CI_Controller
         $data['detail_preorder']        = $this->Model_transaksi->detail_riwayat_preorder()->result_array();
         $data['barang_belum_dikirim']   = $this->Model_transaksi->barang_belum_dikirim()->result_array();
         $data['data_midtrans']          = $this->db->get('midtrans')->result_array();
+        // echo json_encode($data['detail_preorder']);
+        // exit('');
         //echo "<pre>"; print_r($data2);exit;
         $this->load->view('admin/template/header');
         $this->load->view('admin/template/sidebar');

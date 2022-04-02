@@ -119,7 +119,7 @@
             Kediri, <?= date('d').' '.$bulan2.' '.date('Y') ?>
             <br>Pimpinan Toko Marins Cake
             <br><br><br><br>
-            <h4>Ahmad Syah M.</h4>    
+            <h4>Ego Duta</h4>    
         </div>
     </div>
 </body><?php endforeach; ?></html>
