@@ -98,7 +98,7 @@
                 </tr>   
                 <tr>
                     <td height="20"></td>
-                    <td align="center" colspan="2" >Pengeluaran Modal</td>
+                    <td align="center" colspan="2" >Pengeluaran Lain-lain</td>
                     <td style="padding-left:10px">
                         <?php foreach($data_modal as $dt_modal);?>
                             Rp. <?= number_format($dt_modal['keluar_modal'], 0, '', '.') ?>

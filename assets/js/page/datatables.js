@@ -37,6 +37,9 @@ $("[data-checkboxes]").each(function () {
 $("#table-1").dataTable({
 	columnDefs: [{ sortable: false, targets: [2, 3] }],
 });
+$("#table-3").dataTable({
+	columnDefs: [{ sortable: false, targets: [2, 3] }],
+});
 $("#table-99").dataTable({
 	columnDefs: [{ sortable: false, targets: [2, 3] }],
 });

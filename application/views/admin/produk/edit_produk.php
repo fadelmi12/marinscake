@@ -309,19 +309,21 @@
 
         if (total_gambar_awal != cekTambah_formGambar) {
             let data = document.getElementById('list_kode').value;
-            const kode_array = data.split(",");
-            max = kode_array.length;
-            // console.log(max);
-            for (i = 0; i < max; i++) {
-                if (document.getElementById("upload" + kode_array[i]).files.length == 0) {
-                    swal('Gagal Menyimpan', 'Form gambar tidak boleh kosong', 'error');
-                    document.getElementById("upload" + kode_array[i]).focus();
-                    return false;
-                }
+            if(data != ''){
+                const kode_array = data.split(",");
+                max = kode_array.length;
+                // console.log(max);
+                for (i = 0; i < max; i++) {
+                    if (document.getElementById("upload" + kode_array[i]).files.length == 0) {
+                        swal('Gagal Menyimpan', 'Form gambar tidak boleh kosong', 'error');
+                        document.getElementById("upload" + kode_array[i]).focus();
+                        return false;
+                    }
+                }   
+                return validasi_dataProduk();
+            }else{
+                return validasi_dataProduk();
             }
-
-            // if sukses semua lanjut submit    
-            return validasi_dataProduk();
         } else {
             return validasi_dataProduk();
         }

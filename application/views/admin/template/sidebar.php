@@ -38,7 +38,7 @@
             <li class="dropdown <?php echo ($this->uri->segment(2) === 'laporan' || $this->uri->segment(2) === 'modal') ? 'active' : '' ?>">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="file-text"></i><span>Laporan</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/modal/pengeluaran_modal/<?= date('Y-m') ?>">Laporan Modal</a></li>
+                    <li><a class="nav-link" href="<?php echo base_url() ?>admin/modal/pengeluaran_modal/<?= date('Y-m') ?>">Laporan Pengeluaran</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_gaji/<?= date('Y-m') ?>">Laporan Gaji</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_penjualan/<?= date('Y-m') ?>">Laporan Penjualan</a></li>
                     <li><a class="nav-link" href="<?php echo base_url() ?>admin/laporan/laporan_keuntungan/<?= date('Y-m') ?>">Laporan Keuntungan</a></li>

@@ -78,7 +78,7 @@
                             </table>
                         </div>
                         <div class="table-responsive" id="langsung" style="display: none;">
-                            <table class="table table-striped" id="table-1">
+                            <table class="table table-striped" id="table-99">
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>
@@ -116,7 +116,7 @@
                             </table>
                         </div>
                         <div class="table-responsive" id="preorder" style="display: none;">
-                            <table class="table table-striped" id="table-2">
+                            <table class="table table-striped" id="table-3">
                                 <thead>
                                     <tr>
                                         <th class="text-center">No</th>

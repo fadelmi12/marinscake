@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><?php foreach($data_modal as $dt_modal): ?><head>
-	<title>Laporan Pengeluaran Modal</title>
+	<title>Laporan Pengeluaran</title>
 	<style>
         table {
             border-collapse: collapse;

@@ -41,7 +41,7 @@ class Model_laporan extends CI_Model {
     // get data detai modal where id modal sesuai parameter
     public function get_detail_modal_where($idModal)
     {
-        return $this->db->get_where('detail_modal', array('idModal' => $idModal));
+        return $this->db->get_where('detail_modal', array('id_modal' => $idModal));
     } 
 
 

@@ -59,7 +59,7 @@
                                                 <?php 
                                                 if($pengeluaran_modal != null){
                                                     foreach($pengeluaran_modal as $p_ml){
-                                                        $tt_modal[] = ($p_ml['totalModal']);
+                                                        $tt_modal[] = ($p_ml['total_modal']);
                                                     };
                                                     echo number_format(array_sum($tt_modal), 0, '', '.');
                                                 } else{

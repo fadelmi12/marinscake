@@ -6,18 +6,18 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h4>
-                            Laporan Modal
+                            Laporan Pengeluaran
                         </h4>
                     </div>
                     <div class="card-body">
-                        <div class="form-group d-flex align-items-center col-9">
+                        <div class="form-group d-flex align-items-center">
                             <label class="mr-3 mb-0">Pilih Bulan :</label>
                             <input id="tanggal_filter" type="month" name="tanggal" class="form-control mr-3" style="width:max-content" oninvalid="this.setCustomValidity('Form input tidak boleh kosong!')" oninput="setCustomValidity('')" required value="<?= $tanggal ?>">
                             <button type="button" onclick="filter()" class="btn btn-primary"><i class="fas fa-align-center mr-2"></i>Filter</button>
                             <!-- ekspor pdf -->
                             <a href="<?php echo base_url('admin/cetak_pdf/cetak_modal_pdf/' . $tanggal) ?>" target="_blank" class="btn btn-warning ml-3"><i class="fas fa-file mr-2"></i>Export pdf</a>
                             <!-- tambah data -->
-                            <button class="btn btn-success ml-3" data-toggle="modal" data-target="#biaya_produksi"><i class="fas fa-plus mr-1"></i> Tambah Data Modal</button>
+                            <button class="btn btn-success ml-3" data-toggle="modal" data-target="#biaya_produksi"><i class="fas fa-plus mr-1"></i> Tambah Data Pengeluaran</button>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped" id="table-1">
@@ -27,7 +27,7 @@
                                             No
                                         </th>
                                         <th>Tanggal</th>
-                                        <th>Pengeluaran Modal</th>
+                                        <th>Total Pengeluaran</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -87,7 +87,7 @@
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header ml-3">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Tambah Data Biaya Produksi</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Tambah Data Pengeluaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -98,7 +98,7 @@
                         <div class="col-3 text-center">
                             <div class="form-group my-1">
                                 <label>
-                                    Nama Bahan
+                                    Nama Pengeluaran
                                 </label>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-info add_field_button" type="button"><i class="fas fa-plus mr-2"></i>Tambah Bahan</button>
+                        <button class="btn btn-info add_field_button" type="button"><i class="fas fa-plus mr-2"></i>Tambah Form</button>
                     </div>
                     <div class="d-flex justify-content-around mt-3">
                         <button type="button" class="btn btn-danger col-2" data-dismiss="modal">
@@ -189,7 +189,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Detail Pengeluaran Modal</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Detail Pengeluaran</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -202,7 +202,7 @@
                                     <th class="text-center">
                                         No
                                     </th>
-                                    <th>Nama Bahan</th>
+                                    <th>Nama Pengeluaran</th>
                                     <th>Jumlah</th>
                                     <th>Harga Satuan</th>
                                     <th>Total</th>
@@ -235,7 +235,7 @@
                             </tbody>
                             <tfooter>
                                 <td class="text-center" colspan="4"><strong>Total Pengeluaran</strong></td>
-                                <td><strong>Rp <?= number_format($dt_modal['totalModal'], 0, '', '.') ?></strong></td>
+                                <td><strong>Rp <?= number_format($dt_modal['total_modal'], 0, '', '.') ?></strong></td>
                             </tfooter>
                         </table>
                     </div>
