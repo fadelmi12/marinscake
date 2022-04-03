@@ -21,9 +21,17 @@
         .rowspan {
             border-left-width: 10px;
         }
+
+        .wrapper-page {
+            page-break-after: always;
+        }
+        .wrapper-page:last-child {
+            page-break-after: avoid;
+        }
     </style>
 </head><body>
-    <div style="padding:0 50px">
+    <?php for($i = 0; $i < count($data_preorder); $i++):?>
+    <div class="wrapper-page" style="padding:0 50px;">
         <div align="center" style="margin-left: 80px; position: static;">
             <h2>TOKO MARINS CAKE
                 <br>KEDIRI JAWA TIMUR
@@ -57,8 +65,8 @@
             <br>Bulan <?= $bulan ?> Tahun <?= $tahun ?>
         </div>
         <br>
-        <div class="container-fluid" align="center" style="margin-top: 20px;">
-            <table>
+        <div align="center" style="margin-top: 20px;">
+            <table width="100%">
                 <tr>
                     <th align="center" colspan="3" width="30" style="padding: 7px 0;">NO</th>
                     <th align="center" colspan="5" width="105">Tanggal Transaksi</th>
@@ -70,7 +78,7 @@
 
                 <?php
                 $no = 1;
-                foreach($data_preorder as $dt_pre): ?>
+                foreach($data_preorder[$i] as $dt_pre): ?>
                 <tr>
                      <td colspan="3" align="center" height="15" style="padding: 5px 0;">
                         <?= $no++ ?>
@@ -98,7 +106,13 @@
             </table>
         </div>
         <br>
-        <div align="right">
+        <?php if((count($data_preorder) - 1) == $i){
+                $tampil = "";
+            }else{
+                $tampil = "style='display: none;'";
+            }
+        ?>
+        <div align="right" <?= $tampil?>>
             <?php $bln2 = date('m'); 
                 if     ($bln2 == '01') {$bulan2 = 'Januari';}
                 elseif ($bln2 == '02') {$bulan2 = 'Februari';}
@@ -119,4 +133,5 @@
             <h4>Ego Duta</h4>    
         </div>
     </div>
+    <?php endfor; ?>
 </body></html>

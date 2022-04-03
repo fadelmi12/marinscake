@@ -97,10 +97,9 @@ class Kasir_page extends CI_Controller
             $data = array(
                 'jumlah'            => $total_belanja,
                 'metode'            => "Offline",
-                'tanggal_pesan'     => date("Y-m-d"),
+                'tanggal_pesan'     => date("Y-m-d H:i:s"),
                 'tanggal_dikirim'   => $tanggalDikirim,
                 'status'            => "Menunggu Pengiriman",
-
             );
 
             $simpan = $this->db->insert('preorder', $data);
@@ -112,7 +111,7 @@ class Kasir_page extends CI_Controller
                     $ttProduk     = $_POST['totalProduk'][$key];
                     $rpl1         = str_replace('Rp. ', '', $ttProduk);
                     $rpl2         = str_replace('.00', '', $rpl1);
-                    $data2[]     = array(
+                    $data2[]      = array(
                         'id_preorder'   => $insert_id,
                         'id_produk'     => $_POST['idProduk'][$key],
                         'nama_produk'   => $_POST['namaProduk'][$key],
@@ -152,7 +151,7 @@ class Kasir_page extends CI_Controller
                 'metode'        => "Offline",
                 'pembayaran'    => "Tunai",
                 'status'        => "Selesai",
-                'tanggal'        => date("Y-m-d"),
+                'tanggal'       => date("Y-m-d H:i:s"),
             );
 
             $simpan = $this->db->insert('transaksi', $data);
@@ -161,15 +160,15 @@ class Kasir_page extends CI_Controller
             if ($simpan) {
                 $data2 = array();
                 foreach ($_POST['namaProduk'] as $key => $val) :
-                    $ttProduk     = $_POST['totalProduk'][$key];
-                    $rpl1         = str_replace('Rp. ', '', $ttProduk);
-                    $rpl2         = str_replace('.00', '', $rpl1);
-                    $data2[]     = array(
-                        'id_transaksi'    => $insert_id,
-                        'id_produk'        => $_POST['idProduk'][$key],
-                        'nama_produk'    => $_POST['namaProduk'][$key],
+                    $ttProduk   = $_POST['totalProduk'][$key];
+                    $rpl1       = str_replace('Rp. ', '', $ttProduk);
+                    $rpl2       = str_replace('.00', '', $rpl1);
+                    $data2[]    = array(
+                        'id_transaksi'  => $insert_id,
+                        'id_produk'     => $_POST['idProduk'][$key],
+                        'nama_produk'   => $_POST['namaProduk'][$key],
                         'jumlah'        => $_POST['jumlahProduk'][$key],
-                        'total'            => $rpl2,
+                        'total'         => $rpl2,
                     );
                 endforeach;
 

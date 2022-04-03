@@ -21,9 +21,17 @@
         .rowspan {
             border-left-width: 10px;
         }
+
+        .wrapper-page {
+            page-break-after: always;
+        }
+        .wrapper-page:last-child {
+            page-break-after: avoid;
+        }
     </style>
 </head><body>
-    <div style="padding:0 50px">
+    <?php for($i = 0; $i < count($data_transaksi); $i++):?>
+    <div class="wrapper-page" style="padding:0 50px;">
         <div align="center" style="margin-left: 80px; position: static;">
             <h2>TOKO MARINS CAKE
                 <br>KEDIRI JAWA TIMUR
@@ -57,36 +65,36 @@
             <br>Bulan <?= $bulan ?> Tahun <?= $tahun ?>
         </div>
         <br>
-        <div class="container-fluid" align="center" style="margin-top: 20px;">
-            <table>
+        <div align="center" style="margin-top: 20px;">
+            <table width="100%">
                 <tr>
-                    <th align="center" colspan="3" width="30" style="padding: 7px 0;">NO</th>
-                    <th align="center" colspan="5" width="105">Tanggal Transaksi</th>
-                    <th align="center" colspan="5" width="85">Total Belanja</th>
-                    <th align="center" colspan="5" width="60">Metode</th>
-                    <th align="center" colspan="5" width="80">Pembayaran</th>
-                    <th align="center" colspan="5" width="60">Status</th>
+                    <th align="center" style="padding: 7px 0;">NO</th>
+                    <th align="center" width="150px">Tanggal Transaksi</th>
+                    <th align="center" width="110px">Total Belanja</th>
+                    <th align="center" >Metode</th>
+                    <th align="center" width="100px">Pembayaran</th>
+                    <th align="center" >Status</th>
                 </tr>
 
                 <?php
                 $no = 1;
-                foreach ($data_transaksi as $dt_trans): ?>
+                foreach ($data_transaksi[$i] as $dt_trans): ?>
                 <tr>
-                     <td colspan="3" align="center" height="15" style="padding: 5px 0;">
+                     <td align="center" height="22" style="padding: 5px 0;">
                         <?= $no++ ?>
                     </td>
-                    <td colspan="5" align="left" style="margin-left: 5px; padding-left:10px"><?= $dt_trans['tanggal']?>
+                    <td align="left" style="margin-left: 5px; padding-left:10px"><?= $dt_trans['tanggal']?>
                     </td>
-                    <td colspan="5" align="center">
+                    <td align="center">
                         Rp <?php echo number_format($dt_trans['total_belanja'], 0, '', '.') ?>
                     </td>
-                    <td colspan="5" align="center">
+                    <td align="center">
                         <?= $dt_trans['metode']?>
                     </td>
-                    <td colspan="5" align="center">
+                    <td align="center">
                         <?= $dt_trans['pembayaran']?>
                     </td>
-                    <td colspan="5" align="center">
+                    <td align="center">
                         <?= $dt_trans['status']?>
                     </td>
                 </tr>
@@ -94,7 +102,13 @@
             </table>
         </div>
         <br>
-        <div align="right">
+        <?php if((count($data_transaksi) - 1) == $i){
+                $tampil = "";
+            }else{
+                $tampil = "style='display: none;'";
+            }
+        ?>
+        <div align="right" <?= $tampil?>>
             <?php $bln2 = date('m'); 
                 if     ($bln2 == '01') {$bulan2 = 'Januari';}
                 elseif ($bln2 == '02') {$bulan2 = 'Februari';}
@@ -115,4 +129,5 @@
             <h4>Ahmad Syah M.</h4>    
         </div>
     </div>
+    <?php endfor; ?>
 </body></html>

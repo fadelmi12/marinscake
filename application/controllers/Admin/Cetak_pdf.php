@@ -56,13 +56,26 @@ class Cetak_pdf extends CI_Controller {
     public function cetak_semua_pdf($blnTh)
     {
      	$this->load->library('dompdf_gen');
+		$data['bulan_tahun'] = $blnTh;
+     	$transaksi  = $this->Model_laporan->get_transaksi_langsung($blnTh)->result_array();
 
-     	$data['data_transaksi']   = $this->Model_laporan->get_transaksi_langsung($blnTh)->result_array();
-        $data['detail_transaksi'] = $this->Model_laporan->get_detail_transaksi_langsung()->result_array();
-        $data['data_preorder']   = $this->Model_laporan->get_transaksi_preorder($blnTh)->result_array();
-        $data['detail_preorder'] = $this->Model_laporan->get_detail_transaksi_preorder()->result_array();
-        $data['bulan_tahun'] = $blnTh;
-     	
+        $prd   = $this->Model_laporan->get_transaksi_preorder($blnTh)->result_array();
+		foreach($prd as $key => $val):
+			if($val['metode'] == 'Offline'){$pembayaran = 'Tunai';}
+			else{$pembayaran = 'Transfer';}
+			$preorder[] = array(
+				'id_preorder' 	=> $val['id_preorder'],
+				'total_belanja' => $val['jumlah'],
+				'metode'		=> $val['metode'],
+				'pembayaran' 	=> $pembayaran,
+				'status' 		=> $val['status'],
+				'tanggal'		=> $val['tanggal_pesan'],
+			);
+		endforeach;
+
+		$gabung = array_merge($transaksi, $preorder);
+		$data['semua_transaksi'] = array_chunk($gabung, 18, true);
+		
      	$this->load->view('admin/laporan/laporan_semua_pdf', $data);
 
      	$paper_size 	= 'A4';
@@ -80,8 +93,8 @@ class Cetak_pdf extends CI_Controller {
     {
      	$this->load->library('dompdf_gen');
 
-     	$data['data_transaksi']   = $this->Model_laporan->get_transaksi_langsung($blnTh)->result_array();
-        $data['detail_transaksi'] = $this->Model_laporan->get_detail_transaksi_langsung()->result_array();
+     	$data_transaksi   = $this->Model_laporan->get_transaksi_langsung($blnTh)->result_array();
+		$data['data_transaksi'] = array_chunk($data_transaksi, 18, true);
         $data['bulan_tahun'] = $blnTh;
      	
      	$this->load->view('admin/laporan/laporan_langsung_pdf', $data);
@@ -101,8 +114,8 @@ class Cetak_pdf extends CI_Controller {
     {
      	$this->load->library('dompdf_gen');
 
-     	$data['data_preorder']   = $this->Model_laporan->get_transaksi_preorder($blnTh)->result_array();
-        $data['detail_preorder'] = $this->Model_laporan->get_detail_transaksi_preorder()->result_array();
+     	$data_preorder   = $this->Model_laporan->get_transaksi_preorder($blnTh)->result_array();
+		$data['data_preorder'] = array_chunk($data_preorder, 18, true);
         $data['bulan_tahun'] = $blnTh;
      	
      	$this->load->view('admin/laporan/laporan_preorder_pdf', $data);
