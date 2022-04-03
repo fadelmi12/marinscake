@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller
 			);
 		}
 		$data['tr_langsung'] = $tr_ls;
- 
+
 		//data array transaksi preorder
 		$transaksi_pr = $this->Model_dashboard->total_transaksi_preorder();
 		for ($i = 0; $i < count($transaksi_pr); $i++) {
@@ -50,7 +50,7 @@ class Dashboard extends CI_Controller
 
 		$this->load->view('admin/template/header');
 		$this->load->view('admin/template/sidebar');
-		$this->load->view('admin/dashboard', $data);
+		$this->load->view('admin/dashboard', $data); 
 		$this->load->view('admin/template/footer');
 	}
 }
