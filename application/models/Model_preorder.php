@@ -59,4 +59,12 @@ class Model_preorder extends CI_Model
         $this->db->where('id_preorder', $id_preorder);
         return $this->db->get('');
     }
+
+    // get id midtrans
+    public function get_id_midtrans()
+    {
+        $this->db->select('id_midtrans');
+        $this->db->from('midtrans');
+        return $this->db->get('');
+    }
 }

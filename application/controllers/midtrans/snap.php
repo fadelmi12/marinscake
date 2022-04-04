@@ -36,16 +36,24 @@ class Snap extends CI_Controller
 
 	public function token()
 	{
-		$id_preorder	= $this->input->post('idPreorder');
-		// $id_preorder	= 22;
-		$total_bayar	= $this->input->post('total_bayar');
-		$produk			= $this->Model_preorder->get_preorder($id_preorder)->row();
+		$id_preorder = $this->input->post('id_preorder');
+		$total_bayar = $this->input->post('total_bayar');
+
 		$pengiriman		= $this->Model_preorder->get_pengiriman($id_preorder)->row();
 		$item			= $this->Model_preorder->get_detailPreorder($id_preorder)->result_array();
 
+		$midtrans = $this->Model_preorder->get_id_midtrans()->result_array();
+
+		$cek = 1;
+
+		while ($cek == 1) {
+			$order_id = $id_preorder . '-' . rand(10000, 100000);
+			$cek = in_array($order_id, $midtrans);
+		}
+
 		// Required
 		$transaction_details = array(
-			'order_id' => $id_preorder,
+			'order_id' => $order_id,
 			'gross_amount' => $total_bayar, // no decimal allowed for creditcard
 		);
 
@@ -58,7 +66,7 @@ class Snap extends CI_Controller
 			);
 		}
 		$item_details[] = array(
-			'price' => $pengiriman->ongkir,
+			'price' => (int)$pengiriman->ongkir,
 			'quantity' => 1,
 			'name' => "Ongkir"
 		);
@@ -73,15 +81,6 @@ class Snap extends CI_Controller
 			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'
 		);
-		// $billing_address = array(
-		// 	'first_name'    => "hasgjkdgsa",
-		// 	// 'last_name'     => "Litani",
-		// 	'address'       => "hgsdfsefud",
-		// 	'city'          => "fdgfhksa",
-		// 	// 'postal_code'   => "16602",
-		// 	'phone'         => "dbshgfids",
-		// 	'country_code'  => 'IDN'
-		// );
 
 		// Optional
 		$shipping_address = array(
@@ -93,15 +92,6 @@ class Snap extends CI_Controller
 			'phone'         => $pengiriman->no_hp,
 			'country_code'  => 'IDN'
 		);
-		// $shipping_address = array(
-		// 	'first_name'    => "hasgjkdgsa",
-		// 	// 'last_name'     => "Litani",
-		// 	'address'       => "hgsdfsefud",
-		// 	'city'          => "fdgfhksa",
-		// 	// 'postal_code'   => "16602",
-		// 	'phone'         => "dbshgfids",
-		// 	'country_code'  => 'IDN'
-		// );
 
 		// Optional
 		$customer_details = array(
@@ -112,14 +102,6 @@ class Snap extends CI_Controller
 			'billing_address'  => $billing_address,
 			'shipping_address' => $shipping_address
 		);
-		// $customer_details = array(
-		// 	'first_name'    => "hasgjkdgsa",
-		// 	// 'last_name'     => "Litani",
-		// 	'email'         => "jsafka@gmail.com",
-		// 	'phone'         => "dbshgfids",
-		// 	'billing_address'  => $billing_address,
-		// 	'shipping_address' => $shipping_address
-		// );
 
 		// Data yang akan dikirim untuk request redirect_url.
 		$credit_card['secure'] = true;
@@ -141,8 +123,10 @@ class Snap extends CI_Controller
 			'expiry'             => $custom_expiry
 		);
 
+
 		error_log(json_encode($transaction_data));
 		$snapToken = $this->midtrans->getSnapToken($transaction_data);
+
 		error_log($snapToken);
 		echo $snapToken;
 	}
@@ -153,7 +137,8 @@ class Snap extends CI_Controller
 
 		if ($result['payment_type'] == "gopay") {
 			$data = array(
-				'id_preorder' 		=> $result['order_id'],
+				'id_midtrans' 		=> $result['order_id'],
+				'id_preorder' 		=> strtok($result['order_id'], '-'),
 				'status'			=> $result['status_code'],
 				'total_bayar'		=> $result['gross_amount'],
 				'metode'			=> $result['payment_type'],
@@ -161,7 +146,8 @@ class Snap extends CI_Controller
 			);
 		} elseif ($result['payment_type'] == "bank_transfer") {
 			$data = array(
-				'id_preorder' 		=> $result['order_id'],
+				'id_midtrans' 		=> $result['order_id'],
+				'id_preorder' 		=> strtok($result['order_id'], '-'),
 				'status'			=> $result['status_code'],
 				'total_bayar'		=> $result['gross_amount'],
 				'metode'			=> $result['payment_type'],

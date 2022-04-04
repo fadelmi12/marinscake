@@ -24,12 +24,13 @@ class Model_login extends CI_Model
 			}
 		} else {
 			// email tidak ditemukan
-			$this->session->set_flashdata('pesan',
-					'<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+			$this->session->set_flashdata(
+				'pesan',
+				'<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
                     <script type ="text/JavaScript">  
                     swal("Gagal Login","Email yang anda masukkan salah!","error")  
                     </script>'
-				);
+			);
 			redirect('admin/auth/login');
 		}
 	}

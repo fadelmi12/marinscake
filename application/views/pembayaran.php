@@ -54,6 +54,13 @@
                                 </div>
                             </div>
                             <div class="form-group form-group--inline  d-flex align-items-center">
+                                <label class="m-0">Tanggal Pengiriman<span></span>
+                                </label>
+                                <div class="form-group__content">
+                                    <input class="form-control" type="text" value="<?= date('j F Y', strtotime($preorder->tanggal_dikirim)) ?>" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group form-group--inline  d-flex align-items-center">
                                 <label class="m-0">Catatan Pesanan</label>
                                 <div class="form-group__content">
                                     <textarea class="form-control" rows="5" placeholder="<?= ($pengiriman->catatan == "") ? "Tidak ada catatan" : $pengiriman->catatan ?>" disabled></textarea>
@@ -136,7 +143,9 @@
                             <th>Metode Pembayaran</th>
                             <th>Waktu</th>
                             <th>Status</th>
-                            <th>Panduan</th>
+                            <?php if ($midtrans->url != null) : ?>
+                                <th>Panduan</th>
+                            <?php endif ?>
                         </tr>
                         <tr class="text-center">
                             <td><?= $midtrans->id_preorder ?></td>
@@ -164,7 +173,9 @@
                                     <span class="btn btn-success text-light">Sukses</span>
                                 <?php endif ?>
                             </td>
-                            <td><a class="btn btn-info" href="<?= $midtrans->url ?>" target="_blank">Panduan</a></td>
+                            <?php if ($midtrans->url != null) : ?>
+                                <td><a class="btn btn-info" href="<?= $midtrans->url ?>" target="_blank">Panduan</a></td>
+                            <?php endif ?>
                         </tr>
                     </table>
                     <?php if ($midtrans->status == 201) : ?>
@@ -222,21 +233,26 @@
         event.preventDefault();
         // $(this).attr("disabled", "disabled");
 
+
         $.ajax({
             url: '<?= site_url() ?>midtrans/snap/token',
             cache: false,
             method: "POST",
             data: {
-                idPreorder: '<?= $this->uri->segment(3) ?>',
+                id_preorder: '<?= $this->uri->segment(3) ?>',
                 total_bayar: '<?= $preorder->jumlah ?>'
             },
             success: function(data) {
+                console.log(data);
+                // return false;
                 //location = data;
 
                 console.log('token = ' + data);
 
                 var resultType = document.getElementById('result-type');
                 var resultData = document.getElementById('result-data');
+
+                console.log(resultType + resultData);
 
                 function changeResult(type, data) {
                     $("#result-type").val(type);
